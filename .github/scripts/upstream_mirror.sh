@@ -44,7 +44,7 @@ merged_tsv="$(git log upstream/master --merges --grep='^Merge pull request #' \
     --format='%H%x09%ct%x09%cI%x09%s' \
   | awk -F '\t' '{ split($4, a, "#"); split(a[2], b, " "); print $2 "\t" b[1] "\t" $3 "\t" $1 }' \
   | sort -n -k1,1 \
-  | awk '{ print $2 "\t" $3 "\t" $4 }'
+  | awk '{ print $2 "\t" $3 "\t" $4 "\t" $1 }'
 )"
 [ -n "$merged_tsv" ] || { log "в апстриме нет принятых ПРов"; exit 0; }
 
@@ -87,22 +87,18 @@ create_conflict_issue() {
 }
 
 mark_done() {
-  processed_ns="${processed_ns} ${1}"
   git tag "mirror/${1}"
   git push origin "refs/tags/mirror/${1}" --quiet || log "не удалось запушить тег mirror/${1}"
-  processed=$((processed + 1))
 }
 
 ordinal="$max_m"
 processed=0
-processed_ns=""
 now_epoch="$(date +%s)"
 
-is_mirrored_once() {
-  case " ${processed_ns} " in *" $1 "*) return 0 ;; esac
-  return 1
-}
+cand_file="$(mktemp)"
+: > "$cand_file"
 
+log "сбор кандидатов на зеркалирование..."
 while IFS=$'\t' read -r n merged_at msha; do
   [ -n "$n" ] || continue
   url="https://github.com/${UPSTREAM}/pull/${n}"
@@ -114,59 +110,82 @@ while IFS=$'\t' read -r n merged_at msha; do
     fi
   fi
 
-  is_mirrored_once "$n" && { log "ПР #${n} уже зеркалирован в этом прогоне, пропускаю"; continue; }
-  is_mirrored "$n" && { log "ПР #${n} уже зеркалирован, пропускаю"; continue; }
+  is_mirrored "$n" && continue
 
   [ -n "$msha" ] || { log "ПР #${n} без merge_commit_sha (rebased?). Требуется ручное зеркалирование, пропускаю"; continue; }
 
-  ordinal=$((ordinal + 1))
-  branch="mirror/upstream-${n}"
-
-  if git rev-parse --verify "refs/remotes/origin/${branch}" >/dev/null 2>&1; then
-    log "ветка ${branch} уже существует"
-  else
-    git checkout -B "$branch" "$REMOTE_BASE" --quiet || die "не могу создать ветку ${branch}"
-    if git merge --no-edit "$msha" >/tmp/mirror_merge.log 2>&1; then
-      if [ "$(git rev-parse HEAD)" = "$(git rev-parse "$REMOTE_BASE")" ]; then
-        log "upstream #${n}: изменений относительно базы нет, помечаю обработанным"
-        mark_done "$n"
-        [ "$processed" -ge "$MAX_PER_RUN" ] && { log "достигнут лимит ${MAX_PER_RUN}, остановка"; break; }
-        continue
-      fi
-    else
-      git merge --abort 2>/dev/null || true
-      log "КОНФЛИКТ при слиянии upstream #${n}"
-      create_conflict_issue "$n" "$msha" "$url" "$ordinal"
-      continue
-    fi
-    git push -u origin "refs/heads/${branch}" --quiet || die "не могу запушить ${branch}"
+  # Изменения у ПРа уже в базе -> он обработан, без веток и без лимита
+  if git merge-base --is-ancestor "$msha" "$REMOTE_BASE" 2>/dev/null; then
+    log "upstream #${n}: изменения уже в базе, помечаю обработанным"
+    mark_done "$n"
+    continue
   fi
 
-  existing_pr="$(printf '%s\n' "$pr_tsv" | awk -F '\t' -v b="$branch" '$3==b {print $1; exit}')"
-  if [ -n "$existing_pr" ]; then
-    log "ПР для ветки ${branch} уже существует (#${existing_pr})"
-    mark_done "$n"
-  else
-    body="Автоматическое зеркало ПРа апстрима **voidcrew/Voidcrew#$n** — mirror №$ordinal.
+  printf '%s\t%s\t%s\n' "$n" "$merged_at" "$msha" >> "$cand_file"
+done <<< "$merged_tsv"
+
+total_cands="$(wc -l < "$cand_file" | tr -d ' ')"
+if [ "$total_cands" -eq 0 ]; then
+  log "неотзеркаленных ПРов с изменениями нет"
+else
+  log "неотзеркаленных ПРов с изменениями: ${total_cands}"
+  batch="$(tail -n "$MAX_PER_RUN" "$cand_file")"
+
+  while IFS=$'\t' read -r n merged_at msha; do
+    [ -n "$n" ] || continue
+    url="https://github.com/${UPSTREAM}/pull/${n}"
+
+    ordinal=$((ordinal + 1))
+    branch="mirror/upstream-${n}"
+
+    if git rev-parse --verify "refs/remotes/origin/${branch}" >/dev/null 2>&1; then
+      log "ветка ${branch} уже существует"
+    else
+      git checkout -B "$branch" "$REMOTE_BASE" --quiet || die "не могу создать ветку ${branch}"
+      if git merge --no-edit "$msha" >/tmp/mirror_merge.log 2>&1; then
+        if [ "$(git rev-parse HEAD)" = "$(git rev-parse "$REMOTE_BASE")" ]; then
+          log "upstream #${n}: изменений относительно базы нет, помечаю обработанным"
+          mark_done "$n"
+          continue
+        fi
+      else
+        git merge --abort 2>/dev/null || true
+        log "КОНФЛИКТ при слиянии upstream #${n}"
+        create_conflict_issue "$n" "$msha" "$url" "$ordinal"
+        continue
+      fi
+      git push -u origin "refs/heads/${branch}" --quiet || die "не могу запушить ${branch}"
+    fi
+
+    existing_pr="$(printf '%s\n' "$pr_tsv" | awk -F '\t' -v b="$branch" '$3==b {print $1; exit}')"
+    if [ -n "$existing_pr" ]; then
+      log "ПР для ветки ${branch} уже существует (#${existing_pr})"
+      mark_done "$n"
+    else
+      body="Автоматическое зеркало ПРа апстрима **voidcrew/Voidcrew#$n** — mirror №$ordinal.
 
 - Источник: $url
 - Принят в апстриме: $merged_at
-- Порядковый номер присвоен по порядку принятия в апстриме.
+- Номер присвоен в порядке обработки порции свежих ПРов (новые первыми).
 
 ПР содержит только слияние коммитов апстрим-ПРа. Модуляризация и финальная интеграция выполняются отдельно (как в существующих коммитах \`Modularize PR #N\`)."
-    local pr_args=( --repo "$MIRROR_REPO" --base "$BASE_BRANCH" --head "$branch" \
-        --title "Upstream #${n} (mirror №${ordinal})" --body "$body" )
-    [ -n "$MIRROR_LABEL" ] && pr_args+=( --label "$MIRROR_LABEL" )
-    if gh pr create "${pr_args[@]}" >/dev/null; then
-      log "готово: upstream #${n} -> mirror №${ordinal} (${branch})"
-      mark_done "$n"
-    else
-      log "не удалось открыть ПР для #${n} (ветка ${branch} сохранена, попробуем позже)"
+      pr_args=( --repo "$MIRROR_REPO" --base "$BASE_BRANCH" --head "$branch" \
+          --title "Upstream #${n} (mirror №${ordinal})" --body "$body" )
+      [ -n "$MIRROR_LABEL" ] && pr_args+=( --label "$MIRROR_LABEL" )
+      if gh pr create "${pr_args[@]}" >/dev/null; then
+        log "готово: upstream #${n} -> mirror №${ordinal} (${branch})"
+        mark_done "$n"
+        processed=$((processed + 1))
+      else
+        log "не удалось открыть ПР для #${n} (ветка ${branch} сохранена, попробуем позже)"
+      fi
     fi
-  fi
 
-  [ "$processed" -ge "$MAX_PER_RUN" ] && { log "достигнут лимит ${MAX_PER_RUN}, остановка"; break; }
-done <<< "$merged_tsv"
+    [ "$processed" -ge "$MAX_PER_RUN" ] && { log "достигнут лимит ${MAX_PER_RUN}, остановка"; break; }
+  done <<< "$batch"
+fi
+
+rm -f "$cand_file"
 
 git checkout -q "${BASE_BRANCH}" 2>/dev/null || git checkout -q master
 git reset --hard -q "$REMOTE_BASE" 2>/dev/null || true
