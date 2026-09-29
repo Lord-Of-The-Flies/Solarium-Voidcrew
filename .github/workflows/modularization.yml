@@ -1,4 +1,4 @@
-name: Modularization
+name: Модуляризация
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   modularization:
-    name: Modularization
+    name: Модуляризация
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -30,8 +30,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Test modularization checker
+      - name: Тест проверки модуляризации
         run: python -m unittest tools.ci.test_modularization
 
-      - name: Check PR modularization
+      - name: Проверка модуляризации ПРа
         run: python -m tools.ci.check_modularization --base HEAD^1 --head HEAD --github

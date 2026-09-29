@@ -1,4 +1,4 @@
-name: CI Suite
+name: CI Проверки
 
 on:
   pull_request:
@@ -12,56 +12,56 @@ concurrency:
 
 jobs:
   compile:
-    name: Compile
+    name: Компиляция
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v6
 
-      - name: Setup Python
+      - name: Настройка Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install map parser dependency
+      - name: Установка зависимости парсера карт
         run: python -m pip install bidict==0.22.0
 
-      - name: Test Voidworks compatibility reminder
+      - name: Тест проверки совместимости с Voidworks
         run: python -m unittest tools.ci.test_voidworks_compat
 
-      - name: Remind about Voidworks compatibility
+      - name: Проверка совместимости с Voidworks
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh api --paginate "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" --jq '.[].filename' | python -m tools.ci.check_voidworks_compat --github
 
-      - name: Test ship asset validation
+      - name: Тест проверки корабельных ассетов
         run: python -m unittest tools.ci.test_ship_assets
 
-      - name: Validate ship asset references
+      - name: Проверка ссылок на корабельные ассеты
         run: python -m tools.ci.check_ship_assets --github
 
-      - name: Test ship research server validation
+      - name: Тест проверки исследовательских серверов кораблей
         run: python -m unittest tools.ci.test_ship_research_servers
 
-      - name: Validate ship research servers
+      - name: Проверка исследовательских серверов кораблей
         run: python -m tools.ci.check_ship_research_servers --github
 
-      - name: Test ship preview freshness check
+      - name: Тест проверки актуальности превью кораблей
         run: python -m unittest tools.ci.test_ship_previews
 
-      - name: Check ship previews match their maps
+      - name: Проверка соответствия превью кораблей их картам
         run: python -m tools.ci.check_ship_previews --github
 
-      - name: Setup Bun
+      - name: Настройка Bun
         uses: ./.github/actions/setup_bun
 
-      - name: Restore BYOND from Cache
+      - name: Восстановление BYOND из кэша
         uses: ./.github/actions/restore_or_install_byond
 
-      - name: Compile
+      - name: Компиляция
         run: |
           source $HOME/BYOND/byond/bin/byondsetup
           tools/build/build.sh --ci dm -DCIBUILDING -DCITESTING -DALL_MAPS

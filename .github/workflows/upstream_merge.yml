@@ -1,4 +1,4 @@
-name: Upstream Merge
+name: Слияние апстрима
 
 on:
   schedule:
@@ -25,15 +25,15 @@ env:
 
 jobs:
   merge:
-    name: Merge upstream/master into branch
+    name: Слияние upstream/master в ветку
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
-      - name: Checkout
+      - name: Получение кода
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
-      - name: Run upstream merge
+      - name: Запуск слияния апстрима
         shell: bash
         run: bash .github/scripts/upstream_merge.sh

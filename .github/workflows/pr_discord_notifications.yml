@@ -1,4 +1,4 @@
-name: Pull Request Discord Notifications
+name: Уведомления о ПРах в Discord
 
 on:
   pull_request_target:
@@ -9,7 +9,7 @@ permissions: {}
 
 jobs:
   notify:
-    name: Notify ${{ matrix.channel }}
+    name: Уведомление ${{ matrix.channel }}
     if: >-
       github.repository == 'voidcrew/Voidcrew' &&
       (github.event_name == 'workflow_dispatch' ||
@@ -25,7 +25,7 @@ jobs:
             webhook_secret: DISCORD_PR_GITHUB_WEBHOOK_URL
     steps:
       # Process event data only; never check out or execute pull request code.
-      - name: Send notification
+      - name: Отправка уведомления
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets[matrix.webhook_secret] }}
         shell: python

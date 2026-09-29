@@ -1,4 +1,4 @@
-name: Mirror Upstream PRs
+name: Зеркалирование ПРов апстрима
 
 on:
   workflow_dispatch:
@@ -44,15 +44,15 @@ env:
 
 jobs:
   mirror:
-    name: Mirror accepted upstream PRs
+    name: Зеркалирование принятых ПРов апстрима
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - name: Checkout
+      - name: Получение кода
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
-      - name: Mirror accepted upstream PRs
+      - name: Зеркалирование принятых ПРов апстрима
         shell: bash
         run: bash .github/scripts/upstream_mirror.sh

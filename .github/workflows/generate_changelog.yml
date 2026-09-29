@@ -1,4 +1,4 @@
-name: Generate PR Changelog
+name: Генерация чейнджлога ПРа
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   changelog:
-    name: Build changelog for PR #${{ inputs.pr_number }}
+    name: Сборка чейнджлога для ПРа #${{ inputs.pr_number }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
@@ -33,11 +33,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Generate changelog from PR commits
+      - name: Генерация чейнджлога из коммитов ПРа
         shell: bash
         run: python3 .github/scripts/generate_pr_changelog.py
 
-      - name: Publish body in job summary
+      - name: Публикация описания в сводке запуска
         shell: bash
         run: |
           cat /tmp/pr_changelog.md >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
