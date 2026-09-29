@@ -75,7 +75,7 @@ def main():
         ).get("name") or "?"
         body = body.strip()
 
-        lines.append(f"- {subject} - @{author} - `{sha_short}`")
+        lines.append(f"- {subject} - {author} - `{sha_short}`")
         if body:
             lines.extend(
                 [
