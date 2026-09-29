@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.error
@@ -104,14 +105,35 @@ def main():
             )
         lines.append("")
 
-    comment = "\n".join(lines).strip() + "\n"
+    marker_start = "<!-- CHANGELOG-START -->"
+    marker_end = "<!-- CHANGELOG-END -->"
+
+    section = "\n".join(lines).strip() + "\n"
+    section = f"{marker_start}\n{section}{marker_end}\n"
 
     body_path = "/tmp/pr_changelog.md"
     with open(body_path, "w", encoding="utf-8") as file_out:
-        file_out.write(comment)
-    print(comment)
+        file_out.write(section)
+    print(section)
 
     if os.environ.get("UPDATE_PR_DESCRIPTION", "true").lower() == "true":
+        old_body = pr.get("body") or ""
+
+        if marker_start in old_body and marker_end in old_body:
+            pattern = re.compile(
+                re.escape(marker_start) + r".*?" + re.escape(marker_end), re.DOTALL
+            )
+            new_body = re.sub(pattern, section.strip(), old_body, count=1)
+        else:
+            prefix = old_body.strip()
+            if prefix:
+                new_body = prefix + "\n\n-----------------------------\n\n" + section.strip() + "\n"
+            else:
+                new_body = section.strip()
+
+        with open(body_path, "w", encoding="utf-8") as file_out:
+            file_out.write(new_body + "\n")
+
         result = subprocess.run(
             ["gh", "pr", "edit", str(pr_number), "--repo", repo, "--body-file", body_path],
             capture_output=True,
@@ -120,7 +142,7 @@ def main():
         if result.returncode != 0:
             print(result.stderr, file=sys.stderr)
             sys.exit(1)
-        print(f"Описание ПРа #{pr_number} обновлено.")
+        print(f"Описание ПРа #{pr_number} обновлено (чейнджлог дописан/заменён).")
 
 
 if __name__ == "__main__":
