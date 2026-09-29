@@ -34,8 +34,10 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 	var/loaded = FALSE
 	/// Whether the ruin is currently loading
 	var/loading = FALSE
-	/// Whether this ruin has been visited
+	/// Whether a ship has docked at this loaded interior
 	var/visited = FALSE
+	/// Stoppable timer for automatic interior cleanup
+	var/despawn_timer_id
 	/// Track dock usage
 	var/first_dock_taken = FALSE
 	var/second_dock_taken = FALSE
@@ -71,6 +73,7 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 		set_ruin_template(template)
 
 /obj/structure/overmap/space_ruin/Destroy()
+	cancel_despawn_timer()
 	GLOB.space_ruin_signals -= src
 	ruin_bottom_left = null
 	// The orderly teardowns (release_interior -> remove_mapzone) leave both of these null.
@@ -217,6 +220,7 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
  */
 /obj/structure/overmap/space_ruin/proc/load_level(mob/user, obj/structure/overmap/ship/waiting_ship, queue_timeout)
 	if(mapzone)
+		check_start_despawn()
 		SEND_SIGNAL(src, COMSIG_VOIDCREW_SITE_LOAD_FINISHED, is_loaded())
 		return
 	if(loading)
@@ -320,8 +324,9 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 	worldgen_end(probe)
 	loaded = TRUE
 	loading = FALSE
-	visited = TRUE
 	SSovermap.worldgen_release(src)
+	// Surveys and admin loads may never be followed by a ship undocking.
+	check_start_despawn()
 
 	SEND_SIGNAL(src, COMSIG_VOIDCREW_PLANET_LOADED, TRUE)
 	SEND_SIGNAL(src, COMSIG_VOIDCREW_SITE_LOAD_FINISHED, TRUE)
@@ -442,6 +447,7 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 		return
 
 	// Now that we know docking will work, set the flags
+	cancel_despawn_timer()
 	if(selected_dock_index == 1)
 		first_dock_taken = TRUE
 		acting.dock_index = 1
@@ -459,6 +465,8 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 			acting.ship_notify("[dock_result]", "DOCKING", SHIP_NOTIFY_WARNING, 'voidcrew/sound/warn.ogg', 25)
 
 	concerned = FALSE
+	// Keep monitoring even if the approach is cancelled before anything docks.
+	check_start_despawn()
 
 	if(optional_partner)
 		ship_act(user, optional_partner)
@@ -475,38 +483,41 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
  * way out of it, because the wait is long enough for the answer to change.
  */
 /obj/structure/overmap/space_ruin/proc/can_release_interior()
+	return isnull(get_interior_release_blocker(log_failure = TRUE))
+
+/obj/structure/overmap/space_ruin/proc/get_interior_release_blocker(log_failure = FALSE)
 	if(!mapzone || !footprint)
-		return FALSE
+		return "The interior is not loaded."
 
 	// Never while the interior is still being generated. worldgen_claim() is reentrant
 	// by requester, so a teardown fired mid-load would be granted the queue instantly
 	// (load and teardown both claim as src) and reset the ground out from under the
 	// template still stamping into it.
 	if(loading)
-		return FALSE
+		return "Interior generation is in progress."
 
 	// A claimed berth means a ship is somewhere between "approach started" and "undock
 	// complete" - possibly in hyperspace transit, which the contents and hull-overlap
 	// checks below are both blind to.
+	var/docking_blocker = get_docking_blocker()
+	if(docking_blocker)
+		return docking_blocker
 	if(first_dock_taken || second_dock_taken)
-		return FALSE
+		return "A landing pad is reserved, but no assigned ship was found. Inspect its docking port before retrying."
 
-	// Check if any ships are still docked here (docked ships move INTO the ruin, so check contents)
-	for(var/obj/structure/overmap/ship/docked_ship in contents)
-		return FALSE
 
 	// Players inside OUR rectangle - a packed level carries up to three neighbours, and a
 	// level-wide check would keep this site pinned for as long as any of them has a crew
 	// standing on it.
 	if(has_players_in_site())
-		return FALSE
+		return "A player is inside the interior."
 
 	// Anyone with a mind standing on our ground, client or not: the same gate the flat
 	// encounters use, scoped to the slot rather than the z (map_zones.dm get_mind_mobs_in).
 	// Catches a crewman who disconnected inside the ruin, whom the client sweep above
 	// cannot see and whose body the teardown would delete.
 	if(length(mapzone.get_mind_mobs_in(footprint)))
-		return FALSE
+		return "A disconnected player or their body remains inside. Move them out before unloading."
 
 	// No ship hull may overlap the slot. The overmap token leaves a full second before the
 	// interior physically moves (complete_undock_warmup schedules both), and the undock
@@ -517,10 +528,11 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 	// used to have no such guard at all - see footprint_blocking_hull_reason().
 	var/blocking_reason = footprint_blocking_hull_reason(footprint)
 	if(blocking_reason)
-		log_mapping("SSovermap: Space ruin '[name]' teardown refused - [blocking_reason]")
-		return FALSE
+		if(log_failure)
+			log_mapping("SSovermap: Space ruin '[name]' teardown refused - [blocking_reason]")
+		return blocking_reason
 
-	return TRUE
+	return null
 
 /**
  * Frees the ruin's interior, under the worldgen queue, if it is genuinely abandoned.
@@ -604,6 +616,8 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
  * every subtype that frees its interior by hand get the full sequence.
  */
 /obj/structure/overmap/space_ruin/proc/remove_mapzone()
+	cancel_despawn_timer()
+	visited = FALSE
 	if(mapzone)
 		var/datum/map_zone/departing_zone = mapzone
 		var/datum/map_footprint/departing_footprint = footprint
@@ -680,26 +694,57 @@ GLOBAL_LIST_EMPTY(space_ruin_signals)
 /obj/structure/overmap/space_ruin/proc/has_players_in_site()
 	return turf_footprint_has_players(footprint)
 
-/**
- * Called when a ship undocks - checks if the ruin should be cleaned up and respawned
- * If no living players remain in the ruin, unloads it and spawns a new one elsewhere
- */
+/// Arrival ends the survey grace and cancels any pending cleanup.
+/obj/structure/overmap/space_ruin/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if(!istype(arrived, /obj/structure/overmap/ship))
+		return
+	visited = TRUE
+	cancel_despawn_timer()
+	check_start_despawn()
+
+/obj/structure/overmap/space_ruin/proc/get_despawn_delay()
+	return visited ? RUIN_DESPAWN_TIMER : RUIN_UNVISITED_DESPAWN_TIMER
+
+/// Every loaded interior is monitored, including sites nobody ever boards.
+/obj/structure/overmap/space_ruin/proc/check_start_despawn()
+	if(!mapzone || mission_locked)
+		cancel_despawn_timer()
+		return
+	if(concerned || !can_release_interior())
+		cancel_despawn_timer()
+		addtimer(CALLBACK(src, PROC_REF(check_start_despawn)), 30 SECONDS, TIMER_UNIQUE)
+		return
+	if(despawn_timer_id)
+		return
+	despawn_timer_id = addtimer(CALLBACK(src, PROC_REF(attempt_despawn)), get_despawn_delay(), TIMER_STOPPABLE)
+
+/obj/structure/overmap/space_ruin/proc/cancel_despawn_timer()
+	if(!despawn_timer_id)
+		return
+	deltimer(despawn_timer_id)
+	despawn_timer_id = null
+
+/// Recheck occupancy at expiry; a refusal must grant a fresh grace once empty again.
+/obj/structure/overmap/space_ruin/proc/attempt_despawn()
+	despawn_timer_id = null
+	check_and_respawn()
+
+/// Releases the interior, then applies this ruin type's replacement/persistence rules.
 /obj/structure/overmap/space_ruin/proc/check_and_respawn()
 	// A live mission still needs this site; its cleanup path clears the lock
 	// and re-runs this check when it's done with the ruin
-	if(mission_locked)
+	if(mission_locked || !mapzone)
+		cancel_despawn_timer()
 		return
 
 	// Store the ruin template before we clean up
 	var/datum/map_template/ruin/space/old_template = ruin_template
 
-	// Guards, queues and frees the slot, or refuses because somebody is still
-	// aboard. Nothing below may run unless it actually went through. A refusal is
-	// usually the departing ship's interior still mid-move (the hull-overlap guard in
-	// can_release_interior()), so try again once the departure has finished rather
-	// than holding the slot until the next visitor undocks.
+	// A refusal may be occupancy, a departing hull or a worldgen queue timeout.
+	// Resume eligibility checks and grant a fresh countdown once it is safe again.
 	if(!release_interior())
-		addtimer(CALLBACK(src, PROC_REF(check_and_respawn)), 30 SECONDS, TIMER_UNIQUE)
+		addtimer(CALLBACK(src, PROC_REF(check_start_despawn)), 30 SECONDS, TIMER_UNIQUE)
 		return
 
 	// A live contract is pointed here. The interior is gone either way - it was

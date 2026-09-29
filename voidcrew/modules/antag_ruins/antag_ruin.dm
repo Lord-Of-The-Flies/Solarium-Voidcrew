@@ -142,7 +142,7 @@
 		// Same re-arm as the base proc: a refusal is usually the departing hull still
 		// mid-move, or the worldgen queue timing out - and nothing else ever retries,
 		// so giving up here would hold the slot for the rest of the round.
-		addtimer(CALLBACK(src, PROC_REF(check_and_respawn)), 30 SECONDS, TIMER_UNIQUE)
+		addtimer(CALLBACK(src, PROC_REF(check_start_despawn)), 30 SECONDS, TIMER_UNIQUE)
 
 // The base proc relocates the signal to a fresh overmap square on unload;
 // vestige signals hold position so known patrons stay findable.

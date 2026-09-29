@@ -1,0 +1,96 @@
+/**
+ * Shared "would this creature start a fight" classification for automated defenses
+ * (hull defense turrets, outpost enforcement turrets). Reads the creature's own AI
+ * rather than its type or faction, so livestock, pets and passive fauna are left
+ * alone while anything that goes looking for a target is treated as hostile.
+ */
+
+/// Planning subtrees that mean "this creature goes looking for something to attack".
+GLOBAL_LIST_INIT(turret_aggressive_subtrees, typecacheof(list(
+	/datum/ai_planning_subtree/simple_find_target,
+	/datum/ai_planning_subtree/simple_find_wounded_target,
+	/datum/ai_planning_subtree/find_target_prioritize_traits,
+	/datum/ai_planning_subtree/aggressive_find_target,
+)))
+
+/// Subtrees that pick a target only to run away from it. Checked first, because
+/// simple_find_target/to_flee is a subtype of an aggressive one and typecacheof()
+/// covers subtypes.
+GLOBAL_LIST_INIT(turret_fleeing_subtrees, typecacheof(list(
+	/datum/ai_planning_subtree/simple_find_target/to_flee,
+	/datum/ai_planning_subtree/simple_find_nearest_target_to_flee,
+	/datum/ai_planning_subtree/find_nearest_thing_which_attacked_me_to_flee,
+)))
+
+/// Subtrees that only pick a fight once something has already picked one with them.
+GLOBAL_LIST_INIT(turret_retaliating_subtrees, typecacheof(list(
+	/datum/ai_planning_subtree/target_retaliate,
+	/datum/ai_planning_subtree/capricious_retaliate,
+)))
+
+/**
+ * Would this creature's own targeting strategy ever pick a person-sized mob?
+ *
+ * Stoats and crabs hunt, but only things strictly smaller than themselves - mice, roaches.
+ * They cannot lay a finger on a person and are not what a turret is out here for. This
+ * mirrors /datum/targeting_strategy/basic/of_size/can_attack() with the target's size
+ * pinned to a person's, so it stays honest if that strategy gains more variants.
+ */
+/proc/creature_threatens_people(mob/living/creature)
+	var/datum/targeting_strategy/basic/of_size/sizer = GET_TARGETING_STRATEGY(creature.ai_controller?.blackboard[BB_TARGETING_STRATEGY])
+	if(!istype(sizer)) // Anything not size-gated will take a swing at whatever it can reach.
+		return TRUE
+	if(sizer.inclusive && creature.mob_size == MOB_SIZE_HUMAN)
+		return TRUE
+	if(creature.mob_size > MOB_SIZE_HUMAN)
+		return sizer.find_smaller
+	return !sizer.find_smaller
+
+/**
+ * Would this creature start a fight on its own?
+ *
+ * A goat, a goose, an ant or a stoat has teeth and will use them if you shove it, but it
+ * is not a threat and a turret has no business shooting it. What makes something a
+ * threat is how its AI picks targets, not how hard it hits - a ranged trooper with no
+ * melee attack at all is exactly what these are for.
+ *
+ * Read off the live planning subtrees rather than the mob's type, so a controller that
+ * inherits its planning_subtrees from a parent (the viscerator, most of the trooper tree)
+ * still classifies correctly. Subtree instances are shared singletons out of
+ * GLOB.ai_subtrees, so this is a handful of list lookups.
+ */
+/proc/is_hostile_creature(mob/living/creature)
+	// The /hostile branch of the old simple animal tree is aggressive by definition; its
+	// retaliate-only subtypes were all moved over to /mob/living/basic long ago.
+	if(istype(creature, /mob/living/simple_animal/hostile))
+		return TRUE
+
+	// Somebody's pet, whatever its AI says. Cats and foxes both carry a full hunting
+	// subtree - the cat's is for squabbling over territory with other cats - and would
+	// otherwise read as aggressive.
+	if(istype(creature, /mob/living/basic/pet))
+		return FALSE
+
+	if(!creature_threatens_people(creature))
+		return FALSE
+
+	var/datum/ai_controller/controller = creature.ai_controller
+	if(!controller)
+		return FALSE
+
+	var/provoked = FALSE
+	var/skittish = FALSE
+	for(var/datum/ai_planning_subtree/subtree as anything in controller.planning_subtrees)
+		if(GLOB.turret_fleeing_subtrees[subtree.type])
+			skittish = TRUE
+			continue
+		if(GLOB.turret_aggressive_subtrees[subtree.type])
+			return TRUE
+		if(GLOB.turret_retaliating_subtrees[subtree.type])
+			provoked = TRUE
+
+	// Retaliators are left alone until they have actually settled on someone to maul, at
+	// which point they are as much of a problem as anything else out there. Skittish mobs
+	// are excluded because some of them park what they are running away from in the same
+	// blackboard key an attacker would go in.
+	return provoked && !skittish && !isnull(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])

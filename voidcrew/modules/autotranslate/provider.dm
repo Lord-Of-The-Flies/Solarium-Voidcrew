@@ -49,12 +49,26 @@
 
 /// Marks the request finished. Providers call one of these two from poll().
 /datum/translation_request/proc/succeed(translated_text)
+	// Rejected translations leave the original speech visible.
+	// Validate here so every backend is checked before caching or either display.
+	if(!autotranslate_output_acceptable(translated_text, target_language))
+		fail("translation output rejected")
+		return
 	result = translated_text
 	errored = FALSE
 
 /datum/translation_request/proc/fail(reason)
+	result = null
 	errored = TRUE
 	error_reason = reason
+
+/// Check translated output against the server's private English word filter.
+/proc/autotranslate_output_acceptable(text, target_language)
+	if(!istext(text) || !length(trim(html_decode(text))))
+		return FALSE
+	if(target_language != AUTOTRANSLATE_LANG_EN)
+		return TRUE
+	return !SSautotranslate.english_output_filter?.Find(html_decode(text))
 
 
 /**

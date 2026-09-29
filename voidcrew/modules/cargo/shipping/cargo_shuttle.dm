@@ -231,6 +231,7 @@
 		template.height + SHUTTLE_TRANSIT_BORDER * 2,
 		1,
 		reservation_type = /datum/turf_reservation/transit,
+		requester = "cargo shuttle transit",
 	)
 
 	if(!reservation)
@@ -572,18 +573,6 @@
 		cleanup_shuttle()
 		return FALSE
 
-	// Calculate the correct dir for ship_dock based on ship_shuttle's current geometry
-	// We can't call adjust_dock_to_shuttle because it also moves the dock
-	// This is necessary because construction console port relocation updates port_direction
-	// but doesn't update the stationary dock's dir
-	var/shuttle_true_height = ship_shuttle.height
-	var/shuttle_true_width = ship_shuttle.width
-	if(EWCOMPONENT(ship_shuttle.port_direction))
-		shuttle_true_height = ship_shuttle.width
-		shuttle_true_width = ship_shuttle.height
-	var/ship_facing_dir = angle2dir(dir2angle(shuttle_true_height > shuttle_true_width ? EAST : NORTH) + dir2angle(ship_shuttle.port_direction) + 180)
-	ship_dock.dir = ship_facing_dir
-
 	// Set cargo_dock dimensions to match the cargo shuttle
 	cargo_dock.width = shuttle_port.width
 	cargo_dock.height = shuttle_port.height
@@ -666,7 +655,7 @@
 
 	for(var/area/shuttle_area as anything in shuttle_port.shuttle_areas)
 		for(var/turf/T in shuttle_area)
-			for(var/mob/living/L in T)
+			for(var/mob/living/L as anything in T.get_all_contents_type(/mob/living))
 				if(L.stat != DEAD)
 					return TRUE
 	return FALSE
@@ -681,6 +670,13 @@
 	stall_deadline = world.time + CARGO_SHUTTLE_STALL_GRACE
 
 	if(state != CARGO_SHUTTLE_DEPARTING)
+		return FALSE
+
+	// Boarding during warmup must be checked before any cargo is sold or deleted.
+	if(has_living_mobs())
+		state = CARGO_SHUTTLE_DOCKED
+		stall_deadline = 0
+		linked_console?.say("Departure cancelled: living organisms detected aboard.")
 		return FALSE
 
 	// Release the reserve dock first
@@ -805,6 +801,11 @@
 			M.playsound_local(M, 'voidcrew/sound/cargodock2.ogg', 50, FALSE)
 
 /datum/voidcrew_cargo_shuttle/proc/position_cargo_dock_next_to_ship(obj/docking_port/stationary/ship_dock, obj/docking_port/stationary/cargo_dock, obj/docking_port/mobile/ship_shuttle, obj/docking_port/mobile/cargo_shuttle_port)
+	// The mobile port follows the hull's actual rotation, including ship-to-ship docks.
+	// Its aspect ratio and ship-relative port_direction only describe a default berth.
+	// Also refresh a stationary port left facing the old way after a manual relocation.
+	ship_dock.dir = ship_shuttle.dir
+
 	// For exit-to-exit docking (airlocks facing each other):
 	// - ship_dock.dir points INTO the ship
 	// - cargo_dock.dir must point INTO the cargo shuttle (OPPOSITE direction)

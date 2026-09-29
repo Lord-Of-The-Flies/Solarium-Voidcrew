@@ -255,15 +255,57 @@
 /**
  * Living, minded mobs standing inside ONE tenant's footprint.
  *
- * get_mind_mobs() above matches by z, which on a packed level counts the neighbour's crew
- * and fuses the two tenants' lifecycles - neither recycles until both are empty. Every
- * lifecycle guard (can_release_interior() and friends) wants this one instead.
+ * get_mind_mobs() above matches by z, which also counts neighbouring sites on packed levels.
+ * This query includes disconnected bodies; use has_living_players_in() when only connected
+ * survivors should hold a site.
  * A null footprint falls back to the z-wide answer, so a whole-level tenant is unchanged.
  */
 /datum/map_zone/proc/get_mind_mobs_in(datum/map_footprint/footprint)
 	if(!footprint)
 		return get_mind_mobs()
 	return footprint.get_mind_mobs()
+
+/// Living, connected players inside one footprint, or any of this zone's levels when unscoped.
+/// Ghosted and disconnected bodies retain minds, but must not pin abandoned planets forever.
+/datum/map_zone/proc/has_living_players_in(datum/map_footprint/footprint)
+	if(footprint)
+		return footprint.has_living_players()
+	for(var/mob/living/player in GLOB.player_list)
+		if(player.stat == DEAD)
+			continue
+		var/turf/player_turf = get_turf(player)
+		if(!player_turf)
+			continue
+		for(var/datum/space_level/level as anything in z_levels)
+			if(player_turf.z == level.z_value)
+				return TRUE
+	return FALSE
+
+/// Longest remaining reconnection grace among living SSD bodies in this site's interior.
+/// A real key without a client is SSD; unkeyed, suicided, and admin-ghost bodies get no extension.
+/datum/map_zone/proc/get_ssd_grace_remaining_in(datum/map_footprint/footprint, grace_period)
+	. = 0
+	for(var/mob/living/body as anything in GLOB.mob_living_list)
+		if(body.stat == DEAD || body.client || !body.key || IS_FAKE_KEY(body.key) || HAS_TRAIT(body, TRAIT_SUICIDED))
+			continue
+		var/remaining = body.last_logout_time + grace_period - world.time
+		if(remaining <= .)
+			continue
+		var/turf/body_turf = get_turf(body)
+		if(!body_turf)
+			continue
+		if(footprint)
+			if(!footprint.contains_turf(body_turf))
+				continue
+		else
+			var/in_zone = FALSE
+			for(var/datum/space_level/level as anything in z_levels)
+				if(body_turf.z == level.z_value)
+					in_zone = TRUE
+					break
+			if(!in_zone)
+				continue
+		. = remaining
 
 /datum/space_level
 	/**
@@ -682,6 +724,19 @@
 		return FALSE
 	return TRUE
 
+/// Release player keys before deleting bodies, including SSD bodies and mobs inside containers.
+/// Observers remain on the cleared turfs so a disconnected player can return as a ghost.
+/datum/space_level/proc/ghostize_teardown_mobs(list/turf/turfs_to_clear)
+	for(var/mob/living/body as anything in GLOB.mob_living_list)
+		if(!body.key)
+			continue
+		var/turf/body_turf = get_turf(body)
+		if(body_turf?.z != z_value || !(body_turf in turfs_to_clear))
+			continue
+		body.ghostize(can_reenter_corpse = FALSE)
+		// Assigning the observer's key need not clear an offline body's old key.
+		body.key = null
+
 /**
  * Wipes a tenant's ground back to bare reserved turf in the level's own space area.
  *
@@ -701,9 +756,16 @@
 	// so it stays scoped to the bounds instead of grinding through ~48k empty cordon
 	// tiles that cannot possibly hold anything.
 	var/list/turf/contents_turfs = get_teardown_contents_block(footprint, whole_level)
+	ghostize_teardown_mobs(contents_turfs)
 	for(var/turf/turf as anything in contents_turfs)
 		// don't waste time trying to qdelete the lighting object
 		for(var/datum/thing in (turf.contents - turf.lighting_object))
+			if(istype(thing, /mob/dead))
+				continue // Match empty() below: preserve observers, including newly released SSD players.
+			// Duct Destroy() otherwise spawns salvage outside this contents snapshot.
+			if(istype(thing, /obj/machinery/duct))
+				var/obj/machinery/duct/duct = thing
+				duct.drop_on_wrench = null
 			qdel(thing)
 			// DO NOT CHECK_TICK HERE. IT CAN CAUSE ITEMS TO GET LEFT BEHIND
 			// THIS IS REALLY IMPORTANT FOR CONSISTENCY. SORRY ABOUT THE LAG SPIKE
@@ -787,6 +849,7 @@
 	// as clear_reservation() - this sweep doesn't yield, so don't widen it.
 	var/static/list/ignored_atoms = typecacheof(list(/mob/dead, /obj/effect/landmark, /obj/docking_port))
 	var/list/turf/contents_turfs = get_teardown_contents_block(footprint, whole_level)
+	ghostize_teardown_mobs(contents_turfs)
 	for(var/turf/T as anything in contents_turfs)
 		// Iterate a COPY. /atom/movable/Destroy() nullspaces the atom, which removes it from
 		// the turf's contents mid-iteration, and BYOND's `for(x in list)` walks by index -
@@ -801,6 +864,10 @@
 				continue
 			if(ignored_atoms[AM.type])
 				continue
+			// The raw turf swap below cannot sweep up salvage spawned during Destroy().
+			if(istype(AM, /obj/machinery/duct))
+				var/obj/machinery/duct/duct = AM
+				duct.drop_on_wrench = null
 			qdel(AM)
 
 	// Whole level (cordon included) only for the last tenant out - see clear_reservation()

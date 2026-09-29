@@ -90,9 +90,6 @@
 "as" = (
 /obj/structure/fans/tiny,
 /obj/structure/window/reinforced/spawner/directional/east,
-/obj/docking_port/mobile/voidcrew/pirate_medieval{
-	port_direction = 2
-	},
 /obj/structure/mineral_door/iron,
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/floor/plating,

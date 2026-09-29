@@ -110,12 +110,13 @@ $tsl-timeout: hsl(0, 0%, 58%);
   text-decoration: underline dotted
     oklch(from #{$tsl-accent} l c h / 30%);
   text-underline-offset: 2px;
-}
 
-// Safety net for the case where there is no original to show. A help cursor
-// with no tooltip behind it is worse than no affordance at all.
-.tsl-no-tooltip {
-  cursor: inherit;
+  &::after {
+    content: ' [translated]';
+    color: $tsl-accent;
+    font-size: 0.8em;
+    font-style: normal;
+  }
 }
 
 // Some players will not want speech moving around at all.

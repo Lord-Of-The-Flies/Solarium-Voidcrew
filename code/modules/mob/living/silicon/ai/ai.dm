@@ -23,7 +23,7 @@
 
 	create_eye()
 
-	if((target_ai.mind && target_ai.mind.active) || SSticker.current_state == GAME_STATE_SETTING_UP)
+	if((target_ai.mind && target_ai.mind.active) || SSticker.current_state == GAME_STATE_SETTING_UP || target_ai.mind?.assigned_role?.ship_role == "ai")
 		target_ai.mind.transfer_to(src)
 		if(is_antag())
 			to_chat(src, span_userdanger("You have been installed as an AI! "))

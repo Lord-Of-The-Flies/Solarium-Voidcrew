@@ -1,427 +1,1158 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
+"au" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
-	pixel_x = -3;
-	pixel_y = 5
+/obj/item/food/peanuts/honey_roasted{
+	pixel_w = 3;
+	pixel_z = 6
 	},
-/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
-	pixel_x = 4
-	},
-/turf/open/floor/wood,
+/turf/open/floor/wood/maple,
 /area/ruin/powered)
-"b" = (
-/mob/living/basic/turtle/beach,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"c" = (
-/obj/effect/spawner/random/trash/cigbutt,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"d" = (
-/obj/structure/table/wood,
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = -4
+"ay" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
 	},
-/obj/item/reagent_containers/cup/glass/drinkingglass{
-	pixel_x = 5;
-	pixel_y = 4
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"e" = (
-/obj/structure/chair/plastic{
+/obj/structure/chair/stool/directional/south,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"by" = (
+/obj/effect/turf_decal/weather/sand{
 	dir = 8
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"f" = (
-/obj/structure/sign/poster/contraband/random,
-/turf/closed/wall/mineral/wood,
-/area/ruin/powered)
-"g" = (
-/obj/item/toy/seashell,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"h" = (
 /turf/template_noop,
 /area/template_noop)
-"i" = (
-/obj/structure/table/wood,
-/obj/item/reagent_containers/cup/glass/bottle/beer/almost_empty{
-	pixel_x = 3;
-	pixel_y = 2
+"bL" = (
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"cq" = (
+/mob/living/basic/turtle/beach,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"cD" = (
+/obj/structure/chair/stool/directional/east,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"cJ" = (
+/obj/item/toy/seashell{
+	pixel_w = -4;
+	pixel_z = 6
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"j" = (
-/obj/structure/flora/tree/palm,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"k" = (
-/obj/structure/chair/plastic{
-	dir = 1
-	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"m" = (
-/obj/machinery/jukebox,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"n" = (
-/obj/structure/table/wood,
-/obj/item/storage/cans/sixbeer,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"o" = (
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"cO" = (
+/obj/machinery/vending/boozeomat,
 /obj/machinery/light/warm/directional/north,
-/turf/open/floor/wood,
+/turf/open/floor/wood/maple,
 /area/ruin/powered)
-"q" = (
-/obj/structure/chair/stool/bar{
+"em" = (
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"er" = (
+/obj/item/toy/seashell{
+	pixel_w = -4;
+	pixel_z = -8
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"eJ" = (
+/obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"r" = (
-/obj/structure/flora/rock/beach,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"s" = (
-/obj/structure/fence{
-	dir = 4
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 1
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"t" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"v" = (
-/obj/structure/bonfire/prelit,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"w" = (
-/obj/structure/chair/plastic{
-	dir = 4
+/obj/machinery/jukebox,
+/obj/machinery/light/floor,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"eY" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"x" = (
-/mob/living/basic/crab/beach,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"z" = (
+/turf/template_noop,
+/area/template_noop)
+"fD" = (
+/obj/structure/flora/tree/palm{
+	pixel_w = 6;
+	pixel_z = -16
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 0;
+	pixel_z = -6
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"gg" = (
+/obj/structure/flora/branches{
+	pixel_w = 3;
+	pixel_z = 11
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"gJ" = (
+/obj/effect/turf_decal/weather/sand,
+/turf/template_noop,
+/area/template_noop)
+"gN" = (
+/turf/template_noop,
+/area/template_noop)
+"iB" = (
+/obj/structure/flora/tree/palm/style_2{
+	pixel_w = 9;
+	pixel_z = 10
+	},
+/obj/structure/flora/coconuts{
+	pixel_w = 0;
+	pixel_z = -1
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"iG" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"jE" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/obj/structure/railing/corner{
+	color = "#5d341f"
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"jZ" = (
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = -6;
+	pixel_z = -8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"kq" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 1
+	},
 /turf/closed/wall/mineral/wood,
 /area/ruin/powered)
-"A" = (
-/obj/item/toy/seashell,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"B" = (
-/obj/structure/flora/coconuts,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"D" = (
+"kP" = (
+/obj/structure/flora/tree/palm/style_2{
+	pixel_w = -5;
+	pixel_z = 0
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"kT" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -6;
+	pixel_z = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"lj" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"lP" = (
 /obj/structure/chair/plastic{
 	dir = 4
 	},
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"E" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/random/trash/cigbutt,
-/turf/open/floor/wood,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"mL" = (
+/obj/structure/flora/coconuts{
+	pixel_w = -8;
+	pixel_z = 7
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"nL" = (
+/obj/item/cigbutt/cigarbutt{
+	pixel_w = 7;
+	pixel_z = 9
+	},
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = -10;
+	pixel_z = -6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"oc" = (
+/obj/structure/flora/tree/palm{
+	pixel_w = 9;
+	pixel_z = -8
+	},
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -5;
+	pixel_z = -3
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"oy" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/storage/cans/sixbeer,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"oI" = (
+/obj/structure/railing/corner{
+	color = "#5d341f"
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"pn" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"qi" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"qE" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood,
+/obj/item/clothing/mask/gas/tiki_mask{
+	pixel_w = 0;
+	pixel_z = 3
+	},
+/turf/open/floor/wood/maple,
 /area/ruin/powered)
-"F" = (
-/obj/machinery/barsign/all_access/directional/north,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/wood,
+"qT" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/floor/carpet/blue,
+/area/overmap_encounter/planetoid/beach)
+"rc" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/machinery/door/airlock/wood/glass,
+/turf/open/floor/wood/tile,
 /area/ruin/powered)
-"G" = (
+"rq" = (
+/turf/closed/wall/mineral/wood,
+/area/ruin/powered)
+"rC" = (
+/obj/structure/flora/coconuts{
+	pixel_w = -1;
+	pixel_z = -4
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"sc" = (
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"sn" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"tx" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"tQ" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"uw" = (
+/obj/structure/chair/plastic{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"uz" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
+	pixel_w = -7;
+	pixel_z = 12
+	},
+/obj/item/food/cornchips/red{
+	pixel_w = 6;
+	pixel_z = 1
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"uD" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood,
+/obj/item/reagent_containers/cup/soda_cans/beer{
+	pixel_w = 5;
+	pixel_z = 5
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"vl" = (
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"vn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/obj/machinery/light/warm/directional/east,
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"vL" = (
+/obj/item/toy/seashell{
+	pixel_w = -6;
+	pixel_z = -3
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"wz" = (
+/obj/structure/fermenting_barrel,
+/obj/machinery/light/warm/directional/north,
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"xj" = (
+/obj/structure/flora/rock/beach,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"xo" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 0;
+	pixel_z = -6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"xt" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_w = -7;
+	pixel_z = 3
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"xv" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 1
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"xF" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/floor/carpet/purple/airless,
+/area/overmap_encounter/planetoid/beach)
+"xX" = (
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"yt" = (
+/mob/living/basic/crab/beach,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"yF" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 6
+	},
+/obj/structure/fermenting_barrel,
+/obj/item/flashlight/lantern/on{
+	pixel_w = -1;
+	pixel_z = 17
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"yP" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"yW" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/obj/structure/chair/stool/directional/north,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"yZ" = (
 /obj/structure/chair/plastic{
 	dir = 1
 	},
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"H" = (
-/obj/machinery/vending/boozeomat,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"I" = (
-/obj/structure/fermenting_barrel,
-/obj/effect/decal/cleanable/cobweb/cobweb2,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"J" = (
-/obj/item/storage/cans/sixbeer,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"K" = (
-/turf/open/floor/wood,
-/area/ruin/powered)
-"M" = (
-/obj/structure/rack,
-/obj/item/reagent_containers/cup/glass/bottle/rum{
-	pixel_x = -4;
-	pixel_y = 3
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"zp" = (
+/obj/structure/bonfire/prelit,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"zv" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
 	},
-/obj/item/reagent_containers/cup/glass/bottle/beer{
-	pixel_x = 4
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
 	},
-/turf/open/floor/wood,
-/area/ruin/powered)
-"O" = (
-/obj/structure/fluff/beach_umbrella,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"Q" = (
-/obj/effect/spawner/random/trash/garbage,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"S" = (
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"T" = (
-/obj/structure/chair/plastic{
+/obj/structure/flora/rock/pile/style_2{
+	pixel_w = 1;
+	pixel_z = -8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"zw" = (
+/obj/structure/fake_stairs/wood/directional/north,
+/obj/structure/railing{
+	color = "#5d341f";
 	dir = 8
 	},
 /turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"U" = (
-/obj/effect/spawner/random/trash/crushed_can,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"V" = (
-/obj/machinery/door/airlock/wood,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"W" = (
-/obj/item/toy/beach_ball,
-/turf/open/misc/asteroid/sand/beach/lit,
-/area/ruin/unpowered)
-"X" = (
-/obj/item/kirbyplants/random,
-/turf/open/floor/wood,
-/area/ruin/powered)
-"Y" = (
+/area/overmap_encounter/planetoid/beach)
+"zz" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/structure/railing{
+	color = "#5d341f"
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"AV" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
 /obj/structure/table/wood,
-/obj/effect/spawner/random/food_or_drink/booze,
-/turf/open/floor/wood,
+/obj/item/reagent_containers/cup/glass/bottle/rootbeer{
+	pixel_w = 5;
+	pixel_z = 7
+	},
+/obj/item/food/chips/shrimp{
+	pixel_w = -6;
+	pixel_z = 3
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"AZ" = (
+/obj/structure/fluff/beach_umbrella{
+	pixel_w = -7;
+	pixel_z = -16
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Bq" = (
+/turf/open/floor/wood/maple,
 /area/ruin/powered)
-"Z" = (
+"Cf" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -6;
+	pixel_z = 1
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"Cu" = (
+/obj/effect/spawner/random/trash/crushed_can{
+	pixel_w = 7;
+	pixel_z = 11
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"CG" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 5
+	},
+/obj/item/kirbyplants/organic/plant21,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"Ek" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Gm" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Gn" = (
+/obj/structure/table/wood,
+/obj/machinery/barsign/all_access/directional/north,
+/obj/item/rag{
+	pixel_w = 6;
+	pixel_z = 4
+	},
+/obj/item/reagent_containers/cup/glass/shaker{
+	pixel_w = -8;
+	pixel_z = 8
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"GF" = (
+/obj/effect/turf_decal/weather/sand/light,
+/turf/template_noop,
+/area/template_noop)
+"GL" = (
+/obj/structure/table/wood,
+/obj/item/storage/box/cups{
+	pixel_w = 4;
+	pixel_z = 8
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"GQ" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ha" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/template_noop,
+/area/template_noop)
+"He" = (
+/obj/item/reagent_containers/cup/soda_cans/beer{
+	pixel_w = 8;
+	pixel_z = -2
+	},
+/obj/item/flashlight/lantern/on{
+	pixel_w = -8;
+	pixel_z = -2
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Hl" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/wood,
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	pixel_w = -5;
+	pixel_z = 7
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{
+	pixel_w = 8;
+	pixel_z = 7
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered)
+"HD" = (
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 6;
+	pixel_z = 8
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"IR" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 9
+	},
+/obj/item/kirbyplants/organic/plant21,
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"Jp" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"Js" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/floor/carpet/blue,
+/area/overmap_encounter/planetoid/beach)
+"JF" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"KY" = (
+/obj/structure/fake_stairs/wood/directional/north,
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach/lit,
+/area/overmap_encounter/planetoid/beach)
+"KZ" = (
+/obj/item/toy/seashell{
+	pixel_w = 5;
+	pixel_z = 2
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Lx" = (
+/mob/living/basic/crab/beach,
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"LY" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Nm" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Nq" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/machinery/light/warm/directional/west,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"Of" = (
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Og" = (
+/obj/structure/fluff/beach_umbrella/science{
+	pixel_w = -24;
+	pixel_z = 13
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/floor/carpet/purple/airless,
+/area/overmap_encounter/planetoid/beach)
+"OZ" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/structure/chair/stool/bar/directional/west,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"Qa" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Qh" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/chair/stool/bar/directional/west,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"Qy" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"QM" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 3;
+	pixel_z = -9
+	},
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = -4;
+	pixel_z = 9
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Ri" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"RE" = (
+/obj/structure/chair/stool/bar/directional/north,
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"RO" = (
+/obj/structure/railing/corner{
+	color = "#5d341f";
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"Sq" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Tw" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -8;
+	pixel_z = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"TC" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"TP" = (
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 0;
+	pixel_z = -9
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"Ur" = (
+/obj/item/toy/seashell{
+	pixel_w = -5;
+	pixel_z = 5
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Vl" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"Vo" = (
+/obj/structure/fake_stairs/wood/directional/north,
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach/lit,
+/area/overmap_encounter/planetoid/beach)
+"VU" = (
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 5;
+	pixel_z = 7
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"WH" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/turf/open/floor/wood/large,
+/area/overmap_encounter/planetoid/beach)
+"WR" = (
+/obj/structure/flora/coconuts{
+	pixel_w = 5;
+	pixel_z = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"WT" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
 /obj/machinery/grill,
-/turf/open/floor/wood,
-/area/ruin/powered)
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"XZ" = (
+/obj/item/toy/beach_ball{
+	pixel_w = -9;
+	pixel_z = 13
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"ZX" = (
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
 
 (1,1,1) = {"
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
+gN
+Vl
+pn
+pn
+pn
+pn
+pn
+pn
+pn
+gN
+Vl
+Vl
+gN
 "}
 (2,1,1) = {"
-z
-z
-z
-z
-z
-S
-r
-S
-S
-S
-S
-h
+GF
+gg
+kP
+WR
+xo
+er
+sc
+VU
+yt
+Ha
+TP
+xj
+eY
 "}
 (3,1,1) = {"
-z
-H
-d
-X
-z
-S
-S
-g
-S
-S
-x
-h
+gJ
+IR
+vn
+TC
+TC
+TC
+jE
+Vo
+tx
+sc
+iB
+Cf
+eY
 "}
 (4,1,1) = {"
-z
-o
-E
-q
-z
-S
-S
-S
-D
-S
-S
-h
+gJ
+kq
+rq
+rc
+rq
+vl
+zz
+WT
+Ek
+sc
+qT
+Js
+iG
 "}
 (5,1,1) = {"
-z
-M
-Y
-t
-V
-S
-S
-S
-S
-J
-S
-h
+gJ
+kq
+cO
+Bq
+Hl
+RE
+zz
+oy
+Nm
+sn
+He
+XZ
+iG
 "}
 (6,1,1) = {"
-z
-Z
-i
-q
-z
-S
-S
-S
-v
-S
-G
-h
+gJ
+kq
+Gn
+Bq
+xt
+vl
+RO
+zw
+LY
+bL
+Og
+xF
+iG
 "}
 (7,1,1) = {"
-z
-F
-a
-q
-f
-S
-S
-S
-S
-S
-S
-h
+gJ
+kq
+GL
+Bq
+uD
+RE
+oI
+KY
+Gm
+Of
+Qa
+cJ
+iG
 "}
 (8,1,1) = {"
-z
-I
-t
-Q
-z
-S
-S
-S
-T
-S
-S
-h
+gJ
+kq
+wz
+Bq
+uz
+RE
+zz
+QM
+sc
+Ri
+sc
+qi
+gN
 "}
 (9,1,1) = {"
-z
-z
-z
-z
-z
-S
-S
-S
-S
-W
-S
-h
+gJ
+kq
+rq
+au
+qE
+vl
+zz
+Sq
+AZ
+lP
+Cu
+yP
+gN
 "}
 (10,1,1) = {"
-h
-s
-n
-K
-A
-S
-S
-x
-S
-S
-g
-h
+gJ
+xv
+Nq
+Qh
+OZ
+vl
+zz
+zv
+GQ
+zp
+yZ
+cq
+eY
 "}
 (11,1,1) = {"
-h
-s
-e
-t
-K
-S
-S
-S
-S
-S
-S
-h
+gJ
+eJ
+em
+em
+ZX
+vl
+RO
+zw
+Qy
+sc
+yZ
+xX
+eY
 "}
 (12,1,1) = {"
-h
-s
-c
-k
-t
-S
-g
-S
-S
-j
-S
-h
+gJ
+tQ
+em
+cD
+ZX
+vl
+oI
+KY
+LY
+sn
+sc
+Jp
+gN
 "}
 (13,1,1) = {"
-h
-m
-K
-K
-K
-S
-S
-O
-S
-S
-B
-h
+gJ
+CG
+ay
+AV
+yW
+WH
+yF
+kT
+vL
+oc
+Tw
+JF
+gN
 "}
 (14,1,1) = {"
-h
-X
-U
-t
-w
-b
-S
-S
-S
-S
-S
-h
+gJ
+Ur
+fD
+rC
+HD
+uw
+uw
+nL
+Lx
+jZ
+mL
+KZ
+iG
 "}
 (15,1,1) = {"
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
-h
+gN
+by
+by
+by
+lj
+lj
+lj
+by
+by
+by
+by
+by
+gN
 "}

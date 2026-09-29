@@ -150,7 +150,8 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
-docs/
+docs/*
+!docs/external-rsc.md
 # Icon must end with two \r
 Icon
 
@@ -268,6 +269,8 @@ rust_g64.dll
 
 # Local scratch, never committed
 /_bench_previews/
+# Voidworks preview staging folders, left behind if generation is interrupted
+.voidworks-previews-*/
 /vc/
 /unit_test_run.dme
 wiki/deploy.local.ps1
@@ -275,3 +278,4 @@ wiki/dist/
 
 # Local-only notes (machine-specific infrastructure, never commit)
 *.local.md
+/config/translation_filter.txt

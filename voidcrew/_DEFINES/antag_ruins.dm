@@ -5,7 +5,7 @@
 /// Delay between subsequent vestige ruin arrivals
 #define VESTIGE_SPAWN_INTERVAL (15 MINUTES)
 /// Hard cap on vestige ruins per round (also capped by how many themes exist)
-#define VESTIGE_MAX_PER_ROUND 14
+#define VESTIGE_MAX_PER_ROUND 5
 
 /// Most boon candidates a fulfilled pact offers at once (fewer if the patron has less left to give)
 #define VESTIGE_REWARD_CHOICES 3

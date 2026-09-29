@@ -123,7 +123,8 @@
 
 /datum/record/crew/Destroy()
 	GLOB.manifest.general -= src
-	QDEL_LAZYLIST(record_photos)
+	QDEL_LIST_ASSOC_VAL(record_photos)
+	record_photos = null
 	return ..()
 
 /**
@@ -225,7 +226,8 @@
 /datum/record/crew/proc/make_photo(field_name, orientation, add_height_chart)
 	var/icon/picture_image
 	if(!isicon(character_appearance))
-		var/mutable_appearance/appearance = character_appearance
+		// Direction and the height chart belong to this photo, not the saved appearance.
+		var/mutable_appearance/appearance = new(character_appearance)
 		appearance.setDir(orientation)
 		if(add_height_chart)
 			appearance.underlays += mutable_appearance('icons/obj/machines/photobooth.dmi', "height_chart", alpha = 125, appearance_flags = RESET_ALPHA|RESET_COLOR|RESET_TRANSFORM|KEEP_APART)

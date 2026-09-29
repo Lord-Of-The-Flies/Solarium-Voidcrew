@@ -40,6 +40,9 @@
 
 /obj/energy_ball/Initialize(mapload, starting_energy = 50, is_miniball = FALSE)
 	. = ..()
+	if(is_trader_outpost_protected(src)) // VOIDCREW
+		log_game("OUTPOST PROTECTION: Prevented [name] from forming at [AREACOORD(src)].")
+		return INITIALIZE_HINT_QDEL
 
 	energy = starting_energy
 	miniball = is_miniball
@@ -63,6 +66,8 @@
 	return ..()
 
 /obj/energy_ball/process()
+	if(neutralize_trader_outpost_hazard(src)) // VOIDCREW
+		return PROCESS_KILL
 	if(orbiting)
 		energy = 0 // ensure we dont have miniballs of miniballs
 	else
@@ -112,6 +117,8 @@
 
 /obj/energy_ball/proc/can_move(turf/to_move)
 	if (!to_move)
+		return FALSE
+	if(is_trader_outpost_protected(to_move)) // VOIDCREW
 		return FALSE
 
 	for (var/_thing in to_move)
@@ -186,6 +193,8 @@
 
 
 /obj/energy_ball/proc/dust_mobs(atom/A)
+	if(is_trader_outpost_protected(src) || is_trader_outpost_protected(A)) // VOIDCREW
+		return
 	if(isliving(A))
 		var/mob/living/living = A
 		if(living.incorporeal_move || HAS_TRAIT(living, TRAIT_GODMODE))
@@ -201,6 +210,8 @@
 
 /proc/tesla_zap(atom/source, zap_range = 3, power, cutoff = 4e5, zap_flags = ZAP_DEFAULT_FLAGS, list/shocked_targets = list())
 	if(QDELETED(source))
+		return
+	if(is_trader_outpost_protected(source)) // VOIDCREW
 		return
 	if(!(zap_flags & ZAP_ALLOW_DUPLICATES))
 		LAZYSET(shocked_targets, source, TRUE) //I don't want no null refs in my list yeah?
@@ -245,6 +256,8 @@
 	//Darkness fucks oview up hard. I've tried dview() but it doesn't seem to work
 	//I hate existence
 	for(var/atom/A as anything in typecache_filter_list(oview(zap_range+2, source), things_to_shock))
+		if(is_trader_outpost_protected(A)) // VOIDCREW
+			continue
 		if(!(zap_flags & ZAP_ALLOW_DUPLICATES) && LAZYACCESS(shocked_targets, A))
 			continue
 		// NOTE: these type checks are safe because CURRENTLY the range family of procs returns turfs in least to greatest distance order

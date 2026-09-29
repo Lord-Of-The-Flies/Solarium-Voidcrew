@@ -150,9 +150,9 @@
 		if(zone?.zone_type != ZONE_RED)
 			var/list/scanned_ships = controller.blackboard[BB_NPC_SCANNED_SHIPS]
 			if(scanned_ships)
-				var/scanned_time = scanned_ships[REF(potential_target)]
-				if(scanned_time && (world.time - scanned_time) < NPC_SCAN_MEMORY_TIME)
-					continue  // Skip - we scanned this ship recently
+				var/memory_expires = scanned_ships[REF(potential_target)]
+				if(memory_expires && world.time < memory_expires)
+					continue  // Skip - we scanned (or tried to scan) this ship recently
 
 		// Skip hulls with nobody alive aboard. There's nothing to rob off a ship whose crew
 		// is dead or gone, and without this a pirate that had just wiped a crew and broken
@@ -175,6 +175,13 @@
 			controller.blackboard[BB_NPC_SCAN_START_TIME] = world.time
 			controller.blackboard[BB_NPC_SCAN_COMPLETE] = FALSE
 			controller.blackboard[BB_NPC_SCAN_ANNOUNCED] = FALSE
+			// Remember the attempt now, not only on completion. A scan that
+			// check_disengage abandons (drift past territory_range, another pirate
+			// taking the target) used to leave no memory, so the next tick
+			// re-acquired the same hull and re-announced the scan - round 76 logged
+			// 268 "scanning your financial systems" starts against one ship.
+			// Short memory: a finished scan upgrades it to the full duration.
+			controller.remember_scanned_ship(potential_target, NPC_SCAN_ABORT_MEMORY_TIME)
 		else if(istype(ship, /obj/structure/overmap/ship/npc/pirate))
 			// Red zone: hail first (give player chance to respond)
 			var/obj/structure/overmap/ship/npc/pirate/pirate_ship = ship
@@ -228,7 +235,7 @@
 		ship.ship_notify("Initiating financial scan of [target.name]...", "SCANNER", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 50)
 		target.ship_notify("[ship.name] is scanning our financial systems!", "SECURITY", SHIP_NOTIFY_WARNING, 'voidcrew/sound/warn4.ogg', 25)
 		// Start looping scan sound on target ship
-		start_scan_sound(target)
+		controller.start_scan_sound(target)
 
 	var/elapsed = world.time - scan_start
 	if(elapsed < ship.scan_time)
@@ -236,15 +243,11 @@
 		return AI_BEHAVIOR_DELAY
 
 	// Scan complete! Stop the scan sound
-	stop_scan_sound(target)
+	controller.stop_scan_sound(target)
 
 	// Record this ship as scanned
 	controller.blackboard[BB_NPC_SCAN_COMPLETE] = TRUE
-	var/list/scanned_ships = controller.blackboard[BB_NPC_SCANNED_SHIPS]
-	if(!scanned_ships)
-		scanned_ships = list()
-		controller.blackboard[BB_NPC_SCANNED_SHIPS] = scanned_ships
-	scanned_ships[REF(target)] = world.time
+	controller.remember_scanned_ship(target, NPC_SCAN_MEMORY_TIME)
 
 	// Check target's wealth
 	var/target_wealth = target.ship_account?.account_balance || 0
@@ -316,7 +319,7 @@
 	return AI_BEHAVIOR_DELAY
 
 /// Starts looping scan sound on the target ship
-/datum/ai_behavior/npc_ship/scan_wealth/proc/start_scan_sound(obj/structure/overmap/ship/target)
+/datum/ai_controller/npc_ship/proc/start_scan_sound(obj/structure/overmap/ship/target)
 	if(!target?.shuttle?.shuttle_areas)
 		return
 	var/sound/scan_sound = sound('voidcrew/sound/econ_scan.ogg', repeat = TRUE, channel = CHANNEL_ECON_SCAN)
@@ -325,8 +328,10 @@
 			if(M.client)
 				SEND_SOUND(M, scan_sound)
 
-/// Stops the looping scan sound on the target ship
-/datum/ai_behavior/npc_ship/scan_wealth/proc/stop_scan_sound(obj/structure/overmap/ship/target)
+/// Stops the looping scan sound on the target ship. Lives on the controller rather than
+/// the behavior so clear_target() can silence an abandoned scan - only a completed one
+/// used to reach this, and an aborted scan left the loop playing aboard the target.
+/datum/ai_controller/npc_ship/proc/stop_scan_sound(obj/structure/overmap/ship/target)
 	if(!target?.shuttle?.shuttle_areas)
 		return
 	var/sound/stop_sound = sound(null, channel = CHANNEL_ECON_SCAN)
@@ -334,6 +339,19 @@
 		for(var/mob/M in shuttle_area)
 			if(M.client)
 				SEND_SOUND(M, stop_sound)
+
+/// Holds scan_threats off a target for `duration`. Stores the expiry, so an attempted
+/// scan (short) and a completed one (long) can carry different lengths; a longer
+/// memory never gets shortened by a later stamp.
+/datum/ai_controller/npc_ship/proc/remember_scanned_ship(obj/structure/overmap/ship/target, duration)
+	if(!target)
+		return
+	var/list/scanned_ships = blackboard[BB_NPC_SCANNED_SHIPS]
+	if(!scanned_ships)
+		scanned_ships = list()
+		blackboard[BB_NPC_SCANNED_SHIPS] = scanned_ships
+	var/key = REF(target)
+	scanned_ships[key] = max(scanned_ships[key], world.time + duration)
 
 // ========== HAILING ==========
 
@@ -841,8 +859,13 @@
 	// Check distance to target
 	var/target_dist = get_dist(ship, target)
 
-	// If target is out of range, disengage
-	if(target_dist > ship.territory_range)
+	// If target is out of range, disengage. A scan in progress gets some slack:
+	// scan_threats acquires right at territory_range, and either hull moving one
+	// tile from there used to abandon the 6-second scan a second or two in.
+	var/disengage_range = ship.territory_range
+	if(combat_state == NPC_COMBAT_SCANNING)
+		disengage_range += NPC_SCAN_RANGE_SLACK
+	if(target_dist > disengage_range)
 		// Notify target that we stopped targeting them
 		SEND_SIGNAL(target, COMSIG_SHIP_TARGETING_STOPPED, ship)
 		controller.clear_target()

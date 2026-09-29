@@ -2,7 +2,10 @@
 	name = "Research & Development Kit"
 	id = "rndkit"
 	build_type = AUTOLATHE
-	materials = list(/datum/material/iron = 2000, /datum/material/glass = 4000) // The materials for one box + all boards inside exactly.
+	// 3125 each prints as 50 sheets of iron and 50 of glass on a tier 1 autolathe, which applies a
+	// 1.6 cost coefficient to its designs. Better parts lower that coefficient, so the printed
+	// price falls as the autolathe is upgraded.
+	materials = list(/datum/material/iron = 3125, /datum/material/glass = 3125)
 	build_path = /obj/item/storage/box/rndboards/all
 	category = list(
 		RND_CATEGORY_INITIAL,

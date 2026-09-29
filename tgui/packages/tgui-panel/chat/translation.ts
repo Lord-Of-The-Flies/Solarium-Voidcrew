@@ -455,6 +455,24 @@ function reapplyFormatting(node: HTMLElement): void {
   }
 }
 
+/** Keep attribution and the original available on every successful path. */
+function finishTranslation(
+  node: HTMLElement,
+  translatedText: string,
+  originalText: string,
+): void {
+  node.textContent = translatedText;
+  node.classList.remove('tsl-morphing');
+  node.classList.add('tsl-translated');
+  node.setAttribute(
+    'title',
+    originalText
+      ? `Automatically translated.\nOriginal: ${originalText}`
+      : 'Automatically translated.',
+  );
+  reapplyFormatting(node);
+}
+
 /**
  * Animates one line from its original text to its translation.
  *
@@ -480,8 +498,7 @@ function morph(node: HTMLElement, payload: TranslationPayload): void {
 
   // Nothing to animate between - just settle.
   if (!from.length || duration <= 0) {
-    node.textContent = to.join('');
-    reapplyFormatting(node);
+    finishTranslation(node, to.join(''), originalText);
     return;
   }
 
@@ -499,18 +516,7 @@ function morph(node: HTMLElement, payload: TranslationPayload): void {
       requestAnimationFrame(step);
       return;
     }
-    node.classList.remove('tsl-morphing');
-    node.classList.add('tsl-translated');
-    // Hovering a translated line shows what was actually said. Only mark it
-    // as hoverable if there is genuinely something to show, otherwise the
-    // help cursor promises a tooltip that never appears.
-    if (originalText) {
-      node.setAttribute('title', originalText);
-    } else {
-      node.removeAttribute('title');
-      node.classList.add('tsl-no-tooltip');
-    }
-    reapplyFormatting(node);
+    finishTranslation(node, to.join(''), originalText);
   };
 
   requestAnimationFrame(step);

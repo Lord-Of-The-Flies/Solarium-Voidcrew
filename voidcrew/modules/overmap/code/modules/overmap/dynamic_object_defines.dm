@@ -171,24 +171,35 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 	else
 		addtimer(CALLBACK(src, PROC_REF(try_unload_level)), unload_backoff_delay, TIMER_UNIQUE)
 
+/// Placeholders keep their own cleanup loop (try_unload_level(), armed on undock) and
+/// must not also run the planet countdown: the two would race, and attempt_despawn()
+/// logs a relocation the parent's unload_level() does but ours - which deletes itself -
+/// does not. Note this does NOT cover a placeholder that was stood up and then never
+/// docked at; that leak is separate and lives in the ship-to-ship docking failure paths.
+/obj/structure/overmap/planet/empty/check_start_despawn()
+	return
+
 /// Same contract as the parent's, minus its mapzone requirement: an empty-space
 /// encounter that never got as far as allocating one still needs cleaning up.
 /// preserve_level is handled by unload_level() itself, which has to stop the retries.
 /obj/structure/overmap/planet/empty/can_release_interior()
-	// Don't unload if any ships are still docked here
-	if(first_dock_taken || second_dock_taken)
-		return FALSE
+	return isnull(get_interior_release_blocker())
 
-	// Check if any ships are still inside (catches race conditions with async unload)
-	for(var/obj/structure/overmap/ship/docked_ship in contents)
-		return FALSE
+/obj/structure/overmap/planet/empty/get_interior_release_blocker(ignore_ssd_grace = FALSE)
+	// Don't unload if any ships are still docked here
+	var/docking_blocker = get_docking_blocker()
+	if(docking_blocker)
+		return docking_blocker
+	if(first_dock_taken || second_dock_taken)
+		return "A landing pad is reserved, but no assigned ship was found. Inspect its docking port before retrying."
+
 
 	// Footprint-scoped: three other encounters may share this z-level, and the z-wide
 	// answer would keep this one pinned for as long as ANY of them has a crew on it.
 	if(length(mapzone?.get_mind_mobs_in(footprint)))
-		return FALSE
+		return "A disconnected player or their body remains inside. Move them out before unloading."
 
-	return TRUE
+	return null
 
 /obj/structure/overmap/planet/empty/unload_level()
 	if(preserve_level)
@@ -374,15 +385,20 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 	map_generator = null
 
 /area/overmap_encounter/planetoid/RunTerrainGeneration()
-	planet_type = new src.planet_type()
-	map_generator = new map_generator()
+	prepare_planet_definition()
+	if(ispath(map_generator))
+		map_generator = new map_generator()
 	var/list/turfs = list()
 	for(var/turf/T in contents)
 		turfs += T
 	map_generator.generate_terrain(turfs, planet_type, FALSE, TRUE)
 
 /area/overmap_encounter/planetoid/RunTerrainPopulation()
-	if(map_generator)
+	// A typepath here is an area that never generated terrain: the planet-surface yard a
+	// ruin maps around itself, minted by the loader after the planet's own ground was laid.
+	// Roundstart instantiates every generator before populating; a dynamic planet populates
+	// after its ruins land, and those yards keep the mapper's ground exactly as placed.
+	if(map_generator && !ispath(map_generator))
 		var/list/turfs = list()
 		for(var/turf/T in contents)
 			turfs += T
@@ -441,56 +457,36 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 	name = "\improper Volcanic Planetoid"
 	ambientsounds = MINING
 	planet_type = /datum/planet/lava
-	map_generator = /datum/map_generator/planet_generator/lava
-	static_lighting = FALSE
-	ambient_lighting = TRUE
-	base_lighting_alpha = 255
 	// was /turf/open/misc/asteroid/planetary_basalt/lava_land_surface/lit
-	base_lighting_color = "#F98511"
 
 /area/overmap_encounter/planetoid/ice
 	name = "\improper Frozen Planetoid"
 	sound_environment = SOUND_ENVIRONMENT_CAVE
 	ambientsounds = SPOOKY
 	planet_type = /datum/planet/snow
-	map_generator = /datum/map_generator/planet_generator/snow
-	static_lighting = FALSE
-	ambient_lighting = TRUE
 	// snow was lit colourless; only the frozen lakes were cyan, and they are a minority
-	base_lighting_alpha = 255
 
 /area/overmap_encounter/planetoid/beach
 	name = "\improper Beach Planetoid"
 	sound_environment = SOUND_ENVIRONMENT_FOREST
 	ambientsounds = BEACH
 	planet_type = /datum/planet/beach
-	map_generator = /datum/map_generator/planet_generator/beach
-	static_lighting = FALSE
-	ambient_lighting = TRUE
-	base_lighting_alpha = 255
 	// was /turf/open/misc/asteroid/sand/beach/lit, the bulk of a beach planet's ground
-	base_lighting_color = LIGHT_COLOR_TUNGSTEN
 
 /area/overmap_encounter/planetoid/jungle
 	name = "\improper Jungle Planetoid"
 	sound_environment = SOUND_ENVIRONMENT_FOREST
 	ambientsounds = AWAY_MISSION
 	planet_type = /datum/planet/jungle
-	static_lighting = FALSE
-	ambient_lighting = TRUE
-	base_lighting_alpha = 255
 
 /area/overmap_encounter/planetoid/wasteland
 	name = "\improper Apocalyptic Planetoid"
 	sound_environment = SOUND_ENVIRONMENT_HANGAR
 	ambientsounds = MINING
 	planet_type = /datum/planet/wasteland
-	static_lighting = FALSE
-	ambient_lighting = TRUE
 	// the fallout zone keeps its own green ground light on top of this - see
 	// /datum/biome/nuclear. Those turfs are the one kind of surface ground that still
 	// carries a lighting object, so the green still renders; see skips_lighting_object().
-	base_lighting_alpha = 255
 
 // CAVE AREAS
 // No base lighting here on purpose: caves are meant to be dark, and they are a subtype
@@ -503,8 +499,9 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 
 // We want to run generate terrain with is_cave set to TRUE for cave areas
 /area/overmap_encounter/planetoid/cave/RunTerrainGeneration()
-	planet_type = new src.planet_type()
-	map_generator = new map_generator()
+	prepare_planet_definition()
+	if(ispath(map_generator))
+		map_generator = new map_generator()
 	var/list/turfs = list()
 	for(var/turf/T in contents)
 		turfs += T

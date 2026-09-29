@@ -31,10 +31,16 @@
 
 /datum/job/prisoner/proc/handle_prisoner_joining(datum/source, mob/living/crewmember, rank)
 	SIGNAL_HANDLER
-	if(rank != title)
-		return //not a prisoner
+	// Ships can have separate prisoner jobs with the same title.
+	if(crewmember.mind?.assigned_role != src)
+		return
 
-	var/crime_name = crewmember.client?.prefs?.read_preference(/datum/preference/choiced/prisoner_crime)
+	var/datum/record/crew/target_record = find_record(crewmember.real_name)
+	if(!target_record)
+		return
+
+	var/datum/client_interface/player_client = GET_CLIENT(crewmember)
+	var/crime_name = player_client?.prefs?.read_preference(/datum/preference/choiced/prisoner_crime)
 	if(!crime_name)
 		stack_trace("[crewmember] joined as a Prisoner without having a prisoner crime set.")
 		crime_name = pick(assoc_to_keys(GLOB.prisoner_crimes))
@@ -43,7 +49,6 @@
 
 	var/datum/prisoner_crime/crime = GLOB.prisoner_crimes[crime_name]
 	var/datum/crime/past_crime = new(crime.name, crime.desc, "Central Command", "Indefinite.")
-	var/datum/record/crew/target_record = find_record(crewmember.real_name)
 	target_record.crimes += past_crime
 	target_record.recreate_manifest_photos(add_height_chart = TRUE)
 	to_chat(crewmember, span_warning("You are imprisoned for \"[crime_name]\"."))

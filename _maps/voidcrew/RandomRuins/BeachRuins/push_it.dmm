@@ -1,435 +1,1400 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"ai" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"aA" = (
+/obj/item/reagent_containers/applicator/pill/happy,
+/turf/open/floor/light/colour_cycle,
+/area/ruin/powered)
 "aD" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"aI" = (
 /obj/structure/table/glass,
-/obj/item/research_notes/loot/medium,
-/obj/item/research_notes/loot/small,
-/turf/open/floor/light,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/item/cigarette/rollie/mindbreaker{
+	pixel_w = 1;
+	pixel_z = 5
+	},
+/obj/item/cigarette/rollie/trippy{
+	pixel_w = 5;
+	pixel_z = 11
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
 "aN" = (
-/obj/machinery/chem_dispenser,
-/obj/machinery/light,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"aR" = (
-/obj/structure/chair/sofa/left{
+/obj/effect/turf_decal/weather/sand{
 	dir = 1
 	},
-/turf/open/floor/carpet/royalblue,
+/turf/template_noop,
+/area/template_noop)
+"aR" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
+"aX" = (
+/obj/structure/platform,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"aY" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"bd" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"be" = (
+/obj/structure/table/wood,
+/obj/machinery/chem_dispenser/drinks{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"ck" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -4;
+	pixel_z = -3
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"cv" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"cA" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"cG" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"cY" = (
+/obj/effect/decal/cleanable/rubble,
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "dd" = (
-/obj/structure/chair/sofa/left,
-/obj/item/stack/spacecash/c1000,
-/turf/open/floor/carpet/royalblue,
+/obj/structure/steps/directional/east,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"de" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
 "dh" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/light,
+/obj/structure/chair/stool/directional/north,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
 /area/ruin/powered)
 "ds" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/light,
-/area/ruin/powered)
+/obj/structure/flora/coconuts,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
 "dG" = (
-/obj/structure/chair/sofa/corner{
+/obj/structure/chair,
+/mob/living/basic/trooper/russian/ranged,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 8
 	},
-/mob/living/basic/trooper/russian,
-/obj/machinery/light,
-/turf/open/floor/carpet/royalblue,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
+"ej" = (
+/obj/structure/table/glass,
+/obj/item/storage/fancy/rollingpapers{
+	pixel_w = 5;
+	pixel_z = 6
+	},
+/obj/item/cigarette/rollie/cannabis{
+	pixel_w = -2;
+	pixel_z = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/machinery/light/blacklight/directional/east,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"eR" = (
+/obj/structure/chair,
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"fy" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"gd" = (
+/obj/structure/flora/bush/stalky/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"gv" = (
+/obj/item/kirbyplants/organic/plant22,
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"gy" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
 "gE" = (
-/obj/machinery/seed_extractor,
-/turf/open/floor/plastic,
+/obj/structure/chair/sofa/corp{
+	dir = 1
+	},
+/obj/machinery/light/blacklight/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"gO" = (
+/obj/structure/chair/stool/directional/west,
+/obj/machinery/light/blacklight/directional/east,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
 /area/ruin/powered)
 "hh" = (
-/obj/structure/chair/sofa/left{
-	dir = 1
-	},
-/turf/open/floor/light,
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "hm" = (
-/obj/item/kirbyplants,
-/turf/open/floor/light,
+/obj/structure/chair/sofa/corp/right,
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
-"ie" = (
-/obj/item/storage/pill_bottle/happy,
-/turf/open/floor/light,
-/area/ruin/powered)
-"kc" = (
-/obj/structure/chair/sofa/right,
-/obj/item/research_notes/loot/medium,
+"hs" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"hG" = (
+/obj/structure/flora/deadgrass/tall,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"hH" = (
+/obj/structure/chair{
+	dir = 4
+	},
 /mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/iron/vaporwave,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"ia" = (
+/obj/effect/decal/cleanable/rubble{
+	pixel_w = 2;
+	pixel_z = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"ie" = (
+/turf/open/floor/light/colour_cycle,
+/area/ruin/powered)
+"in" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"iZ" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"kc" = (
+/obj/item/clothing/head/costume/chicken,
+/obj/machinery/light/blacklight/directional/north,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
 /area/ruin/powered)
 "kf" = (
-/obj/structure/mineral_door/wood,
-/turf/open/floor/carpet/royalblue,
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"kF" = (
+/obj/structure/table/glass,
+/obj/item/stack/spacecash/c1000,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/machinery/light/blacklight/directional/east,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "kR" = (
-/obj/machinery/door/airlock/freezer,
-/turf/open/floor/plastic,
+/obj/structure/platform,
+/obj/structure/festivus/anchored{
+	pixel_w = -17;
+	pixel_z = -2
+	},
+/obj/effect/zone_mobs/pirate/boss,
+/obj/machinery/light/floor,
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
+"la" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"lN" = (
+/obj/structure/table,
+/obj/item/research_notes/loot/small{
+	pixel_w = 0;
+	pixel_z = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"mc" = (
+/obj/effect/turf_decal/weather/sand/light,
+/turf/template_noop,
+/area/template_noop)
 "mf" = (
 /mob/living/basic/trooper/russian,
-/turf/open/floor/carpet/blue,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"ms" = (
+/obj/structure/chair/stool/directional/west,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"mF" = (
+/obj/structure/table,
+/obj/item/reagent_containers/applicator/pill/happy{
+	pixel_w = -5;
+	pixel_z = 8
+	},
+/obj/item/reagent_containers/applicator/pill/happy{
+	pixel_w = 6;
+	pixel_z = 4
+	},
+/obj/item/reagent_containers/applicator/pill/happy{
+	pixel_w = -2;
+	pixel_z = 0
+	},
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "mK" = (
-/obj/structure/chair/sofa/right{
+/mob/living/basic/trooper/russian,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 1
 	},
-/turf/open/floor/carpet/royalblue,
+/obj/machinery/light/blacklight/directional/south,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"mP" = (
+/obj/structure/flora/deadgrass/tall,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"nd" = (
+/obj/structure/table,
+/obj/item/surgicaldrill,
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "nh" = (
-/obj/structure/closet/secure_closet/hydroponics,
-/turf/open/floor/plastic,
+/obj/structure/chair/sofa/corp/left{
+	dir = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "nz" = (
-/mob/living/basic/trooper/russian,
-/turf/open/floor/light,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
 "nS" = (
-/obj/structure/chair/sofa/right{
+/obj/structure/steps/directional/west,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"on" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -4;
+	pixel_z = -3
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"oA" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 8
 	},
-/turf/open/floor/carpet/royalblue,
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "pi" = (
-/obj/structure/chair/office/light,
-/turf/open/floor/plastic,
+/obj/structure/chair/stool/directional/south,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
 /area/ruin/powered)
+"pp" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
 "pG" = (
-/turf/open/floor/plastic,
+/obj/item/kirbyplants/organic/plant9,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
+"pH" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "pY" = (
-/obj/item/clothing/head/costume/chicken,
-/turf/open/floor/carpet/cyan,
-/area/ruin/powered)
-"qg" = (
-/obj/machinery/hydroponics,
-/obj/item/seeds/cannabis/ultimate,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"qD" = (
-/obj/structure/chair/sofa/corner{
-	dir = 1
-	},
-/obj/machinery/light,
-/mob/living/basic/trooper/russian,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"rb" = (
-/obj/structure/chair/sofa/left{
-	dir = 8
-	},
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"rN" = (
-/obj/item/kirbyplants/random,
-/obj/item/stack/sheet/mineral/diamond/five,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"se" = (
-/obj/item/kirbyplants/random,
-/turf/open/floor/light,
-/area/ruin/powered)
-"sn" = (
-/turf/open/floor/carpet/blue,
-/area/ruin/powered)
-"sP" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/light,
-/area/ruin/powered)
-"uC" = (
-/turf/open/floor/light,
-/area/ruin/powered)
-"ve" = (
-/obj/structure/table/glass,
-/obj/machinery/chem_dispenser/drinks{
-	dir = 8
-	},
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"xr" = (
-/obj/structure/chair/office/light,
-/mob/living/basic/trooper/russian,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"xL" = (
-/obj/structure/chair/sofa,
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"yA" = (
-/obj/structure/reagent_dispensers/watertank,
-/obj/machinery/light,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"yE" = (
-/obj/machinery/chem_master,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"yG" = (
-/obj/structure/chair/sofa/right,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"zj" = (
 /obj/item/melee/baseball_bat{
 	force = 25;
 	throwforce = 25
 	},
-/turf/open/floor/carpet/cyan,
+/obj/machinery/light/blacklight/directional/north,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
 /area/ruin/powered)
-"Cm" = (
-/obj/structure/table/glass,
-/obj/item/gun/ballistic/revolver/golden,
-/obj/item/ammo_casing/c357,
-/obj/item/ammo_casing/c357,
-/obj/item/ammo_casing/c357,
-/obj/item/ammo_casing/c357,
-/obj/item/ammo_casing/c357,
-/obj/item/ammo_casing/c357,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"Cs" = (
-/obj/structure/chair/sofa{
+"qc" = (
+/obj/structure/chair/sofa/corp/left{
 	dir = 1
 	},
-/turf/open/floor/light,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"qg" = (
+/obj/structure/flora/coconuts{
+	pixel_w = 4;
+	pixel_z = 9
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"qq" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"qD" = (
+/obj/structure/table/glass,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"qZ" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"rb" = (
+/obj/structure/table,
+/obj/item/dyespray{
+	pixel_w = 5;
+	pixel_z = 4
+	},
+/obj/item/razor{
+	pixel_w = -6;
+	pixel_z = 5
+	},
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"rI" = (
+/obj/structure/flora/tree/palm,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"rN" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"rR" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -4;
+	pixel_z = -3
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"rS" = (
+/obj/machinery/light/blacklight/directional/south,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"se" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"sf" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"sn" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"sv" = (
+/obj/structure/chair/stool/directional/north,
+/mob/living/basic/trooper/russian,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"sP" = (
+/obj/structure/chair/stool/directional/east,
+/obj/machinery/light/blacklight/directional/west,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"sY" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"ta" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"ti" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"tx" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"tJ" = (
+/obj/machinery/light/blacklight/directional/north,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"tX" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"tY" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"uj" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"uC" = (
+/obj/structure/closet/crate/zone_loot/syndicate,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"ve" = (
+/obj/structure/toilet,
+/mob/living/basic/trooper/russian,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"vv" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"vG" = (
+/obj/structure/table/glass,
+/obj/item/stack/spacecash/c1000,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"wM" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"wR" = (
+/obj/item/kirbyplants/organic/plant22,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"xr" = (
+/obj/structure/table/glass,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/item/research_notes/loot/big,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"xv" = (
+/obj/structure/chair,
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"xx" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -4;
+	pixel_z = -3
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"xL" = (
+/obj/effect/turf_decal/weather/sand,
+/turf/template_noop,
+/area/template_noop)
+"xW" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"ys" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"yA" = (
+/obj/structure/flora/bush/stalky/style_random,
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"yE" = (
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"yG" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"yL" = (
+/obj/effect/zone_mobs/pirate,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/machinery/light/blacklight/directional/south,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"zj" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Ad" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 8
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"BE" = (
+/obj/structure/table/glass,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/machinery/light/blacklight/directional/west,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Cm" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 8
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"Co" = (
+/obj/effect/zone_mobs/pirate,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"Cs" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 1
+	},
+/mob/living/basic/trooper/russian/ranged,
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "Cz" = (
 /obj/effect/mob_spawn/corpse/human/nanotrasensoldier,
-/turf/open/floor/light,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ruin/powered)
 "CI" = (
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"CX" = (
-/obj/structure/table/rolling,
-/obj/item/storage/fancy/rollingpapers,
-/obj/item/cigarette/rollie/cannabis,
-/obj/item/cigarette/rollie/cannabis,
-/obj/item/reagent_containers/applicator/pill/stimulant,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"Df" = (
-/obj/structure/chair/sofa/left,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"Dz" = (
-/mob/living/basic/bear/russian,
-/turf/open/floor/carpet/cyan,
-/area/ruin/powered)
-"Fr" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"FB" = (
-/obj/structure/mineral_door/wood,
-/turf/open/floor/carpet/blue,
-/area/ruin/powered)
-"GK" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/turf/open/floor/carpet/blue,
-/area/ruin/powered)
-"Ha" = (
-/obj/structure/table/glass,
-/obj/item/storage/box/donkpockets,
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"HH" = (
-/obj/machinery/vending/hydroseeds,
-/obj/machinery/light,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"Iw" = (
-/obj/structure/table/reinforced,
-/obj/item/research_notes/loot/big,
-/obj/machinery/light,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"JH" = (
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"JQ" = (
-/obj/machinery/chem_heater,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"Le" = (
-/obj/structure/chair/sofa/right{
+/obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 1
 	},
-/turf/open/floor/light,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/structure/curtain/bounty/start_closed,
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
-"Mb" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/plastic,
+"CX" = (
+/turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ruin/powered)
-"MB" = (
-/obj/machinery/light,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"MI" = (
-/obj/structure/chair/sofa/left,
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"Nh" = (
-/obj/structure/table/glass,
-/obj/machinery/microwave,
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"Oa" = (
-/obj/structure/chair/sofa/right,
-/obj/item/stack/spacecash/c1000,
-/turf/open/floor/iron/vaporwave,
-/area/ruin/powered)
-"Ou" = (
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/carpet/cyan,
-/area/ruin/powered)
-"Pq" = (
-/obj/structure/chair/sofa/right{
-	dir = 4
-	},
-/mob/living/basic/trooper/russian/ranged,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"Px" = (
-/turf/open/floor/carpet/cyan,
-/area/ruin/powered)
-"QN" = (
-/obj/item/book/manual/wiki/chemistry,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"QY" = (
-/obj/structure/chair/sofa/right{
+"CY" = (
+/obj/effect/turf_decal/weather/sand{
 	dir = 8
 	},
-/mob/living/basic/trooper/russian,
-/turf/open/floor/carpet/royalblue,
+/turf/template_noop,
+/area/template_noop)
+"Df" = (
+/obj/item/kirbyplants/organic/plant19,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
+"Dw" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Dz" = (
+/obj/structure/table/wood/poker,
+/obj/machinery/light/floor,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"DP" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"DW" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Eb" = (
+/obj/item/kirbyplants/organic/plant21,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Fm" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Fr" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/mob/living/basic/trooper/russian/ranged,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"Fw" = (
+/obj/structure/table/glass,
+/obj/item/lighter/greyscale{
+	pixel_w = 6;
+	pixel_z = 0
+	},
+/obj/item/storage/fancy/cigarettes{
+	pixel_w = -4;
+	pixel_z = 6
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/machinery/light/blacklight/directional/west,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"FB" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"FD" = (
+/obj/structure/table/glass,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/item/seeds/cannabis/death{
+	pixel_w = -3;
+	pixel_z = 5
+	},
+/obj/item/seeds/cannabis/death{
+	pixel_w = 5;
+	pixel_z = 2
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"FG" = (
+/mob/living/basic/bear/russian,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"FT" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"GK" = (
+/obj/structure/chair{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Ha" = (
+/obj/structure/table,
+/obj/effect/spawner/random/food_or_drink/donkpockets,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"Hx" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"HH" = (
+/obj/structure/chair/sofa/corp{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"HI" = (
+/obj/structure/table/wood/poker,
+/obj/item/stack/spacecash/c200,
+/obj/machinery/light/floor,
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"HQ" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/machinery/light/blacklight/directional/south,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"Io" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 8
+	},
+/obj/item/kirbyplants/organic/plant22,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Iv" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"Iw" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"JH" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"JQ" = (
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Kl" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"KX" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"Ld" = (
+/obj/structure/table/wood,
+/obj/item/storage/cans/sixbeer,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Le" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 8
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"LI" = (
+/obj/structure/table,
+/obj/item/reagent_containers/applicator/pill/happy{
+	pixel_w = 7;
+	pixel_z = 1
+	},
+/obj/item/storage/pill_bottle/happy{
+	pixel_w = -4;
+	pixel_z = 6
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"Mb" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"Mu" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"MB" = (
+/obj/structure/chair,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"MD" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"MI" = (
+/obj/structure/toilet,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"MM" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Nh" = (
+/obj/machinery/microwave,
+/obj/structure/table,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"NG" = (
+/obj/structure/flora/tree/palm/style_2,
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 7;
+	pixel_z = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Oa" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/machinery/light/blacklight/directional/north,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"Ol" = (
+/obj/structure/chair/stool/directional/east,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"Ou" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Pl" = (
+/mob/living/basic/trooper/russian/ranged,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
+/area/ruin/powered)
+"Pq" = (
+/obj/machinery/vending/coffee,
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"Px" = (
+/obj/structure/bookcase/random,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"PW" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/turf/template_noop,
+/area/template_noop)
+"Qw" = (
+/obj/structure/chair/sofa/corp/corner,
+/mob/living/basic/trooper/russian,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"QN" = (
+/obj/item/kirbyplants/organic/plant19,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"QR" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"QW" = (
+/obj/structure/flora/tree/palm,
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"QY" = (
+/turf/open/floor/iron/checker,
+/area/ruin/powered)
+"Rv" = (
+/obj/structure/flora/rock/beach,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Rx" = (
+/obj/structure/mirror/directional/north,
+/obj/structure/sink/directional/south,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"RA" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "RJ" = (
-/obj/effect/spawner/structure/window/reinforced/plasma,
-/turf/open/floor/carpet/royalblue,
+/obj/effect/spawner/structure/window/reinforced/tinted,
+/turf/open/floor/plating,
 /area/ruin/powered)
 "RS" = (
 /turf/closed/wall/mineral/wood,
 /area/ruin/powered)
 "Sa" = (
 /obj/structure/table/glass,
-/obj/item/stack/spacecash/c1000,
-/obj/item/stack/spacecash/c1000,
-/obj/item/stack/spacecash/c200,
-/obj/item/stack/medical/suture,
-/obj/item/stack/medical/gauze,
-/turf/open/floor/carpet/royalblue,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/machinery/light/blacklight/directional/west,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "Sb" = (
-/obj/structure/chair/sofa/right,
-/obj/item/lighter/greyscale,
-/turf/open/floor/carpet/royalblue,
+/obj/item/kirbyplants/organic/plant9,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
 "SI" = (
-/obj/item/kirbyplants/random,
-/turf/open/floor/carpet/royalblue,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/carpet/neon/simple/violet/nodots,
+/area/ruin/powered)
+"SQ" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"SV" = (
+/obj/structure/mirror/directional/north,
+/obj/structure/sink/directional/south,
+/mob/living/basic/trooper/russian/ranged,
+/obj/machinery/light/blacklight/directional/west,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"Ta" = (
+/obj/structure/flora/coconuts{
+	pixel_w = 4;
+	pixel_z = 9
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Ti" = (
+/obj/structure/table/wood,
+/obj/item/gun/ballistic/revolver/golden,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Ty" = (
+/obj/item/kirbyplants/organic/plant22,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "TH" = (
-/obj/machinery/hydroponics,
-/obj/item/seeds/cannabis,
-/turf/open/floor/plastic,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "TO" = (
-/obj/structure/mineral_door/wood,
-/turf/open/floor/carpet/cyan,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "TP" = (
-/obj/structure/table/glass,
-/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
-/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
-/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
-/obj/item/reagent_containers/cup/glass/drinkingglass,
-/obj/item/reagent_containers/cup/glass/drinkingglass,
-/obj/item/reagent_containers/cup/glass/drinkingglass,
-/obj/item/stack/medical/suture,
-/turf/open/floor/iron/vaporwave,
+/obj/machinery/door/airlock/grunge,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/turf/open/floor/iron/dark/smooth_large,
 /area/ruin/powered)
+"Ub" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"Uj" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 1
+	},
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"Ux" = (
+/mob/living/basic/trooper/russian,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
+/area/ruin/powered)
+"UU" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
 "Vb" = (
 /turf/template_noop,
 /area/template_noop)
+"Vm" = (
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Vq" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/turf/template_noop,
+/area/template_noop)
+"VI" = (
+/obj/structure/table/wood,
+/obj/structure/reagent_dispensers/beerkeg,
+/obj/machinery/light/floor,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
 "VO" = (
-/obj/machinery/light,
-/turf/open/floor/carpet/cyan,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"VQ" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 8
+	},
+/mob/living/basic/trooper/russian,
+/turf/open/floor/iron/dark/smooth_large,
+/area/ruin/powered)
+"VX" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Wk" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Wl" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/applicator/pill/stimulant,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/machinery/light/blacklight/directional/east,
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Wm" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ww" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/mob/living/basic/trooper/russian,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "Wx" = (
-/obj/machinery/hydroponics,
-/obj/item/seeds/cannabis/rainbow,
-/turf/open/floor/plastic,
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"WF" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner,
+/obj/item/kirbyplants/organic/plant22,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "WU" = (
 /obj/machinery/jukebox/disco/beach,
-/turf/open/floor/light,
+/turf/open/floor/light/colour_cycle/dancefloor_b,
+/area/ruin/powered)
+"Xb" = (
+/obj/item/kirbyplants/organic/plant22,
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/ruin/powered)
+"Xe" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 4
+	},
+/turf/open/floor/carpet/neon/simple/violet,
 /area/ruin/powered)
 "Xs" = (
 /obj/item/gun/ballistic/automatic/pistol/deagle,
-/turf/open/floor/light,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ruin/powered)
 "XC" = (
-/obj/machinery/hydroponics,
-/obj/item/seeds/cannabis/death,
-/turf/open/floor/plastic,
-/area/ruin/powered)
+/obj/structure/flora/deadgrass/tall,
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ye" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "YD" = (
-/obj/item/surgicaldrill,
-/turf/open/floor/light,
+/obj/item/reagent_containers/applicator/pill/happy,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ruin/powered)
 "YV" = (
-/obj/machinery/hydroponics,
-/obj/item/seeds/cannabis/white,
-/turf/open/floor/plastic,
+/obj/structure/bookcase/random,
+/turf/open/floor/iron/dark,
 /area/ruin/powered)
 "Zc" = (
-/obj/structure/closet/crate/zone_loot/syndicate,
-/turf/open/floor/plastic,
-/area/ruin/powered)
+/obj/structure/flora/tree/palm/style_2,
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "Zo" = (
-/obj/item/reagent_containers/applicator/pill/happy,
-/turf/open/floor/light,
+/obj/effect/zone_mobs/pirate,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ruin/powered)
-"ZH" = (
-/obj/structure/chair/sofa/left{
+"Zq" = (
+/obj/structure/chair/sofa/corp/left,
+/turf/open/floor/carpet/neon/simple/violet,
+/area/ruin/powered)
+"ZA" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand{
 	dir = 4
 	},
-/turf/open/floor/carpet/royalblue,
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"ZH" = (
+/obj/structure/table,
+/turf/open/floor/iron/checker,
 /area/ruin/powered)
-"aa" = (
-/obj/effect/zone_mobs/pirate,
-/turf/open/floor/carpet/blue,
-/area/ruin/powered)
-"aA" = (
-/obj/effect/zone_mobs/pirate,
-/turf/open/floor/light,
-/area/ruin/powered)
-"aX" = (
-/obj/effect/zone_mobs/pirate,
-/turf/open/floor/carpet/royalblue,
-/area/ruin/powered)
-"qq" = (
-/obj/effect/zone_mobs/pirate,
-/turf/open/floor/plastic,
-/area/ruin/powered)
-"qZ" = (
-/obj/effect/zone_mobs/pirate/boss,
-/turf/open/floor/plastic,
-/area/ruin/powered)
+"ZK" = (
+/obj/structure/flora/coconuts,
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 
 (1,1,1) = {"
-RS
-RS
-RS
-RS
-RS
-RS
 Vb
-Vb
+Wx
+Wx
+Wx
+Wx
+Wx
+Wx
+sY
+sY
+Wx
 Vb
 Vb
 Vb
@@ -446,18 +1411,20 @@ Vb
 Vb
 "}
 (2,1,1) = {"
-RS
-Nh
-Ha
-ZH
-Pq
+xL
 RS
 RS
 RS
 RS
 RS
-Vb
-Vb
+RS
+yE
+hs
+DP
+Vq
+Wx
+Wx
+Wx
 Vb
 Vb
 Vb
@@ -470,23 +1437,25 @@ Vb
 Vb
 "}
 (3,1,1) = {"
+xL
 RS
-JH
-JH
-CI
-MB
-RS
-Cm
+Nh
+Ha
 ZH
-qD
+Pq
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+RS
+Ye
+aY
+tx
+pp
+hG
+qg
+Vq
+sY
+Wx
+Wx
+Wx
 Vb
 Vb
 Vb
@@ -494,86 +1463,94 @@ Vb
 Vb
 "}
 (4,1,1) = {"
+xL
 RS
-Oa
-JH
-CI
-CI
+QY
+QY
+QY
+QY
 RS
-CI
-Px
-mK
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+RS
+RS
+RS
+Wm
+NG
+wM
+Dw
+yE
+DP
+kf
+JQ
+Vq
 Vb
 Vb
 Vb
 Vb
 "}
 (5,1,1) = {"
+xL
 RS
-MI
+Oa
 JH
-CI
-CI
-kf
-CI
-Dz
-CI
+JH
+HQ
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+aa
+sP
+aa
+RS
+RS
+ck
+hs
+MD
+gd
+ia
+JQ
+wM
+Hx
+aN
 Vb
 Vb
 Vb
 "}
 (6,1,1) = {"
+xL
 RS
-JH
-JH
-CI
-MB
+tY
+hH
+TO
+TO
 RS
-rN
-Px
-MB
+pi
+Dz
+dh
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+RS
+RS
+RS
+JQ
+pp
+fy
+ZA
+mP
+yE
+KX
 Vb
 Vb
 Vb
 "}
 (7,1,1) = {"
+xL
 RS
-RS
-RS
-kf
-RS
-RS
-RS
+qD
+vG
 TO
+TO
+de
+rN
+ms
+rN
 RS
 RS
 RS
@@ -583,493 +1560,560 @@ RS
 RS
 RS
 RS
-Vb
-Vb
-Vb
+mP
+Mu
+aN
 Vb
 Vb
 "}
 (8,1,1) = {"
-Vb
+xL
 RS
-Px
-Px
-Px
+GK
+GK
+TO
+Ty
 RS
-CI
-Px
-CI
-CI
-CI
-CI
+TO
+TO
+TO
+RS
+eR
+Fw
+zj
+cG
 MB
+BE
+Ou
 RS
-CI
-CI
-RS
-RS
-RS
-RS
-RS
-RS
+gy
+rI
+aN
+Vb
+Vb
 "}
 (9,1,1) = {"
-Vb
-RS
-Px
-sn
-Px
-RJ
-CI
-Px
-Px
-Px
-Px
-Ou
-CI
-kf
-CI
-MB
-RS
-pG
-pG
-pG
-yE
-RS
-"}
-(10,1,1) = {"
-RS
-RS
-Px
-sn
-Px
-RJ
-CI
-CI
-CI
-CI
-CI
-CI
-MB
-RS
-CI
-CI
-RS
-pG
-Fr
-pi
-aN
-RS
-"}
-(11,1,1) = {"
-RS
-Px
-Px
-sn
-VO
-RS
-RS
-GK
-GK
-RS
-RS
-RS
-RS
-RS
-CI
-CI
-RS
-pG
-pG
-qq
-JQ
-RS
-"}
-(12,1,1) = {"
-RS
-Px
-sn
-mf
-Px
-RS
-se
-ds
-uC
-uC
-uC
-uC
-hh
-RS
-Sb
-CI
-RS
-pG
-QN
-pG
-Zc
-RS
-"}
-(13,1,1) = {"
-RS
-zj
-sn
-sn
-Px
-RS
-se
-Zo
-uC
-sP
-uC
-uC
-Cs
-RS
 xL
+RS
+RS
+RS
+Ub
+RS
+RS
+TO
+FG
+TO
 CI
-RS
-pG
-pG
-pG
-qZ
-RS
-"}
-(14,1,1) = {"
-RS
-pY
-sn
+qq
+aa
+aa
+aa
+aa
 aa
 VO
 RS
+ds
+ta
+Vq
+Vb
+Vb
+"}
+(10,1,1) = {"
+xL
+VX
+RS
+gv
+cG
+uj
+RJ
+TO
+TO
+TO
+CI
+qq
+aa
+aa
+aa
+aa
+aa
+VO
+RS
+RS
+xx
+JQ
+aN
+Vb
+"}
+(11,1,1) = {"
+xL
+pp
+RS
+YV
+hh
+VO
+RJ
+Eb
+Ti
+Ld
+RS
+Io
+TH
+dG
+kF
+Ww
+TH
+QR
+RS
+RS
+pp
+cY
+aN
+Vb
+"}
+(12,1,1) = {"
+xL
+ta
+RS
+Px
+hh
+VO
+RS
+RS
+RJ
+RJ
+RS
+RS
+RS
+RS
+RS
+RS
+RS
+Ub
+RS
+RS
+RS
+mP
+xW
+Vb
+"}
+(13,1,1) = {"
+xL
+ti
+RS
+YV
+hh
+mK
+RS
+se
+Xe
+mF
 uC
-uC
-YD
-uC
-uC
+nd
+nh
+Uj
+RS
+Sb
+nz
+nz
+nz
+QN
+RS
+RS
+RS
+aN
+"}
+(14,1,1) = {"
+xL
+RS
+RS
+MM
+sn
+aD
+RS
+Zq
 ie
-Le
+ie
+ie
+ie
+ie
+Cs
 RS
+tJ
+hh
 dd
-MB
+hh
+hh
+Fr
+qZ
 RS
-pG
-pG
-pG
-Iw
-RS
+aN
 "}
 (15,1,1) = {"
-TO
-Px
+xL
+RS
+pY
+aa
+aa
+aa
+RS
+hh
+ie
+YD
+Pl
+CX
+ie
+hh
+RS
+hh
+aX
+aX
+aX
+hh
+aI
+HH
+RS
+aN
+"}
+(16,1,1) = {"
+xL
+bd
+aa
 mf
-sn
-Px
+aa
+aa
 FB
-uC
-uC
+hh
+ie
 Zo
 WU
 Xs
 aA
-aD
+hh
 RS
-CX
+Co
 aX
 kR
-pG
-pG
+aX
+uC
 xr
 gE
 RS
-"}
-(16,1,1) = {"
-RS
-Px
-sn
-sn
-VO
-RS
-uC
-uC
-uC
-Cz
-uC
-uC
-hh
-RS
-yG
-MB
-RS
-pG
-pG
-pG
-HH
-RS
+aN
 "}
 (17,1,1) = {"
-RS
-Px
-sn
-sn
-Px
-RS
-hm
-nz
-uC
-uC
-dh
-uC
-Cs
-RS
 xL
-CI
 RS
-pG
-TH
-pG
-XC
+kc
+aa
+aa
+aa
 RS
+hh
+ie
+CX
+Cz
+Ux
+ie
+hh
+RS
+hh
+aX
+aX
+aX
+hh
+FD
+HH
+RS
+aN
 "}
 (18,1,1) = {"
+xL
 RS
-Px
-sn
-sn
-Px
 RS
-se
+oA
+Kl
+aR
+RS
+hm
+ie
+aA
+ie
+ie
+ie
+qc
+RS
+tJ
+hh
+nS
+hh
+hh
+Iv
+VQ
+RS
+aN
+"}
+(19,1,1) = {"
+xL
+Hx
+RS
+YV
+hh
+yL
+RS
+Qw
+Cm
+lN
 uC
-uC
-uC
-uC
-uC
+LI
+Ad
 Le
 RS
 Df
-CI
-RS
+Mb
+Mb
 Mb
 pG
-pG
-pG
 RS
+RS
+RS
+aN
 "}
-(19,1,1) = {"
+(20,1,1) = {"
+mc
+hs
 RS
 Px
-Px
-sn
+hh
 VO
 RS
 RS
-GK
-GK
-RS
-RS
-RS
-RS
-RS
-CI
-CI
-RS
-pG
-Wx
-pG
-qg
-RS
-"}
-(20,1,1) = {"
-RS
-RS
-Px
-sn
-Px
 RJ
-CI
-CI
-CI
-CI
-CI
-CI
-MB
+RJ
 RS
-CI
-CI
 RS
-pG
-pG
-pG
-yA
 RS
+RS
+RS
+RS
+RS
+Ub
+RS
+RS
+RS
+yE
+cA
+Vb
 "}
 (21,1,1) = {"
-Vb
+xL
+Fm
 RS
-Px
-sn
-Px
-RJ
-CI
-Px
-Px
-Px
-Px
-Ou
-CI
-kf
-CI
-MB
-RS
-nh
 YV
-pG
-TH
+hh
+VO
+RJ
+Eb
+VI
+be
 RS
+WF
+cG
+MB
+Sa
+zj
+cG
+uj
+RS
+RS
+JQ
+tX
+aN
+Vb
 "}
 (22,1,1) = {"
+mc
+hs
+RS
+Xb
+TH
+QR
+RJ
+TO
+TO
+TO
+CI
+qq
+aa
+aa
+aa
+aa
+aa
+VO
+RS
+RS
+SQ
+JQ
+aN
 Vb
-RS
-Px
-Px
-Px
-RS
-CI
-Px
-CI
-CI
-CI
-CI
-MB
-RS
-CI
-CI
-RS
-RS
-RS
-RS
-RS
-RS
 "}
 (23,1,1) = {"
+xL
 RS
 RS
 RS
-kf
-RS
+Ub
 RS
 RS
 TO
+TO
+TO
+CI
+qq
+aa
+aa
+aa
+aa
+aa
+VO
 RS
-RS
-RS
-RS
-RS
-RS
-RS
-RS
-RS
-Vb
-Vb
-Vb
+yE
+XC
+PW
 Vb
 Vb
 "}
 (24,1,1) = {"
+xL
 RS
-JH
-JH
-CI
-MB
+SV
+ys
+QY
+wR
 RS
-SI
-Px
-MB
+TO
+TO
+TO
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+xv
+Wl
+Ww
+TH
+dG
+ej
+in
+RS
+cv
+Zc
+aN
 Vb
 Vb
 "}
 (25,1,1) = {"
+xL
 RS
-kc
-JH
-CI
-CI
-kf
-CI
-Px
-CI
+Rx
+ys
+QY
+QY
+ai
+SI
+Ol
+SI
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+RS
+RS
+RS
+RS
+RS
+RS
+RS
+RS
+rR
+ZK
+aN
 Vb
 Vb
 "}
 (26,1,1) = {"
+xL
 RS
-MI
-JH
-CI
-CI
 RS
-CI
-Px
-aR
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+QY
+QY
+RS
+pi
+HI
+sv
+RS
+RS
+RS
+RS
+JQ
+Rv
+yG
+yE
+yE
+RA
+Vm
+aN
 Vb
 Vb
 "}
 (27,1,1) = {"
+xL
 RS
-JH
-JH
-CI
-MB
+MI
+TP
+QY
+rS
 RS
-Sa
-nS
-dG
+aa
+gO
+aa
 RS
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
-Vb
+RS
+hG
+pH
+tx
+yA
+hs
+yE
+la
+FT
+PW
 Vb
 Vb
 Vb
 "}
 (28,1,1) = {"
+xL
+RS
+RS
+RS
+QY
+QY
+RS
+RS
+RS
+RS
+RS
+JQ
+QW
+Ta
+wM
+JQ
+Wk
+iZ
+VX
+PW
+Vb
+Vb
+Vb
+Vb
+"}
+(29,1,1) = {"
+xL
 RS
 ve
 TP
@@ -1077,12 +2121,39 @@ QY
 rb
 RS
 RS
-RS
-RS
-RS
+JQ
+wM
+on
+vv
+sf
+hs
+mP
+cA
+CY
+CY
+CY
 Vb
 Vb
 Vb
+Vb
+Vb
+"}
+(30,1,1) = {"
+xL
+RS
+RS
+RS
+RS
+RS
+RS
+pp
+DW
+UU
+cA
+CY
+CY
+Iw
+Iw
 Vb
 Vb
 Vb
@@ -1093,15 +2164,17 @@ Vb
 Vb
 Vb
 "}
-(29,1,1) = {"
-RS
-RS
-RS
-RS
-RS
-RS
+(31,1,1) = {"
 Vb
-Vb
+CY
+CY
+CY
+CY
+CY
+CY
+CY
+CY
+Iw
 Vb
 Vb
 Vb

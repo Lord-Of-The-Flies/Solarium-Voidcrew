@@ -97,7 +97,7 @@
 		if(QDELETED(hazard_turf) || istype(hazard_turf, /turf/open/indestructible) || istype(hazard_turf, /turf/closed))
 			continue // never melt the dais/plinths or a wall
 		pending_restores += list(list(hazard_turf, hazard_turf.type))
-		hazard_turf.ChangeTurf(/turf/open/lava/smooth, flags = CHANGETURF_IGNORE_AIR)
+		hazard_turf.ChangeTurf(/turf/open/lava/smooth/colosseum, flags = CHANGETURF_IGNORE_AIR)
 	addtimer(CALLBACK(src, PROC_REF(restore_hazards)), COLOSSEUM_HAZARD_DURATION, TIMER_STOPPABLE)
 
 /// Puts the sand back. Also called on Destroy so early match ends can't leak lava.

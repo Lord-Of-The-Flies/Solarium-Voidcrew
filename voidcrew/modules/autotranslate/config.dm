@@ -22,3 +22,8 @@
 	min_val = 1
 	max_val = 30
 	integer = TRUE
+
+/// Repeat this setting in private server configuration for each blocked word.
+/datum/config_entry/str_list/translate_output_blocked_word
+	protection = CONFIG_ENTRY_HIDDEN
+	lowercase = TRUE

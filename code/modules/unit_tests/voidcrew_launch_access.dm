@@ -1,32 +1,3 @@
-/// Existing loose tanks must not suppress the refill fallback; repeat audits add nothing.
-/datum/unit_test/voidcrew_launch_oxygen
-
-/datum/unit_test/voidcrew_launch_oxygen/Run()
-	var/obj/docking_port/mobile/voidcrew/port = allocate(/obj/docking_port/mobile/voidcrew)
-	port.width = 1
-	port.height = 1
-	port.shuttle_areas = list(get_area(port) = TRUE)
-	var/obj/item/tank/internals/oxygen/tank = allocate(/obj/item/tank/internals/oxygen)
-	port.ensure_starter_supplies()
-	var/turf/tile = get_turf(port)
-	var/obj/machinery/portable_atmospherics/canister/oxygen/refill = locate() in tile
-	var/obj/structure/closet/crate/internals/ship_reserve/reserve = locate() in tile
-	TEST_ASSERT_NOTNULL(refill, "Loose oxygen tank prevented the missing refill canister from spawning")
-	TEST_ASSERT_NULL(reserve, "Existing tank unnecessarily gained a reserve crate")
-	port.ensure_starter_supplies()
-	var/count = 0
-	for(var/obj/machinery/portable_atmospherics/canister/oxygen/canister in tile)
-		count++
-	TEST_ASSERT_EQUAL(count, 1, "Repeated starter audit duplicated the oxygen canister")
-	qdel(refill)
-	qdel(tank)
-	allocate(/obj/machinery/portable_atmospherics/canister/air)
-	allocate(/obj/structure/closet/emcloset)
-	port.ensure_starter_supplies()
-	refill = locate() in tile
-	TEST_ASSERT_NULL(refill, "Existing air canister was not accepted as a refill source")
-	qdel(port, force = TRUE)
-
 /// Force the sampling pass to miss so the exhaustive preferred-zone fallback is exercised.
 /datum/mission_target/coords/launch_access_samples
 	var/rejections_left = 30

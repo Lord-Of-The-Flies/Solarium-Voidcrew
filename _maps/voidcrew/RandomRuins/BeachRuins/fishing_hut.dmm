@@ -1,93 +1,830 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ab" = (
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"ac" = (
+/obj/structure/closet/crate/freezer,
+/obj/item/food/burger/fish,
+/obj/item/food/burger/fish,
+/obj/item/food/fishandchips,
+/obj/item/food/fishandchips,
+/obj/item/guardian_creator/carp,
+/obj/item/guardian_creator/carp,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"ad" = (
+/obj/structure/flora/tree/palm{
+	pixel_w = 0;
+	pixel_z = 21
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "ae" = (
-/obj/structure/window/fulltile,
-/turf/open/floor/carpet/royalblack,
+/obj/structure/fake_stairs/wood/directional/north,
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach/lit,
+/area/overmap_encounter/planetoid/beach)
+"al" = (
+/obj/structure/table/wood,
+/obj/item/spear{
+	pixel_w = -1;
+	pixel_z = 6
+	},
+/obj/item/spear{
+	pixel_w = 3;
+	pixel_z = -2
+	},
+/turf/open/floor/bamboo/tatami,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
 "aF" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/item/toy/plush/carpplushie/dehy_carp,
-/obj/item/toy/plush/carpplushie/dehy_carp,
-/obj/item/toy/plush/carpplushie/dehy_carp,
-/obj/item/grenade/spawnergrenade/spesscarp,
-/turf/open/floor/carpet/royalblack,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
+/obj/structure/flora/coconuts{
+	pixel_w = 4;
+	pixel_z = 9
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"bC" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 2;
+	pixel_z = -8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
 "bE" = (
-/obj/structure/table/wood/fancy,
-/obj/item/food/cubancarp,
-/turf/open/floor/carpet/red,
+/obj/machinery/light/warm/directional/north,
+/obj/machinery/deepfryer,
+/turf/open/floor/wood/maple,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
 "dd" = (
-/obj/structure/chair/wood/wings{
-	dir = 5
-	},
-/obj/item/nullrod/carp,
-/turf/open/floor/carpet/red,
+/obj/structure/closet/secure_closet/freezer/fridge/all_access,
+/obj/item/food/fishmeat/salmon,
+/obj/item/food/fishmeat/salmon,
+/obj/item/food/fishmeat/salmon,
+/obj/item/food/fishmeat/salmon,
+/obj/item/food/fishmeat/salmon,
+/obj/item/food/fishmeat/carp,
+/obj/item/food/fishmeat/carp,
+/obj/item/food/fishmeat/carp,
+/obj/item/food/fishmeat/carp,
+/obj/item/food/fishmeat/carp,
+/turf/open/floor/wood/maple,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
+"dG" = (
+/obj/structure/table/wood,
+/obj/item/plate/small{
+	pixel_w = -5;
+	pixel_z = 2
+	},
+/obj/item/food/fishfry{
+	pixel_w = -5;
+	pixel_z = 3
+	},
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"el" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
 "ep" = (
 /turf/closed/wall/mineral/wood,
 /area/ruin/powered{
 	name = "\improper Cold Storage"
 	})
+"eC" = (
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"fk" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
 "gT" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/item/spear,
-/obj/item/spear,
-/turf/open/floor/carpet/royalblack,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 4;
+	pixel_z = 7
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "hd" = (
-/obj/structure/table/wood/fancy,
-/obj/item/food/burger/fish,
-/turf/open/floor/carpet/red/airless,
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/turf/open/floor/wood/large,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
+"hl" = (
+/obj/structure/flora/coconuts{
+	pixel_w = 7;
+	pixel_z = 5
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
 "hH" = (
-/obj/structure/fence/end,
-/turf/open/floor/wood,
-/area/ruin/unpowered)
+/obj/structure/fake_stairs/wood/directional/north,
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach/lit,
+/area/overmap_encounter/planetoid/beach)
 "hK" = (
-/turf/open/floor/carpet/red,
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/machinery/door/airlock/wood/glass,
+/turf/open/floor/wood/tile,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
+"in" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"iG" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 2;
+	pixel_z = -13
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"jm" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
 "jD" = (
-/obj/machinery/door/airlock/wood/glass,
-/turf/open/floor/carpet/royalblack,
+/obj/structure/table/wood,
+/obj/item/pneumatic_cannon{
+	pixel_w = 0;
+	pixel_z = 7
+	},
+/obj/item/pneumatic_cannon{
+	pixel_w = 7;
+	pixel_z = -1
+	},
+/turf/open/floor/bamboo/tatami,
 /area/ruin/powered{
 	name = "\improper Cold Storage"
+	})
+"jE" = (
+/obj/machinery/light/warm/directional/south,
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"kx" = (
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"kQ" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -2;
+	pixel_z = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"lP" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"mc" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/item/kirbyplants/organic/plant4,
+/obj/machinery/light/warm/directional/east,
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
 	})
 "mr" = (
-/obj/structure/chair/wood/wings{
-	dir = 4
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
 	},
-/mob/living/basic/trooper/pirate/melee,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/unpowered)
-"nv" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 4
-	},
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"oE" = (
-/turf/open/floor/carpet/red,
+/turf/open/floor/wood/large,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
+"mB" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"mR" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 7;
+	pixel_z = 2
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"ne" = (
+/obj/structure/flora/rock/beach,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"nv" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"nw" = (
+/obj/structure/aquarium,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"ow" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"oE" = (
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"pj" = (
+/obj/structure/flora/coconuts,
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"pE" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 7;
+	pixel_z = 4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
 "pI" = (
-/obj/item/guardian_creator/carp,
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"qo" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 7;
+	pixel_z = -1
+	},
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"qp" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/template_noop,
+/area/template_noop)
+"qU" = (
+/mob/living/basic/trooper/pirate/melee,
+/obj/structure/chair/stool/directional/west,
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"rk" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"rU" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"sA" = (
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"sC" = (
+/obj/effect/turf_decal/weather/sand/light,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"sU" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"tS" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/item/kirbyplants/organic/plant22,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"tV" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"tX" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"ud" = (
+/obj/item/toy/seashell,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"us" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/turf/template_noop,
+/area/template_noop)
+"ut" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/item/kirbyplants/organic/plant21,
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"uy" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"uD" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"uR" = (
+/obj/structure/flora/rock/beach,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"uZ" = (
+/obj/machinery/microwave,
+/obj/structure/table/reinforced,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"vc" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"vL" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"wn" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = 10;
+	pixel_z = -3
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"wH" = (
+/obj/machinery/light/warm/directional/north,
+/obj/structure/table/reinforced,
+/obj/item/food/seaweedsheet{
+	pixel_w = -1;
+	pixel_z = 4
+	},
+/obj/item/food/meat/slab/rawcrab{
+	pixel_w = -1;
+	pixel_z = 5
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"wL" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -2;
+	pixel_z = -6
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"xg" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 1
+	},
+/obj/structure/chair/plastic,
+/turf/open/floor/wood/parquet,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"yW" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -4;
+	pixel_z = -3
+	},
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"zj" = (
+/obj/structure/flora/deadgrass/tall{
+	pixel_w = -1;
+	pixel_z = -1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"zp" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/under/costume/kimono,
+/obj/item/clothing/under/costume/kimono/purple,
+/obj/item/clothing/under/costume/kimono/red,
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Ai" = (
+/obj/structure/flora/coconuts{
+	pixel_w = 17;
+	pixel_z = 2
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Bh" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Bx" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"BM" = (
+/obj/effect/decal/cleanable/rubble{
+	pixel_w = 5;
+	pixel_z = 0
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"BS" = (
+/obj/structure/table/wood,
+/obj/item/clothing/suit/hooded/carp_costume{
+	pixel_w = 1;
+	pixel_z = 1
+	},
+/obj/item/toy/plush/carpplushie,
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Ch" = (
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/condiment/rice{
+	pixel_w = 4;
+	pixel_z = 8
+	},
+/obj/item/reagent_containers/condiment/rice{
+	pixel_w = -4;
+	pixel_z = 4
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Cu" = (
+/obj/structure/flora/tree/palm/style_2{
+	pixel_w = -7;
+	pixel_z = 0
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Ds" = (
+/obj/structure/table/reinforced,
+/obj/item/plate/large{
+	pixel_w = 0;
+	pixel_z = 4
+	},
+/obj/item/food/futomaki_sushi_roll{
+	pixel_w = 0;
+	pixel_z = 6
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"DM" = (
+/obj/structure/table/reinforced,
+/obj/item/knife/butcher,
+/obj/machinery/light/floor,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"DO" = (
+/obj/structure/table/reinforced,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"El" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Em" = (
+/obj/structure/table/wood,
+/obj/item/plate/small{
+	pixel_w = 0;
+	pixel_z = 6
+	},
+/obj/item/food/nigiri_sushi{
+	pixel_w = 0;
+	pixel_z = 8
+	},
+/obj/item/reagent_containers/condiment/soysauce{
+	pixel_w = -17;
+	pixel_z = 9
+	},
+/obj/item/reagent_containers/cup/bowl/mushroom_bowl{
+	pixel_w = 18;
+	pixel_z = 3
+	},
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"Eq" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 4
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"EU" = (
+/obj/effect/decal/cleanable/blood/old{
+	pixel_w = 15;
+	pixel_z = 3
+	},
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"FG" = (
+/turf/template_noop,
+/area/template_noop)
+"FK" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"FP" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -9;
+	pixel_z = -6
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Hl" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 9;
+	pixel_z = 2
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Hz" = (
+/obj/structure/flora/tree/palm{
+	pixel_w = -17;
+	pixel_z = 9
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -5;
+	pixel_z = 0
+	},
+/obj/effect/turf_decal/weather/sand,
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Iv" = (
+/obj/item/toy/seashell,
+/turf/open/misc/asteroid/sand/beach/dense,
+/area/overmap_encounter/planetoid/beach)
+"JU" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ko" = (
+/turf/closed/wall/mineral/wood,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Kq" = (
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = -4;
+	pixel_z = 11
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ky" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"KY" = (
 /mob/living/basic/cat_butcherer{
 	name = "The Butcher";
 	desc = "A profession carp butcher, gone mad due to carptoxin exposure. There seems to be something in their pocket...";
@@ -97,25 +834,289 @@
 	melee_damage_lower = 20;
 	melee_damage_upper = 25
 	},
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Ls" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"Ly" = (
+/obj/structure/flora/tree/palm/style_2{
+	pixel_w = -1;
+	pixel_z = -5
+	},
+/obj/structure/flora/deadgrass/tall,
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Mn" = (
+/mob/living/basic/trooper/pirate/ranged,
+/obj/structure/chair/stool/directional/east,
+/turf/open/floor/bamboo/tatami,
 /area/ruin/powered{
 	name = "\improper Cold Storage"
 	})
-"sA" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/item/pneumatic_cannon,
-/obj/item/pneumatic_cannon,
-/turf/open/floor/carpet/royalblack,
+"MK" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/template_noop,
+/area/template_noop)
+"Nm" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"NS" = (
+/obj/structure/table/wood,
+/obj/item/grenade/spawnergrenade/spesscarp{
+	pixel_w = -4;
+	pixel_z = 7
+	},
+/obj/item/grenade/spawnergrenade/spesscarp{
+	pixel_w = 4;
+	pixel_z = 0
+	},
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"Ok" = (
+/obj/structure/closet/crate/zone_loot/syndicate,
+/turf/open/floor/bamboo/tatami,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
-"tV" = (
-/mob/living/basic/trooper/pirate/melee,
-/turf/open/floor/carpet/red,
+"Os" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/machinery/light/floor,
+/turf/open/floor/wood/parquet,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
 	})
-"tX" = (
+"OE" = (
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"OV" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Pi" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 5
+	},
+/obj/machinery/light/floor,
+/turf/open/floor/wood/parquet,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"PB" = (
+/obj/effect/decal/cleanable/rubble{
+	pixel_w = 2;
+	pixel_z = -4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/sand/light,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Qi" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/template_noop,
+/area/template_noop)
+"Qp" = (
+/obj/structure/table/wood,
+/obj/item/plate/small{
+	pixel_w = 4;
+	pixel_z = 2
+	},
+/obj/item/food/philadelphia_sushi_slice{
+	pixel_w = 5;
+	pixel_z = 4
+	},
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Cold Storage"
+	})
+"QA" = (
+/obj/effect/turf_decal/weather/sand,
+/turf/template_noop,
+/area/template_noop)
+"QO" = (
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -3;
+	pixel_z = -7
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"SJ" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -6;
+	pixel_z = 15
+	},
+/obj/structure/flora/bush/sparsegrass/style_random{
+	pixel_w = 6;
+	pixel_z = -4
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand,
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Ta" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/chair/plastic{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"Tw" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Uh" = (
+/obj/effect/decal/cleanable/rubble{
+	pixel_w = 9;
+	pixel_z = 9
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"VH" = (
+/obj/effect/decal/cleanable/rubble{
+	pixel_w = 2;
+	pixel_z = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/sand{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Wl" = (
+/turf/open/floor/wood/maple,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"WE" = (
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"WT" = (
+/obj/structure/chair/stool/directional/south,
+/obj/effect/zone_mobs/wildlife,
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Xp" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = 5;
+	pixel_z = 18
+	},
+/obj/structure/flora/bush/sparsegrass/style_random,
+/obj/effect/turf_decal/weather/sand{
+	dir = 6
+	},
+/turf/open/misc/asteroid/sand,
+/area/overmap_encounter/planetoid/beach)
+"Xt" = (
+/turf/open/floor/bamboo/tatami,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Yk" = (
+/obj/effect/turf_decal/weather/sand/light,
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Yo" = (
+/obj/effect/turf_decal/weather/sand{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"YJ" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 1
+	},
+/obj/structure/fermenting_barrel,
+/turf/open/floor/wood/large,
+/area/ruin/powered{
+	name = "\improper Dining Hall"
+	})
+"Zc" = (
+/obj/structure/flora/bush/stalky/style_random{
+	pixel_w = -10;
+	pixel_z = -16
+	},
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 4
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"Zg" = (
+/obj/effect/turf_decal/weather/sand/light{
+	dir = 1
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"ZA" = (
+/obj/effect/turf_decal/weather/sand/light,
+/turf/template_noop,
+/area/template_noop)
+"ZC" = (
 /obj/machinery/porta_turret/syndicate/energy{
 	active_power_usage = 0;
 	faction = list("turret", "beach");
@@ -124,521 +1125,321 @@
 	},
 /turf/closed/wall/mineral/wood,
 /area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"ut" = (
-/turf/open/floor/carpet/royalblack,
-/area/ruin/powered{
 	name = "\improper Dining Hall"
-	})
-"uD" = (
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"uZ" = (
-/obj/structure/table/wood/fancy,
-/obj/item/food/fishandchips,
-/turf/open/floor/carpet/red,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"vc" = (
-/obj/structure/table/wood/fancy,
-/obj/item/food/meat/slab/rawcrab,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"vL" = (
-/obj/structure/kitchenspike,
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 4
-	},
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"wH" = (
-/obj/structure/table/wood/fancy,
-/obj/item/reagent_containers/cup/soda_cans/cola,
-/turf/open/floor/carpet/red,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Ch" = (
-/obj/structure/table/wood/fancy,
-/obj/structure/table/wood/fancy,
-/turf/open/floor/carpet/red,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Ds" = (
-/obj/structure/table/wood/fancy,
-/obj/item/storage/fancy/cigarettes/cigars/havana,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"DM" = (
-/obj/structure/table/wood/fancy,
-/obj/item/reagent_containers/cup/soda_cans/cola,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"DO" = (
-/obj/structure/table/wood/fancy,
-/obj/item/food/fishfry,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Em" = (
-/obj/structure/fence,
-/turf/open/floor/wood,
-/area/ruin/unpowered)
-"Eq" = (
-/obj/machinery/door/airlock/wood/glass,
-/turf/open/floor/wood,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"FG" = (
-/turf/template_noop,
-/area/template_noop)
-"FK" = (
-/obj/machinery/light/dim,
-/turf/open/floor/carpet/royalblack,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Iv" = (
-/obj/structure/fence{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/ruin/unpowered)
-"Ko" = (
-/turf/closed/wall/mineral/wood,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Kq" = (
-/obj/machinery/light/dim,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"KY" = (
-/obj/structure/table/wood/fancy,
-/turf/open/floor/carpet/red/airless,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"Ly" = (
-/turf/open/floor/iron/stairs,
-/area/ruin/unpowered)
-"Mn" = (
-/obj/structure/sink,
-/turf/closed/wall/mineral/wood,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Ok" = (
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer/on/coldroom,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Os" = (
-/mob/living/basic/trooper/pirate/ranged,
-/turf/open/floor/carpet/red,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"OE" = (
-/obj/structure/table/rolling,
-/obj/item/knife/butcher,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"PB" = (
-/obj/structure/kitchenspike,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Qi" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"QO" = (
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Ta" = (
-/obj/structure/table/rolling,
-/obj/machinery/microwave,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"WT" = (
-/obj/structure/fence/corner{
-	dir = 5
-	},
-/turf/open/floor/wood,
-/area/ruin/unpowered)
-"Xp" = (
-/obj/structure/table/rolling,
-/obj/item/clothing/suit/hooded/carp_costume,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Xt" = (
-/obj/machinery/deepfryer,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"YJ" = (
-/obj/structure/closet/crate/freezer,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/obj/item/food/fishmeat/carp,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"Zc" = (
-/obj/structure/closet/crate/zone_loot/syndicate,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
 	})
 "ZG" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/junction,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
-	})
-"ab" = (
-/obj/effect/zone_mobs/wildlife,
-/turf/open/floor/carpet/royalblack,
+/obj/effect/turf_decal/tile/dark/half{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/turf/open/misc/asteroid/sand/beach,
+/area/overmap_encounter/planetoid/beach)
+"ZL" = (
+/obj/structure/railing{
+	color = "#5d341f";
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet,
+/area/overmap_encounter/planetoid/beach)
+"ZM" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/item/kirbyplants/organic/plant4,
+/obj/machinery/light/warm/directional/west,
+/turf/open/floor/wood/large,
 /area/ruin/powered{
 	name = "\improper Dining Hall"
-	})
-"ac" = (
-/obj/effect/zone_mobs/wildlife,
-/turf/open/floor/carpet/red,
-/area/ruin/powered{
-	name = "\improper Dining Hall"
-	})
-"ad" = (
-/obj/effect/zone_mobs/wildlife,
-/turf/open/floor/iron/kitchen_coldroom/freezerfloor,
-/area/ruin/powered{
-	name = "\improper Cold Storage"
 	})
 
 (1,1,1) = {"
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
 FG
 FG
+Ls
+Ls
+Ls
+Ls
+Qi
+Qi
+Qi
+Ls
+Ls
 FG
 FG
 FG
 "}
 (2,1,1) = {"
-ae
-ut
-ut
+FG
+QA
+Cu
 aF
 gT
+kx
 sA
-ut
-ut
-Ko
-FG
-FG
-FG
+sA
+sA
+in
+mR
+us
 FG
 FG
 "}
 (3,1,1) = {"
-ae
+FG
+qp
+Bx
+Xp
 ut
-ut
-ut
-ut
-ut
-ut
-FK
-ep
-ep
-ep
-ep
-ep
-tX
+ZL
+Os
+Ta
+tS
+bC
+ne
+WE
+rk
+FG
 "}
 (4,1,1) = {"
-ae
-ut
+QA
+WE
+VH
+Ko
+Ko
 hK
-hK
-hK
-hK
-hK
-ut
-ep
-Ok
+Ko
+FK
+Ko
+ZC
 ZG
-QO
-QO
-ep
+SJ
+Ky
+FG
 "}
 (5,1,1) = {"
-ae
-ut
-hK
+QA
+pE
+Ko
+Ko
+zp
 oE
-oE
-oE
-hK
-ut
+ZM
+al
 jD
-QO
-QO
-PB
-Kq
 ep
+wL
+PB
+sA
+Nm
 "}
 (6,1,1) = {"
-ae
-ut
-hK
-oE
+QA
+OV
+Ko
+nw
 mr
-uD
-hK
-ut
-jD
-QO
-QO
-nv
-QO
+oE
+eC
+Xt
+jE
 ep
+ep
+nv
+sA
+Nm
 "}
 (7,1,1) = {"
-ae
-ut
-hK
+ZA
+sA
+FK
 uZ
 hd
 vc
-hK
-ut
+Bh
+Xt
 Mn
-QO
-QO
-vL
-QO
-ep
-"}
-(8,1,1) = {"
-ae
-ut
-Os
-wH
-KY
-Ds
-hK
-ut
-ep
 OE
 pI
-QO
-QO
-ep
+sU
+Iv
+Nm
+"}
+(8,1,1) = {"
+ZA
+sA
+Ko
+wH
+EU
+Ds
+uy
+Ok
+dG
+OE
+pI
+lP
+JU
+rk
 "}
 (9,1,1) = {"
-ae
-ut
-hK
+QA
+El
+FK
 Ch
 KY
 DM
-hK
-FK
-ep
-Qi
-QO
-vL
-QO
-ep
+uy
+WT
+Em
+OE
+pI
+wn
+sA
+Nm
 "}
 (10,1,1) = {"
-ae
-ut
-hK
+QA
+ud
+Ko
 bE
-KY
+Wl
 DO
-hK
-ut
-ep
-Ta
-QO
-QO
-QO
-ep
+uy
+Xt
+Qp
+OE
+pI
+iG
+Ai
+rk
 "}
 (11,1,1) = {"
-ae
-ut
-hK
+QA
+qo
+FK
 ac
 tV
-oE
-hK
-ut
-ep
-Xp
-QO
+ow
+fk
+Xt
+qU
+OE
+pI
 vL
 ad
-ep
+rk
 "}
 (12,1,1) = {"
-ae
-ut
-hK
+QA
+pj
+Ko
 dd
+mr
 oE
-oE
-hK
-ut
-ep
+eC
 Xt
-QO
-nv
-Kq
+jE
 ep
+ep
+jm
+Kq
+rk
 "}
 (13,1,1) = {"
-ae
-ut
-hK
-hK
-hK
-hK
-hK
-ut
-ep
+QA
+Hz
+Ko
+Ko
 YJ
-QO
-QO
-Zc
+oE
+mc
+BS
+NS
 ep
+QO
+tX
+WE
+rk
 "}
 (14,1,1) = {"
-ae
-ut
-ut
-ut
-ut
-ut
-ut
+QA
+rU
+zj
+Ko
+Ko
+hK
+Ko
 FK
-ep
-ep
-ep
-ep
-ep
-tX
+Ko
+ZC
+FP
+BM
+OV
+rk
 "}
 (15,1,1) = {"
-ae
-ut
-ut
-ut
-ut
+QA
+Zc
+uR
+Hl
+xg
 ab
-ut
-ut
-Ko
-FG
-FG
-FG
-FG
-FG
+ab
+ae
+ae
+ae
+ae
+uD
+sA
+Nm
 "}
 (16,1,1) = {"
-Ko
-Ko
-Ko
-Ko
-Ko
+ZA
+sA
+yW
+Uh
+Pi
 Eq
-Ko
-Ko
-Ko
+Eq
 hH
-FG
-FG
-FG
-FG
+hH
+hH
+hH
+sC
+sA
+Nm
 "}
 (17,1,1) = {"
 FG
-FG
-FG
-FG
+MK
+sA
+sA
+Zg
+Tw
+kQ
+Ly
+hl
+sA
+Yk
 Iv
-Ly
-Ly
-Ly
-Ly
-Ly
-Ly
-FG
-FG
+mB
 FG
 "}
 (18,1,1) = {"
 FG
 FG
-FG
-FG
-WT
-Em
-Em
-Em
-Em
-hH
-FG
-FG
+el
+el
+Yo
+Yo
+Yo
+Yo
+el
+el
+Yo
+el
 FG
 FG
 "}

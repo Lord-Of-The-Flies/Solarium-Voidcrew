@@ -148,8 +148,21 @@
 /// Tallest ruin template a slot can hold, once the berths have taken the bottom rows.
 #define MAP_SLOT_RUIN_REGION_HEIGHT (MAP_SLOT_SIDE - MAP_SLOT_RUIN_MARGIN - MAP_SLOT_RUIN_MIN_Y_OFFSET)
 
-/// How long after the last ship undocks before an abandoned planet releases its z-levels
+/// Minimum cleanup delay once an undocked planet has no living, connected players.
 #define PLANET_DESPAWN_TIMER 5 MINUTES
+/**
+ * Cleanup delay for an interior no ship has ever docked at.
+ *
+ * A survey, a transporter lock or a survey-camera refresh generates a whole surface
+ * without anybody flying to it, and those planets used to sit resident for the rest of
+ * the round: the countdown was only ever armed by a ship undocking, so one that was
+ * never docked at never got a countdown at all. They are on the same clock as everybody
+ * else now, but a longer one - the crew that charted it is usually still deciding
+ * whether to land, and the helm invites them to "dock when ready".
+ */
+#define PLANET_UNVISITED_DESPAWN_TIMER 15 MINUTES
+/// A living SSD player's body is protected for this long after its last disconnect.
+#define PLANET_SSD_GRACE_PERIOD 10 MINUTES
 
 /// How long a site waits before retrying a load that was refused for want of map volume
 /// (world.maxz at its ceiling - see /datum/config_entry/number/max_z_levels).
@@ -164,3 +177,19 @@
 /// SITE_CAPACITY_RETRY_DELAY-paced). Long enough not to nag, short enough that a
 /// minutes-long hold is distinguishable from a hang.
 #define SITE_CAPACITY_RENOTIFY_INTERVAL (3 MINUTES)
+
+/**
+ * Planetary turfs start on one shared, read-only gas mixture per gas string instead of
+ * each owning a /datum/gas_mixture/turf, and only take a private copy the first time
+ * something writes to their air. See voidcrew/edits/planetary_shared_air.dm.
+ *
+ * Round 79 (2026-09-16, ~40 players, 6 h): /datum/gas_mixture/turf went 11,103 ->
+ * 106,347, one per generated planet/asteroid turf, on a 32-bit DreamDaemon that ended the
+ * round at 95% of its 4 GB address space. Almost none of those turfs ever have their air
+ * changed, and planetary_atmos turfs revert toward initial_gas_mix anyway.
+ *
+ * Comment out to fall back to a private mixture per turf. Nothing else has to change:
+ * every write path calls materialize_planet_air(), which is a no-op once no turf holds
+ * the shared mix.
+ */
+#define PLANETARY_ATMOS_SHARED_MIX

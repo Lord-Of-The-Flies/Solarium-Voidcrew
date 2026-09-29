@@ -22,6 +22,8 @@ SUBSYSTEM_DEF(autotranslate)
 
 	/// The active backend. Never null after Initialize().
 	var/datum/translation_provider/provider
+	/// Compiled from private server configuration; no blocked words ship in code.
+	var/regex/english_output_filter
 
 	/// Requests currently out with the provider.
 	var/list/datum/translation_request/active_requests = list()
@@ -46,6 +48,7 @@ SUBSYSTEM_DEF(autotranslate)
 	var/chat_updates_dropped = 0
 
 /datum/controller/subsystem/autotranslate/Initialize()
+	english_output_filter = config.compile_filter_regex(CONFIG_GET(str_list/translate_output_blocked_word))
 	// No configured endpoint means the feature stays completely inert: no
 	// pending indicators, no requests, no cost.
 	var/endpoint = CONFIG_GET(string/translate_http_url)
@@ -83,6 +86,7 @@ SUBSYSTEM_DEF(autotranslate)
 	active_requests.Cut()
 	requests_by_key.Cut()
 	provider = new_provider
+	clear_cache()
 	log_world("SSautotranslate: provider set to [new_provider.name]")
 	return TRUE
 

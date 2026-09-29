@@ -1,4 +1,12 @@
-import { Box, Button, Icon, Section, Stack } from 'tgui-core/components';
+import { useState } from 'react';
+import {
+  Box,
+  Button,
+  Dropdown,
+  Icon,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
@@ -16,7 +24,7 @@ type ActiveShip = {
   memo: string | null;
   locked: BooleanLike;
   password_cleared: BooleanLike;
-  crew_locked: BooleanLike;
+  ping_cooldown: number;
   applied: BooleanLike;
 };
 
@@ -189,6 +197,18 @@ const RequisitionSection = (props: { canRequisition: boolean }) => {
 
 const JoinShipSection = (props: { ships: ActiveShip[] }) => {
   const { ships } = props;
+  const [passwordFilter, setPasswordFilter] = useState<
+    'all' | 'no_password' | 'password'
+  >('all');
+  const filteredShips = ships.filter((ship) => {
+    if (passwordFilter === 'no_password') {
+      return !ship.locked;
+    }
+    if (passwordFilter === 'password') {
+      return !!ship.locked;
+    }
+    return true;
+  });
 
   return (
     <Section
@@ -199,11 +219,25 @@ const JoinShipSection = (props: { ships: ActiveShip[] }) => {
           <Icon name="users" mr={1} />
           Join Existing Crew
           <Box inline color="gray" ml={1} fontSize="12px">
-            ({ships.length} {ships.length === 1 ? 'ship' : 'ships'} available)
+            ({filteredShips.length} of {ships.length}{' '}
+            {ships.length === 1 ? 'ship' : 'ships'} shown)
           </Box>
         </Box>
       }
     >
+      <Box mb={1}>
+        <Dropdown
+          icon="filter"
+          width="190px"
+          selected={passwordFilter}
+          options={[
+            { displayText: 'All ships', value: 'all' },
+            { displayText: 'No password', value: 'no_password' },
+            { displayText: 'Password protected', value: 'password' },
+          ]}
+          onSelected={setPasswordFilter}
+        />
+      </Box>
       {ships.length === 0 ? (
         <Box textAlign="center" color="gray" fontSize="14px" mt={2}>
           <Icon name="ghost" size={2} mb={1} />
@@ -212,9 +246,13 @@ const JoinShipSection = (props: { ships: ActiveShip[] }) => {
           <br />
           Requisition a free hull above, or buy your own.
         </Box>
+      ) : filteredShips.length === 0 ? (
+        <Box textAlign="center" color="gray" fontSize="14px" mt={2}>
+          No ships match this filter.
+        </Box>
       ) : (
         <Stack vertical>
-          {ships.map((ship) => (
+          {filteredShips.map((ship) => (
             <Stack.Item key={ship.ref}>
               <ShipCard ship={ship} />
             </Stack.Item>
@@ -295,14 +333,6 @@ const ShipCard = (props: { ship: ActiveShip }) => {
                     </Box>
                   </Stack.Item>
                 )}
-                {!!ship.crew_locked && (
-                  <Stack.Item ml={1.5}>
-                    <Box fontSize="12px" color="yellow">
-                      <Icon name="door-closed" mr={0.5} />
-                      Crew-only doors
-                    </Box>
-                  </Stack.Item>
-                )}
               </Stack>
             </Stack.Item>
 
@@ -330,7 +360,7 @@ const ShipCard = (props: { ship: ActiveShip }) => {
           </Stack>
         </Stack.Item>
 
-        {/* Join Button */}
+        {/* Crew Actions */}
         <Stack.Item>
           <Stack vertical>
             <Stack.Item>
@@ -349,6 +379,25 @@ const ShipCard = (props: { ship: ActiveShip }) => {
                 onClick={() => act('select_ship', { ship_ref: ship.ref })}
               >
                 Join
+              </Button>
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                fluid
+                icon="bell"
+                disabled={totalSlots > 0 || ship.ping_cooldown > 0}
+                tooltip={
+                  totalSlots > 0
+                    ? 'This crew still has open job slots'
+                    : ship.ping_cooldown > 0
+                      ? 'Please wait before pinging this crew again'
+                      : 'Ask the crew to open a job slot'
+                }
+                onClick={() => act('ping_ship', { ship_ref: ship.ref })}
+              >
+                {ship.ping_cooldown > 0
+                  ? `Ping (${Math.ceil(ship.ping_cooldown)}s)`
+                  : 'Ping Crew'}
               </Button>
             </Stack.Item>
             {!!ship.locked && !ship.password_cleared && (

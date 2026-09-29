@@ -942,7 +942,10 @@ SUBSYSTEM_DEF(job)
 		job_debug("[debug_prefix]: Player has no mind, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_GENERIC
 
-	if(possible_job.title in LAZYACCESS(prevented_occupations, player.mind))
+	var/eligibility_title = possible_job.ship_role == "crew" ? possible_job.title : initial(possible_job.title)
+	if(possible_job.ship_role != "crew" && !possible_job.config_check())
+		return JOB_UNAVAILABLE_GENERIC
+	if(eligibility_title in LAZYACCESS(prevented_occupations, player.mind))
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ANTAG_INCOMPAT, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_ANTAG_INCOMPAT
 
@@ -956,7 +959,7 @@ SUBSYSTEM_DEF(job)
 		return JOB_UNAVAILABLE_PLAYTIME
 
 	// Run the banned check last since it should be the rarest check to fail and can access the database.
-	if(is_banned_from(player.ckey, possible_job.title))
+	if(is_banned_from(player.ckey, eligibility_title))
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_BANNED, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_BANNED
 

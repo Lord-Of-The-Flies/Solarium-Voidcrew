@@ -122,8 +122,17 @@
 	if(!ispath(path, /turf/open/floor))
 		return ..()
 	var/old_dir = dir
+	// VOIDCREW EDIT ADDITION: when the map loader is the caller it has already queued the
+	// mapped vars - dir included - for /atom/New() to apply to the turf ..() creates.
+	// Restoring old_dir below would then stomp that with whatever floor sat here before.
+	// Ship upgrade modules load onto hull plating, every tile of which faces SOUTH, so
+	// mapped stairs, edge and corner floors all snapped to the same facing in game.
+	// Shuttle and ruin templates never hit this: they land on space, not a floor.
+	var/keep_mapped_dir = GLOB.use_preloader
 	var/turf/open/floor/W = ..()
-	W.setDir(old_dir)
+	if(!keep_mapped_dir)
+		W.setDir(old_dir)
+	// END VOIDCREW EDIT ADDITION
 	W.update_appearance()
 	return W
 

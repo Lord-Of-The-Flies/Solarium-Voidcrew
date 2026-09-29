@@ -8,6 +8,7 @@
 	openToolTip(usr,src,params,title = name,content = desc, theme = "blob")
 
 /atom/movable/screen/blob/MouseExited()
+	. = ..()
 	closeToolTip(usr)
 
 /atom/movable/screen/blob/jump_to_node

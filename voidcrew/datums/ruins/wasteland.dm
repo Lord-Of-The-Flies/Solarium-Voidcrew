@@ -360,3 +360,39 @@
 	cost = 1
 	allow_duplicates = TRUE
 	placement_weight = 0.5
+
+/// Each loaded arena owns its portal destination and death-triggered exits.
+/datum/map_template/ruin/wasteland/pandora/load(turf/origin, centered = FALSE)
+	. = ..()
+	if(.)
+		link_arena(get_affected_turfs(origin, centered))
+
+/datum/map_template/ruin/wasteland/pandora/proc/link_arena(list/turfs)
+	var/static/arena_serial = 0
+	var/entrance_id = "pandora_entrance_[++arena_serial]"
+	var/mob/living/simple_animal/hostile/asteroid/elite/pandora/guardian
+	var/list/obj/machinery/door/poddoor/exits = list()
+	for(var/turf/tile as anything in turfs)
+		for(var/obj/effect/portal/permanent/one_way/entrance in tile)
+			if(entrance.id == "pandora_entrance")
+				entrance.id = entrance_id
+				entrance.hard_target = null
+		for(var/obj/effect/landmark/portal_exit/destination in tile)
+			if(destination.id == "pandora_entrance")
+				destination.id = entrance_id
+		for(var/mob/living/simple_animal/hostile/asteroid/elite/pandora/boss in tile)
+			guardian = boss
+		for(var/obj/machinery/door/poddoor/door in tile)
+			if(door.id == "pandora_dead")
+				exits += door
+	if(guardian)
+		for(var/obj/machinery/door/poddoor/door as anything in exits)
+			door.link_pandora_guardian(guardian)
+
+/obj/machinery/door/poddoor/proc/link_pandora_guardian(mob/living/guardian)
+	RegisterSignal(guardian, COMSIG_LIVING_DEATH, PROC_REF(on_pandora_guardian_death))
+
+/obj/machinery/door/poddoor/proc/on_pandora_guardian_death(mob/living/source)
+	SIGNAL_HANDLER
+	UnregisterSignal(source, COMSIG_LIVING_DEATH)
+	INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/machinery/door/poddoor, open))

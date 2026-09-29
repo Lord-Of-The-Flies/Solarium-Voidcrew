@@ -401,6 +401,54 @@
    },
    "src_md5": "3e5781e14bb25e01cd34b5f1c31cba45"
   },
+  "nanobead": {
+   "png": "ship_nanobead.png",
+   "width": 22,
+   "height": 19,
+   "slots": {
+    "Biomedical_South": [
+     8,
+     3
+    ],
+    "Biomedical_North": [
+     8,
+     13
+    ],
+    "Services_South": [
+     13,
+     2
+    ],
+    "Services_North": [
+     13,
+     13
+    ]
+   },
+   "src_md5": "e5632c1c103fb42c4595d869f3ccc636"
+  },
+  "nanobead_dark": {
+   "png": "ship_nanobead_dark.png",
+   "width": 22,
+   "height": 19,
+   "slots": {
+    "Biomedical_South": [
+     8,
+     3
+    ],
+    "Biomedical_North": [
+     8,
+     13
+    ],
+    "Services_South": [
+     13,
+     2
+    ],
+    "Services_North": [
+     13,
+     13
+    ]
+   },
+   "src_md5": "e4a6b12d088286f0c3470999e69801e3"
+  },
   "pill": {
    "png": "ship_pill.png",
    "width": 4,
@@ -491,6 +539,90 @@
     ]
    },
    "src_md5": "250efd19fcf01d79756a98e68ca8af2e"
+  },
+  "squab_cheap_frigate": {
+   "png": "ship_squab_cheap_frigate.png",
+   "width": 36,
+   "height": 20,
+   "slots": {
+    "squab_gear_room": [
+     18,
+     16
+    ],
+    "director_s_quarters": [
+     19,
+     7
+    ],
+    "squab_lab": [
+     23,
+     3
+    ],
+    "lab_storage": [
+     23,
+     7
+    ],
+    "squab_mech_bay": [
+     23,
+     14
+    ]
+   },
+   "src_md5": "28c90f0295ca72a67c1843a1a94f8bf7"
+  },
+  "squab_nanotrasen_frigate": {
+   "png": "ship_squab_nanotrasen_frigate.png",
+   "width": 36,
+   "height": 20,
+   "slots": {
+    "squab_gear_room": [
+     18,
+     16
+    ],
+    "director_s_quarters": [
+     19,
+     7
+    ],
+    "squab_lab": [
+     23,
+     3
+    ],
+    "lab_storage": [
+     23,
+     7
+    ],
+    "squab_mech_bay": [
+     23,
+     14
+    ]
+   },
+   "src_md5": "02126eaa919347e81b6353aa7d7c785a"
+  },
+  "squab_the_patrolboat": {
+   "png": "ship_squab_the_patrolboat.png",
+   "width": 36,
+   "height": 20,
+   "slots": {
+    "squab_gear_room": [
+     18,
+     16
+    ],
+    "director_s_quarters": [
+     19,
+     7
+    ],
+    "squab_lab": [
+     23,
+     3
+    ],
+    "lab_storage": [
+     23,
+     7
+    ],
+    "squab_mech_bay": [
+     23,
+     14
+    ]
+   },
+   "src_md5": "7e124dd54d618154d24c18667616c71e"
   },
   "test_modular": {
    "png": "ship_test_modular.png",
@@ -1986,6 +2118,966 @@
     }
    }
   },
+  "nanobead/empty_biomedical_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_biomedical_north_dark.png",
+     "src_md5": "6812efd0d2b4367066787fa5605bd90b"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_biomedical_north_standard.png",
+     "src_md5": "d8053579c86f0908fbf4d2f035296bdc"
+    }
+   }
+  },
+  "nanobead/xenobio_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_xenobio_north_dark.png",
+     "src_md5": "13169ac3cd3f3549f9693b6657bd29b9"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_xenobio_north_standard.png",
+     "src_md5": "874d3b61b017d06e2c6949ad0934b62c"
+    }
+   }
+  },
+  "nanobead/nanites_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_nanites_north_dark.png",
+     "src_md5": "d140270eabb45b8d80b1145101162e52"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_nanites_north_standard.png",
+     "src_md5": "b1b2a4eb341a15e11f6fa9192d0916d7"
+    }
+   }
+  },
+  "nanobead/robotics_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_robotics_north_dark.png",
+     "src_md5": "45b8b18df400cc3722a2f2e45db4da5b"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_robotics_north_standard.png",
+     "src_md5": "0da806f027da47bfb097de799d9ac62f"
+    }
+   }
+  },
+  "nanobead/chemistry_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_chemistry_north_dark.png",
+     "src_md5": "80ac52a0f83c03083be343626da975f0"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_chemistry_north_standard.png",
+     "src_md5": "3b05a451660585fbc4a7b4aa81f52c96"
+    }
+   }
+  },
+  "nanobead/cryo_cells_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cryo_cells_north_dark.png",
+     "src_md5": "5242d8d9ec3d23bcfa5d21b51f4908ef"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cryo_cells_north_standard.png",
+     "src_md5": "6c45c966e52470318e1818c5568cfbbd"
+    }
+   }
+  },
+  "nanobead/sleeper_bay_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_sleeper_bay_north_dark.png",
+     "src_md5": "2625f60ae03f494fe0ce020b1aa1949c"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_sleeper_bay_north_standard.png",
+     "src_md5": "e77ff103fb6867d1af2c14f4fb31a6cf"
+    }
+   }
+  },
+  "nanobead/surgery_north.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_surgery_north_dark.png",
+     "src_md5": "b28392c1a85b7c736a9f1b3eb9adc498"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_surgery_north_standard.png",
+     "src_md5": "ad9827cd023e2c6e695a621a0c66d687"
+    }
+   }
+  },
+  "nanobead/empty_services_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_services_north_dark.png",
+     "src_md5": "9eb991f6c8f8d18fe57ac6547c183939"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_services_north_standard.png",
+     "src_md5": "500b44e4ee5b2ab4462144cf7fd56632"
+    }
+   }
+  },
+  "nanobead/bitrunning_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_bitrunning_north_dark.png",
+     "src_md5": "d42b90e9d2429847e92ab4f4717a2320"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_bitrunning_north_standard.png",
+     "src_md5": "f419c0e93a24e6963f3c301b7779cea8"
+    }
+   }
+  },
+  "nanobead/dining_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_dining_north_dark.png",
+     "src_md5": "104d79b09ed342f92e784c437d625019"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_dining_north_standard.png",
+     "src_md5": "a015a7926a929ff9915993b9c9d6c33f"
+    }
+   }
+  },
+  "nanobead/botany_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_botany_north_dark.png",
+     "src_md5": "e8efdb46ab5a3416fdf843a14f955a37"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_botany_north_standard.png",
+     "src_md5": "6ba771eb7bc8f30454d415f7e2ec7c1b"
+    }
+   }
+  },
+  "nanobead/mining_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_mining_north_dark.png",
+     "src_md5": "dd80f0f30dc5647669e8f58fa129a253"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_mining_north_standard.png",
+     "src_md5": "c2399bbf523b2e3c0a3b0f4b5ef725a3"
+    }
+   }
+  },
+  "nanobead/cargo_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cargo_north_dark.png",
+     "src_md5": "58f899508befdf72e9cf1df83507c6a3"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cargo_north_standard.png",
+     "src_md5": "22fc0817bb0d126aa643c47ada015e54"
+    }
+   }
+  },
+  "nanobead/security_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_security_north_dark.png",
+     "src_md5": "a7e5849a7eab5392a9724a726cdfcb60"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_security_north_standard.png",
+     "src_md5": "722bc688f697de407621a33a63c99c51"
+    }
+   }
+  },
+  "nanobead/eva_north.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_eva_north_dark.png",
+     "src_md5": "adb32e55a7cc668b22904bfcc5bab4db"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_eva_north_standard.png",
+     "src_md5": "21712edd06d77fd08865191f93bff0a5"
+    }
+   }
+  },
+  "nanobead/empty_biomedical_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_biomedical_south_dark.png",
+     "src_md5": "bfb769ee33a323eaeec64448d4b59089"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_biomedical_south_standard.png",
+     "src_md5": "d6147f2fbf69887d81dc9db3a2c64fc4"
+    }
+   }
+  },
+  "nanobead/xenobio_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_xenobio_south_dark.png",
+     "src_md5": "8c7a8f870af8f0b11ba8969dfa021827"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_xenobio_south_standard.png",
+     "src_md5": "a8388e061e2787d2764e3422bb2ca637"
+    }
+   }
+  },
+  "nanobead/nanites_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_nanites_south_dark.png",
+     "src_md5": "d99db7940911a034f325166ce2bd206e"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_nanites_south_standard.png",
+     "src_md5": "b76a7ad14c1937550fa19e7e8fee1654"
+    }
+   }
+  },
+  "nanobead/robotics_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_robotics_south_dark.png",
+     "src_md5": "1cf589f950792129af54ad5d4207bda7"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_robotics_south_standard.png",
+     "src_md5": "f89e1f2af256b5a8cb2e83757c4e3437"
+    }
+   }
+  },
+  "nanobead/chemistry_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_chemistry_south_dark.png",
+     "src_md5": "8c511dbde441dd482b83c60247c63440"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_chemistry_south_standard.png",
+     "src_md5": "c2c27b841ce5246b2c093831cce4382f"
+    }
+   }
+  },
+  "nanobead/cryo_cells_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cryo_cells_south_dark.png",
+     "src_md5": "1dc932743c2a20bb3d750968cfda0236"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cryo_cells_south_standard.png",
+     "src_md5": "b65587676411370b7600649c3c60b4bb"
+    }
+   }
+  },
+  "nanobead/sleeper_bay_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_sleeper_bay_south_dark.png",
+     "src_md5": "4818822cbd72026ee92425d30c2a1586"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_sleeper_bay_south_standard.png",
+     "src_md5": "154c5af9226785770e5b670b096d3d1e"
+    }
+   }
+  },
+  "nanobead/surgery_south.dmm": {
+   "width": 4,
+   "height": 5,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_surgery_south_dark.png",
+     "src_md5": "3766c0fca41e79957f4c15366fbb5dec"
+    },
+    "standard": {
+     "width": 4,
+     "height": 5,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_surgery_south_standard.png",
+     "src_md5": "a298637aa7aaf46ca08f2cd7cbbfb469"
+    }
+   }
+  },
+  "nanobead/empty_services_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_services_south_dark.png",
+     "src_md5": "a8788877ef08438a3d24e4831309d827"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_empty_services_south_standard.png",
+     "src_md5": "84aec3461d02db7d082a338e211199ed"
+    }
+   }
+  },
+  "nanobead/bitrunning_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_bitrunning_south_dark.png",
+     "src_md5": "51b98a2a787021a40895fea4c7e113c5"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_bitrunning_south_standard.png",
+     "src_md5": "3446d8f013ce8fc7904ede6114687116"
+    }
+   }
+  },
+  "nanobead/dining_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_dining_south_dark.png",
+     "src_md5": "481b57a25eec1711972f77bc0f3a80e1"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_dining_south_standard.png",
+     "src_md5": "0c1a53f95597f295852824f43255416f"
+    }
+   }
+  },
+  "nanobead/botany_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_botany_south_dark.png",
+     "src_md5": "b33245f8e5821802e3a88cb273b1ca79"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_botany_south_standard.png",
+     "src_md5": "2877e8796eb94004c5ef9884110ab81d"
+    }
+   }
+  },
+  "nanobead/mining_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_mining_south_dark.png",
+     "src_md5": "5ec388e6d92ff402cb8cfe315c6f2dfa"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_mining_south_standard.png",
+     "src_md5": "f7cc463b6ed9938c347a3318d6fac4f3"
+    }
+   }
+  },
+  "nanobead/cargo_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cargo_south_dark.png",
+     "src_md5": "fda75ef762c4bab709b20fe3ad2a30b6"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_cargo_south_standard.png",
+     "src_md5": "cb91254ee8391767877f479a175654b1"
+    }
+   }
+  },
+  "nanobead/security_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_security_south_dark.png",
+     "src_md5": "0383209eb703a6311c8e3383248b0173"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_security_south_standard.png",
+     "src_md5": "da91050437b58e381f6328c38563eb6f"
+    }
+   }
+  },
+  "nanobead/eva_south.dmm": {
+   "width": 6,
+   "height": 6,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "dark": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_eva_south_dark.png",
+     "src_md5": "2fa68516b550fd2d13e40335fb9a6b63"
+    },
+    "standard": {
+     "width": 6,
+     "height": 6,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "nanobead_eva_south_standard.png",
+     "src_md5": "de5efb43345b77e934af3a8dfc859c1a"
+    }
+   }
+  },
   "phalanx/phalanx_bay_north_muster.dmm": {
    "width": 11,
    "height": 3,
@@ -3021,6 +4113,526 @@
      ],
      "png": "scarab_scarab_cargo_med_syndicate.png",
      "src_md5": "66e8ff01f98b321a659511fbb302edcd"
+    }
+   }
+  },
+  "squab/robotics_lab.dmm": {
+   "width": 8,
+   "height": 3,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_robotics_lab_cheap_frigate.png",
+     "src_md5": "c0c7becbd820fdbb3bf9344c42ca5bbb"
+    },
+    "standard": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_robotics_lab_standard.png",
+     "src_md5": "92ef7b0cace1ad48e6ac8ad5c49412ba"
+    },
+    "the_patrolboat": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_robotics_lab_the_patrolboat.png",
+     "src_md5": "f6e1305ecb7ee8f0c0bffeca32350bef"
+    }
+   }
+  },
+  "squab/medical_lab.dmm": {
+   "width": 8,
+   "height": 3,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_lab_cheap_frigate.png",
+     "src_md5": "0024373d6373d0c9d4e96e95ae7e05ac"
+    },
+    "standard": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_lab_standard.png",
+     "src_md5": "6743e67629d12de8bd21dc07341ce562"
+    },
+    "the_patrolboat": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_lab_the_patrolboat.png",
+     "src_md5": "8e60cb5c4540ba81c014ce40edbcbf94"
+    }
+   }
+  },
+  "squab/nanite_lab.dmm": {
+   "width": 8,
+   "height": 3,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_nanite_lab_cheap_frigate.png",
+     "src_md5": "db725c85a5df498ad7b4662cb25238b5"
+    },
+    "standard": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_nanite_lab_standard.png",
+     "src_md5": "f432eed5076de17fdf88c9b8038a2154"
+    },
+    "the_patrolboat": {
+     "width": 8,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_nanite_lab_the_patrolboat.png",
+     "src_md5": "956b899a2ccbe0187caed97264947782"
+    }
+   }
+  },
+  "squab/mecha_ripley.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_ripley_cheap_frigate.png",
+     "src_md5": "ffc4eeddec82d61678f9504d4e49d964"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_ripley_standard.png",
+     "src_md5": "5cb6252e888cbd1a6eca265b45de95a7"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_ripley_the_patrolboat.png",
+     "src_md5": "2a942a9a73836ae47a9c93fa1804d6b1"
+    }
+   }
+  },
+  "squab/mecha_paddy.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_paddy_cheap_frigate.png",
+     "src_md5": "88df07c2a8a376fdf463279edfeec990"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_paddy_standard.png",
+     "src_md5": "a558495f6097b76722526b24ea596f9a"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mecha_paddy_the_patrolboat.png",
+     "src_md5": "31986fd2f58c42d164e07bc3b54792e3"
+    }
+   }
+  },
+  "squab/extra_gear_bay.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_extra_gear_bay_cheap_frigate.png",
+     "src_md5": "7a17ba3e62875c96a4f44e10caf3eae6"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_extra_gear_bay_standard.png",
+     "src_md5": "15284b8818710c70a4cfe4329e7ff3c2"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_extra_gear_bay_the_patrolboat.png",
+     "src_md5": "6d227ba50ab135fbbe3becdd654b1aa0"
+    }
+   }
+  },
+  "squab/ai_core.dmm": {
+   "width": 3,
+   "height": 1,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_ai_core_cheap_frigate.png",
+     "src_md5": "b241afc039604d5d60e1d5d7381637e5"
+    },
+    "standard": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_ai_core_standard.png",
+     "src_md5": "41579cacf587992bab95f693c30aa971"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_ai_core_the_patrolboat.png",
+     "src_md5": "edc53f41d4a5761022668ee79015d648"
+    }
+   }
+  },
+  "squab/plumbing_storage.dmm": {
+   "width": 3,
+   "height": 1,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_plumbing_storage_cheap_frigate.png",
+     "src_md5": "5a90af7644b6e6ff25675c203aa12587"
+    },
+    "standard": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_plumbing_storage_standard.png",
+     "src_md5": "0a024269416b6a5d3a4f19345c11d43e"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 1,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_plumbing_storage_the_patrolboat.png",
+     "src_md5": "bd71a6edf83153968931731cba2b9e1b"
+    }
+   }
+  },
+  "squab/science_director.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_science_director_cheap_frigate.png",
+     "src_md5": "45c0c91ba3d38a9af80b79b54c5d5205"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_science_director_standard.png",
+     "src_md5": "2278880fcce97b042f12d1948c94e3d6"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_science_director_the_patrolboat.png",
+     "src_md5": "8275271d005431914936c480bacf7413"
+    }
+   }
+  },
+  "squab/medical_director.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_director_cheap_frigate.png",
+     "src_md5": "5a2d9d267fc29ec638ce256d727dfaa5"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_director_standard.png",
+     "src_md5": "8ebbf057d0b00972e860282584584dbd"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_medical_director_the_patrolboat.png",
+     "src_md5": "74eefabe051050d0ed34bd9ff426992b"
+    }
+   }
+  },
+  "squab/security_director.dmm": {
+   "width": 3,
+   "height": 2,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_director_cheap_frigate.png",
+     "src_md5": "26c5e3bf2e850be5b31dad1251393fa9"
+    },
+    "standard": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_director_standard.png",
+     "src_md5": "d9a245418e9c4742c951c8565e1ad00a"
+    },
+    "the_patrolboat": {
+     "width": 3,
+     "height": 2,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_director_the_patrolboat.png",
+     "src_md5": "b7080d5c305db438cb9143997d567e90"
+    }
+   }
+  },
+  "squab/mining_gear.dmm": {
+   "width": 4,
+   "height": 3,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mining_gear_cheap_frigate.png",
+     "src_md5": "1c5e3e1075de85238f8573558d3679fb"
+    },
+    "standard": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mining_gear_standard.png",
+     "src_md5": "43f29375af9c938e5bc1e031748c6cc4"
+    },
+    "the_patrolboat": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_mining_gear_the_patrolboat.png",
+     "src_md5": "b8750a3363c9f42f8f406327943101e3"
+    }
+   }
+  },
+  "squab/security_gear_room.dmm": {
+   "width": 4,
+   "height": 3,
+   "connector": [
+    1,
+    1
+   ],
+   "themes": {
+    "cheap_frigate": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_gear_room_cheap_frigate.png",
+     "src_md5": "19d7b49a18a002401963a4bf3eedc978"
+    },
+    "standard": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_gear_room_standard.png",
+     "src_md5": "e4c01da54e1869dc37451e8337639594"
+    },
+    "the_patrolboat": {
+     "width": 4,
+     "height": 3,
+     "connector": [
+      1,
+      1
+     ],
+     "png": "squab_security_gear_room_the_patrolboat.png",
+     "src_md5": "b5b792d3ef54d86d403088ce7d0271ee"
     }
    }
   },

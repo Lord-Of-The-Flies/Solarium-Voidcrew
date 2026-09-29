@@ -984,7 +984,10 @@
 		unbuckle_mob(unbuckle_me_now, FALSE)
 
 /mob/living/silicon/robot/proc/TryConnectToAI()
-	set_connected_ai(select_active_ai_with_fewest_borgs(z))
+	if(mind?.assigned_role?.ship_role == "cyborg" || istype(get_area(src), /area/shuttle/voidcrew))
+		set_connected_ai(crew_ai())
+	else
+		set_connected_ai(select_active_ai_with_fewest_borgs(z))
 	if(connected_ai)
 		lawsync()
 		lawupdate = TRUE

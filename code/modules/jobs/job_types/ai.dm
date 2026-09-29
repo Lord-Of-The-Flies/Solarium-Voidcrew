@@ -26,7 +26,7 @@
 /datum/job/ai/after_spawn(mob/living/spawned, client/player_client)
 	. = ..()
 	//we may have been created after our borg
-	if(SSticker.current_state == GAME_STATE_SETTING_UP)
+	if(SSticker.current_state == GAME_STATE_SETTING_UP && ship_role != "ai")
 		for(var/mob/living/silicon/robot/R in GLOB.silicon_mobs)
 			if(!R.connected_ai)
 				R.TryConnectToAI()

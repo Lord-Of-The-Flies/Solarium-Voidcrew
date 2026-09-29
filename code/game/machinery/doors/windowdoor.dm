@@ -40,10 +40,11 @@
 	acid = 100
 
 /obj/machinery/door/window/Initialize(mapload, set_dir, unres_sides)
-	. = ..()
-	flags_1 &= ~PREVENT_CLICK_UNDER_1
+	// The parent publishes atmos adjacency, which must use the edge we actually seal.
 	if(set_dir)
 		setDir(set_dir)
+	. = ..()
+	flags_1 &= ~PREVENT_CLICK_UNDER_1
 	if(LAZYLEN(req_access))
 		icon_state = "[icon_state]"
 		base_state = icon_state

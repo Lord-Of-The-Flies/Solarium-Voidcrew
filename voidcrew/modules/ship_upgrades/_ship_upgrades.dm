@@ -56,6 +56,14 @@ GLOBAL_LIST_EMPTY(ship_themes)
 	/// Merged into the ship's job list at launch, after the theme's own slots
 	/// (e.g. a hydroponics module adds its Botanist). Mention added jobs in desc.
 	var/list/job_slots_add
+	/// Variant ID -> independent room roster. A missing key uses the shared roster;
+	/// an explicit empty list contributes no crew in that variant.
+	var/list/job_slots_add_by_theme
+
+/datum/ship_upgrade_module/proc/crew_for_theme(theme_id)
+	if(theme_id && islist(job_slots_add_by_theme) && (theme_id in job_slots_add_by_theme))
+		return job_slots_add_by_theme[theme_id]
+	return job_slots_add
 
 /datum/ship_upgrade_module/New()
 	. = ..()
@@ -235,7 +243,7 @@ GLOBAL_VAR_INIT(ship_upgrades_initialized, FALSE)
  * will actually load. Returns a list of job definition lists (same format as theme
  * job_slots), ready to append to a list fed to assemble_job_slots_from_list().
  */
-/proc/get_module_job_definitions(ship_template_type, list/upgrade_selections, list/slot_ids)
+/proc/get_module_job_definitions(ship_template_type, list/upgrade_selections, list/slot_ids, theme_id)
 	var/list/definitions = list()
 	if(!length(slot_ids))
 		return definitions
@@ -243,9 +251,11 @@ GLOBAL_VAR_INIT(ship_upgrades_initialized, FALSE)
 		var/datum/ship_upgrade_module/module = upgrade_selections?[slot_key]
 		if(!module)
 			module = get_default_module_for_ship_slot(ship_template_type, slot_key)
-		if(!istype(module) || !length(module.job_slots_add))
+		if(!istype(module))
 			continue
-		definitions += module.job_slots_add
+		var/list/crew = module.crew_for_theme(theme_id)
+		if(length(crew))
+			definitions += crew
 	return definitions
 
 /**

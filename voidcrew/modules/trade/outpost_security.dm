@@ -3,7 +3,8 @@
  *
  * The economic-deterrent enforcement arm of a trader outpost: indestructible
  * lethal turrets that engage people who attacked outpost property or another
- * visitor, and the indestructible airlocks of the sanctuary interior.
+ * visitor (plus xenos and hostile wildlife, on sight), and the indestructible
+ * airlocks of the sanctuary interior.
  *
  * Aggression accrues warning strikes (see trader_outpost.register_aggression);
  * the early hits only issue a warning, and only once the offender crosses
@@ -13,6 +14,26 @@
 // =========================================================================
 // PVP ENFORCEMENT
 // =========================================================================
+
+/**
+ * NPC markets protect their entire concourse and allocated hangars, including
+ * docked ship turfs. Never use a z-level check: unrelated sites share levels.
+ * The area fallback also covers the concourse while its template initializes.
+ * Player-founded outposts share the hangar area type but not this protection.
+ */
+/proc/is_trader_outpost_protected(atom/target)
+	var/turf/location = get_turf(target)
+	if(!location)
+		return FALSE
+	return istype(get_area(location), /area/voidcrew/trader_outpost) || !isnull(get_trader_outpost_for_turf(location))
+
+/// Engine hazards transported into a market must stop before processing damage.
+/proc/neutralize_trader_outpost_hazard(atom/movable/hazard)
+	if(!is_trader_outpost_protected(hazard))
+		return FALSE
+	log_game("OUTPOST PROTECTION: Neutralized [hazard] ([hazard.type]) at [AREACOORD(hazard)].")
+	qdel(hazard)
+	return TRUE
 
 /**
  * Watches every living mob for player-on-player attacks. Whether an attack is
@@ -52,15 +73,15 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
 	RegisterSignal(living_mob, COMSIG_ATOM_ATTACK_MECH, PROC_REF(on_outpost_pvp_mech_attack))
 
 /**
- * Routes player-on-player violence through the same strike and embargo path as
- * property damage. Both parties need minds so outpost NPCs, fauna, and ordinary
- * interactions with them retain their existing behavior.
+ * Checks personal self-defense before applying strikes and embargoes. Both
+ * parties need minds so outpost NPCs, fauna, and ordinary interactions with
+ * them retain their existing behavior.
  */
 /datum/outpost_pvp_enforcement/proc/register_pvp_aggression(mob/living/victim, mob/living/offender)
 	if(!victim.mind || !offender?.mind || victim == offender)
 		return
 	var/obj/structure/overmap/trader_outpost/guarding_outpost = get_trader_outpost_for_turf(get_turf(victim))
-	guarding_outpost?.register_aggression(offender)
+	guarding_outpost?.register_pvp_aggression(victim, offender)
 
 /datum/outpost_pvp_enforcement/proc/on_outpost_pvp_item_attack(mob/living/victim, obj/item/weapon, mob/living/offender, list/modifiers, list/attack_modifiers)
 	SIGNAL_HANDLER
@@ -151,11 +172,60 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
 /obj/machinery/porta_turret/outpost/emag_act(mob/user, obj/item/card/emag/emag_card)
 	return FALSE
 
-// Only marked aggressors are perps; everyone else shops in peace
-/obj/machinery/porta_turret/outpost/assess_perp(mob/living/carbon/human/perp)
-	if(outpost?.is_turret_target(perp))
-		return 10
-	return 0
+/**
+ * Is this something the turret is willing to shoot?
+ *
+ * Three kinds of target, checked in order:
+ * - Anyone the outpost has barred: marked aggressors and embargoed crews. Resolved
+ *   per-mind by the outpost, so it covers players riding a xeno or a spider just as
+ *   well as a human with a gun.
+ * - Xenomorphs, on sight. No warning strikes, no faction pass, player-driven or not;
+ *   a hive does not shop here.
+ * - Wild hostiles: NPC creatures whose own AI goes looking for a fight (carp, spiders,
+ *   boarding troopers, ...). Judged by is_hostile_creature(), so a shopper's corgi or a
+ *   pet carp is left alone. Anything with a player behind it is not a wild creature
+ *   and only becomes a target through the strike ladder above.
+ *
+ * Everything else shops in peace.
+ */
+/obj/machinery/porta_turret/outpost/proc/valid_target(mob/living/creature)
+	if(!istype(creature) || creature.stat == DEAD)
+		return FALSE
+	if(creature.invisibility > SEE_INVISIBLE_LIVING)
+		return FALSE
+	if(outpost?.is_turret_target(creature))
+		return TRUE
+	if(isalien(creature) || istype(creature, /mob/living/basic/alien)) // Player xenos and the NPC hive alike.
+		return TRUE
+	if(creature.client || creature.mind) // Player-driven, so the strike ladder decides, not the wildlife rule.
+		return FALSE
+	if(in_faction(creature)) // Traders, loiterers, bots and the other turrets.
+		return FALSE
+	return is_hostile_creature(creature)
+
+// The stock scan only ever asks assess_perp() about humans; with turret_flags NONE it
+// never so much as looks at an animal or a xeno. Run our own scan over every living
+// mob in range instead, plus the stock mech sweep so a marked aggressor cannot hide in
+// a ripley.
+/obj/machinery/porta_turret/outpost/process()
+	if(!on || (machine_stat & (NOPOWER|BROKEN)))
+		return PROCESS_KILL
+
+	var/list/targets = list()
+	for(var/mob/living/creature in view(scan_range, base))
+		if(valid_target(creature))
+			targets += creature
+
+	for(var/obj/vehicle/sealed/mecha/mech as anything in GLOB.mechas_list)
+		if(get_dist(mech, base) >= scan_range || !can_see(base, mech, scan_range))
+			continue
+		for(var/mob/living/occupant as anything in mech.occupants)
+			if(valid_target(occupant))
+				targets += mech
+				break
+
+	if(length(targets))
+		tryToShootAt(targets)
 
 // Shooting the turret itself is also aggression
 /obj/machinery/porta_turret/outpost/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
@@ -172,21 +242,20 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
  * # Outpost Defense Laser
  *
  * Fired only by outpost turrets. Phases harmlessly through bystanders and only
- * impacts valid turret targets (marked aggressors and embargoed crew) so
- * enforcement never catches innocent shoppers in the crossfire. Dense obstacles
- * (walls, structures) still stop it as normal.
+ * impacts valid turret targets (marked aggressors, embargoed crew, xenos and
+ * hostile wildlife) so enforcement never catches innocent shoppers in the
+ * crossfire. Dense obstacles (walls, structures) still stop it as normal.
  */
 /obj/projectile/beam/laser/outpost
 	name = "outpost defense laser"
 
 /obj/projectile/beam/laser/outpost/can_hit_target(atom/target, direct_target = FALSE, ignore_loc = FALSE, cross_failed = FALSE)
-	// Let bystanders through: skip any living mob that isn't a turret target. The aimed
-	// offender arrives as direct_target and any other barred mob in the path passes
-	// is_turret_target(), so both are still hit by the parent check. Aggression is
-	// per-mind, resolved via the firing turret's outpost, not by faction.
+	// Let bystanders through: skip any living mob the firing turret would not shoot at.
+	// The aimed offender arrives as direct_target and any other valid target in the
+	// path passes valid_target(), so both are still hit by the parent check.
 	if(isliving(target) && !direct_target)
 		var/obj/machinery/porta_turret/outpost/turret = firer
-		if(istype(turret) && !turret.outpost?.is_turret_target(target))
+		if(istype(turret) && !turret.valid_target(target))
 			return FALSE
 	return ..()
 
@@ -308,6 +377,7 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
 	// Never restored on Detach, which only ever runs at qdel
 	var/obj/property = target
 	property.resistance_flags |= INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	property.AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)
 
 	RegisterSignals(target, list(
 		COMSIG_ATOM_TOOL_ACT(TOOL_CROWBAR),
