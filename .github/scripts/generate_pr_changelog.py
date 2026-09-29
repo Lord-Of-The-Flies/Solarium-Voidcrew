@@ -60,7 +60,6 @@ def main():
     lines = [
         f"## Изменения в PR #{pr_number}: {pr['title']}",
         "",
-        f"- Ветка: `{pr['base']['ref']}` ← `{pr['head']['ref']}`",
         f"- Всего коммитов: {len(commits)}",
         "",
     ]
@@ -76,7 +75,7 @@ def main():
         ).get("name") or "?"
         body = body.strip()
 
-        lines.append(f"- {subject} - `{sha_short}` - {author}")
+        lines.append(f"- {subject} - @{author} - `{sha_short}`")
         if body:
             lines.extend(
                 [
@@ -112,16 +111,16 @@ def main():
         file_out.write(comment)
     print(comment)
 
-    if os.environ.get("POST_COMMENT", "true").lower() == "true":
+    if os.environ.get("UPDATE_PR_DESCRIPTION", "true").lower() == "true":
         result = subprocess.run(
-            ["gh", "pr", "comment", str(pr_number), "--repo", repo, "--body-file", body_path],
+            ["gh", "pr", "edit", str(pr_number), "--repo", repo, "--body-file", body_path],
             capture_output=True,
             text=True,
         )
         if result.returncode != 0:
             print(result.stderr, file=sys.stderr)
             sys.exit(1)
-        print(f"Комментарий опубликован в PR #{pr_number}.")
+        print(f"Описание ПРа #{pr_number} обновлено.")
 
 
 if __name__ == "__main__":
