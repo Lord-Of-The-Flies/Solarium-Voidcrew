@@ -49,20 +49,22 @@
 	/// Short blurb shown on the founding catalog
 	var/catalog_desc = ""
 
+// SOL-EDIT START - карты аванпостов переехали в подмодуль Horusheresy
 /datum/map_template/player_outpost/small
 	name = "Compact Habitat"
 	catalog_desc = "A compact, single-room habitat."
-	mappath = "voidcrew/_maps/map_files/outposts/player_outpost_shell_small.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/player_outpost_shell_small.dmm"
 
 /datum/map_template/player_outpost/medium
 	name = "Waystation Frame"
 	catalog_desc = "Separate living quarters and workshop around a central hall."
-	mappath = "voidcrew/_maps/map_files/outposts/player_outpost_shell_medium.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/player_outpost_shell_medium.dmm"
 
 /datum/map_template/player_outpost/nothing
 	name = "Bare Claim"
 	catalog_desc = "No prefab at all: an empty sector, a survey pad, and a crate holding the registry console boards. Bring your own everything."
-	mappath = "voidcrew/_maps/map_files/outposts/player_outpost_shell_nothing.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/player_outpost_shell_nothing.dmm"
+// SOL-EDIT END
 
 /// The bare claim's entire inheritance: the two registry console boards.
 /// Everything else (frames, materials, the silo, air) is the owner's problem.

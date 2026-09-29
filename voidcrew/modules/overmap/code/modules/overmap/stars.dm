@@ -18,12 +18,23 @@
 	icon = star_datum.icon
 	icon_state = star_datum.icon_state
 
+	// The system star is the one overmap contact an observer always wants to park on,
+	// so it is a point of interest from the moment it is placed. Orbiting it drops the
+	// ghost on the overmap tile the star sits on, i.e. onto the strategic chart itself.
+	// (see /datum/orbit_menu/proc/poi_category() in ship_orbit_poi.dm for where it is filed)
+	// SOL-EDIT START
+	SSpoints_of_interest.make_point_of_interest(src)
+	// SOL-EDIT END
+
 	var/colour_one = pick(star_datum.colours_and_descs)
 	var/colour_two = "[star_datum.colours_to_pick > 1 ? pick(star_datum.colours_and_descs) : ""]"
 
 	apply_star_colours(colour_one, colour_two)
 
 /obj/structure/overmap/star/Destroy()
+	// SOL-EDIT START - снимаем точку интереса вместе со звездой
+	SSpoints_of_interest.remove_point_of_interest(src)
+	// SOL-EDIT END
 	QDEL_NULL(star_datum)
 	return ..()
 

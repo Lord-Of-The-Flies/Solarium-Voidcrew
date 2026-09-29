@@ -30,17 +30,19 @@ GLOBAL_LIST_EMPTY(trader_outposts)
 /datum/map_template/trader_outpost
 	name = "Trader Outpost"
 
+// SOL-EDIT START - карты аванпостов переехали в подмодуль Horusheresy
 /datum/map_template/trader_outpost/black_market
 	name = "Trader Outpost - Undertow Exchange"
-	mappath = "voidcrew/_maps/map_files/outposts/trader_outpost_black_market.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/trader_outpost_black_market.dmm"
 
 /datum/map_template/trader_outpost/outfitter
 	name = "Trader Outpost - Quartermain Depot"
-	mappath = "voidcrew/_maps/map_files/outposts/trader_outpost_outfitter.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/trader_outpost_outfitter.dmm"
 
 /datum/map_template/trader_outpost/general
 	name = "Trader Outpost - Waystation Halcyon"
-	mappath = "voidcrew/_maps/map_files/outposts/trader_outpost_general.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/trader_outpost_general.dmm"
+// SOL-EDIT END
 
 /obj/structure/overmap/trader_outpost
 	name = "trader outpost"
@@ -69,6 +71,7 @@ GLOBAL_LIST_EMPTY(trader_outposts)
 	var/loading = FALSE
 	// Berth/elevator host vars (berths, lobby_alcove_turfs, lobby_panels,
 	// template_bottom_left) live on /obj/structure/overmap, see _overmap.dm.
+	// orbit_token, the ghost orbit anchor, lives in outpost_orbit.dm. // SOL-EDIT
 	/// Ships under trade embargo: ship -> world.time the embargo ends
 	var/list/embargoed_ships = list()
 	/// Minds that committed violence here: mind -> world.time the mark lapses (turret targets, refused service)
@@ -205,6 +208,10 @@ GLOBAL_LIST_EMPTY(trader_outposts)
 
 	loaded = TRUE
 	loading = FALSE
+	// Ghost orbit anchor, once there is a floor to drop it on (outpost_orbit.dm)
+	// SOL-EDIT START
+	setup_orbit_token()
+	// SOL-EDIT END
 
 /**
  * Finds the outpost machinery the template spawned and links it to this outpost.

@@ -4945,6 +4945,7 @@
 #include "code\modules\mob\dead\observer\observer_movement.dm"
 #include "code\modules\mob\dead\observer\observer_say.dm"
 #include "code\modules\mob\dead\observer\orbit.dm"
+#include "code\modules\mob\dead\observer\orbit_token.dm" // SOL-EDIT
 #include "code\modules\mob\eye\eye.dm"
 #include "code\modules\mob\eye\camera\camera.dm"
 #include "code\modules\mob\eye\camera\remote.dm"
@@ -7371,6 +7372,7 @@
 #include "voidcrew\modules\trade\outpost_elevator.dm"
 #include "voidcrew\modules\trade\outpost_hangar.dm"
 #include "voidcrew\modules\trade\outpost_missions.dm"
+#include "voidcrew\modules\trade\outpost_orbit.dm" // SOL-EDIT
 #include "voidcrew\modules\trade\outpost_quests.dm"
 #include "voidcrew\modules\trade\outpost_security.dm"
 #include "voidcrew\modules\trade\planetary_goods.dm"

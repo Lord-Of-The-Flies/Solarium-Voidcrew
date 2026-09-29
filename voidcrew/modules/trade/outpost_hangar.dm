@@ -17,7 +17,7 @@ GLOBAL_DATUM(outpost_hangar_template, /datum/map_template/outpost_hangar)
 
 /datum/map_template/outpost_hangar
 	name = "Outpost Hangar Berth"
-	mappath = "voidcrew/_maps/map_files/outposts/outpost_hangar.dmm"
+	mappath = "Horusheresy/_maps/tradeposts/outpost_hangar.dmm"  // SOL-EDIT - Если выдает ошибку, вернуть обратно старый путь
 
 // Deliberately NOT UNIQUE_AREA: the template loads once per berth, and each
 // load must get its own area instance (UNIQUE_AREA map loads are global

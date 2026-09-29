@@ -17,6 +17,10 @@ export type OrbitData = {
   dead: Observable[];
   deadchat_controlled: Observable[];
   ghosts: Observable[];
+  // SOL-EDIT START - разделы не-мобовых точек интереса
+  ships: Observable[];
+  maps: Observable[];
+  // SOL-EDIT END
   misc: Observable[];
   npcs: Observable[];
   orbiting: Observable | null;
