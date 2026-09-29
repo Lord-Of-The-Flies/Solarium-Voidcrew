@@ -59,9 +59,10 @@ def main():
     commits = api_paginated(f"/repos/{repo}/pulls/{pr_number}/commits")
 
     lines = [
-        f"## Изменения в PR #{pr_number}: {pr['title']}",
+        "<details>",
+        f"<summary>Лог изменений ({len(commits)} коммитов)</summary>",
         "",
-        f"- Всего коммитов: {len(commits)}",
+        f"## Изменения в PR #{pr_number}: {pr['title']}",
         "",
     ]
 
@@ -104,6 +105,8 @@ def main():
                 ]
             )
         lines.append("")
+
+    lines.append("</details>")
 
     marker_start = "<!-- CHANGELOG-START -->"
     marker_end = "<!-- CHANGELOG-END -->"
