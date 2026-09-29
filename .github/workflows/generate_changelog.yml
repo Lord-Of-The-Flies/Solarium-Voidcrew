@@ -1,0 +1,43 @@
+name: Generate PR Changelog
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Номер Pull Request, по которому собрать лог изменений"
+        required: true
+        type: string
+      post_comment:
+        description: "Опубликовать комментарий в ПР (иначе только в сводке запуска)"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  changelog:
+    name: Build changelog for PR #${{ inputs.pr_number }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    env:
+      PR_NUMBER: ${{ inputs.pr_number }}
+      POST_COMMENT: ${{ inputs.post_comment && 'true' || 'false' }}
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate changelog from PR commits
+        shell: bash
+        run: python3 .github/scripts/generate_pr_changelog.py
+
+      - name: Publish body in job summary
+        shell: bash
+        run: |
+          cat /tmp/pr_changelog.md >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
