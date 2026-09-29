@@ -1,0 +1,39 @@
+name: Upstream Merge
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        description: "Ветка, в которую вливается upstream/master"
+        required: false
+        default: "stream_update"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: upstream-merge
+  cancel-in-progress: false
+
+env:
+  BASE_BRANCH: ${{ inputs.base_branch || 'stream_update' }}
+  UPSTREAM_MERGE_PAT: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM }}
+  UPSTREAM_MERGE_LABEL: "🆙 Обновление апстрима"
+
+jobs:
+  merge:
+    name: Merge upstream/master into branch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
+      - name: Run upstream merge
+        shell: bash
+        run: bash .github/scripts/upstream_merge.sh
