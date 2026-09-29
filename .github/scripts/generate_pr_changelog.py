@@ -91,20 +91,7 @@ def main():
             for body_line in body.splitlines():
                 lines.append(f"  {body_line}")
             lines.extend(["  ```", "", "  </details>", ""])
-        else:
-            lines.extend(
-                [
-                    "",
-                    "  <details>",
-                    "  <summary>Описание</summary>",
-                    "",
-                    "  Описания нет.",
-                    "",
-                    "  </details>",
-                    "",
-                ]
-            )
-        lines.append("")
+            lines.append("")
 
     lines.append("</details>")
 
