@@ -71,7 +71,7 @@
 		return ORBIT_CATEGORY_SHIPS
 	if(is_overmap_location_poi(poi))
 		return ORBIT_CATEGORY_MAPS
-			return ..()
+	return ..()
 // SOL-EDIT END
 
 /// Voidcrew's overmap-scale landmarks: the system star and trader outpost interiors.
