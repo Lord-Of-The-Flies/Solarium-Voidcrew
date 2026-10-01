@@ -35,8 +35,12 @@
 
 /obj/effect/landmark/tradepost_orbit_token/Initialize(mapload)
 	. = ..()
-	// Второй раз вызывать make_point_of_interest не нужно: AddElement идемпотентен,
-	// а этот же путь используется и для якоря, созданного в рантайме.
+	// Регистрируемся здесь и только здесь. Повторный вызов make_point_of_interest() на
+	// тот же атом не просто лишний: on_poi_element_added() создаёт новый
+	// /datum/point_of_interest и вставляет его в other_points_of_interest без проверки,
+	// а on_poi_element_removed() снимает по REF только один датум. Второй вызов давал
+	// в меню по две записи на аванпост, причём навсегда: убрать лишний датум при
+	// удалении аванпоста было уже нечем.
 	SSpoints_of_interest.make_point_of_interest(src)
 
 /obj/effect/landmark/tradepost_orbit_token/Destroy()
@@ -44,8 +48,15 @@
 	outpost = null
 	return ..()
 
-/// Якорь орбиты внутри интерьера этого аванпоста, null пока интерьер не поднят.
-var/obj/effect/landmark/tradepost_orbit_token/orbit_token
+/obj/structure/overmap/trader_outpost
+	/**
+	 * Якорь орбиты внутри интерьера этого аванпоста, null пока интерьер не поднят.
+	 *
+	 * Поле объявлено на типе, а не на уровне файла: var в файле без заголовка типа
+	 * создаёт глобальную переменную, общую на всех аванпостов, и первый же
+	 * загрузившийся блокировал остальным setup_orbit_token() через if(orbit_token).
+	 */
+	var/obj/effect/landmark/tradepost_orbit_token/orbit_token
 
 /**
  * Ставит якорь орбиты на конкорсе.
@@ -76,7 +87,6 @@ var/obj/effect/landmark/tradepost_orbit_token/orbit_token
 	anchor_token.name = name
 	anchor_token.desc = "Interior of [name]."
 	anchor_token.outpost = src
-	SSpoints_of_interest.make_point_of_interest(anchor_token)
 	orbit_token = anchor_token
 	log_mapping("TRADER OUTPOST: ghost orbit anchor ready for '[name]' at [anchor_token.x], [anchor_token.y], [anchor_token.z].")
 
@@ -89,6 +99,10 @@ var/obj/effect/landmark/tradepost_orbit_token/orbit_token
 /obj/structure/overmap/trader_outpost/proc/get_interior_orbit_token() as /obj/effect/landmark/tradepost_orbit_token
 	for(var/turf/candidate as anything in get_interior_turfs())
 		for(var/obj/effect/landmark/tradepost_orbit_token/placed in candidate)
+			// Чужой якорь не забираем: иначе аванпост переименовал бы и переприсвоил
+			// токен соседнего аванпоста, а тот остался бы в меню с чужим именем.
+			if(placed.outpost && placed.outpost != src)
+				continue
 			return placed
 	return null
 

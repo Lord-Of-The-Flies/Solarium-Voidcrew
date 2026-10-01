@@ -170,32 +170,31 @@ GLOBAL_LIST_EMPTY(trader_outposts)
 		return
 
 	// Ships dock in per-ship hangar berths (outpost_hangar.dm), so the
-	// reservation only needs to fit the interior itself.
-	reservation = SSmapping.request_turf_block_reservation(outpost_template.width, outpost_template.height, 1)
+	// reservation only needs to fit the interior itself. Берется ровно один
+	// reservation: прежний код брал два, и первый утекал навсегда, потому что
+	// поле перезаписывалось вторым.
+	// SOL-EDIT START
+	reservation = SSmapping.request_turf_block_reservation(
+		outpost_template.width,
+		outpost_template.height,
+		1,
+		requester = "trader outpost '[name]' concourse"
+	)
 	if(!reservation)
 		loading = FALSE
 		return
 
-	var/turf/bottom_left = reservation.bottom_left_turfs[1]
-	template_bottom_left = bottom_left
+	template_bottom_left = reservation.bottom_left_turfs[1]
 
 	var/load_success = FALSE
 	try
-		if(!outpost_template)
-			outpost_template = new template_type
-		if(!outpost_template.width || !outpost_template.height)
-			log_mapping("TRADER OUTPOST: Template '[outpost_template.name]' has no dimensions, cannot load.")
-		else
-			// Ships use separate hangar reservations; this block is only the concourse.
-			reservation = SSmapping.request_turf_block_reservation(outpost_template.width, outpost_template.height, 1, requester = "trader outpost '[name]' concourse")
-			if(reservation)
-				template_bottom_left = reservation.bottom_left_turfs[1]
-				if(outpost_template.load(template_bottom_left))
-					link_interior_machinery()
-					load_success = TRUE
+		if(outpost_template.load(template_bottom_left))
+			load_success = TRUE
 	catch(var/exception/e)
 		log_mapping("TRADER OUTPOST: Failed to load '[outpost_template.name]': [e]")
 		load_success = FALSE
+
+	// SOL-EDIT END
 
 	if(!load_success)
 		qdel(reservation)
