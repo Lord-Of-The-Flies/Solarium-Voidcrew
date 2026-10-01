@@ -20,7 +20,8 @@ concurrency:
 
 env:
   BASE_BRANCH: ${{ inputs.base_branch || 'stream_update' }}
-  UPSTREAM_MERGE_PAT: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM }}
+  UPSTREAM_MIRROR_PAT: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
+  GITHUB_TOKEN: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
   UPSTREAM_MERGE_LABEL: "🆙 Обновление апстрима"
 
 jobs:
