@@ -5,6 +5,20 @@
 */
 
 // The default UI style is the first one in the list
+// SOL-EDIT - HORIZON_DREAM - НАЧАЛО
+#ifdef HORUSHERESY
+GLOBAL_LIST_INIT(available_ui_styles, list(
+	"Midnight" = 'Horusheresy/icons/hud/screen_midnight.dmi',
+	// "Retro" = 'Horusheresy/icons/hud/screen_retro.dmi',	// Устарело
+	"Plasmafire" = 'Horusheresy/icons/hud/screen_plasmafire.dmi',
+	"Slimecore" = 'Horusheresy/icons/hud/screen_slimecore.dmi',
+	"Operative" = 'Horusheresy/icons/hud/screen_operative.dmi',
+	// "Clockwork" = 'Horusheresy/icons/hud/screen_clockwork.dmi',	// Устарело
+	"Glass" = 'Horusheresy/icons/hud/screen_glass.dmi',
+	// "Trasen-Knox" = 'Horusheresy/icons/hud/screen_trasenknox.dmi',	// Устарело
+	"Detective" = 'Horusheresy/icons/hud/screen_detective.dmi',
+))
+#else
 GLOBAL_LIST_INIT(available_ui_styles, list(
 	"Midnight" = 'icons/hud/screen_midnight.dmi',
 	"Retro" = 'icons/hud/screen_retro.dmi',
@@ -16,6 +30,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	"Trasen-Knox" = 'icons/hud/screen_trasenknox.dmi',
 	"Detective" = 'icons/hud/screen_detective.dmi',
 ))
+#endif
+// SOL-EDIT - HORIZON_DREAM - КОНЕЦ
 
 /proc/ui_style2icon(ui_style)
 	return GLOB.available_ui_styles[ui_style] || GLOB.available_ui_styles[GLOB.available_ui_styles[1]]
@@ -562,20 +578,18 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	for(var/atom/movable/screen/swap_hand/swap_hands in static_inventory)
 		num_of_swaps += 1
 
+	// DROP прижат к левому краю блока слотов рук, SWAP — к правому.
+	// При двух и более кнопках SWAP (алиены) каждая центрируется над своим
+	// слотом, иначе они наезжают друг на друга у правого края. // SOL-EDIT - HORIZON_DREAM
 	var/hand_num = 1
 	for(var/atom/movable/screen/swap_hand/swap_hands in static_inventory)
-		var/hand_ind = RIGHT_HANDS
-		if (num_of_swaps > 1)
-			hand_ind = IS_RIGHT_INDEX(hand_num) ? LEFT_HANDS : RIGHT_HANDS
-		swap_hands.screen_loc = ui_swaphand_position(mymob, hand_ind)
+		if(num_of_swaps > 1)
+			swap_hands.screen_loc = ui_hand_item_position(hand_num)
+		else
+			swap_hands.screen_loc = ui_swaphand_position(mymob)
 		hand_num += 1
-	hand_num = 1
 	for(var/atom/movable/screen/drop/swap_hands in static_inventory)
-		var/hand_ind = LEFT_HANDS
-		if (num_of_swaps > 1)
-			hand_ind = IS_LEFT_INDEX(hand_num) ? LEFT_HANDS : RIGHT_HANDS
-		swap_hands.screen_loc = ui_swaphand_position(mymob, hand_ind)
-		hand_num += 1
+		swap_hands.screen_loc = ui_drophand_position(mymob)
 
 	if(ismob(mymob) && mymob.hud_used == src)
 		show_hud(hud_version)

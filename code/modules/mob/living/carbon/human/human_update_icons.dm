@@ -543,7 +543,7 @@ There are several things that need to be remembered:
 	for(var/obj/item/worn_item in held_items)
 		var/held_index = get_held_index_of_item(worn_item)
 		if(client && hud_used && hud_used.hud_version != HUD_STYLE_NOHUD)
-			worn_item.screen_loc = ui_hand_position(held_index)
+			worn_item.screen_loc = ui_hand_item_position(held_index)
 			client.screen += worn_item
 			if(observers?.len)
 				for(var/M in observers)

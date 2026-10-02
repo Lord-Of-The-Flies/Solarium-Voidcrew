@@ -327,7 +327,7 @@
 	for(var/obj/item/held in held_items)
 		var/index = get_held_index_of_item(held)
 		SET_PLANE(held, ABOVE_HUD_PLANE, our_turf)
-		held.screen_loc = ui_hand_position(index)
+		held.screen_loc = ui_hand_item_position(index)
 		client.screen |= held
 
 /mob/living/basic/get_body_temp_heat_damage_limit()

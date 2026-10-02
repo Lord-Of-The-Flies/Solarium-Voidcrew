@@ -39,13 +39,13 @@
 	using = new /atom/movable/screen/swap_hand(null, src)
 	using.icon = ui_style
 	using.icon_state = "swap_1"
-	using.screen_loc = ui_swaphand_position(owner, 1)
+	using.screen_loc = ui_hand_item_position(LEFT_HANDS) // SOL-EDIT - HORIZON_DREAM - swap_1 центрируется над своим слотом руки
 	static_inventory += using
 
 	using = new /atom/movable/screen/swap_hand(null, src)
 	using.icon = ui_style
 	using.icon_state = "swap_2"
-	using.screen_loc = ui_swaphand_position(owner, 2)
+	using.screen_loc = ui_hand_item_position(RIGHT_HANDS) // SOL-EDIT - HORIZON_DREAM - swap_2 центрируется над своим слотом руки
 	static_inventory += using
 
 	action_intent = new /atom/movable/screen/combattoggle/flashy(null, src)
@@ -131,7 +131,7 @@
 	var/mob/living/carbon/alien/adult/H = mymob
 	if(hud_version != HUD_STYLE_NOHUD)
 		for(var/obj/item/I in H.held_items)
-			I.screen_loc = ui_hand_position(H.get_held_index_of_item(I))
+			I.screen_loc = ui_hand_item_position(H.get_held_index_of_item(I))
 			H.client.screen += I
 	else
 		for(var/obj/item/I in H.held_items)
