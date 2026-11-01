@@ -598,3 +598,6 @@ SPY_HARD_REWARD_TC_THRESHOLD 15
 #TRANSLATE_HTTP_TOKEN yourkeyhere
 ## Per-request timeout in seconds.
 #TRANSLATE_HTTP_TIMEOUT_SECONDS 5
+## Repeat for each English word that translated output must not contain.
+## Keep the real list in private server configuration, outside version control.
+#TRANSLATE_OUTPUT_BLOCKED_WORD exampletoken

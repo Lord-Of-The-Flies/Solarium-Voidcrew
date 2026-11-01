@@ -18,7 +18,7 @@
 
 	var/respawn_delay = CONFIG_GET(number/respawn_delay)
 	if(respawn_delay)
-		notice += " You must wait [DisplayTimeText(respawn_delay)] after death first."
+		notice += " You must wait [DisplayTimeText(respawn_delay)] after death first, unless you died in the [ZONE_NAME_GREEN]."
 
 	return notice
 
@@ -59,7 +59,11 @@
  */
 /datum/action/cooldown/respawn/proc/refresh_respawn_delay()
 	var/delay = CONFIG_GET(number/respawn_delay)
-	var/time_of_death = owner?.persistent_client?.time_of_death
+	var/datum/persistent_client/persistent_client = owner?.persistent_client
+	var/time_of_death = persistent_client?.time_of_death
+	//A death in the Neutral Zone waives the delay (see green_zone_respawn.dm).
+	if(persistent_client?.died_in_green_zone())
+		time_of_death = 0
 	next_use_time = (delay && time_of_death) ? (time_of_death + delay) : 0
 	if(next_use_time > world.time)
 		START_PROCESSING(SSfastprocess, src)

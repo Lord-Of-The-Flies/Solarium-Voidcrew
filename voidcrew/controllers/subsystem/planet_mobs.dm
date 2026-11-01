@@ -449,6 +449,10 @@ SUBSYSTEM_DEF(planet_mobs)
 		return FALSE
 	if(HAS_TRAIT(candidate, TRAIT_MISSION_FIELD_MOB))
 		return FALSE
+	// Deleting a carrier also deletes its contents, including player corpses in Legions.
+	for(var/mob/contained as anything in candidate.get_all_contents_type(/mob))
+		if(contained.ckey || contained.mind)
+			return FALSE
 	return TRUE
 
 /// Counts the managed (despawnable) mobs currently alive on a planet.

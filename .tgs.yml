@@ -21,5 +21,8 @@ linux_scripts:
 # Same as above for Windows hosted servers
 windows_scripts:
   PreCompile.bat: tools/tgs_scripts/PreCompile.bat
+  PostCompile.bat: tools/tgs_scripts/PostCompile.bat
+  DeploymentActivation.bat: tools/tgs_scripts/DeploymentActivation.bat
+  ExternalRsc.ps1: tools/tgs_scripts/ExternalRsc.ps1
 # The security level the game should be run at
 security: Trusted

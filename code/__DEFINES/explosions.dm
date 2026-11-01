@@ -19,13 +19,16 @@
 #define GIBTONITE_DETONATE 3
 
 /// A wrapper for [/atom/proc/ex_act] to ensure that the explosion propagation and attendant signal are always handled.
+/// VOIDCREW: recheck outpost protection when queued or direct damage is applied.
 #define EX_ACT(target, args...)\
-	if(!(target.flags_1 & PREVENT_CONTENTS_EXPLOSION_1)) { \
-		target.contents_explosion(##args);\
-	};\
-	if(!(SEND_SIGNAL(target, COMSIG_ATOM_PRE_EX_ACT, ##args) & COMPONENT_CANCEL_EX_ACT)) { \
-		SEND_SIGNAL(target, COMSIG_ATOM_EX_ACT, ##args);\
-		target.ex_act(##args);\
+	if(!is_trader_outpost_protected(target)) { \
+		if(!(target.flags_1 & PREVENT_CONTENTS_EXPLOSION_1)) { \
+			target.contents_explosion(##args);\
+		};\
+		if(!(SEND_SIGNAL(target, COMSIG_ATOM_PRE_EX_ACT, ##args) & COMPONENT_CANCEL_EX_ACT)) { \
+			SEND_SIGNAL(target, COMSIG_ATOM_EX_ACT, ##args);\
+			target.ex_act(##args);\
+		} \
 	}
 
 // Internal explosion argument list keys.

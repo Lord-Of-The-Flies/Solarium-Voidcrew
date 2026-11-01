@@ -11,7 +11,7 @@
 /obj/machinery/computer/bank_machine/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(istype(held_item, /obj/item/card/id))
-		context[SCREENTIP_CONTEXT_LMB] = get_outpost_from_atom(src) ? "Treasury transfer instructions" : "Connect Account"
+		context[SCREENTIP_CONTEXT_LMB] = get_outpost_from_atom(src) ? "Treasury transfer instructions" : "Link ID to ship account"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/computer/bank_machine/examine(mob/user)
@@ -19,8 +19,10 @@
 	. = ..()
 	if(synced_bank_account)
 		. += span_notice("It is connected to [synced_bank_account.account_holder]'s account.")
+		if(istype(synced_bank_account, /datum/bank_account/ship))
+			. += span_notice("Crew members can swipe an ID to link it to this ship's account.")
 	else
-		. += span_notice("It is not connected to an account. Use an ID to connect it")
+		. += span_notice("It is not connected to a ship or claim account.")
 
 /obj/machinery/computer/bank_machine/multitool_act(mob/living/user, obj/item/multitool/tool)
 	user.balloon_alert(user, "buffer saved in storage")
@@ -48,14 +50,12 @@
 
 /obj/machinery/computer/bank_machine/attackby(obj/item/weapon, mob/user, params)
 	var/obj/structure/overmap/dynamic/player_outpost/site = resolve_outpost_bank()
-	if(site && isidcard(weapon))
-		to_chat(user, span_notice("This terminal serves [site.treasury.account_holder]. Keep your ID in hand and use the terminal interface for account transfers."))
-		return
 	if(isidcard(weapon))
-		var/obj/item/card/id/id_weapon = weapon
-		synced_bank_account = id_weapon.registered_account
-		playsound(user, 'sound/machines/ding.ogg', 50, TRUE)
-		balloon_alert_to_viewers(user, "account updated")
+		if(site)
+			to_chat(user, span_notice("This terminal serves [site.treasury.account_holder]. Keep your ID in hand and use the terminal interface for account transfers."))
+		else
+			link_id_account(weapon, user)
+		return
 
 	if(!synced_bank_account && (istype(weapon, /obj/item/stack/spacecash) || istype(weapon, /obj/item/holochip) || istype(weapon, /obj/item/coin)))
 		return //don't let them continue the attack chain because they'll waste money on a machine with no account
@@ -64,6 +64,35 @@
 	. = ..()
 	if(site && site.treasury.account_balance > previous_balance)
 		site.treasury.add_log_to_history(0, "Physical deposit of [site.treasury.account_balance - previous_balance] cr from [user.ckey] to [site.treasury.account_holder]")
+
+/// Switch only the presented card's account; neither the terminal nor either balance changes.
+/obj/machinery/computer/bank_machine/proc/link_id_account(obj/item/card/id/card, mob/living/user)
+	if(!istype(user) || QDELETED(user) || QDELETED(src) || !istype(card) || QDELETED(card) \
+		|| !user.can_perform_action(src) || !user.is_holding(card))
+		return FALSE
+	if(machine_stat & (BROKEN | NOPOWER))
+		balloon_alert(user, "terminal offline")
+		return FALSE
+	if(resolve_outpost_bank())
+		return FALSE
+	var/obj/structure/overmap/ship/ship = get_ship_from_atom(src)
+	if(!ship?.ship_account || QDELETED(ship.ship_account) || synced_bank_account != ship.ship_account)
+		balloon_alert(user, "no ship account connected")
+		return FALSE
+	// Join-password clearance also covers former lives; banking requires the current mind.
+	if(!user.mind || !(user.mind in ship.ship_team?.members))
+		balloon_alert(user, "ship crew only")
+		return FALSE
+	if(card.registered_account == synced_bank_account)
+		balloon_alert(user, "ID already linked")
+		return TRUE
+	if(card.registered_account)
+		card.registered_account.bank_cards -= card
+	card.registered_account = synced_bank_account
+	synced_bank_account.bank_cards |= card
+	balloon_alert(user, "ID account linked")
+	to_chat(user, span_notice("[card] is now linked to [synced_bank_account.account_holder]'s account."))
+	return TRUE
 
 // A pirate siphon on the ship's accounts locks the vault. Emptying the balance into a
 // holochip is the fastest way to make a robbery come up empty, so it is the one path

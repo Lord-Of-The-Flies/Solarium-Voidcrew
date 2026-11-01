@@ -1,3 +1,6 @@
+/// Includes hidden contacts and ships nested inside other contacts.
+GLOBAL_LIST_EMPTY(overmap_objects)
+
 /obj/structure/overmap
 	name = "overmap object"
 	desc = "An unknown celestial object."
@@ -115,6 +118,18 @@
 /obj/structure/overmap/proc/get_interior_footprint()
 	return null
 
+/// Whether a visitor is inside this site or one of its elevator-connected hangars.
+/// Reservations can share z-levels, so each part must use its own bounds.
+/obj/structure/overmap/proc/contains_site_turf(turf/location)
+	if(!location)
+		return FALSE
+	if(get_interior_footprint()?.contains_turf(location))
+		return TRUE
+	for(var/datum/outpost_berth/berth as anything in berths)
+		if(berth?.reservation?.contains_turf(location))
+			return TRUE
+	return FALSE
+
 /**
  * Standard response to a site load that was refused for want of MAP VOLUME rather than
  * for anything the crew did.
@@ -184,6 +199,7 @@
 
 /obj/structure/overmap/Initialize(mapload)
 	. = ..()
+	GLOB.overmap_objects += src
 	if(isnull(display_name))
 		display_name = name
 	var/static/list/loc_connections = list(
@@ -191,6 +207,13 @@
 		COMSIG_ATOM_EXITED = PROC_REF(on_exited),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+
+/obj/structure/overmap/Destroy()
+	GLOB.overmap_objects -= src
+	for(var/obj/structure/overmap/other as anything in close_overmap_objects)
+		LAZYREMOVE(other.close_overmap_objects, src)
+	close_overmap_objects = null
+	return ..()
 
 // ===== COMBAT TARGET API =====
 // Ship weapons historically targeted only ships; these hooks let other overmap
@@ -451,3 +474,32 @@
 			for(var/atom/movable/screen/parallax_layer/layer as anything in C.overmap_parallax_layers)
 				if(layer.scroll_loops)
 					update_parallax_motionblur(C, layer, C.parallax_movedir, scroll_transform)
+/obj/structure/overmap/proc/get_docking_ships()
+	var/list/ships = list()
+	// Include contents as well as the simulation registry during docking transitions.
+	for(var/obj/structure/overmap/ship/ship as anything in (SSovermap.simulated_ships | contents))
+		if(!istype(ship) || QDELETED(ship) || ship == src)
+			continue
+		if(ship.docked == src || ship.loc == src || ship.pending_dock_target == src)
+			ships += ship
+	return ships
+
+/// Shared by teardown guards and the admin view, so the explanation matches the gate.
+/obj/structure/overmap/proc/get_docking_blocker()
+	for(var/obj/structure/overmap/ship/ship as anything in get_docking_ships())
+		if(ship.admin_operation == "delete")
+			return "[ship.name] is being deleted. Wait for removal to finish."
+		switch(ship.presence_at(src))
+			if("Departing")
+				return "[ship.name] is departing. Wait for it to leave."
+			if("Arriving")
+				return "[ship.name] is arriving. Wait for docking to finish, then move or delete the ship."
+		return "[ship.name] is docked here. Move or delete the ship first."
+	return null
+
+/obj/structure/overmap/ship/proc/presence_at(obj/structure/overmap/site)
+	if(state == OVERMAP_SHIP_UNDOCKING)
+		return "Departing"
+	if(state == OVERMAP_SHIP_DOCKING || (pending_dock_target == site && docked != site && loc != site))
+		return "Arriving"
+	return "Docked"

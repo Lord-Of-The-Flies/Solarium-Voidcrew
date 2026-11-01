@@ -164,7 +164,7 @@
 /turf/open/indestructible/stone,
 /area/voidcrew/colosseum/lobby)
 "aD" = (
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "aE" = (
 /obj/item/kirbyplants/random,
@@ -400,15 +400,15 @@
 /area/voidcrew/colosseum/lobby)
 "bA" = (
 /obj/machinery/camera/colosseum/directional/north,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "bB" = (
 /obj/machinery/camera/colosseum/directional/south,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "bC" = (
 /obj/machinery/camera/colosseum/directional/west,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "bD" = (
 /obj/structure/table/wood,
@@ -419,7 +419,7 @@
 /area/voidcrew/colosseum/lobby)
 "bE" = (
 /obj/machinery/camera/colosseum/directional/east,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "bF" = (
 /obj/item/reagent_containers/cup/glass/drinkingglass{
@@ -571,7 +571,7 @@
 "dU" = (
 /obj/structure/girder,
 /obj/machinery/light/floor,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "en" = (
 /obj/structure/stone_tile/slab/colosseum/cracked,
@@ -642,7 +642,7 @@
 /area/voidcrew/colosseum/lobby)
 "fU" = (
 /obj/effect/turf_decal/caution/stand_clear,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "fV" = (
 /obj/structure/stone_tile/slab/colosseum/two,
@@ -777,7 +777,7 @@
 /area/voidcrew/colosseum/spectator)
 "kc" = (
 /obj/effect/decal/remains/human,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "kg" = (
 /obj/structure/rack,
@@ -857,7 +857,7 @@
 /area/voidcrew/colosseum/staging)
 "mI" = (
 /obj/machinery/light/warm/directional/south,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "nb" = (
 /obj/structure/fermenting_barrel,
@@ -942,7 +942,7 @@
 /area/voidcrew/colosseum/staging)
 "pA" = (
 /obj/effect/landmark/colosseum/arena_event,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "qt" = (
 /obj/effect/decal/cleanable/ash,
@@ -951,7 +951,7 @@
 "qx" = (
 /obj/structure/stone_tile/block,
 /obj/structure/statue/sandstone/venus,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "qH" = (
 /obj/effect/turf_decal/siding/wood{
@@ -986,11 +986,11 @@
 "rk" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/light/floor,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "rF" = (
 /obj/structure/stone_tile/cracked,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "rI" = (
 /obj/structure/closet/crate/secure,
@@ -1006,7 +1006,7 @@
 "rK" = (
 /obj/effect/turf_decal/caution/stand_clear,
 /obj/structure/stone_tile/slab/colosseum/two,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "rP" = (
 /obj/machinery/light/small/directional/north,
@@ -1067,7 +1067,7 @@
 "tk" = (
 /obj/structure/stone_tile/block,
 /obj/structure/statue/sandstone/assistant,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "tl" = (
 /obj/structure/table/wood,
@@ -1082,7 +1082,7 @@
 /area/voidcrew/colosseum/staging)
 "tp" = (
 /obj/machinery/light/warm/directional/east,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "tz" = (
 /obj/structure/stone_tile/slab,
@@ -1208,7 +1208,7 @@
 /obj/structure/barricade/security{
 	dir = 8
 	},
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "xQ" = (
 /obj/structure/marker_beacon{
@@ -1226,7 +1226,7 @@
 /area/voidcrew/colosseum/lobby)
 "yO" = (
 /obj/machinery/light/warm/directional/north,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "yP" = (
 /obj/structure/stone_tile/slab/colosseum/three,
@@ -1256,7 +1256,7 @@
 /area/voidcrew/colosseum/staging)
 "zp" = (
 /obj/structure/closet/crate,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "zA" = (
 /obj/structure/bookcase/random/fiction,
@@ -1356,7 +1356,7 @@
 "CX" = (
 /obj/structure/barricade/sandbags,
 /obj/machinery/light/floor,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "CY" = (
 /obj/structure/table,
@@ -1393,7 +1393,7 @@
 /area/voidcrew/colosseum/lobby)
 "DX" = (
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Ee" = (
 /turf/closed/indestructible/sandstone,
@@ -1463,7 +1463,7 @@
 /area/voidcrew/colosseum/lobby)
 "GD" = (
 /obj/structure/barricade/wooden,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "GJ" = (
 /obj/machinery/light/warm/directional/west,
@@ -1526,7 +1526,7 @@
 /area/voidcrew/colosseum/lobby)
 "HU" = (
 /obj/structure/stone_tile/block/cracked,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Ib" = (
 /obj/structure/table/wood,
@@ -1709,7 +1709,7 @@
 /area/voidcrew/colosseum/lobby)
 "MX" = (
 /obj/machinery/light/floor,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Nh" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1813,7 +1813,7 @@
 /area/voidcrew/colosseum/spectator)
 "QH" = (
 /obj/structure/girder,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "QP" = (
 /obj/structure/filingcabinet,
@@ -1865,7 +1865,7 @@
 /area/voidcrew/colosseum/lobby)
 "Ru" = (
 /obj/structure/barricade/sandbags,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Rw" = (
 /obj/structure/chair/sofa/bench{
@@ -1949,7 +1949,7 @@
 /area/voidcrew/colosseum/staging)
 "TW" = (
 /obj/machinery/light/warm/directional/west,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Uc" = (
 /obj/structure/table/bronze,
@@ -2108,7 +2108,7 @@
 /obj/structure/barricade/security{
 	dir = 4
 	},
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Zi" = (
 /obj/machinery/light/warm/directional/west{
@@ -2118,7 +2118,7 @@
 /area/voidcrew/colosseum/spectator)
 "Zo" = (
 /obj/structure/stone_tile/slab/colosseum/two,
-/turf/open/misc/beach/sand,
+/turf/open/misc/beach/sand/colosseum,
 /area/voidcrew/colosseum/arena)
 "Zp" = (
 /obj/structure/marker_beacon{

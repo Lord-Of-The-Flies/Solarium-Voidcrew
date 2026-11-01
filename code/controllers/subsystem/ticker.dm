@@ -161,8 +161,10 @@ SUBSYSTEM_DEF(ticker)
 			for(var/client/C in GLOB.clients)
 				window_flash(C, ignorepref = TRUE) //let them know lobby has opened up.
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))
+			var/new_round_alert_role = CONFIG_GET(string/new_round_alert_role_id)
+			var/new_round_message = "[new_round_alert_role ? "<@&[new_round_alert_role]> " : ""]New round starting on [SSmapping.current_map.map_name]!"
 			for(var/channel_tag in CONFIG_GET(str_list/channel_announce_new_game))
-				send2chat(new /datum/tgs_message_content("New round starting on [SSmapping.current_map.map_name]!"), channel_tag)
+				send2chat(new /datum/tgs_message_content(new_round_message), channel_tag)
 			current_state = GAME_STATE_PREGAME
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 
@@ -583,8 +585,9 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
-		var/mob/living = player.transfer_character()
+		var/mob/living/living = player.transfer_character()
 		if(living)
+			SEND_GLOBAL_SIGNAL(COMSIG_GLOB_CREWMEMBER_JOINED, living, living.mind.assigned_role.title)
 			qdel(player)
 			ADD_TRAIT(living, TRAIT_NO_TRANSFORM, SS_TICKER_TRAIT)
 			if(living.client)

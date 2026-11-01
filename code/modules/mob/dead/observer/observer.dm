@@ -637,8 +637,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		name = real_name
 
 // This is the ghost's follow verb with an argument
-/mob/dead/observer/proc/ManualFollow(atom/movable/target)
-	if (!istype(target) || (is_secret_level(target.z) && !client?.holder))
+// SOL-EDIT START - ManualFollow принимает любой atom, а не только /atom/movable
+// /datum/component/orbiter умеет орбитить и неподвижные цели, а istype() в проверке
+// молча гасил вызовы - кристалл, сингулярность, звезда овермапа, якорь аванпоста
+/mob/dead/observer/proc/ManualFollow(atom/target)
+	if (isnull(target) || (is_secret_level(target.z) && !client?.holder))
 		return
 
 	var/list/icon_dimensions = get_icon_dimensions(target.icon)
@@ -660,6 +663,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			rot_seg = 36 //360/10 bby, smooth enough aproximation of a circle
 
 	orbit(target,orbitsize, FALSE, 20, rot_seg)
+// SOL-EDIT END
 
 /mob/dead/observer/orbit()
 	setDir(2)//reset dir so the right directional sprites show up

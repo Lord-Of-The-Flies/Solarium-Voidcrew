@@ -98,7 +98,7 @@
 
 /**
  * The purchase screen does not render maps live: it shows committed PNGs and
- * manifest.json out of voidcrew/modules/ship_upgrades/previews/. Any edit to a
+ * per-hull/module JSON out of voidcrew/modules/ship_upgrades/previews/. Any edit to a
  * hull or module map is invisible there until the previews are regenerated, so
  * this pins the manifest to the maps by content rather than by mtime.
  *
@@ -132,19 +132,16 @@
 	TEST_FAIL("the baked preview for [label] was rendered from a different version of [map_path] than the one on disk, so the purchase \
 		screen is showing players a ship that no longer exists. Any edit to a hull or a module map has to be committed together with \
 		regenerated art: run tools/ship_previews/generate_ship_previews.py from the repo root (~13 minutes) and commit the changed PNGs \
-		and manifest.json alongside the .dmm change.")
+		and the changed .preview.json files alongside the .dmm change.")
 	return FALSE
 
 /datum/unit_test/voidcrew_ship_previews/Run()
 	ensure_ship_upgrades_initialized()
-	var/manifest_text = vc_test_file_text("[SHIP_PREVIEW_ROOT]manifest.json")
-	TEST_ASSERT_NOTNULL(manifest_text, "the baked ship-preview manifest is missing, every card on the purchase screen renders blank")
-	var/list/manifest = json_decode(manifest_text)
-	TEST_ASSERT(islist(manifest), "manifest.json did not parse into a list")
+	var/list/manifest = load_ship_preview_metadata(SHIP_PREVIEW_ROOT)
 	var/list/hull_entries = manifest["hulls"]
 	var/list/module_entries = manifest["modules"]
-	TEST_ASSERT(length(hull_entries), "manifest.json lists no hulls")
-	TEST_ASSERT(length(module_entries), "manifest.json lists no modules")
+	TEST_ASSERT(length(hull_entries), "Preview metadata lists no hulls")
+	TEST_ASSERT(length(module_entries), "Preview metadata lists no modules")
 
 	// Entries baked before src_md5 existed are rolled up into one failure at the
 	// end rather than one per card, so a run against un-regenerated previews
@@ -203,7 +200,29 @@
 		TEST_FAIL("[unfingerprinted] preview manifest entries carry no `src_md5`, so nothing can tell whether the committed art still \
 			matches the map it was rendered from, which is exactly how three stale Phalanx previews shipped. \
 			tools/ship_previews/generate_ship_previews.py records that hash on every run; regenerate the previews and commit \
-			manifest.json with the PNGs.")
+			the changed .preview.json files with the PNGs.")
 
 #undef SHIP_MODULE_MAP_ROOT
 #undef SHIP_PREVIEW_ROOT
+
+/datum/unit_test/voidcrew_room_crew_variants/Run()
+	var/datum/ship_upgrade_module/module = allocate(/datum/ship_upgrade_module)
+	var/list/shared = list(list(name = "Engineer", slots = 2))
+	var/list/independent = list(list(name = "Medic", slots = 3))
+	module.job_slots_add = shared
+	module.job_slots_add_by_theme = list("medical" = independent, "empty" = list())
+	var/list/selections = list("bay" = module)
+	var/list/slots = list("bay")
+	var/list/actual = get_module_job_definitions(null, selections, slots, "standard")
+	TEST_ASSERT_EQUAL(actual.len, 1, "a variant without an override lost its existing room crew")
+	TEST_ASSERT_EQUAL(actual[1], shared[1], "a variant without an override did not use its existing room crew")
+	actual = get_module_job_definitions(null, selections, slots, "medical")
+	TEST_ASSERT_EQUAL(actual.len, 1, "the independent roster was added to the shared roster")
+	TEST_ASSERT_EQUAL(actual[1], independent[1], "the selected variant did not use its own crew")
+	actual = get_module_job_definitions(null, selections, slots, "empty")
+	TEST_ASSERT_EQUAL(actual.len, 0, "an explicitly empty roster fell back to shared crew")
+	actual = get_module_job_definitions(null, selections, slots)
+	TEST_ASSERT_EQUAL(actual[1], shared[1], "themeless ships lost their existing roster")
+	module.job_slots_add_by_theme -= "medical"
+	actual = get_module_job_definitions(null, selections, slots, "medical")
+	TEST_ASSERT_EQUAL(actual[1], shared[1], "removing an override did not restore the existing room crew")

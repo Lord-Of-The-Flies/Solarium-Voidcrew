@@ -229,6 +229,7 @@
 		return FALSE
 
 	//Removes a job slot
+	var/datum/job/previous_role = mind.assigned_role
 	joined_ship.job_slots[job]--
 
 	//Remove the player from the join queue if he was in one and reset the timer
@@ -241,16 +242,39 @@
 		tgui_alert(usr, "There was an unexpected error putting you into your requested job. If you cannot join with any job, you should contact an admin.")
 		return FALSE
 
-	var/atom/destination = pick(joined_ship.shuttle.spawn_points)
+	var/obj/structure/ai_core/latejoin_inactive/core
+	var/atom/destination
+	if(job.ship_role == "ai")
+		core = joined_ship.available_crew_ai_core()
+		if(core)
+			core.available = FALSE
+			destination = get_turf(core)
+	else
+		destination = pick(joined_ship.shuttle.spawn_points)
 	if(!destination)
-		CRASH("Failed to find a latejoin spawn point.")
+		joined_ship.job_slots[job]++
+		job.current_positions--
+		mind.set_assigned_role(previous_role)
+		to_chat(src, span_warning("No suitable spawn point is available on this ship."))
+		return FALSE
 	var/mob/living/character = create_character(destination)
 	if(!character)
-		CRASH("Failed to create a character for latejoin.")
+		joined_ship.job_slots[job]++
+		job.current_positions--
+		if(!QDELETED(core))
+			core.available = TRUE
+		if(mind)
+			mind.set_assigned_role(previous_role)
+		spawning = FALSE
+		return FALSE
+	if(core)
+		qdel(core)
 	transfer_character()
 
 	SSjob.equip_rank(character, job, character.client)
 	job.after_latejoin_spawn(character)
+	if(issilicon(character))
+		job.finish_ship_silicon_spawn(character, joined_ship)
 
 	SSticker.minds += character.mind
 	character.client.init_verbs() // init verbs for the late join

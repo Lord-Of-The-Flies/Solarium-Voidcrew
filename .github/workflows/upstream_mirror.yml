@@ -1,0 +1,58 @@
+name: Зеркалирование ПРов апстрима
+
+on:
+  workflow_dispatch:
+    inputs:
+      catchup_all:
+        description: "Зеркалить ВСЕ непринятые ПРы апстрима (без окна по времени)"
+        required: false
+        default: false
+        type: boolean
+      window_hours:
+        description: "Зеркалить ПРы, принятые в апстриме за последние N часов (если ВКЛ ВСЕ ПРы апстрима)"
+        required: false
+        default: "2"
+      max_per_run:
+        description: "Максимум ПРов за один запуск"
+        required: false
+        default: "50"
+      base_branch:
+        description: "Ветка, в которую открываются зеркальные ПРы"
+        required: false
+        default: "stream_update"
+      mirror_label:
+        description: "Label на зеркальные ПРы (оставь пустым, чтобы не вешать)"
+        required: false
+        default: "🧲 Зеркало"
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: upstream-mirror
+  cancel-in-progress: false
+
+env:
+  BASE_BRANCH: ${{ inputs.base_branch || 'stream_update' }}
+  CATCHUP_ALL: ${{ inputs.catchup_all || (github.event_name == 'schedule' && 'true') || 'false' }}
+  WINDOW_HOURS: ${{ inputs.window_hours || '2' }}
+  MAX_PER_RUN: ${{ inputs.max_per_run || '50' }}
+  UPSTREAM_MIRROR_PAT: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM }}
+  UPSTREAM_MIRROR_LABEL: ${{ inputs.mirror_label }}
+
+jobs:
+  mirror:
+    name: Зеркалирование принятых ПРов апстрима
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.UPSTREAM_MIRROR_PAT || secrets.UPSTREAM_MIRROR_SOLARIUM || github.token }}
+      - name: Зеркалирование принятых ПРов апстрима
+        shell: bash
+        run: bash .github/scripts/upstream_mirror.sh

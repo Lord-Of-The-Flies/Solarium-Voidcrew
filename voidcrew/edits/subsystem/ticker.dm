@@ -292,7 +292,7 @@
 /datum/controller/subsystem/ticker/proc/get_overflow_job(obj/structure/overmap/ship/ship)
 	var/datum/job/junior_job
 	for(var/datum/job/job as anything in ship.job_slots)
-		if(job.officer)
+		if(job.officer || job.ship_role != "crew")
 			continue
 		if(job.job_category == JOB_CAT_ASSISTANT)
 			return job
@@ -305,6 +305,8 @@
  */
 /datum/controller/subsystem/ticker/proc/assign_player_to_ship_job(mob/dead/new_player/player, datum/job/job, obj/structure/overmap/ship/ship)
 	if(!player || !job || !ship)
+		return FALSE
+	if(!job.ship_roundstart_opted_in(player))
 		return FALSE
 
 	// AttemptSpawnOnShip handles role assignment, slot decrementing, spawning,

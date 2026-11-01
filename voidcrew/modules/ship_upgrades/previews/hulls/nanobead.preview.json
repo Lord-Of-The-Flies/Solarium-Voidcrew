@@ -1,0 +1,30 @@
+{
+ "hulls": {
+  "nanobead": {
+   "height": 19,
+   "png": "ship_nanobead.png",
+   "slots": {
+    "Biomedical_North": [
+     9,
+     13
+    ],
+    "Biomedical_South": [
+     9,
+     3
+    ],
+    "Services_North": [
+     14,
+     13
+    ],
+    "Services_South": [
+     14,
+     2
+    ]
+   },
+   "src_md5": "d832e165a3e25181855de554129a0740",
+   "width": 23
+  }
+ },
+ "modules": {},
+ "tile_px": 32
+}

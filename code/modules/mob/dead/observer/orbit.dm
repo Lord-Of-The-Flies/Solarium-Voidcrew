@@ -1,5 +1,12 @@
 GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 
+// SOL-EDIT START - разделы меню для не-мобовых точек интереса
+// #define в DM действует только вперёд по тексту, поэтому выше ui_static_data()
+#define ORBIT_CATEGORY_MISC "misc"
+#define ORBIT_CATEGORY_SHIPS "ships"
+#define ORBIT_CATEGORY_MAPS "maps"
+// SOL-EDIT END
+
 /datum/orbit_menu
 	///mobs worth orbiting. Because spaghetti, all mobs have the point of interest, but only some are allowed to actually show up.
 	///this obviously should be changed in the future, so we only add mobs as POI if they actually are interesting, and we don't use
@@ -68,8 +75,10 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 	var/list/deadchat_controlled = list()
 	var/list/dead = list()
 	var/list/ghosts = list()
+	var/list/ships = list() // SOL-EDIT - раздел Ships
 	var/list/misc = list()
 	var/list/npcs = list()
+	var/list/maps = list() // SOL-EDIT - раздел Maps
 
 	for(var/name in new_mob_pois)
 		var/list/serialized = list()
@@ -133,10 +142,19 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 		var/list/other_data = get_misc_data(atom_poi)
 		var/misc_data = list(other_data[1])
 
-		misc += misc_data
+		// SOL-EDIT START - раскладываем не-мобовые POI по разделам через хук
+		// poi_category(), который переопределяет voidcrew и Astramilitarum
+		var/poi_category = poi_category(atom_poi)
+		if(poi_category == ORBIT_CATEGORY_SHIPS)
+			ships += misc_data
+		else if(poi_category == ORBIT_CATEGORY_MAPS)
+			maps += misc_data
+		else
+			misc += misc_data
 
 		if(other_data[2]) // Critical = TRUE
 			critical += misc_data
+	// SOL-EDIT END
 
 	return list(
 		"alive" = alive,
@@ -145,10 +163,29 @@ GLOBAL_DATUM_INIT(orbit_menu, /datum/orbit_menu, new)
 		"deadchat_controlled" = deadchat_controlled,
 		"dead" = dead,
 		"ghosts" = ghosts,
+		"ships" = ships, // SOL-EDIT
 		"misc" = misc,
 		"npcs" = npcs,
+		"maps" = maps, // SOL-EDIT
 		"can_observe" = !HAS_TRAIT(user, TRAIT_NO_OBSERVE),
 	)
+
+
+// SOL-EDIT START - хук категоризации, переопределяется в voidcrew и Astramilitarum
+/**
+ * В какой раздел орбит-меню положить не-мобовую точку интереса.
+ *
+ * Базово всё уходит в Misc, кроме штатного пульта управления кораблём.
+ *
+ * Формы объявления в DM разные и это важно: /datum/x/proc/foo() - НОВОЕ объявление
+ * (второе такое же даёт "duplicate definition"), а /datum/x/foo() без /proc/ -
+ * переопределение с цепочкой ..(). Переопределять можно только второй формой.
+ */
+/datum/orbit_menu/proc/poi_category(atom/poi)
+	if(istype(poi, /obj/machinery/computer/helm))
+		return ORBIT_CATEGORY_SHIPS
+	return ORBIT_CATEGORY_MISC
+// SOL-EDIT END
 
 
 /// Shows the UI to the specified user.

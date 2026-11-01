@@ -90,6 +90,8 @@
 	COOLDOWN_DECLARE(rename_cooldown)
 	///Cooldown between sending crew invites
 	COOLDOWN_DECLARE(invite_cooldown)
+	///Cooldown between lobby requests to open a job slot, shared by all requesters.
+	COOLDOWN_DECLARE(join_ping_cooldown)
 	///List of pending crew invites: ckey -> invite_time
 	var/list/pending_invites = list()
 	///Open /datum/ship_application requests to join this ship from the lobby. Only a
@@ -716,9 +718,11 @@
 	// own slots so the first entry (the captain) stays the supervisor
 	if(source_template.has_upgrade_slots)
 		var/list/slot_ids = selected_theme?.upgrade_slot_ids || source_template.upgrade_slot_ids
-		job_slot_definitions += get_module_job_definitions(source_template.type, upgrade_selections, slot_ids)
+		job_slot_definitions += get_module_job_definitions(source_template.type, upgrade_selections, slot_ids, selected_theme?.id)
 
 	job_slots = assemble_job_slots_from_list(job_slot_definitions)
+	for(var/datum/job/crew_job as anything in job_slots)
+		crew_job.crew_ship_ref = WEAKREF(src)
 
 	// Store initial slot counts for max slot calculations in cryo console
 	// This is an assoc list (job datum -> slot count), same format as job_slots
@@ -770,8 +774,8 @@
 	GLOB.crew_locked_ships -= src
 	QDEL_LIST(crew_applications)
 	source_template = null
-	shuttle?.intoTheSunset()
-	shuttle = null
+	var/obj/docking_port/mobile/owned_shuttle = detach_shuttle()
+	owned_shuttle?.intoTheSunset()
 	SSovermap.simulated_ships -= src
 	QDEL_NULL(ship_account)
 	manifest?.Cut()
@@ -1435,7 +1439,8 @@
 			return FALSE
 		message_admins("\[SHUTTLE]: [shuttle?.name] has been FORCE deleted!")
 		log_shuttle("[shuttle?.name] has been force deleted!")
-		shuttle?.jumpToNullSpace()
+		var/obj/docking_port/mobile/owned_shuttle = detach_shuttle()
+		owned_shuttle?.jumpToNullSpace()
 		qdel(src)
 		return TRUE
 
@@ -1465,7 +1470,8 @@
 	// A ship docked to us ship-to-ship parks its overmap token in our contents.
 	// Deleting the host would strand the guest inside a deleted loc.
 	for(var/obj/structure/overmap/ship/guest in src)
-		return FALSE
+		if(!QDELETED(guest))
+			return FALSE
 
 	log_shuttle("[name]: derelict despawned (abandoned [(world.time - abandoned_at) / 600] minutes ago).")
 	message_admins("\[SHUTTLE]: Derelict [name] has despawned. [ADMIN_COORDJMP(shuttle?.loc)]")
@@ -1477,13 +1483,13 @@
 	if(site)
 		if(istype(site, /obj/structure/overmap/ship))
 			var/obj/structure/overmap/ship/host = site
-			if(host.shuttle && host.shuttle != shuttle)
+			if(host.shuttle && shuttle && host.shuttle != shuttle)
 				host.shuttle.shuttle_areas -= shuttle.shuttle_areas
 			SEND_SIGNAL(host, COMSIG_VOIDCREW_SHIP_UNDOCKED_BY, src)
 		release_berth_flags(site)
 		site.on_ship_undock_complete(src) // frees hangar berths at outposts; no-op elsewhere
 		if(istype(site, /obj/structure/overmap/space_ruin))
-			addtimer(CALLBACK(site, TYPE_PROC_REF(/obj/structure/overmap/space_ruin, check_and_respawn)), 5 SECONDS)
+			addtimer(CALLBACK(site, TYPE_PROC_REF(/obj/structure/overmap/space_ruin, check_start_despawn)), 5 SECONDS)
 		else if(istype(site, /obj/structure/overmap/event/meteor))
 			addtimer(CALLBACK(site, TYPE_PROC_REF(/obj/structure/overmap/event/meteor, unload_level)), 5 SECONDS)
 		// Planets and empty-space placeholders (crash sites included) registered
@@ -1523,9 +1529,20 @@
 					continue
 				aboard.ghostize(FALSE) // a disconnected player's body still holds their key
 				qdel(aboard)
-		shuttle.intoTheSunset()
+		var/obj/docking_port/mobile/owned_shuttle = detach_shuttle()
+		owned_shuttle.intoTheSunset()
 	qdel(src)
 	return TRUE
+
+/// Planned hull removal must release both ownership links before the port's Destroy().
+/// Otherwise its unexpected-deletion stack trace aborts callers inside try/catch,
+/// leaving a hull-less overmap ship behind that continues to pin its landing site.
+/obj/structure/overmap/ship/proc/detach_shuttle()
+	var/obj/docking_port/mobile/voidcrew/owned_shuttle = shuttle
+	shuttle = null
+	if(owned_shuttle?.current_ship == src)
+		owned_shuttle.current_ship = null
+	return owned_shuttle
 
 /**
  * The dynamic encounter this hull should be force-undocked from, or null if it should
@@ -1599,11 +1616,10 @@
  * 1. Physically aboard - get_event_crew(), any player at all, roster or not. Someone
  *    standing in the engine room is someone the hull is not empty of, and a boarder
  *    who has taken up residence is a crew as far as the teardown is concerned.
- * 2. On the hull's own z-level, and on this hull's roster. A landing party is not an
- *    abandoned crew: they walked out through their own airlock, they are alive, they
- *    are connected, and their ship is thirty tiles away. Aboard-only read that as
- *    derelict and handed their hull to whoever found it while they were standing on
- *    it - so the crewless clock now needs them to be gone, not merely outdoors.
+ * 2. On this hull's roster and still at its docked site, including the concourse,
+ *    elevator-connected hangars and other interior floors. Facilities with hangars
+ *    span several z-levels, and visiting their interior must not abandon the ship.
+ *    Outside hangar facilities, the hull's own z-level still counts for away teams.
  *
  * The roster scoping in 2 is load-bearing, not decoration. Ship z-levels are shared:
  * a flying hull sits on a transit level with every other hull in flight, and a berthed
@@ -1639,11 +1655,17 @@
 			continue
 		// A ghosted player's mind still points at the body they left, so DEAD covers
 		// the corpse and the client check covers everyone who logged off or aghosted.
-		if(body.stat == DEAD || !body.client)
+		if(body.stat == DEAD || !GET_CLIENT(body))
 			continue
 		// get_turf() again: a player inside a locker, a mech or a bodybag reads z 0 off
 		// the mob itself.
 		var/turf/body_turf = get_turf(body)
+		if(docked?.contains_site_turf(body_turf))
+			return TRUE
+		// Hangars from different facilities can occupy the same reservation level.
+		// Their elevator host, not their z, determines whether the crew is still here.
+		if(length(docked?.berths))
+			continue
 		if(body_turf?.z == hull_turf.z)
 			return TRUE
 	return FALSE
@@ -2357,7 +2379,14 @@
 		ship_notify("Chart complete: [site.get_site_label()]. Resuming docking approach.", "SURVEY", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 50)
 		INVOKE_ASYNC(site, TYPE_PROC_REF(/obj/structure/overmap, ship_act), user, src)
 	else
-		ship_notify("Chart complete: [site.get_site_label()]. It will hold position - dock when ready.", "SURVEY", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 50)
+		// "Dock when ready" is not open-ended any more: a charted interior nobody has
+		// landed on counts down and then drifts to another sector. Quote the window.
+		var/obj/structure/overmap/planet/charted = astype(site, /obj/structure/overmap/planet)
+		var/hold_remaining = charted?.get_interior_hold_remaining()
+		if(hold_remaining)
+			ship_notify("Chart complete: [site.get_site_label()]. It holds for [DisplayTimeText(hold_remaining)] - dock within that window or it drifts.", "SURVEY", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 50)
+		else
+			ship_notify("Chart complete: [site.get_site_label()]. It will hold position - dock when ready.", "SURVEY", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 50)
 
 /**
  * Signal handler - the site we were waiting on was deleted mid-survey.
@@ -2669,8 +2698,8 @@
 				else if(dock_index == 2)
 					ruin_place.second_dock_taken = FALSE
 				dock_index = 0
-				// Check if we should unload and respawn (small delay to ensure ship is fully moved)
-				addtimer(CALLBACK(ruin_place, TYPE_PROC_REF(/obj/structure/overmap/space_ruin, check_and_respawn)), 0.5 SECONDS)
+				// Start the cleanup grace after the departing ship has moved clear.
+				addtimer(CALLBACK(ruin_place, TYPE_PROC_REF(/obj/structure/overmap/space_ruin, check_start_despawn)), 3 SECONDS)
 
 			// Handle landable asteroid field (meteor storm) dock flags and cleanup - unlike
 			// space ruins, the event itself never respawns/relocates, only its reservation frees up

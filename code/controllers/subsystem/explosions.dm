@@ -300,6 +300,10 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	epicenter = get_turf(epicenter)
 	if(!epicenter)
 		return
+	// VOIDCREW: suppress the blast before smoke, flashes, fire, or chain reactions.
+	if(is_trader_outpost_protected(epicenter))
+		log_game("OUTPOST PROTECTION: Suppressed explosion ([devastation_range], [heavy_impact_range], [light_impact_range]) at [AREACOORD(epicenter)]. Cause: [explosion_cause]. Last fingerprints: [key_name(explosion_cause?.fingerprintslast)].")
+		return
 
 	if(isnull(flame_range))
 		flame_range = light_impact_range
@@ -393,6 +397,8 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	//flash mobs
 	if(flash_range)
 		for(var/mob/living/L in viewers(flash_range, epicenter))
+			if(is_trader_outpost_protected(L)) // VOIDCREW
+				continue
 			L.flash_act()
 
 	var/list/affected_turfs = prepare_explosion_turfs(max_range, epicenter, protect_epicenter, explosion_direction, explosion_arc)
@@ -407,6 +413,10 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	//lists are guaranteed to contain at least 1 turf at this point
 	//we presuppose that we'll be iterating away from the epicenter
 	for(var/turf/explode as anything in affected_turfs)
+		// VOIDCREW: outside blasts cannot damage, ignite, or throw outpost contents.
+		if(is_trader_outpost_protected(explode))
+			cached_exp_block[explode] = INFINITY
+			continue
 		var/our_x = explode.x
 		var/our_y = explode.y
 		var/dist = CHEAP_HYPOTENUSE(our_x, our_y, x0, y0)

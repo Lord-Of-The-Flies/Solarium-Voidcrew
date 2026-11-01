@@ -1,0 +1,148 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"kTp" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 5
+	},
+/turf/template_noop,
+/area/template_noop)
+"nSo" = (
+/obj/structure/table,
+/obj/item/stack/medical/suture{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/healthanalyzer{
+	pixel_x = -2;
+	pixel_y = -3
+	},
+/obj/item/reagent_containers/syringe{
+	pixel_x = 8;
+	pixel_y = -5
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 6
+	},
+/turf/template_noop,
+/area/template_noop)
+"omx" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"oQM" = (
+/obj/effect/turf_decal/siding/white,
+/turf/template_noop,
+/area/template_noop)
+"qnx" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	layer = 2.041
+	},
+/obj/machinery/suit_storage_unit/mining,
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"qMI" = (
+/obj/effect/turf_decal/siding/white{
+	layer = 2.041;
+	dir = 10
+	},
+/obj/modular_map_connector,
+/turf/template_noop,
+/area/template_noop)
+"tMh" = (
+/obj/structure/closet/secure_closet/miner{
+	populate = 0;
+	name = "miner's locker";
+	anchored = 1
+	},
+/obj/effect/turf_decal/siding/thinplating/dark{
+	layer = 2.041
+	},
+/obj/item/storage/belt/mining/alt,
+/obj/item/clothing/glasses/meson,
+/obj/item/gps/mining{
+	pixel_x = -8;
+	pixel_y = -8
+	},
+/obj/item/clothing/shoes/workboots{
+	pixel_x = -4;
+	pixel_y = -9
+	},
+/obj/item/clothing/gloves/fingerless{
+	pixel_x = -1;
+	pixel_y = -4
+	},
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 1
+	},
+/obj/machinery/camera/autoname{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"uYm" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 9
+	},
+/turf/template_noop,
+/area/template_noop)
+"vUn" = (
+/obj/structure/closet/secure_closet/miner{
+	populate = 0;
+	name = "miner's locker";
+	anchored = 1
+	},
+/obj/effect/turf_decal/siding/thinplating/dark{
+	layer = 2.041
+	},
+/obj/item/storage/belt/mining/alt,
+/obj/item/clothing/glasses/meson,
+/obj/item/gps/mining{
+	pixel_x = -8;
+	pixel_y = -8
+	},
+/obj/item/clothing/shoes/workboots{
+	pixel_x = -4;
+	pixel_y = -9
+	},
+/obj/item/clothing/gloves/fingerless{
+	pixel_x = -1;
+	pixel_y = -4
+	},
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"xmt" = (
+/obj/effect/turf_decal/siding/white,
+/obj/structure/extinguisher_cabinet/directional/south{
+	pixel_x = -6;
+	pixel_y = -28
+	},
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+qnx
+uYm
+qMI
+"}
+(2,1,1) = {"
+qnx
+omx
+xmt
+"}
+(3,1,1) = {"
+vUn
+omx
+oQM
+"}
+(4,1,1) = {"
+tMh
+kTp
+nSo
+"}

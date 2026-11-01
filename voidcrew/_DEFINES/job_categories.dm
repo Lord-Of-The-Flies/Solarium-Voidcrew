@@ -9,6 +9,7 @@
 #define JOB_CAT_CARGO "Cargo"
 #define JOB_CAT_SERVICE "Service"
 #define JOB_CAT_ASSISTANT "Assistant"
+#define JOB_CAT_SILICON "Silicon"
 
 /// List of all job categories in display order
 GLOBAL_LIST_INIT(job_categories, list(
@@ -20,4 +21,5 @@ GLOBAL_LIST_INIT(job_categories, list(
 	JOB_CAT_CARGO,
 	JOB_CAT_SERVICE,
 	JOB_CAT_ASSISTANT,
+	JOB_CAT_SILICON,
 ))

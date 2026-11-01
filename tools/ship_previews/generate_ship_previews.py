@@ -3,7 +3,7 @@
 
 Scans hull DMMs for /obj/modular_map_root/ship_upgrade slot markers and module
 DMMs for their /obj/modular_map_connector anchor, renders everything to PNG via
-dmm-tools, and writes a manifest.json describing the compositing geometry.
+dmm-tools, and writes one metadata file per hull or module.
 
 dmm-tools' icon-smoothing pass implements the pre-2020 corner system, so
 anything using modern bitmask smoothing (walls, carpets, tables) renders as
@@ -19,7 +19,8 @@ nothing. We repair that here:
     is translucent so the grille stays visible)
 
 Outputs (commit these):
-    voidcrew/modules/ship_upgrades/previews/manifest.json
+    voidcrew/modules/ship_upgrades/previews/hulls/*.preview.json
+    voidcrew/modules/ship_upgrades/previews/modules/**/*.preview.json
     voidcrew/modules/ship_upgrades/previews/*.png
 
 Run from the repo root after editing modular hulls or modules:
@@ -111,6 +112,23 @@ SMOOTH_OBJS = {
     "/obj/structure/window/reinforced/shuttle/survival_pod": ("icons/obj/smooth_structures/pod_window.dmi", "pod_window", "pod_window"),
     "/obj/structure/window/reinforced/plasma/plastitanium": ("icons/obj/smooth_structures/plastitanium_window.dmi", "plastitanium_window", "plastitanium_window"),
     "/obj/structure/window/bronze/fulltile": ("icons/obj/smooth_structures/clockwork_window.dmi", "clockwork_window", "bronze_window"),
+}
+
+# dmm-tools expands these spawners into grilles and windows before rendering,
+# but our repair pass reads the original map paths. Resolve the window from
+# each spawn_list in code/game/objects/effects/spawners/structure.dm so it gets
+# both its glass overlay and the same smoothing joins as a placed window.
+WINDOW_SPAWNERS = {
+    "/obj/effect/spawner/structure/window": "/obj/structure/window/fulltile",
+    "/obj/effect/spawner/structure/window/reinforced": "/obj/structure/window/reinforced/fulltile",
+    "/obj/effect/spawner/structure/window/reinforced/tinted": "/obj/structure/window/reinforced/tinted/fulltile",
+    "/obj/effect/spawner/structure/window/bronze": "/obj/structure/window/bronze/fulltile",
+    "/obj/effect/spawner/structure/window/reinforced/shuttle": "/obj/structure/window/reinforced/shuttle",
+    "/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium": "/obj/structure/window/reinforced/plasma/plastitanium",
+    "/obj/effect/spawner/structure/window/ice": "/obj/structure/window/reinforced/fulltile/ice",
+    "/obj/effect/spawner/structure/window/survival_pod": "/obj/structure/window/reinforced/shuttle/survival_pod",
+    "/obj/effect/spawner/structure/window/plasma": "/obj/structure/window/plasma/fulltile",
+    "/obj/effect/spawner/structure/window/reinforced/plasma": "/obj/structure/window/reinforced/plasma/fulltile",
 }
 
 # Non-window tiles that also count as joins for a window group
@@ -244,10 +262,13 @@ class Dmm:
 def collect_base_module_files() -> list[str]:
     """map_file values registered in the ship upgrade module datums."""
     files: list[str] = []
-    for dm_file in sorted(SHIP_DM_DIR.glob("*.dm")):
-        for match in re.finditer(r'map_file = "([^"]+)"', dm_file.read_text(encoding="utf-8")):
-            if match.group(1) not in files:
-                files.append(match.group(1))
+    # Rooms added to an existing ship by Voidworks are registered in workshop/.
+    # Scan both registration trees; loose DMMs are not necessarily active modules.
+    for directory in (SHIP_DM_DIR, SHIP_DM_DIR.parent / "workshop"):
+        for dm_file in sorted(directory.rglob("*.dm")):
+            for match in re.finditer(r'map_file = "([^"]+)"', dm_file.read_text(encoding="utf-8")):
+                if match.group(1) not in files:
+                    files.append(match.group(1))
     return files
 
 
@@ -318,8 +339,20 @@ def smooth_turf_at(dmm: Dmm, x: int, y: int):
     return best
 
 
+def resolve_window_spawner(path: str) -> str:
+    """Resolve fulltile spawners; hollow spawners use directional panes."""
+    if path_matches(path, "/obj/effect/spawner/structure/window/hollow"):
+        return path
+    best = max(
+        (prefix for prefix in WINDOW_SPAWNERS if path_matches(path, prefix)),
+        key=len, default=None,
+    )
+    return WINDOW_SPAWNERS[best] if best else path
+
+
 def smooth_obj_entry(path: str):
     """Longest-prefix SMOOTH_OBJS entry for an obj path, or None."""
+    path = resolve_window_spawner(path)
     best = None
     best_len = -1
     for prefix, entry in SMOOTH_OBJS.items():
@@ -352,6 +385,7 @@ def build_join_sets(dmm: Dmm) -> tuple[dict, set, dict]:
     }
     for pos, key in dmm.grid.items():
         for path in dmm.key_paths[key]:
+            path = resolve_window_spawner(path)
             if any(path_matches(path, p) for p in WALL_JOIN_PREFIXES) and not any(
                 path_matches(path, p) for p in WALL_JOIN_EXCLUDE
             ):
@@ -484,6 +518,71 @@ def module_geometry(dmm: Dmm) -> dict:
     return {"width": dmm.width, "height": dmm.height, "connector": [cx, cy]}
 
 
+def metadata_path(output: Path, group: str, key: str) -> Path:
+    if group == "modules":
+        if not key.endswith(".dmm"):
+            raise ValueError(f"Expected a module map filename: {key}")
+        key = key.removesuffix(".dmm")
+    parts = key.split("/")
+    if any(not part or part in (".", "..") or part != part.strip()
+           or part.endswith(".") or any(c in part for c in '<>:"\\|?*\0')
+           or any(ord(c) < 32 for c in part) for part in parts):
+        raise ValueError(f"Invalid preview metadata key: {key}")
+    path = output / group / (key + ".preview.json")
+    for parent in (path, *path.parents):
+        if parent == output:
+            break
+        if parent.is_symlink() or getattr(parent, "is_junction", lambda: False)():
+            raise ValueError(f"Preview metadata must not contain links: {parent}")
+    return path
+
+
+def preview_metadata_files(output: Path):
+    yield from output.glob("*.preview.json")
+
+    def collect(folder):
+        if folder.is_symlink() or getattr(folder, "is_junction", lambda: False)():
+            raise ValueError(f"Preview metadata must not contain links: {folder}")
+        if not folder.exists():
+            return
+        for path in folder.iterdir():
+            if path.is_dir() or path.is_symlink():
+                yield from collect(path)
+            elif path.name.endswith(".preview.json"):
+                yield path
+
+    for group in ("hulls", "modules"):
+        yield from collect(output / group)
+
+
+def write_preview_metadata(manifest: dict, output: Path) -> None:
+    """Keep unrelated hull/module changes in separate, deterministic files."""
+    files = {}
+    for group in ("hulls", "modules"):
+        for key, entry in manifest[group].items():
+            path = metadata_path(output, group, key)
+            document = {"tile_px": manifest["tile_px"], "hulls": {}, "modules": {}}
+            document[group][key] = entry
+            files[path] = (json.dumps(document, indent=1, sort_keys=True) + "\n").encode("utf-8")
+    if not files:
+        raise RuntimeError("No ship preview metadata generated")
+    output.mkdir(parents=True, exist_ok=True)
+    previous = list(preview_metadata_files(output))
+    for path, data in files.items():
+        if path.exists() and path.read_bytes() == data:
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as temporary:
+            temporary.write(data)
+        os.replace(temporary.name, path)
+    # This namespace belongs to the generator. Retire deleted/renamed entries
+    # and the old combined index only after all current entries were written.
+    for path in previous:
+        if path not in files:
+            path.unlink()
+    (output / "manifest.json").unlink(missing_ok=True)
+
+
 def main() -> None:
     dmm_tools = find_dmm_tools()
     tmp_dir = Path(tempfile.mkdtemp(prefix="ship_previews_"))
@@ -565,10 +664,9 @@ def main() -> None:
         print(f"module {rel_file}: {entry['width']}x{entry['height']}"
               + (f", themed: {list(themes)}" if themes else ""))
 
-    manifest_path = OUTPUT_DIR / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=1) + "\n", encoding="utf-8")
+    write_preview_metadata(manifest, OUTPUT_DIR)
     shutil.rmtree(tmp_dir, ignore_errors=True)
-    print(f"\nwrote {manifest_path.relative_to(REPO_ROOT)} "
+    print(f"\nwrote preview metadata in {OUTPUT_DIR.relative_to(REPO_ROOT)} "
           f"({len(manifest['hulls'])} hulls, {len(manifest['modules'])} modules)")
 
 

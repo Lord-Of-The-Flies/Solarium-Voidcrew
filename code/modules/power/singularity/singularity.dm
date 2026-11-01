@@ -57,6 +57,9 @@
 
 /obj/singularity/Initialize(mapload, starting_energy)
 	. = ..()
+	if(is_trader_outpost_protected(src)) // VOIDCREW
+		log_game("OUTPOST PROTECTION: Prevented [name] from forming at [AREACOORD(src)].")
+		return INITIALIZE_HINT_QDEL
 
 	energy = starting_energy || energy
 
@@ -160,6 +163,8 @@
 	return TRUE
 
 /obj/singularity/process(seconds_per_tick)
+	if(neutralize_trader_outpost_hazard(src)) // VOIDCREW
+		return PROCESS_KILL
 	time_since_act += seconds_per_tick
 	if(time_since_act < 2)
 		return
@@ -182,6 +187,8 @@
 		time_since_last_dissipiation -= dissipate_delay
 
 /obj/singularity/proc/expand(force_size)
+	if(QDELETED(src)) // VOIDCREW: creation may have been suppressed.
+		return FALSE
 	var/temp_allowed_size = allowed_size
 
 	if(force_size)
@@ -312,6 +319,8 @@
 	return TRUE
 
 /obj/singularity/proc/consume(atom/thing)
+	if(QDELETED(src) || is_trader_outpost_protected(src) || is_trader_outpost_protected(thing)) // VOIDCREW
+		return
 	if(istype(thing, /obj/item/storage/backpack/holding) && !consumed_supermatter && !collapsing)
 		consume_boh(thing)
 		return
@@ -433,6 +442,8 @@
 
 /obj/singularity/proc/combust_mobs()
 	for(var/mob/living/carbon/burned_mob in urange(20, src, 1))
+		if(is_trader_outpost_protected(burned_mob)) // VOIDCREW
+			continue
 		burned_mob.visible_message(
 			span_warning("[burned_mob]'s skin bursts into flame!"),
 			span_userdanger("You feel an inner fire as your skin bursts into flames!")
@@ -443,6 +454,8 @@
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/stunned_mob in oviewers(8, src))
+		if(is_trader_outpost_protected(stunned_mob)) // VOIDCREW
+			continue
 		if(stunned_mob.stat == DEAD || stunned_mob.is_blind())
 			continue
 
@@ -495,6 +508,8 @@
 
 /obj/singularity/deadchat_controlled/Initialize(mapload, starting_energy)
 	. = ..()
+	if(. == INITIALIZE_HINT_QDEL) // VOIDCREW
+		return
 	deadchat_plays(mode = DEMOCRACY_MODE)
 
 /// Special singularity spawned by being sucked into a black hole during emagged orion trail.
@@ -503,10 +518,14 @@
 
 /obj/singularity/orion/Initialize(mapload)
 	. = ..()
+	if(. == INITIALIZE_HINT_QDEL) // VOIDCREW
+		return
 	var/datum/component/singularity/singularity = singularity_component.resolve()
 	singularity?.grav_pull = 1
 
 /obj/singularity/orion/process(seconds_per_tick)
+	if(neutralize_trader_outpost_hazard(src)) // VOIDCREW
+		return PROCESS_KILL
 	if(SPT_PROB(0.5, seconds_per_tick))
 		mezzer()
 

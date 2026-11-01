@@ -145,6 +145,8 @@ All ShuttleMove procs go here
 	return TRUE
 
 /atom/movable/proc/lateShuttleMove(turf/oldT, list/movement_force, move_dir)
+	// VOIDCREW ADDITION: sent before the anchored early-return so bolted machinery hears it.
+	SEND_SIGNAL(src, COMSIG_ATOM_LATE_SHUTTLE_MOVE, oldT, movement_force, move_dir)
 	if(!movement_force || anchored)
 		return
 	var/throw_force = movement_force["THROW"]

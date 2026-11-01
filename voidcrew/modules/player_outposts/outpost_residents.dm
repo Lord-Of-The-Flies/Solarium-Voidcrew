@@ -169,6 +169,7 @@
 		if((job.job_flags & JOB_ASSIGN_QUIRKS) && CONFIG_GET(flag/roundstart_traits))
 			SSquirks.AssignQuirks(human, human.client)
 	log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_CREWMEMBER_JOINED, character, job.title)
 	log_shuttle("[character.ckey] arrived as a resident of [home.name]")
 	to_chat(character, span_boldnotice("You are a resident of [home.name]. Your ID keeps its own account. Management can delegate treasury and construction authority separately."))
 	try_show_orientation_briefing(character)

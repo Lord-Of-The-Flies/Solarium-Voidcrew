@@ -33,6 +33,10 @@ export function OrbitSearchBar(props) {
       data.deadchat_controlled,
       data.dead,
       data.ghosts,
+      // SOL-EDIT START - разделы не-мобовых точек интереса
+      data.ships,
+      data.maps,
+      // SOL-EDIT END
       data.misc,
       data.npcs,
     ]

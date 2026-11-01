@@ -375,6 +375,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/colosseum, 0)
 		ui = new(user, src, "ColosseumVault", name)
 		ui.open()
 
+/// Catalogue loose spoils like a smart locker, but keep every body individually selectable.
+/obj/machinery/colosseum_vault/proc/item_group_key(atom/movable/thing)
+	return ismob(thing) ? REF(thing) : "[thing.type]-[thing.name]"
+
 /obj/machinery/colosseum_vault/ui_data(mob/user)
 	var/list/data = list()
 	var/datum/colosseum_controller/controller = site?.controller
@@ -384,12 +388,25 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/colosseum, 0)
 	data["is_winner"] = !!(claim_active && user.mind && controller.winner_minds[user.mind])
 	data["can_claim"] = can_claim(user)
 	var/list/item_list = list()
+	var/list/item_groups = list()
 	for(var/atom/movable/thing as anything in contents)
-		item_list += list(list(
+		if(QDELETED(thing))
+			continue
+		var/key = item_group_key(thing)
+		var/list/group = item_groups[key]
+		if(group)
+			group["amount"]++
+			continue
+		group = list(
 			"name" = thing.name,
 			"ref" = REF(thing),
 			"corpse" = ismob(thing),
-		))
+			"icon" = thing.icon,
+			"icon_state" = thing.icon_state,
+			"amount" = 1,
+		)
+		item_groups[key] = group
+		item_list += list(group)
 	data["items"] = item_list
 	return data
 
@@ -404,15 +421,29 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/colosseum, 0)
 		balloon_alert(user, "winners only, for now!")
 		return TRUE
 	var/atom/movable/thing = locate(params["ref"]) in contents
-	if(!thing)
+	if(!thing || QDELETED(thing))
 		return TRUE
+	var/amount = isnull(params["amount"]) ? 1 : text2num(params["amount"])
+	if(!isnum(amount) || !IS_FINITE__UNSAFE(amount) || amount < 1)
+		return TRUE
+	amount = min(round(amount), length(contents))
 	var/turf/drop_turf = get_turf(user)
 	if(!drop_turf)
 		return TRUE
-	thing.forceMove(drop_turf)
-	if(isitem(thing) && isliving(user))
-		var/mob/living/living_user = user
-		living_user.put_in_hands(thing)
-	balloon_alert(user, "claimed [thing.name]")
+	var/key = item_group_key(thing)
+	var/item_name = thing.name
+	var/claimed = 0
+	for(var/atom/movable/to_claim as anything in contents.Copy())
+		if(claimed >= amount)
+			break
+		if(QDELETED(to_claim) || to_claim.loc != src || item_group_key(to_claim) != key)
+			continue
+		to_claim.forceMove(drop_turf)
+		if(isitem(to_claim) && isliving(user))
+			var/mob/living/living_user = user
+			living_user.put_in_hands(to_claim)
+		claimed++
+	if(claimed)
+		balloon_alert(user, claimed == 1 ? "claimed [item_name]" : "claimed [claimed] items")
 	update_static_ui()
 	return TRUE

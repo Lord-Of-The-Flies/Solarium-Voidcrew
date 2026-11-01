@@ -52,7 +52,7 @@ describe('OOC translation rendering', () => {
       'https://example.com/help?a=1&b=2',
     );
     expect(line.querySelector('.tsl-translated')?.getAttribute('title')).toBe(
-      'Original & text',
+      'Automatically translated.\nOriginal: Original & text',
     );
     expect(line.querySelector('.tsl-pending')).toBeNull();
   });
@@ -65,6 +65,9 @@ describe('OOC translation rendering', () => {
     expect(line.querySelector('.translatable')?.textContent).toBe(text);
     expect(line.querySelector('img')).toBeNull();
     expect(line.querySelector('a')?.textContent).toBe('https://example.com');
+    expect(line.querySelector('.tsl-translated')?.getAttribute('title')).toBe(
+      'Automatically translated.\nOriginal: Original & text',
+    );
   });
 
   it('does not add links to speech that did not opt into linkification', () => {

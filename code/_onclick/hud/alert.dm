@@ -131,6 +131,7 @@
 
 
 /atom/movable/screen/alert/MouseExited()
+	. = ..()
 	closeToolTip(usr)
 
 

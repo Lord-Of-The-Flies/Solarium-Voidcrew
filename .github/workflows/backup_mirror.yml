@@ -1,0 +1,103 @@
+name: Solar Exterminatorius
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  BACKUP_REPO: "SOLARIUM-Collective/solarexterminatorius"
+  BACKUP_SSH_KEY: ${{ secrets.BACKUP_SSH_KEY }}
+
+jobs:
+  backup:
+    name: Зеркалирование всех ссылок в резервную копию
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Получение всей истории
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Загрузка остальных веток и тегов
+        shell: bash
+        run: |
+          set -uo pipefail
+          [ -n "$BACKUP_SSH_KEY" ] || exit 1
+          git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*' '+refs/tags/*:refs/tags/*' || exit 1
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$BACKUP_SSH_KEY" > ~/.ssh/backup_key
+          chmod 600 ~/.ssh/backup_key
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/backup_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          URL="git@github.com:${BACKUP_REPO}.git"
+          if ! git push --prune "$URL" '+refs/remotes/origin/*:refs/heads/*' >/tmp/push.log 2>&1; then
+            cat /tmp/push.log
+            echo "=> первичный пуш не прошёл (лимит pack 2GiB), секвуем историю частями"
+            seeded=0
+            while read -r sha; do
+              seeded=$((seeded + 1))
+              if [ $((seeded % 500)) -eq 0 ]; then
+                echo "seed: ${seeded} коммитов..."
+                git push --force "$URL" "${sha}:refs/backup-seed/pending" || exit 1
+              fi
+            done < <(git rev-list --topo-order --reverse refs/remotes/origin/master)
+            last="$(git rev-list -n1 refs/remotes/origin/master)"
+            git push --force "$URL" "${last}:refs/backup-seed/pending" || exit 1
+            echo "сев завершён, повторяю зеркальный пуш"
+            git push --prune "$URL" '+refs/remotes/origin/*:refs/heads/*' || exit 1
+            git push "$URL" --delete refs/backup-seed/pending >/dev/null 2>&1 || true
+          fi
+          git tag "snapshot/$(date -u +%F)" refs/remotes/origin/master 2>/dev/null || true
+          git push "$URL" '+refs/tags/*:refs/tags/*' || exit 1
+          git count-objects -v | grep -E '^(count|size-pack):'
+
+  backup_submodules:
+    name: "Зеркалирование субмодуля ${{ matrix.src }}"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - src: "SOLARIUM-Collective/Astramilitarum"
+            backup: "SOLARIUM-Collective/solarexterminatorius-astramilitarum"
+            ssh_secret: "BACKUP_SSH_KEY_ASTRAMILITARUM"
+            read_secret: "READ_SSH_KEY_ASTRAMILITARUM"
+          - src: "SOLARIUM-Collective/Horusheresy"
+            backup: "SOLARIUM-Collective/solarexterminatorius-horusheresy"
+            ssh_secret: "BACKUP_SSH_KEY_HORUSHERESY"
+            read_secret: "READ_SSH_KEY_HORUSHERESY"
+    steps:
+      - name: Зеркалирование субмодуля
+        shell: bash
+        env:
+          SRC_REPO: ${{ matrix.src }}
+          SUB_BACKUP_REPO: ${{ matrix.backup }}
+          BACKUP_SSH_KEY: ${{ secrets[matrix.ssh_secret] }}
+          READ_SSH_KEY: ${{ secrets[matrix.read_secret] }}
+        run: |
+          set -uo pipefail
+          [ -n "$BACKUP_SSH_KEY" ] || exit 1
+          [ -n "$READ_SSH_KEY" ] || exit 1
+          SRC_SSH="git@github.com:${SRC_REPO}.git"
+          WRITE_URL="git@github.com:${SUB_BACKUP_REPO}.git"
+          mkdir -p ~/.ssh /tmp/subsrc
+          chmod 700 ~/.ssh
+          printf '%s\n' "$READ_SSH_KEY" > ~/.ssh/read_key
+          chmod 600 ~/.ssh/read_key
+          printf '%s\n' "$BACKUP_SSH_KEY" > ~/.ssh/write_key
+          chmod 600 ~/.ssh/write_key
+          READ_SSH_CMD="ssh -i ~/.ssh/read_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          WRITE_SSH_CMD="ssh -i ~/.ssh/write_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          cd /tmp/subsrc
+          git init -q
+          GIT_SSH_COMMAND="$READ_SSH_CMD" git fetch --prune "$SRC_SSH" '+refs/heads/*:refs/remotes/src/*' '+refs/tags/*:refs/tags/*' || exit 1
+          GIT_SSH_COMMAND="$WRITE_SSH_CMD" git push --prune "$WRITE_URL" '+refs/remotes/src/*:refs/heads/*' || exit 1
+          head_sha="$(GIT_SSH_COMMAND="$READ_SSH_CMD" git ls-remote "$SRC_SSH" HEAD | awk '{print $1}')"
+          git tag "snapshot/$(date -u +%F)" "$head_sha" 2>/dev/null || true
+          GIT_SSH_COMMAND="$WRITE_SSH_CMD" git push "$WRITE_URL" '+refs/tags/*:refs/tags/*' || exit 1
+          git count-objects -v | grep -E '^(count|size-pack):'

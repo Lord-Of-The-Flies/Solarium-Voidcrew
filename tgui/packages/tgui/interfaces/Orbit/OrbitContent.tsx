@@ -52,11 +52,26 @@ export function OrbitContent(props) {
       content: data.ghosts,
       title: 'Ghosts',
     },
+    // SOL-EDIT START - разделы не-мобовых точек интереса. Цвет красит заголовок
+    // и элементы и заодно раскрывает секцию (open={!!color} в OrbitCollapsible).
     {
+      color: 'teal',
+      content: data.ships,
+      title: 'Ships',
+    },
+    {
+      color: 'violet',
+      content: data.maps,
+      title: 'Maps',
+    },
+    // SOL-EDIT END
+    {
+      color: 'orange',
       content: data.misc,
       title: 'Misc',
     },
     {
+      color: 'olive',
       content: data.npcs,
       title: 'NPCs',
     },

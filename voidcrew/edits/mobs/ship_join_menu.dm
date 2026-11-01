@@ -1,3 +1,5 @@
+#define SHIP_JOIN_PING_COOLDOWN (2 MINUTES)
+
 /**
  * Ship Join Menu UI
  *
@@ -7,6 +9,8 @@
 /datum/ship_join_menu
 	/// The player using this menu
 	var/mob/dead/new_player/user
+	/// Ckey -> next allowed ping time; shared across menus so reopening or reconnecting cannot reset it.
+	var/static/list/ping_cooldowns = list()
 
 /**
  * Every ship the join menu is willing to show a player: it exists, it has somewhere to
@@ -116,6 +120,7 @@
 			"locked" = !!active_ship.join_password,
 			"password_cleared" = active_ship.is_password_cleared(user.ckey),
 			"crew_locked" = !!active_ship.crew_only_airlocks,
+			"ping_cooldown" = ping_wait(active_ship) / (1 SECONDS),
 			"applied" = !isnull(active_ship.find_crew_application(user.ckey))
 		))
 
@@ -128,6 +133,10 @@
 	data["ships"] = ships
 	data["can_requisition"] = can_requisition_hull(user)
 	return data
+
+/// Both the requester and the receiving ship must be ready for another ping.
+/datum/ship_join_menu/proc/ping_wait(obj/structure/overmap/ship/ship)
+	return max(0, (ping_cooldowns[user.ckey] || 0) - world.time, COOLDOWN_TIMELEFT(ship, join_ping_cooldown))
 
 /**
  * Asks the player for their one line to the captain and files the application.
@@ -162,6 +171,27 @@
 	. = TRUE
 
 	switch(action)
+		if("ping_ship")
+			if(!user?.client || user != ui.user)
+				return FALSE
+			var/obj/structure/overmap/ship/ship = locate(params["ship_ref"]) in get_joinable_ships()
+			if(QDELETED(ship))
+				to_chat(user, span_warning("That ship is no longer available."))
+				return FALSE
+			if(ship_has_open_slots(ship))
+				to_chat(user, span_warning("This crew still has open job slots."))
+				return FALSE
+			var/wait_time = ping_wait(ship)
+			if(wait_time > 0)
+				to_chat(user, span_warning("You can ping this crew again in [DisplayTimeText(wait_time)]."))
+				return FALSE
+
+			ping_cooldowns[user.ckey] = world.time + SHIP_JOIN_PING_COOLDOWN
+			COOLDOWN_START(ship, join_ping_cooldown, SHIP_JOIN_PING_COOLDOWN)
+			ship.ship_notify("Someone wants to join [html_encode(ship.name)]. Please open a job slot at the cryogenic oversight console.", "CREW REQUEST", SHIP_NOTIFY_NOTICE, 'voidcrew/sound/notify.ogg', 25)
+			to_chat(user, span_notice("Ping sent to [ship.name]'s crew asking them to open a job slot."))
+			log_game("[key_name(user)] pinged ship [ship.name] to request an open job slot.")
+
 		if("join_outpost")
 			var/obj/structure/overmap/dynamic/player_outpost/home = locate(params["ref"]) in GLOB.player_outposts
 			if(home && user == ui.user)
@@ -240,3 +270,5 @@
 			// cannot sit on the TGUI call or every other button in the menu queues
 			// behind it for as long as the player is typing.
 			INVOKE_ASYNC(src, PROC_REF(prompt_crew_application), target)
+
+#undef SHIP_JOIN_PING_COOLDOWN

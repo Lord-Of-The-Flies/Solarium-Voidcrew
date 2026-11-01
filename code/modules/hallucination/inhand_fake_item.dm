@@ -13,7 +13,7 @@
 	var/list/slots_free = list()
 	if(valid_slots & ITEM_SLOT_HANDS)
 		for(var/hand in hallucinator.get_empty_held_indexes())
-			slots_free[ui_hand_position(hand)] = ITEM_SLOT_HANDS
+			slots_free[ui_hand_item_position(hand)] = ITEM_SLOT_HANDS
 
 	// These slots are human only, + they have to have a uniform
 	var/mob/living/carbon/human/human_hallucinator = hallucinator

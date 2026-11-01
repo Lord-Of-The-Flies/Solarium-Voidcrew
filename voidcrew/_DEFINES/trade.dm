@@ -3,16 +3,24 @@
 /// How long an outpost trade embargo against a ship lasts after aggression
 #define OUTPOST_EMBARGO_DURATION (15 MINUTES)
 
+/// How long a marked aggressor stays a turret target and is refused service.
+/// Matches the embargo their crew serves for the same offense, so both lift
+/// together. Also how long unspent warning strikes linger before they reset.
+#define OUTPOST_AGGRESSION_MARK_DURATION OUTPOST_EMBARGO_DURATION
+
 /// How many violent infractions at an outpost it takes before turrets open fire.
 /// Earlier offenses only issue a warning; the final strike marks the aggressor.
 #define OUTPOST_AGGRESSION_STRIKES 3
 
 /// Grace window after an infraction during which further hits don't add strikes.
 /// A single swing reaches register_aggression through more than one route (the
-/// machine's own attacked_by override and the outpost_property relay), and an
-/// autoattack burst would otherwise blow through the whole ladder before the
-/// first warning is read.
-#define OUTPOST_AGGRESSION_GRACE (2 SECONDS)
+/// machine's own attacked_by override and the outpost_property relay), all in the
+/// same tick. Kept under CLICK_CD_MELEE (0.8 s) so it only folds those duplicates
+/// together: every real swing is its own strike.
+#define OUTPOST_AGGRESSION_GRACE (0.5 SECONDS)
+
+/// How long a victim may retaliate against their attacker after the latest unprovoked hit.
+#define OUTPOST_SELF_DEFENSE_DURATION (2 MINUTES)
 
 /// Placement attempts when scattering trader outposts across the zone bands
 #define MAX_OUTPOST_PLACEMENT_ATTEMPTS 300

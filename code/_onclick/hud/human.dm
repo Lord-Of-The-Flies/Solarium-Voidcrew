@@ -114,13 +114,13 @@
 
 	using = new /atom/movable/screen/drop(null, src)
 	using.icon = ui_style
-	using.screen_loc = ui_swaphand_position(owner, 1)
+	using.screen_loc = ui_drophand_position(owner)
 	static_inventory += using
 
 	using = new /atom/movable/screen/swap_hand(null, src)
-	using.icon = ui_style
+	using.icon = ui_style  // SOL-EDIT - HORIZON_DREAM - Замена ui_style
 	using.icon_state = "act_swap"
-	using.screen_loc = ui_swaphand_position(owner, 2)
+	using.screen_loc = ui_swaphand_position(owner)
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
@@ -435,7 +435,7 @@
 
 	if(hud_version != HUD_STYLE_NOHUD)
 		for(var/obj/item/I in H.held_items)
-			I.screen_loc = ui_hand_position(H.get_held_index_of_item(I))
+			I.screen_loc = ui_hand_item_position(H.get_held_index_of_item(I))
 			screenmob.client.screen += I
 	else
 		for(var/obj/item/I in H.held_items)

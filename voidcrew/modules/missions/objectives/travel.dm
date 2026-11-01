@@ -20,13 +20,15 @@
 	var/obj/structure/overmap/ship/ship = get_servant()
 	if(!ship)
 		return
-	RegisterSignal(ship, COMSIG_VOIDCREW_SHIP_MOVED, PROC_REF(on_ship_moved))
+	// The ship-specific signal fires on engine burns; coasting and autopilot
+	// can reach the site without another burn. Check after actual token movement.
+	RegisterSignal(ship, COMSIG_MOVABLE_MOVED, PROC_REF(on_ship_moved))
 	check_position()
 
 /datum/mission_objective/goto_coords/deactivate()
 	var/obj/structure/overmap/ship/ship = get_servant()
 	if(ship)
-		UnregisterSignal(ship, COMSIG_VOIDCREW_SHIP_MOVED)
+		UnregisterSignal(ship, COMSIG_MOVABLE_MOVED)
 	return ..()
 
 /datum/mission_objective/goto_coords/proc/on_ship_moved(datum/source)

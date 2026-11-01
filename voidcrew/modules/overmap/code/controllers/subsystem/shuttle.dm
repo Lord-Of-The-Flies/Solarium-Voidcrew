@@ -103,7 +103,7 @@
 	var/datum/worldgen_probe/probe = worldgen_begin("ship", "[template_instance.name] theme=[selected_theme?.id || "default"]")
 
 	// Create ship and set template directly as a workaround for Initialize arg passing
-	// Ships spawn in the green zone (outer ring) for safety
+	// Ships spawn in the green zone (inner ring) for safety
 	var/turf/spawn_loc = SSovermap.get_unused_overmap_square_in_green_zone(tries = INFINITY)
 	var/obj/structure/overmap/ship/ship_to_spawn = new(spawn_loc)
 
@@ -182,11 +182,6 @@
 	if(safe_turf)
 		new /obj/effect/landmark/blobstart(safe_turf) // Stationloving component
 		new /obj/effect/landmark/observer_start(safe_turf) // Observer and Unit tests
-
-	// No hull configuration may launch without breathing gear, or without a
-	// surgical kit if it has somewhere to operate (BAL-6) - see
-	// voidcrew/modules/shuttle/ship_parts/starter_supplies.dm
-	loaded.ensure_starter_supplies()
 
 	worldgen_end(probe)
 	return ship_to_spawn
@@ -290,5 +285,4 @@
 	if(!check_rights(R_ADMIN))
 		return
 	src.holder.check_teams()
-
 

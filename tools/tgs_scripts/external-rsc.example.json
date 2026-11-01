@@ -1,0 +1,6 @@
+{
+  "Enabled": true,
+  "Bucket": "YOUR-BUCKET",
+  "Region": "us-west-1",
+  "Prefix": "external-rsc/vctranslate/"
+}

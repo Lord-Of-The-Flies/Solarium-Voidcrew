@@ -22,6 +22,8 @@
 	var/mappath = initial(venue_type.mappath)
 	var/text = vc_test_file_text(mappath)
 	TEST_ASSERT_NOTNULL(text, "the colosseum map '[mappath]' is missing. The venue can never open")
+	TEST_ASSERT(!findtext(text, "/turf/open/misc/beach/sand,"), "the colosseum must use fish-free arena sand instead of beach fishing spots")
+	TEST_ASSERT(findtext(text, "/turf/open/misc/beach/sand/colosseum,"), "the colosseum map has no arena sand")
 
 	// Door ids set_gates() drives. Literals = COLOSSEUM_GATE_RED / _BLUE / _SOLO
 	// and COLOSSEUM_SEAL (voidcrew/_DEFINES/colosseum.dm); unit-test files
@@ -70,3 +72,39 @@
 		TEST_FAIL("the colosseum map has no stairs. The spectator gallery is unreachable")
 	if(!findtext(text, "/turf/open/indestructible/glass"))
 		TEST_FAIL("the colosseum map has no glass gallery deck, spectators cannot see the arena below")
+
+/// Blasts must not produce fishing rewards, including after a lava hazard resets.
+/datum/unit_test/colosseum_terrain_explosions
+	var/turf/test_turf
+	var/original_type
+	var/list/original_baseturfs
+
+/datum/unit_test/colosseum_terrain_explosions/Destroy()
+	if(test_turf)
+		test_turf.ChangeTurf(original_type, original_baseturfs, flags = CHANGETURF_IGNORE_AIR)
+	return ..()
+
+/datum/unit_test/colosseum_terrain_explosions/Run()
+	test_turf = get_step(run_loc_floor_bottom_left, NORTHEAST)
+	original_type = test_turf.type
+	original_baseturfs = test_turf.baseturfs.Copy()
+	for(var/turf_type in list(
+		/turf/open/misc/beach/sand/colosseum,
+		/turf/open/lava/smooth/colosseum,
+		/turf/open/misc/beach/sand/colosseum,
+	))
+		test_turf = test_turf.ChangeTurf(turf_type, flags = CHANGETURF_IGNORE_AIR)
+		TEST_ASSERT_NULL(test_turf.fish_source, "[turf_type] must not have a fishing source")
+		TEST_ASSERT(!HAS_TRAIT(test_turf, TRAIT_FISHING_SPOT), "[turf_type] must not accept fishing rods")
+		for(var/severity in list(EXPLODE_LIGHT, EXPLODE_HEAVY, EXPLODE_DEVASTATE))
+			var/list/contents_before = test_turf.contents.Copy()
+			EX_ACT(test_turf, severity)
+			TEST_ASSERT_EQUAL(test_turf.type, turf_type, "Blasting arena terrain must preserve its type")
+			var/list/spawned = test_turf.contents - contents_before
+			TEST_ASSERT_EQUAL(length(spawned), 0, "Blasting [turf_type] at severity [severity] spawned fishing rewards")
+
+	// Fishing sources outside the venue must still register normally.
+	for(var/turf_type in list(/turf/open/misc/beach/sand, /turf/open/lava/smooth))
+		test_turf = test_turf.ChangeTurf(turf_type, flags = CHANGETURF_IGNORE_AIR)
+		TEST_ASSERT_NOTNULL(test_turf.fish_source, "Normal [turf_type] lost its fishing source")
+		TEST_ASSERT(HAS_TRAIT(test_turf, TRAIT_FISHING_SPOT), "Normal [turf_type] must still accept fishing rods")

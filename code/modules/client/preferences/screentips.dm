@@ -11,6 +11,7 @@
 
 /datum/preference/choiced/enable_screentips/apply_to_client(client/client, value)
 	client.mob?.hud_used?.screentips_enabled = value
+	client.mob?.hud_used?.screentip_text?.refresh_hover()
 
 /datum/preference/choiced/enable_screentips/deserialize(input, datum/preferences/preferences)
 	// Migrate old always disabled screentips to context only.

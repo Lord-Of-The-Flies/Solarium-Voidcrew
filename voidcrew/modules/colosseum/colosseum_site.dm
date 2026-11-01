@@ -170,6 +170,17 @@ GLOBAL_DATUM(colosseum_site, /obj/structure/overmap/colosseum)
 	/// Landmarks are deleted at link; only their turfs are kept.
 	var/list/landmark_turfs = list()
 
+/// Arena and gallery are dedicated levels; hangars use the shared berth bounds.
+/obj/structure/overmap/colosseum/contains_site_turf(turf/location)
+	if(..())
+		return TRUE
+	if(!location)
+		return FALSE
+	for(var/datum/space_level/level as anything in interior_levels)
+		if(level.z_value == location.z)
+			return TRUE
+	return FALSE
+
 /obj/structure/overmap/colosseum/Initialize(mapload)
 	. = ..()
 	if(GLOB.colosseum_site && GLOB.colosseum_site != src)
@@ -305,7 +316,7 @@ GLOBAL_DATUM(colosseum_site, /obj/structure/overmap/colosseum)
 			level_traits[ZTRAIT_DOWN] = TRUE
 		if(stack_index < template.z_count)
 			level_traits[ZTRAIT_UP] = TRUE
-		var/datum/space_level/level = SSmapping.add_new_zlevel("Grand Colosseum ([stack_index] of [template.z_count])", level_traits)
+		var/datum/space_level/level = SSmapping.add_new_zlevel("Grand Colosseum ([stack_index] of [template.z_count])", level_traits, mint_reason = "Grand Colosseum venue opening - slice [stack_index] of a [template.z_count]-level stack, kept for the round")
 		if(length(interior_levels) && level.z_value != interior_levels[length(interior_levels)].z_value + 1)
 			log_mapping("COLOSSEUM: interior z-levels came out non-consecutive ([interior_levels[length(interior_levels)].z_value] then [level.z_value]). Multiz linkage would be wrong, aborting load.")
 			loading = FALSE
