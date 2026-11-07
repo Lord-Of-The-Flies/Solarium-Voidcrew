@@ -49,16 +49,20 @@
 		qdel(src)
 		return
 
-	//Focus Chat failsafe. Overrides movement checks to prevent WASD.
-	if(!hotkeys && length(_key) == 1 && _key != "Alt" && _key != "Ctrl" && _key != "Shift")
-		winset(src, null, "input.focus=true ; input.text=[url_encode(_key)]")
-		return
-
+	// VOIDCREW EDIT START - track held keys before the hotkeys failsafe below.
+	// Without this, holding a letter key is completely invisible to server code while
+	// the player has hotkeys disabled, so combos like Z+ЛКМ can never be detected.
 	if(length(keys_held) >= HELD_KEY_BUFFER_LENGTH && !keys_held[_key])
 		keyUp(keys_held[1], mousepos_x, mousepos_y, sizex, sizey) //We are going over the number of possible held keys, so let's remove the first one.
 
 	//the time a key was pressed isn't actually used anywhere (as of 2019-9-10) but this allows easier access usage/checking
 	keys_held[_key] = world.time
+	// VOIDCREW EDIT END
+
+	//Focus Chat failsafe. Overrides movement checks to prevent WASD.
+	if(!hotkeys && length(_key) == 1 && _key != "Alt" && _key != "Ctrl" && _key != "Shift")
+		winset(src, null, "input.focus=true ; input.text=[url_encode(_key)]")
+		return
 	var/movement = movement_keys[_key]
 	if(movement)
 		calculate_move_dir()
