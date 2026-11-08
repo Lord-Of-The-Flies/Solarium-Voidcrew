@@ -140,7 +140,7 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 /// Overrides the planet countdown: empty space has no terrain worth keeping, so it
 /// tears down and deletes itself instead of waiting out a despawn timer.
 /obj/structure/overmap/planet/empty/on_ship_undocked(obj/structure/overmap/ship/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	UnregisterSignal(source, COMSIG_VOIDCREW_SHIP_UNDOCKED)
 	// Reset retry counter for this undock attempt
 	unload_attempts = 0
@@ -182,8 +182,8 @@ GLOBAL_LIST_EMPTY(overmap_planets)
 /// Same contract as the parent's, minus its mapzone requirement: an empty-space
 /// encounter that never got as far as allocating one still needs cleaning up.
 /// preserve_level is handled by unload_level() itself, which has to stop the retries.
-/obj/structure/overmap/planet/empty/can_release_interior()
-	return isnull(get_interior_release_blocker())
+/obj/structure/overmap/planet/empty/can_release_interior(ignore_ssd_grace = FALSE)
+	return isnull(get_interior_release_blocker(ignore_ssd_grace))
 
 /obj/structure/overmap/planet/empty/get_interior_release_blocker(ignore_ssd_grace = FALSE)
 	// Don't unload if any ships are still docked here

@@ -117,8 +117,13 @@ GLOBAL_LIST_EMPTY(player_outposts)
 			berth.release(force = TRUE)
 	berths = null
 	remove_docks()
-	remove_mapzone()
+	remove_mapzone_on_destroy()
 	return ..()
+
+/// VOIDCREW EDIT - the real teardown can block on worldgen_yield, and Destroy must not sleep.
+/obj/structure/overmap/dynamic/player_outpost/proc/remove_mapzone_on_destroy()
+	ALLOWED_TO_SLEEP(TRUE)
+	remove_mapzone()
 
 /obj/structure/overmap/dynamic/player_outpost/proc/remove_docks()
 	if(reserve_dock)
@@ -285,6 +290,7 @@ GLOBAL_LIST_EMPTY(player_outposts)
  * so stacking generators never multiplies effective shield charge.
  */
 /obj/structure/overmap/dynamic/player_outpost/proc/get_shield_generator()
+	RETURN_TYPE(/obj/machinery/outpost_shield_generator)
 	for(var/obj/machinery/outpost_shield_generator/generator as anything in shield_generators)
 		if(generator.is_operational_unit())
 			return generator

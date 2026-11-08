@@ -42,13 +42,13 @@ GLOBAL_DATUM_INIT(ship_economy_db, /datum/ship_economy_db, new)
 	/// Cache for credits by ckey
 	var/list/credits_cache = list()
 	/// Cache for parts by ckey
-	var/list/parts_cache = list()
+	var/list/list/parts_cache = list()
 	/// Cache for ship unlocks by ckey
-	var/list/unlocks_cache = list()
+	var/list/list/unlocks_cache = list()
 	/// Cache for upgrade unlocks by ckey
-	var/list/upgrade_unlocks_cache = list()
+	var/list/list/upgrade_unlocks_cache = list()
 	/// Cache for theme unlocks by ckey
-	var/list/theme_unlocks_cache = list()
+	var/list/list/theme_unlocks_cache = list()
 	/// Last cache update time by ckey
 	var/list/cache_times = list()
 	/// Cache validity duration in deciseconds (5 minutes)

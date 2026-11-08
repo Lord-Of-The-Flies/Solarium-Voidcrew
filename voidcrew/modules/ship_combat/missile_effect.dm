@@ -187,7 +187,13 @@
 /obj/effect/ship_missile/proc/on_loop_stopped(datum/source)
 	SIGNAL_HANDLER
 	if(!exploded)
-		impact()
+		impact_on_stop()
+
+/// VOIDCREW EDIT - assault-pod impact opens a supplypod with a blocking preOpen(), so keep
+/// the dispatch out of the move-loop signal handler.
+/obj/effect/ship_missile/proc/impact_on_stop()
+	ALLOWED_TO_SLEEP(TRUE)
+	impact()
 
 /// Called when the missile reaches its target or hits something
 /// Shield walls physically intercept missiles via Bump() before this is called

@@ -242,6 +242,8 @@
  */
 /datum/action/cooldown/spell/touch/proc/do_secondary_hand_hit(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster)
 	SHOULD_NOT_OVERRIDE(TRUE) // Don't put effects here, put them in cast_on_secondary_hand_hit
+	// VOIDCREW EDIT - some touch effects pop interactive pickers or run channels that may block.
+	ALLOWED_TO_SLEEP(TRUE)
 
 	var/secondary_result = cast_on_secondary_hand_hit(hand, victim, caster)
 	switch(secondary_result)

@@ -1726,6 +1726,8 @@
 
 /// Helper to respawn walls and clear flags
 /obj/machinery/ship_combat/shield_generator/proc/try_respawn_walls()
+	// VOIDCREW EDIT - wall rebuild sweeps turfs with a blocking yield.
+	ALLOWED_TO_SLEEP(TRUE)
 	pending_wall_respawn = FALSE
 	shuttle_move_done = FALSE
 	if(!active)

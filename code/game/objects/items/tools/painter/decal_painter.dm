@@ -52,6 +52,7 @@
 
 /// An immutable description of the current paint selection for remote construction jobs.
 /obj/item/airlock_painter/decal/proc/get_decal_data()
+	RETURN_TYPE(/list)
 	return current_category.get_decal_info(state = selected_decal_icon_state, color = selected_color, dir = selected_dir)
 
 /obj/item/airlock_painter/decal/proc/set_category(datum/paintable_decal_category/category)

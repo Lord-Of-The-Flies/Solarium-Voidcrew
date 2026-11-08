@@ -37,6 +37,7 @@
 
 /// Turf at a block-relative offset. (1, 1) is the reservation's bottom-left corner.
 /datum/unit_test/voidcrew_hull_survey/proc/spot(offset_x, offset_y)
+	RETURN_TYPE(/turf)
 	return locate(anchor.x + offset_x - 1, anchor.y + offset_y - 1, anchor.z)
 
 /**

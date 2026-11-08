@@ -12,7 +12,7 @@
 	 */
 	var/taken = FALSE
 	/// List of all z levels this map zone contains
-	var/list/z_levels = list()
+	var/list/datum/space_level/z_levels = list()
 	/**
 	 * Which tenant class this zone is currently dealing slots of, or null when it holds
 	 * no tenants at all. A free zone has no class and can be re-dealt as any of them,

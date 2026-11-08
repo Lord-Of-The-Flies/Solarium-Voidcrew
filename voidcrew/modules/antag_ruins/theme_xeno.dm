@@ -193,7 +193,7 @@
 
 /datum/vestige_trial/warm_season/get_progress_text()
 	if(egg_structure && !QDELETED(egg_structure))
-		return "Gang [egg_structure.squads_landed] of four; [length(egg_structure.chewers)] cutters remain. Clear the gang, then touch the egg to call the next. Shell: [round(egg_structure.atom_integrity)]/[egg_structure.max_integrity]."
+		return "Gang [egg_structure.squads_landed] of four; [length(egg_structure.chewers)] cutters remain. Clear the gang, then touch the egg to call the next. Shell: [round(egg_structure.get_integrity())]/[egg_structure.max_integrity]."
 	if(egg_item && !QDELETED(egg_item))
 		return "Plant the egg on clear ground, weave resin, and touch the egg when ready."
 	return "The egg is gone. Replace your kit from the pact tracker to retry."
@@ -321,6 +321,7 @@
 
 /// The bound soul's warm season, if it still runs, resolved fresh every time, never stored (renounce-safe)
 /obj/structure/vestige_comb_egg/proc/get_bound_trial()
+	RETURN_TYPE(/datum/vestige_trial/warm_season)
 	var/datum/vestige_trial/warm_season/trial = bound_mind?.active_vestige_trial
 	if(istype(trial))
 		return trial
@@ -643,7 +644,7 @@
 	var/datum/vestige_trial/warm_season/trial = user.mind?.active_vestige_trial
 	if(!istype(trial) || trial.spinneret != src || trial.egg_structure != egg || !user.Adjacent(egg))
 		return ITEM_INTERACT_BLOCKING
-	if(charges < 1 || egg.atom_integrity >= egg.max_integrity)
+	if(charges < 1 || egg.get_integrity() >= egg.max_integrity)
 		balloon_alert(user, "needs damaged shell and one length of resin!")
 		return ITEM_INTERACT_BLOCKING
 	balloon_alert(user, "mending shell...")

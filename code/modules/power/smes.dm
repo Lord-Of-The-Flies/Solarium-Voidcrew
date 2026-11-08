@@ -163,6 +163,18 @@
 	for(var/obj/item/stock_parts/power_store/power_cell in component_parts)
 		. += power_cell.charge()
 
+/// Returns the total charge of this smes. VOIDCREW EDIT - public getter for total_charge.
+/obj/machinery/power/smes/proc/get_total_charge()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	SHOULD_BE_PURE(TRUE)
+	return total_charge()
+
+/// Returns the total capacity of this smes. VOIDCREW EDIT - public getter for total_capacity.
+/obj/machinery/power/smes/proc/get_total_capacity()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	SHOULD_BE_PURE(TRUE)
+	return total_capacity
+
 /**
  * Adjusts the total charge of this smes
  * Arguments

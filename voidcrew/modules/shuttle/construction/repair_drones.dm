@@ -10,7 +10,8 @@
 	for(var/floor_name in list("Plastitanium Floor", "Titanium Floor"))
 		var/list/recipe = /obj/item/construction/rcd/internal/ship::floor_types[floor_name]
 		if(istype(floor, recipe["path"]))
-			return list("path" = floor.type, "materials" = recipe["materials"].Copy())
+			var/list/materials = recipe["materials"]
+			return list("path" = floor.type, "materials" = materials.Copy())
 	if(istype(floor, /turf/open/floor/iron) || istype(floor, /turf/open/floor/plating) || istype(floor, /turf/open/floor/catwalk_floor))
 		return list("path" = floor.type, "materials" = list(/datum/material/iron = SHIP_RTD_TILE_IRON))
 	if(istype(floor, /turf/open/floor/engine) && floor.floor_tile == /obj/item/stack/rods)
@@ -24,7 +25,8 @@
 	for(var/wall_name in list("Plastitanium Wall", "Titanium Wall"))
 		var/list/recipe = /obj/item/construction/rcd/internal/ship::wall_types[wall_name]
 		if(istype(wall, recipe["path"]))
-			return list("path" = wall.type, "materials" = recipe["materials"].Copy())
+			var/list/materials = recipe["materials"]
+			return list("path" = wall.type, "materials" = materials.Copy())
 	if(istype(wall, /turf/closed/wall/r_wall/plastitanium))
 		return list("path" = wall.type, "materials" = list(/datum/material/iron = 400, /datum/material/plasma = 400, /datum/material/titanium = 200))
 	if(wall.type == /turf/closed/wall/r_wall)
@@ -153,7 +155,8 @@
 			var/fraction = 1 - existing.get_integrity() / existing.max_integrity
 			if(!fraction && broken_fixture)
 				fraction = 1
-			var/list/materials = layer["materials"].Copy()
+			var/list/materials = layer["materials"]
+			materials = materials.Copy()
 			for(var/material in materials)
 				materials[material] = CEILING(materials[material] * fraction, 1)
 			repair["materials"] = materials
@@ -240,7 +243,8 @@
 	if(supporting_wall)
 		for(var/list/wall_option as anything in repair_recipe_options(supporting_wall))
 			for(var/list/floor_option as anything in options)
-				var/list/combined = wall_option["materials"].Copy()
+				var/list/wall_materials = wall_option["materials"]
+				var/list/combined = wall_materials.Copy()
 				var/list/floor_materials = floor_option["materials"]
 				for(var/material in floor_materials)
 					combined[material] += floor_materials[material]
@@ -266,7 +270,8 @@
 		return FALSE
 	var/list/wall_after_floor = repair["wall_after_floor"]
 	if(wall_after_floor && record.claimed_by)
-		record.claimed_by.reserved_wall_materials = wall_after_floor["materials"].Copy()
+		var/list/wall_materials = wall_after_floor["materials"]
+		record.claimed_by.reserved_wall_materials = wall_materials.Copy()
 	repair_applying = TRUE
 	var/atom/existing = repair["existing"]
 	if(existing)
@@ -303,8 +308,10 @@
 			fixture.set_anchored(TRUE)
 			if(istype(fixture, /obj/machinery/door/airlock))
 				var/obj/machinery/door/airlock/door = fixture
-				door.req_access = repair["access"]?.Copy() || list()
-				door.req_one_access = repair["one_access"]?.Copy() || list()
+				var/list/access = repair["access"]
+				var/list/one_access = repair["one_access"]
+				door.req_access = access?.Copy() || list()
+				door.req_one_access = one_access?.Copy() || list()
 				door.name = repair["name"]
 				door.unres_sides = turn(repair["unres_sides"], -dir2angle(repair_origin.dir))
 				door.closeOtherId = repair["cycle"]

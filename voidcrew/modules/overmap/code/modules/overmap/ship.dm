@@ -1157,6 +1157,7 @@
  * Returns the first job with officer = TRUE, or the first job as fallback.
  */
 /obj/structure/overmap/ship/proc/get_captain_job()
+	RETURN_TYPE(/datum/job)
 	for(var/datum/job/job in job_slots)
 		if(job.officer)
 			return job

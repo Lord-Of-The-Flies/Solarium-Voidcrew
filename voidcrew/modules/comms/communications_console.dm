@@ -47,6 +47,7 @@
 	return ship ? ship.last_comms_status_display : last_status_display
 
 /obj/machinery/computer/communications/proc/get_communications_security_level()
+	RETURN_TYPE(/datum/security_level)
 	var/obj/docking_port/mobile/ship = voidcrew_communications_ship(src)
 	if(!ship)
 		return SSsecurity_level.current_security_level

@@ -27,19 +27,19 @@
 	return ..()
 
 /datum/mission_target/planet/ingredient_site/on_planet_loaded(datum/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	UnregisterSignal(planet, COMSIG_VOIDCREW_PLANET_LOADED)
 	owner?.on_site_loaded()
 
 /// One planet of each type flies per round: a dead pin has nowhere to go (FAIL policy)
 /datum/mission_target/planet/ingredient_site/on_planet_deleted(datum/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	unhook()
 	owner?.on_site_lost()
 
 /// The planet relocated after unloading: the site's helm marker follows it
 /datum/mission_target/planet/ingredient_site/on_planet_moved(datum/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	if(!istype(get_turf(planet), /turf/open/overmap))
 		return
 	cache_coords_from(planet)

@@ -545,6 +545,7 @@
 
 /// Hands the loaded pod back to the caller and empties the rack
 /obj/machinery/ship_combat/pod_launcher/proc/release_pod()
+	RETURN_TYPE(/obj/structure/closet/supplypod/drop_pod)
 	var/obj/structure/closet/supplypod/drop_pod/released = loaded_pod
 	if(released)
 		UnregisterSignal(released, COMSIG_QDELETING)

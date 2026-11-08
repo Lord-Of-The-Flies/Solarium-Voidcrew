@@ -550,6 +550,8 @@
  * (if any) stays where it fell, the end-of-match sweep collects it.
  */
 /datum/colosseum_controller/proc/eliminate(datum/colosseum_contestant/entry, reason)
+	// VOIDCREW EDIT - resolving a contest can announce/restock through blocking say()/channels.
+	ALLOWED_TO_SLEEP(TRUE)
 	if(entry.eliminated)
 		return
 	entry.eliminated = TRUE
@@ -590,6 +592,8 @@
  * claim window + reset timers.
  */
 /datum/colosseum_controller/proc/resolve(list/datum/mind/winners)
+	// VOIDCREW EDIT - resolving a match announces/restocks through blocking say()/channels.
+	ALLOWED_TO_SLEEP(TRUE)
 	if(state != COLOSSEUM_STATE_LIVE)
 		return
 	stop_match_timer()

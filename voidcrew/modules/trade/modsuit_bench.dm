@@ -354,7 +354,7 @@ GLOBAL_LIST_INIT(modsuit_bench_upgrades, build_modsuit_bench_upgrades())
 	repeatable = TRUE
 
 /datum/mod_upgrade/recondition/proc/part_needs_work(obj/item/part)
-	if(part.uses_integrity && part.atom_integrity < part.max_integrity)
+	if(part.uses_integrity && part.get_integrity() < part.max_integrity)
 		return TRUE
 	var/obj/item/clothing/cloth = part
 	if(istype(cloth) && (cloth.damaged_clothes || LAZYLEN(cloth.damage_by_parts)))

@@ -449,17 +449,17 @@
 	old_body.death()
 	egg.hatch()
 	var/datum/vestige_record/record = get_vestige_record(new_mind)
-	TEST_ASSERT(record && /datum/vestige_boon/unit_test_a in record.pending_candidates, "The departed body's actual hatch must leave its payment")
+	TEST_ASSERT(record && (/datum/vestige_boon/unit_test_a in record.pending_candidates), "The departed body's actual hatch must leave its payment")
 	var/datum/action/vestige_reward/old_button = old_mind.vestige_pending_reward
 	new_trial.complete()
 	TEST_ASSERT(/datum/vestige_boon/unit_test_a in record.pending_candidates, "The newer trial overwrote the first unpaid roll")
 	TEST_ASSERT_EQUAL(record.pending_patron_name, "Old patron", "The first debt lost its patron")
 	TEST_ASSERT_EQUAL(length(record.queued_rewards), 1, "The second completed trial did not retain its own payment")
 	var/datum/action/vestige_reward/first = new_mind.vestige_pending_reward
-	TEST_ASSERT(first && /datum/vestige_boon/unit_test_a in first.candidates, "The current body's button must settle the oldest debt first")
+	TEST_ASSERT(first && (/datum/vestige_boon/unit_test_a in first.candidates), "The current body's button must settle the oldest debt first")
 	first.claim(new_body, new_mind, /datum/vestige_boon/unit_test_a)
 	var/datum/action/vestige_reward/second = new_mind.vestige_pending_reward
-	TEST_ASSERT(second && second != first && /datum/vestige_boon/unit_test_b in second.candidates, "Settling the first debt did not expose the second payment")
+	TEST_ASSERT(second && second != first && (/datum/vestige_boon/unit_test_b in second.candidates), "Settling the first debt did not expose the second payment")
 	TEST_ASSERT_EQUAL(second.patron_name, "New patron", "The queued payment lost its own patron")
 	old_button.clear_recorded_pending(old_mind)
 	old_button.claim(old_body, old_mind, /datum/vestige_boon/unit_test_a)

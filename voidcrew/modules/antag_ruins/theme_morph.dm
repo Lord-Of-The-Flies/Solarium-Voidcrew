@@ -1725,7 +1725,7 @@
 // The base charge plays a 200-volume meteor impact on every tile moved.
 // Ambushes do not.
 /datum/action/cooldown/mob_cooldown/charge/vestige_pounce/on_moved(atom/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - directional marker inherited from /datum/action/cooldown/mob_cooldown/charge/on_moved.
 	return
 
 // Landing on someone: no trample damage, just the floor, the damage is

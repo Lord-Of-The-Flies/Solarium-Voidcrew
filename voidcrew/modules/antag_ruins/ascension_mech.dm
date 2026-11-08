@@ -428,6 +428,11 @@
 
 /mob/living/basic/vestige_warframe/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
+	perform_warframe_life(seconds_per_tick)
+
+/// VOIDCREW EDIT - the read's announce can reach blocking say()/input(), so keep it out of Life.
+/mob/living/basic/vestige_warframe/proc/perform_warframe_life(seconds_per_tick)
+	ALLOWED_TO_SLEEP(TRUE)
 	if(stat == DEAD)
 		return
 	var/atom/opponent = ai_controller?.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -2871,7 +2876,7 @@ GLOBAL_LIST_EMPTY(machine_masshacks)
  * Returns TRUE if the radio was on and is now off.
  */
 /proc/communion_radio_off(obj/item/radio/radio, duration = COMMUNION_RADIO_OFF_DURATION)
-	if(QDELETED(radio) || !radio.on)
+	if(QDELETED(radio) || !radio.is_on())
 		return FALSE
 	radio.emped++
 	radio.set_on(FALSE)

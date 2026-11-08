@@ -41,7 +41,7 @@
  * and settle_usb_link() supersedes it.
  */
 /datum/component/usb_port/on_moved()
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 
 	if(isnull(attached_circuit))
 		return
@@ -52,7 +52,7 @@
 	queue_usb_link_recheck()
 
 /datum/component/usb_port/after_parent_shuttle_move()
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 
 	. = ..()
 	// Always re-check after a shuttle move, even if the link never left range: the beam is
@@ -60,7 +60,7 @@
 	queue_usb_link_recheck()
 
 /datum/component/usb_port/after_physical_object_shuttle_move()
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 
 	. = ..()
 	queue_usb_link_recheck()
@@ -111,7 +111,7 @@
  * be trusted, and nothing here is allowed to detach on a single instantaneous sample.
  */
 /obj/item/usb_cable/on_moved()
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 
 	check_in_range()
 

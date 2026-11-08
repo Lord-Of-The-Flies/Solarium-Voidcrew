@@ -48,7 +48,7 @@
  * no longer changes anything.
  */
 /obj/item/skillchip/self_surgery/apply_surgery_penalty(mob/living/carbon/_source, mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, datum/surgery_step/step, list/modifiers)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	return
 
 #undef SELF_SURGERY_FAIL_PENALTY

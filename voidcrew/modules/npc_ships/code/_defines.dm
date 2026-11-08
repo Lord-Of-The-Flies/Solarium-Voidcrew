@@ -58,8 +58,12 @@ GLOBAL_LIST_EMPTY(patrol_stagger_counter)
 #define NPC_HAILING_REMINDER_INTERVAL (10 SECONDS)  // Reminder halfway through
 
 // Signals for player aggression detection
+#ifndef COMSIG_SHIP_WEAPONS_LOCKED
 #define COMSIG_SHIP_WEAPONS_LOCKED "ship_weapons_locked"  // Fired when player locks weapons on a ship
+#endif
+#ifndef COMSIG_SHIP_WEAPONS_LOCK_LOST
 #define COMSIG_SHIP_WEAPONS_LOCK_LOST "ship_weapons_lock_lost"  // Fired when weapon lock on a ship is lost
+#endif
 #define COMSIG_SHIP_MOVED_DURING_NEGOTIATION "ship_moved_during_negotiation"
 
 // Negotiation blackboard keys

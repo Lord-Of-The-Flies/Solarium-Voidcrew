@@ -12,7 +12,7 @@ ADMIN_VERB(overmap_management, R_ADMIN, "Overmap Management", "Manage overmap co
 	var/notice
 	var/spawning = FALSE
 	var/spawn_serial = 0
-	var/list/spawn_catalog
+	var/list/list/spawn_catalog
 
 /datum/overmap_management/New(mob/user)
 	admin_ref = WEAKREF(user)
@@ -81,12 +81,13 @@ ADMIN_VERB(overmap_management, R_ADMIN, "Overmap Management", "Manage overmap co
 /datum/overmap_management/ui_data(mob/user)
 	if(!authorized(user))
 		return list()
+	var/obj/structure/overmap/returning = return_ref?.resolve()
 	var/list/data = list(
 		"objects" = list(),
 		"selected" = null,
 		"error" = error,
 		"notice" = notice,
-		"return_name" = return_ref?.resolve()?.admin_name(),
+		"return_name" = returning?.admin_name(),
 		"spawning" = spawning,
 		"spawn_serial" = spawn_serial,
 		"worldgen" = SSovermap.worldgen_label,

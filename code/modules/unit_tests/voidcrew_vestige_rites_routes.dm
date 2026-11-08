@@ -52,7 +52,8 @@
 		var/turf/floor = spot.ChangeTurf(/turf/open/floor/plating, flags = CHANGETURF_IGNORE_AIR)
 		floor.AddElement(/datum/element/forced_gravity, 1)
 	var/datum/gas_mixture/room_air = SSair.parse_gas_string(OPENTURF_DEFAULT_ATMOS, /datum/gas_mixture/turf)
-	for(var/turf/open/floor in RANGE_TURFS(radius, locate(center_x, center_y, center_z)))
+	var/turf/sealed_core = locate(center_x, center_y, center_z)
+	for(var/turf/open/floor in RANGE_TURFS(radius, sealed_core))
 		floor.copy_air(room_air)
 		floor.air.archive()
 		floor.temperature = room_air.temperature

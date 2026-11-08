@@ -239,6 +239,8 @@
 		(relevant_item == target.get_item_by_slot(ITEM_SLOT_RPOCKET))
 
 /obj/item/clothing/gloves/courier/proc/try_snatch(mob/living/user, mob/living/target, obj/item/relevant_item)
+	// VOIDCREW EDIT - handing a failed snatch back can reach blocking inventory/do_after code.
+	ALLOWED_TO_SLEEP(TRUE)
 	if(!target.temporarilyRemoveItemFromInventory(relevant_item))
 		return FALSE
 	user.put_in_hands(relevant_item)
@@ -253,6 +255,8 @@
 	return null
 
 /obj/item/clothing/gloves/courier/proc/try_plant(mob/living/user, mob/living/target, obj/item/relevant_item)
+	// VOIDCREW EDIT - handing a failed plant back can reach blocking inventory/do_after code.
+	ALLOWED_TO_SLEEP(TRUE)
 	var/free_slot = free_pocket_slot(target)
 	if(isnull(free_slot))
 		return FALSE

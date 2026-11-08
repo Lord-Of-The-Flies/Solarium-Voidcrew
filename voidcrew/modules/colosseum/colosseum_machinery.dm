@@ -111,7 +111,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/colosseum, 32)
 	return ..()
 
 /obj/machinery/status_display/colosseum/process()
-	var/datum/colosseum_controller/controller = (site || GLOB.colosseum_site)?.controller
+	var/obj/structure/overmap/colosseum/venue = site || GLOB.colosseum_site
+	var/datum/colosseum_controller/controller = venue?.controller
 	if(!controller)
 		set_messages("- GAMES -", "DORMANT")
 		return PROCESS_KILL

@@ -682,7 +682,7 @@
 	playsound(src, 'sound/machines/terminal/terminal_alert.ogg', 50)
 	current_ship.push_helm_frame()
 
-/obj/machinery/computer/helm/LateInitialize()
+/obj/machinery/computer/helm/post_machine_initialize()
 	. = ..()
 	attempt_ship_connection()
 

@@ -22,7 +22,7 @@
 			authorized_builder_ckeys |= player_key
 
 /obj/structure/overmap/dynamic/player_outpost/proc/is_resident(mob/user)
-	return is_owner(user) || (user?.mind && user.mind in residents)
+	return is_owner(user) || (user?.mind && (user.mind in residents))
 
 /obj/structure/overmap/dynamic/player_outpost/proc/has_resident_clearance(player_key)
 	return player_key && !(player_key in blocked_residents) && (player_key == founder_ckey || invited_residents[player_key] || resident_clearance[player_key] == resident_access_revision)
@@ -89,7 +89,7 @@
 		return FALSE
 	if(!SSticker.IsRoundInProgress() || SSlag_switch.measures[DISABLE_NON_OBSJOBS])
 		return FALSE
-	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_NEW_CHARACTER && "[client.prefs.default_slot]" in persistent_client.joined_as_slots)
+	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_NEW_CHARACTER && ("[client.prefs.default_slot]" in persistent_client.joined_as_slots))
 		to_chat(src, span_warning("You already played this character this round. Choose an eligible character."))
 		return FALSE
 	var/limit = CONFIG_GET(number/hard_popcap)

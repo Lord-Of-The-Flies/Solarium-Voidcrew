@@ -133,5 +133,3 @@ GLOBAL_VAR_INIT(cyberware_prices_indexed, FALSE)
 /// never collide with another sheet's class names.
 /proc/get_cyberware_card_icon_key(icon_state)
 	return "chrome-[icon_state]"
-
-#undef CYBERWARE_GHOST_ALPHA

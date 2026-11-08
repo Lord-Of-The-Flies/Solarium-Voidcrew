@@ -58,10 +58,10 @@
 	var/home_bundle_installed = FALSE
 
 /obj/structure/overmap/dynamic/player_outpost/proc/can_manage(mob/user)
-	return founder_ckey && (is_owner(user) || (user?.mind && user.mind in stewards))
+	return founder_ckey && (is_owner(user) || (user?.mind && (user.mind in stewards)))
 
 /obj/structure/overmap/dynamic/player_outpost/proc/can_spend(mob/user)
-	return founder_ckey && (is_owner(user) || (user?.mind && user.mind in treasurers))
+	return founder_ckey && (is_owner(user) || (user?.mind && (user.mind in treasurers)))
 
 /obj/structure/overmap/dynamic/player_outpost/proc/ensure_home_services()
 	if(!treasury)
@@ -111,6 +111,7 @@
 	var/datum/weakref/cart_outpost_ref
 
 /obj/machinery/computer/voidcrew_cargo/proc/cargo_account()
+	RETURN_TYPE(/datum/bank_account)
 	var/obj/structure/overmap/dynamic/player_outpost/site = get_outpost_from_atom(src)
 	if(cart_outpost_ref && (!cart_outpost_ref.resolve() || cart_outpost_ref.resolve() != site))
 		checkout_list = list()

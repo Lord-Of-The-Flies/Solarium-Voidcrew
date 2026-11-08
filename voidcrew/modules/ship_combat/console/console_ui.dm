@@ -30,6 +30,8 @@
 	ui_interact(user)
 
 /obj/machinery/computer/camera_advanced/ship_combat/ui_interact(mob/user, datum/tgui/ui)
+	// VOIDCREW EDIT - this console owns its TGUI state instead of using the stock computer one.
+	SHOULD_CALL_PARENT(FALSE)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "ShipCombatConsole")

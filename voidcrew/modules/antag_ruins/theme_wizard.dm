@@ -93,7 +93,7 @@
 		var/turf/current = reachable[index]
 		for(var/direction in GLOB.cardinals)
 			var/turf/next = get_step(current, direction)
-			if(!next || next in reachable || get_dist(next, origin) > 3)
+			if(!next || (next in reachable) || get_dist(next, origin) > 3)
 				continue
 			if(!isopenturf(next) || isspaceturf(next) || next.is_blocked_turf(exclude_mobs = FALSE))
 				continue

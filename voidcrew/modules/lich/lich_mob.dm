@@ -67,7 +67,7 @@
  */
 
 /// Trait source for the traits he applies to himself during a phase transition.
-#define LICH_TRAIT "verdigris_lich"
+#define VERDIGRIS_LICH_TRAIT "verdigris_lich"
 /// Filter key for the phase-transition glow.
 #define LICH_PHASE_FILTER "verdigris_phase_glow"
 
@@ -476,7 +476,7 @@
 /mob/living/basic/lich/proc/enter_phase(new_phase)
 	phase = new_phase
 
-	add_traits(list(TRAIT_GODMODE, TRAIT_IMMOBILIZED), LICH_TRAIT)
+	add_traits(list(TRAIT_GODMODE, TRAIT_IMMOBILIZED), VERDIGRIS_LICH_TRAIT)
 	// Stop him planning while he is staggered, or he casts through his own tell.
 	ai_controller?.PauseAi(phase_transition_time)
 	addtimer(CALLBACK(src, PROC_REF(end_phase_transition)), phase_transition_time, TIMER_UNIQUE|TIMER_OVERRIDE)
@@ -500,7 +500,7 @@
 	grant_school_abilities(new_phase) // ditto
 
 /mob/living/basic/lich/proc/end_phase_transition()
-	remove_traits(list(TRAIT_GODMODE, TRAIT_IMMOBILIZED), LICH_TRAIT)
+	remove_traits(list(TRAIT_GODMODE, TRAIT_IMMOBILIZED), VERDIGRIS_LICH_TRAIT)
 	var/phase_filter = get_filter(LICH_PHASE_FILTER)
 	if(phase_filter)
 		animate(phase_filter)
@@ -691,5 +691,5 @@
 /obj/effect/landmark/lich/summon_spot
 	name = "lich summon spot"
 
-#undef LICH_TRAIT
+#undef VERDIGRIS_LICH_TRAIT
 #undef LICH_PHASE_FILTER

@@ -336,7 +336,8 @@
 	TEST_ASSERT_EQUAL(filter.owner, patient, "Another surgeon cancelling extraction must not erase our in-flight graft insertion.")
 	TEST_ASSERT(filter.surgically_installed, "The successful independent insertion must execute the real graft hook.")
 	TEST_ASSERT(finished_step && QDELETED(finished_step), "The completed invocation must reclaim its private execution state.")
-	TEST_ASSERT(!QDELETED(GLOB.surgery_steps[/datum/surgery_step/manipulate_organs/internal]), "Introspection must retain the shared surgery prototype.")
+	var/datum/surgery_step/prototype = GLOB.surgery_steps[/datum/surgery_step/manipulate_organs/internal]
+	TEST_ASSERT(!QDELETED(prototype), "Introspection must retain the shared surgery prototype.")
 	surgeon.put_in_active_hand(allocate(/obj/item/cautery))
 	finished_step = null
 	TEST_ASSERT(operation.next_step(surgeon, list()), "Cautery must leave the repeatable insertion step and run the stock closure.")
@@ -348,6 +349,11 @@
 	SIGNAL_HANDLER
 	UnregisterSignal(source, COMSIG_DO_AFTER_BEGAN)
 	interleaved = TRUE
+	do_interleaved_insertion()
+
+/// VOIDCREW EDIT - the interleaved surgery step may block, so keep it out of the signal handler.
+/datum/unit_test/vestige_abductor_parallel_surgery/proc/do_interleaved_insertion()
+	ALLOWED_TO_SLEEP(TRUE)
 	// A clientless surgeon closes the normal selection with null, the same result as Cancel.
 	other_operation.next_step(other_surgeon, list())
 
