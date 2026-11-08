@@ -469,6 +469,11 @@
 /datum/unit_test/vestige_hunt_channel_reentrant/proc/reenter_during_channel(mob/living/source)
 	SIGNAL_HANDLER
 	UnregisterSignal(source, COMSIG_DO_AFTER_BEGAN)
+	do_reenter_during_channel()
+
+/// VOIDCREW EDIT - the reentrant cast chain may block, so keep it out of the signal handler.
+/datum/unit_test/vestige_hunt_channel_reentrant/proc/do_reenter_during_channel()
+	ALLOWED_TO_SLEEP(TRUE)
 	reentrant_result = spell.before_cast(other_ground)
 
 /datum/unit_test/vestige_hunt_channel_reentrant/Run()
@@ -981,7 +986,7 @@
 				break
 			weapon.melee_attack_chain(keeper, quarry, list())
 		TEST_ASSERT_EQUAL(quarry.stat, DEAD, "The ordinary weapon must produce the fresh carcass.")
-		TEST_ASSERT(rack.mouse_drop_receive(quarry, keeper, null), "The real drag-drop route must complete both hang and buckle channels.")
+		TEST_ASSERT(rack.unit_test_mouse_drop_receive(quarry, keeper, null), "The real drag-drop route must complete both hang and buckle channels.")
 		TEST_ASSERT_EQUAL(quarry.buckled, rack, "The credited carcass must actually hang from the rack.")
 		TEST_ASSERT_EQUAL(trial.settings, setting_number, "Each actual fresh hanging must credit one setting.")
 		carcasses += quarry

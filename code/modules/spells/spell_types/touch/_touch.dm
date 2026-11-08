@@ -214,6 +214,8 @@
  */
 /datum/action/cooldown/spell/touch/proc/do_hand_hit(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster)
 	SHOULD_NOT_OVERRIDE(TRUE) // Don't put effects here, put them in cast_on_hand_hit
+	// VOIDCREW EDIT - some touch effects (heretic flesh surgery) pop interactive pickers that may block.
+	ALLOWED_TO_SLEEP(TRUE)
 
 	SEND_SIGNAL(src, COMSIG_SPELL_TOUCH_HAND_HIT, victim, caster, hand)
 

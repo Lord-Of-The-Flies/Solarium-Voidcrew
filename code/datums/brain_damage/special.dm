@@ -687,7 +687,8 @@
 	SIGNAL_HANDLER
 	if(user != owner)
 		return
-	talk_tuah(pick(hurt_lines))
+	// VOIDCREW EDIT - say/runechat can block on MeasureText(), which is not allowed inside a signal handler.
+	INVOKE_ASYNC(src, PROC_REF(talk_tuah), pick(hurt_lines))
 
 /datum/brain_trauma/special/axedoration/proc/talk_tuah(sent_message = "Hello World.")
 	owner.Hear(null, GLOB.bridge_axe, owner.get_selected_language(), sent_message)

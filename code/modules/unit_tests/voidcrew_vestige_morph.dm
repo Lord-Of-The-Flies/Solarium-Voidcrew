@@ -162,7 +162,7 @@
 	TEST_ASSERT(!trial.can_take(user), "The porter beside its pantry must prevent a free pickup.")
 	user.forceMove(get_turf(trial.pantry))
 	var/turf/lure_site = get_step(get_step(center, EAST), EAST)
-	var/result = lure_site.base_ranged_item_interaction(user, trial.maw, list())
+	var/result = lure_site.unit_test_ranged_item_interaction(user, trial.maw, list())
 	TEST_ASSERT(result & ITEM_INTERACT_SUCCESS, "The real ranged click must dispatch the maw's scent lure.")
 	TEST_ASSERT_EQUAL(get_turf(trial.decoy), lure_site, "The lure must spawn on the aimed ground.")
 	TEST_ASSERT(!trial.decoy_ready, "Spitting must consume the one available lure.")
@@ -171,7 +171,7 @@
 		trial.run_scene(user, 0.4)
 	TEST_ASSERT_EQUAL(get_turf(trial.actor), lure_site, "The porter must reach the nearest legal lure instead of stopping too close to the pantry.")
 	TEST_ASSERT(trial.can_take(user), "Separating the guard by three tiles must permit the theft channel.")
-	result = trial.pantry.base_item_interaction(user, trial.maw, list())
+	result = trial.pantry.unit_test_item_interaction(user, trial.maw, list())
 	TEST_ASSERT(result & ITEM_INTERACT_SUCCESS, "The pantry click must channel the guarded taking interaction.")
 	TEST_ASSERT_EQUAL(trial.course.loc, trial.maw, "The actual guarded meal must move into the maw.")
 	TEST_ASSERT_EQUAL(trial.maw.stored_course, trial.course, "The stored course must be the exact loan meal.")
@@ -292,14 +292,14 @@
 		user.put_in_hands(parcel)
 		var/obj/structure/vestige_morph_station/destination = load == 4 ? trial.left_dock : trial.right_dock
 		user.forceMove(get_step_towards(destination, center))
-		var/result = destination.base_item_interaction(user, parcel, list())
+		var/result = destination.unit_test_item_interaction(user, parcel, list())
 		TEST_ASSERT(result & ITEM_INTERACT_SUCCESS, "A real parcel click by the borrowed worker must reach the receiving tray.")
 		TEST_ASSERT_EQUAL(parcel.loc, destination, "A successful delivery must physically leave the parcel in the tray.")
 	user.forceMove(center)
 	trial.amber_share = 1
 	TEST_ASSERT(!trial.release(user), "A complete but incorrectly proportioned shipment must be rejected.")
 	trial.amber_share = 2
-	var/result = trial.input.base_item_interaction(user, trial.skin, list())
+	var/result = trial.input.unit_test_item_interaction(user, trial.skin, list())
 	TEST_ASSERT(result & ITEM_INTERACT_SUCCESS, "The release click must reach the workstation before the skin's object interaction.")
 	TEST_ASSERT(QDELETED(trial), "A whole shipment matching the demonstrated ratio must complete.")
 	TEST_ASSERT(/datum/vestige_trial/understudy in user.mind.completed_vestige_trials, "The actual release must record the completed trial.")
@@ -377,6 +377,11 @@
 	SIGNAL_HANDLER
 	// One attempted reentry is enough; do not recurse if the guard regresses.
 	UnregisterSignal(source, COMSIG_DO_AFTER_BEGAN)
+	do_reenter_during_heave(source)
+
+/// VOIDCREW EDIT - the reentrant cast chain may block, so keep it out of the signal handler.
+/datum/unit_test/vestige_morph/gullet_reentrant/proc/do_reenter_during_heave(mob/living/source)
+	ALLOWED_TO_SLEEP(TRUE)
 	reentrant_result = spell.before_cast(source)
 
 /datum/unit_test/vestige_morph/gullet_reentrant/Run()

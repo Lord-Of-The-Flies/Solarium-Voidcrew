@@ -16,6 +16,13 @@
 /obj/machinery/quantum_server/proc/on_delete(datum/source)
 	SIGNAL_HANDLER
 
+	perform_delete_cleanup()
+
+/// VOIDCREW EDIT - scrubbing a virtual domain can block on turf reservation release,
+/// so keep it out of the signal-handler sleep lint.
+/obj/machinery/quantum_server/proc/perform_delete_cleanup()
+	ALLOWED_TO_SLEEP(TRUE)
+
 	sever_connections()
 
 	if(generated_domain)

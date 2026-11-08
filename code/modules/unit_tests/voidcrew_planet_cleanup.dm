@@ -155,7 +155,8 @@
 		site.cancel_despawn_timer()
 		site.remove_docks()
 		if(site.mapzone)
-			site.remove_mapzone(throttled = FALSE)
+			// VOIDCREW EDIT - the real sweep can block on worldgen_yield, and Destroy must not sleep.
+			INVOKE_ASYNC(site, TYPE_PROC_REF(/obj/structure/overmap/planet, remove_mapzone), FALSE)
 	if(cleanup_turf && original_turf_type)
 		cleanup_turf = cleanup_turf.ChangeTurf(original_turf_type, original_baseturfs)
 		cleanup_turf.change_area(get_area(cleanup_turf), original_area)
@@ -244,7 +245,8 @@
 /datum/unit_test/voidcrew_planet_cleanup_ducts/Destroy()
 	if(!QDELETED(site))
 		if(site.mapzone)
-			site.remove_mapzone(throttled = FALSE)
+			// VOIDCREW EDIT - the real sweep can block on worldgen_yield, and Destroy must not sleep.
+			INVOKE_ASYNC(site, TYPE_PROC_REF(/obj/structure/overmap/planet, remove_mapzone), FALSE)
 	for(var/turf/tile as anything in original_turfs)
 		var/list/original = original_turfs[tile]
 		tile = tile.ChangeTurf(original[1], original[2])
