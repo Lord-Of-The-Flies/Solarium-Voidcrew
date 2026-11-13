@@ -12,7 +12,6 @@ If you create T5+ please take a pass at mech_fabricator.dm. The parts being good
 	var/base_name
 	var/energy_rating = 1
 	///The generic category type that the stock part belongs to.  Generic objects that should not be instantiated should have the same type and abstract_type
-	var/abstract_type = /obj/item/stock_parts
 
 /obj/item/stock_parts/Initialize(mapload)
 	. = ..()

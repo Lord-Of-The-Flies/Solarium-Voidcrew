@@ -1,6 +1,7 @@
 /proc/generate_lizard_side_shot(datum/sprite_accessory/sprite_accessory, key, include_snout = TRUE)
 	var/static/datum/universal_icon/lizard
 	var/static/datum/universal_icon/lizard_with_snout
+	var/static/list/cached_icon_states = list()
 
 	if (isnull(lizard))
 		lizard = uni_icon('icons/mob/human/species/lizard/bodyparts.dmi', "lizard_head", EAST)
@@ -14,8 +15,22 @@
 	var/datum/universal_icon/final_icon = include_snout ? lizard_with_snout.copy() : lizard.copy()
 
 	if (!isnull(sprite_accessory) && sprite_accessory.icon_state != SPRITE_ACCESSORY_NONE)
-		var/datum/universal_icon/accessory_icon = uni_icon(sprite_accessory.icon, "m_[key]_[sprite_accessory.icon_state]_ADJ", EAST)
-		final_icon.blend_icon(accessory_icon, ICON_OVERLAY)
+		// ERP port: some ported accessories point at icon states that do not exist in their dmi,
+		// don't let that break the whole preferences spritesheet
+		var/list/available_states = cached_icon_states[sprite_accessory.icon]
+		if (!islist(available_states))
+			available_states = icon_states(new /icon(sprite_accessory.icon))
+			cached_icon_states[sprite_accessory.icon] = available_states
+
+		var/accessory_state = "m_[key]_[sprite_accessory.icon_state]_ADJ"
+		if (accessory_state in available_states)
+			// ERP port: some ported accessories only have a SOUTH frame, and asking uni_icon for EAST
+			// makes the preferences spritesheet fail, so skip that accessory in the preview instead
+			try
+				var/datum/universal_icon/accessory_icon = uni_icon(sprite_accessory.icon, accessory_state, EAST)
+				final_icon.blend_icon(accessory_icon, ICON_OVERLAY)
+			catch
+				pass
 
 	final_icon.crop(11, 20, 23, 32)
 	final_icon.scale(32, 32)

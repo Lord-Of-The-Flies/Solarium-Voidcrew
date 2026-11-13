@@ -19,7 +19,6 @@
 	/// Art component subtype added to this statue
 	var/art_type = /datum/element/art
 	/// Abstract root type
-	var/abstract_type = /obj/structure/statue
 
 /obj/structure/statue/Initialize(mapload)
 	. = ..()

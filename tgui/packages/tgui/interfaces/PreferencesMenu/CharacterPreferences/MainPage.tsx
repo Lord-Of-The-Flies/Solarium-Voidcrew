@@ -8,6 +8,7 @@ import {
   Floating,
   Input,
   LabeledList,
+  NoticeBox,
   Section,
   Stack,
 } from 'tgui-core/components';
@@ -15,6 +16,7 @@ import { classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
+import { PageButton } from '../components/PageButton';
 import { RandomizationButton } from '../components/RandomizationButton';
 import { features } from '../preferences/features';
 import {
@@ -499,6 +501,99 @@ export function MainPage(props: MainPageProps) {
     delete nonContextualPreferences.random_name;
   }
 
+  // Character setup sub-tabs (ported from the skyrat/bubber preferences menu).
+  // Without these, every preference in the `character_basics` / `ooc_preferences` /
+  // `silicon_preferences` categories is sent by the server but never rendered.
+  enum PrefPage {
+    CharBasics,
+    Visual,
+    Lore,
+    OOCPref,
+    Silicon,
+  }
+
+  const [currentPrefPage, setCurrentPrefPage] = useState(PrefPage.CharBasics);
+
+  const characterBasicsPreferences =
+    data.character_preferences.character_basics || [];
+  const oocPrefPreferences = data.character_preferences.ooc_preferences || [];
+  const siliconPreferences = data.character_preferences.silicon_preferences || [];
+
+  let prefPageContents;
+  switch (currentPrefPage) {
+    case PrefPage.CharBasics:
+      prefPageContents = (
+        <PreferenceList
+          randomizations={getRandomization(
+            characterBasicsPreferences,
+            serverData,
+            randomBodyEnabled,
+          )}
+          preferences={characterBasicsPreferences}
+          maxHeight="auto"
+        />
+      );
+      break;
+    case PrefPage.Visual:
+      prefPageContents = (
+        <PreferenceList
+          randomizations={getRandomization(
+            contextualPreferences,
+            serverData,
+            randomBodyEnabled,
+          )}
+          preferences={contextualPreferences}
+          maxHeight="auto"
+        />
+      );
+      break;
+    case PrefPage.Lore:
+      prefPageContents = (
+        <PreferenceList
+          randomizations={getRandomization(
+            nonContextualPreferences,
+            serverData,
+            randomBodyEnabled,
+          )}
+          preferences={nonContextualPreferences}
+          maxHeight="auto"
+        />
+      );
+      break;
+    case PrefPage.OOCPref:
+      prefPageContents = (
+        <PreferenceList
+          randomizations={getRandomization(
+            oocPrefPreferences,
+            serverData,
+            randomBodyEnabled,
+          )}
+          preferences={oocPrefPreferences}
+          maxHeight="auto"
+        />
+      );
+      break;
+    case PrefPage.Silicon:
+      prefPageContents = (
+        <>
+          <NoticeBox info>
+            This tab is for preferences that only apply when playing the AI or
+            Cyborg jobs!
+          </NoticeBox>
+          <PreferenceList
+            randomizations={getRandomization(
+              siliconPreferences,
+              serverData,
+              randomBodyEnabled,
+            )}
+            preferences={siliconPreferences}
+            maxHeight="auto"
+          />
+        </>
+      );
+      break;
+  }
+
   return (
     <>
       {multiNameInputOpen && (
@@ -599,27 +694,56 @@ export function MainPage(props: MainPageProps) {
           </Stack>
         </Stack.Item>
 
-        <Stack.Item grow basis={0}>
+        <Stack.Item grow basis={0} ml="4px">
           <Stack vertical fill>
-            <PreferenceList
-              randomizations={getRandomization(
-                contextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={contextualPreferences}
-              maxHeight="auto"
-            />
-
-            <PreferenceList
-              randomizations={getRandomization(
-                nonContextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={nonContextualPreferences}
-              maxHeight="auto"
-            />
+            <Stack>
+              <Stack.Item grow={2}>
+                <PageButton
+                  currentPage={currentPrefPage}
+                  page={PrefPage.CharBasics}
+                  setPage={setCurrentPrefPage}
+                >
+                  Character Basics
+                </PageButton>
+              </Stack.Item>
+              <Stack.Item grow={2}>
+                <PageButton
+                  currentPage={currentPrefPage}
+                  page={PrefPage.Visual}
+                  setPage={setCurrentPrefPage}
+                >
+                  Character Visuals
+                </PageButton>
+              </Stack.Item>
+              <Stack.Item grow={2}>
+                <PageButton
+                  currentPage={currentPrefPage}
+                  page={PrefPage.Lore}
+                  setPage={setCurrentPrefPage}
+                >
+                  Character Lore
+                </PageButton>
+              </Stack.Item>
+              <Stack.Item grow={2}>
+                <PageButton
+                  currentPage={currentPrefPage}
+                  page={PrefPage.OOCPref}
+                  setPage={setCurrentPrefPage}
+                >
+                  OOC Preferences
+                </PageButton>
+              </Stack.Item>
+              <Stack.Item grow={2}>
+                <PageButton
+                  currentPage={currentPrefPage}
+                  page={PrefPage.Silicon}
+                  setPage={setCurrentPrefPage}
+                >
+                  Silicon Preferences
+                </PageButton>
+              </Stack.Item>
+            </Stack>
+            {prefPageContents}
           </Stack>
         </Stack.Item>
       </Stack>

@@ -120,6 +120,10 @@
 // Pipenet stuff; housekeeping
 
 /obj/machinery/atmospherics/components/nullify_node(i)
+	// VOIDCREW EDIT: Destroy() walks device_type ports even for a component that never ran
+	// Initialize(), whose parents/airs are still null.
+	if(isnull(parents) || isnull(airs))
+		return
 	if(parents[i])
 		nullify_pipenet(parents[i])
 	airs[i] = null
@@ -185,18 +189,37 @@
 /obj/machinery/atmospherics/components/return_pipenet_airs(datum/pipeline/reference)
 	var/list/returned_air = list()
 
+	// VOIDCREW EDIT: a component that never ran Initialize() has no parents/airs lists.
+	// A pipe next to it can still list it as a neighbour (see build_pipeline_blocking()),
+	// which used to runtime here on parents.len before the caller was guarded too.
+	if(isnull(parents) || isnull(airs))
+		return returned_air
+
 	for (var/i in 1 to parents.len)
 		if (parents[i] == reference)
 			returned_air += airs[i]
 	return returned_air
 
 /obj/machinery/atmospherics/components/pipeline_expansion(datum/pipeline/reference)
-	if(reference)
-		return list(nodes[parents.Find(reference)])
+	if(reference && parents && nodes)
+		var/port_index = parents.Find(reference)
+		// VOIDCREW EDIT: none of our ports carries that pipeline, so nodes[0] is not ours
+		// to hand back (stacked machinery, or a stale reverse link).
+		if(port_index)
+			return list(nodes[port_index])
+		return list()
 	return ..()
 
 /obj/machinery/atmospherics/components/set_pipenet(datum/pipeline/reference, obj/machinery/atmospherics/target_component)
+	// VOIDCREW EDIT: an uninitialized component has no ports, so it cannot be given one.
+	if(isnull(nodes) || isnull(parents))
+		return
 	var/port_index = nodes.Find(target_component)
+	// VOIDCREW EDIT: target_component listed us as a neighbour but is not one of our ports.
+	// Indexing parents[0] here was the "list index out of bounds" half of the stacked-machinery
+	// runtimes.
+	if(!port_index)
+		return
 	var/datum/pipeline/previous_parent = parents[port_index]
 	if(previous_parent == reference)
 		return
@@ -233,6 +256,9 @@
 /obj/machinery/atmospherics/components/proc/update_parents()
 	if(!SSair.initialized)
 		return
+	// VOIDCREW EDIT: a component that never initialized has no port list to walk.
+	if(isnull(parents))
+		return
 	if(rebuilding)
 		update_parents_after_rebuild = TRUE
 		return
@@ -246,6 +272,9 @@
 
 /obj/machinery/atmospherics/components/return_pipenets()
 	. = list()
+	// VOIDCREW EDIT: same uninitialized-component guard as update_parents().
+	if(isnull(nodes))
+		return
 	for(var/i in 1 to device_type)
 		. += return_pipenet(nodes[i])
 

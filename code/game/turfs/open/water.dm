@@ -227,9 +227,13 @@
 
 ///Registers the signals from the immerse element and calls dip_in if the movable has the required trait.
 /turf/open/water/hot_spring/proc/enter_hot_spring(atom/movable/movable)
-	RegisterSignal(movable, SIGNAL_ADDTRAIT(TRAIT_IMMERSED), PROC_REF(dip_in))
+	// VOIDCREW EDIT: this runs twice for anything that spawns on the spring - once from
+	// Entered() during turf/Initialize over its contents, and once from on_atom_inited()
+	// when the movable itself finishes initializing. Same turf, same proc, so ask for
+	// override explicitly instead of logging an "addtrait immersed overridden" runtime.
+	RegisterSignal(movable, SIGNAL_ADDTRAIT(TRAIT_IMMERSED), PROC_REF(dip_in), override = TRUE)
 	if(isliving(movable)) //so far, exiting a hot spring only has effects on living mobs.
-		RegisterSignal(movable, SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), PROC_REF(dip_out))
+		RegisterSignal(movable, SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), PROC_REF(dip_out), override = TRUE)
 
 	if(HAS_TRAIT(movable, TRAIT_IMMERSED))
 		dip_in(movable)

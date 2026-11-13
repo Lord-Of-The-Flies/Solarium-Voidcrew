@@ -292,6 +292,31 @@
 		ADD_NEWLINE_IF_NECESSARY(.)
 		. += "<b>Quirks:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]"
 
+	// ERP port: flavor text preview + link to the examine TGUI
+	var/flavor_text_link = get_flavor_text()
+	if(flavor_text_link)
+		. += flavor_text_link
+
+	if(!isnull(dna?.species))
+		for(var/genital in GLOB.possible_genitals)
+			var/list/genital_feature = dna.features[genital]
+			if(!islist(genital_feature))
+				continue
+			var/datum/sprite_accessory/genital/genital_accessory = SSaccessories.sprite_accessories[genital]?[genital_feature["name"]]
+			if(genital_accessory && !genital_accessory.is_hidden(src))
+				. += span_notice("[t_He] [t_has] exposed genitals... <a href='byond://?src=[REF(src)];lookup_info=genitals'>\[Look closer...\]</a>")
+				break
+
+	// ERP port: ERP status and round removal lines in chat examine
+	if(client?.prefs && !CONFIG_GET(flag/disable_erp_preferences))
+		var/erp_status_pref = client.prefs.read_preference(/datum/preference/choiced/erp_status)
+		if(erp_status_pref && erp_status_pref != "Unset")
+			var/free_use_pref = client.prefs.read_preference(/datum/preference/toggle/erp_free_use)
+			. += span_notice("ERP Status: <b>[erp_status_pref][free_use_pref ? " - Free Use" : ""]</b>")
+		if(CONFIG_GET(flag/use_rr_opt_in_preferences))
+			var/rr_pref = client.prefs.read_preference(/datum/preference/toggle/be_round_removed)
+			. += span_notice("Round Removal: <b>[rr_pref ? "Yes" : "No"]</b>")
+
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 	if(length(.))
 		.[1] = "<span class='info'>" + .[1]

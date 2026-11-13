@@ -5,7 +5,6 @@
 	/// If this meltdown is considered "fatal" or not
 	var/fatal = FALSE
 	/// Used to ensure that abstract subtypes do not get picked
-	var/abstract_type = /datum/instability_meltdown
 
 /// Code that runs when this meltdown is picked
 /datum/instability_meltdown/proc/meltdown(mob/living/carbon/human/victim)

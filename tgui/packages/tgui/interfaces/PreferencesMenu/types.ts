@@ -136,6 +136,9 @@ export type PreferencesMenuData = {
   character_preferences: {
     clothing: Record<string, string>;
     features: Record<string, string>;
+    character_basics: Record<string, unknown>;
+    ooc_preferences: Record<string, unknown>;
+    silicon_preferences: Record<string, unknown>;
     game_preferences: Record<string, unknown>;
     non_contextual: {
       random_body: RandomSetting;
