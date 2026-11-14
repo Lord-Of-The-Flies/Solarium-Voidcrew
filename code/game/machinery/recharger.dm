@@ -158,7 +158,11 @@
 
 	if(istype(charging, /obj/item/ammo_box/magazine/recharge)) //if you add any more snowflake ones, make sure to update the examine messages too.
 		var/obj/item/ammo_box/magazine/recharge/power_pack = charging
-		for(var/charge_iterations in 1 to recharge_coeff)
+		var/charge_steps = recharge_coeff
+		#ifdef ASTRAMILITARUM
+		charge_steps = max(1, round(recharge_coeff * power_pack.recharge_speed_multiplier))
+		#endif
+		for(var/charge_iterations in 1 to charge_steps)
 			if(power_pack.stored_ammo.len >= power_pack.max_ammo)
 				break
 			power_pack.stored_ammo += new power_pack.ammo_type(power_pack)
