@@ -52,12 +52,48 @@
 #define ui_xenobiodisplay "WEST:6,CENTER:-4"
 
 //Lower center, persistent menu
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_sstore1 "CENTER-6:10,SOUTH:5"
+#else
 #define ui_sstore1 "CENTER-5:10,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_id "CENTER+4:6,SOUTH:5"
+#else
 #define ui_id "CENTER-4:12,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_belt "CENTER-5:28,SOUTH:5"
+#else
 #define ui_belt "CENTER-3:14,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_back "CENTER-3:14,SOUTH:5"
+#else
 #define ui_back "CENTER-2:14,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_storage1 "CENTER+2:2,SOUTH:5"
+#else
 #define ui_storage1 "CENTER+1:18,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_storage2 "CENTER+3:4,SOUTH:5"
+#else
 #define ui_storage2 "CENTER+2:20,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
 #define ui_combo "CENTER+4:24,SOUTH+1:7" //combo meter for martial arts
 
 //Lower right, persistent menu
@@ -127,17 +163,83 @@
 #define ui_borg_pull "EAST-2:26,SOUTH+1:7"
 #define ui_borg_radio "EAST-1:28,SOUTH+1:7"
 #define ui_borg_intents "EAST-2:26,SOUTH:5"
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_lamp "CENTER-4:14, SOUTH:5"
+#else
 #define ui_borg_lamp "CENTER-3:16, SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_tablet "CENTER-5:12, SOUTH:5"
+#else
 #define ui_borg_tablet "CENTER-4:16, SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_inv1 "CENTER-3:16,SOUTH:5"
+#else
 #define ui_inv1 "CENTER-2:16,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_inv2 "CENTER-1:0,SOUTH:5"
+#else
 #define ui_inv2 "CENTER-1 :16,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_inv3 "CENTER:16,SOUTH:5"
+#else
 #define ui_inv3 "CENTER :16,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_module "CENTER+2:0,SOUTH:5"
+#else
 #define ui_borg_module "CENTER+1:16,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_store "CENTER+3:2,SOUTH:5"
+#else
 #define ui_borg_store "CENTER+2:16,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_camera "CENTER+4:4,SOUTH:5"
+#else
 #define ui_borg_camera "CENTER+3:21,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_alerts "CENTER+5:6,SOUTH:5"
+#else
 #define ui_borg_alerts "CENTER+4:21,SOUTH:5"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_language_menu "CENTER+5:6,SOUTH+1:6"
+#else
 #define ui_borg_language_menu "CENTER+4:19,SOUTH+1:6"
+#endif
+// VOIDCREW EDIT END
+// VOIDCREW EDIT START - 48x32 lower inventory spacing.
+#ifdef HORUSHERESY
+#define ui_borg_navigate_menu "CENTER+4:22,SOUTH+1:6"
+#else
 #define ui_borg_navigate_menu "CENTER+4:3,SOUTH+1:6"
+#endif
+// VOIDCREW EDIT END
 #define ui_borg_floor_changer "EAST-1:28,SOUTH+1:39"
 
 //Aliens
