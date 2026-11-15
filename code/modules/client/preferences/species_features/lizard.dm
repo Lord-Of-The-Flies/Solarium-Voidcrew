@@ -30,7 +30,7 @@
 				var/datum/universal_icon/accessory_icon = uni_icon(sprite_accessory.icon, accessory_state, EAST)
 				final_icon.blend_icon(accessory_icon, ICON_OVERLAY)
 			catch
-				pass
+				// Missing/invalid icon state - skip this accessory rather than failing the whole preview.
 
 	final_icon.crop(11, 20, 23, 32)
 	final_icon.scale(32, 32)

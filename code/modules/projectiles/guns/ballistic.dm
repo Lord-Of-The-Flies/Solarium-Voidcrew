@@ -270,19 +270,26 @@
 	else
 		..()
 
-/obj/item/gun/ballistic/proc/burst_select()
-	var/mob/living/carbon/human/user = usr
+/obj/item/gun/ballistic/proc/burst_select(mob/living/user = null)
+	if(isnull(user))
+		user = usr
+	if(!ismob(user))
+		user = null
+
 	burst_fire_selection = !burst_fire_selection
 	if(!burst_fire_selection)
 		burst_size = 1
 		fire_delay = 0
-		balloon_alert(user, "switched to semi-automatic")
+		if(user)
+			balloon_alert(user, "switched to semi-automatic")
 	else
 		burst_size = initial(burst_size)
 		fire_delay = initial(fire_delay)
-		balloon_alert(user, "switched to [burst_size]-round burst")
+		if(user)
+			balloon_alert(user, "switched to [burst_size]-round burst")
 
-	playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
+	if(user)
+		playsound(user, 'sound/items/weapons/empty.ogg', 100, TRUE)
 	update_appearance()
 	update_item_action_buttons()
 
