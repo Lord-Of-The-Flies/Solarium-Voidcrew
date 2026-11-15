@@ -82,11 +82,11 @@
 	for(var/obj/item/held in held_items)
 		SET_PLANE(held, ABOVE_HUD_PLANE, our_turf)
 		if(held_items[BORG_CHOOSE_MODULE_ONE] == held)
-			held.screen_loc = inv1.screen_loc
+			held.screen_loc = ui_inventory_item_position(inv1.screen_loc)
 		else if(held_items[BORG_CHOOSE_MODULE_TWO] == held)
-			held.screen_loc = inv2.screen_loc
+			held.screen_loc = ui_inventory_item_position(inv2.screen_loc)
 		else if(held_items[BORG_CHOOSE_MODULE_THREE] == held)
-			held.screen_loc = inv3.screen_loc
+			held.screen_loc = ui_inventory_item_position(inv3.screen_loc)
 		client.screen |= held
 
 /mob/living/silicon/robot/put_in_hand_check(obj/item/item_equipping)
