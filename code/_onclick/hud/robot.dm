@@ -25,6 +25,9 @@
 	robot_owner.pick_model()
 
 /atom/movable/screen/robot/module1
+#ifdef HORUSHERESY // VOIDCREW EDIT - wide module artwork
+	icon = 'Horusheresy/icons/hud/48x32/hands_screen_cyborg.dmi'
+#endif
 	name = "module1"
 	icon_state = "inv1"
 
@@ -35,6 +38,9 @@
 	R.toggle_module(1)
 
 /atom/movable/screen/robot/module2
+#ifdef HORUSHERESY // VOIDCREW EDIT - wide module artwork
+	icon = 'Horusheresy/icons/hud/48x32/hands_screen_cyborg.dmi'
+#endif
 	name = "module2"
 	icon_state = "inv2"
 
@@ -45,6 +51,9 @@
 	R.toggle_module(2)
 
 /atom/movable/screen/robot/module3
+#ifdef HORUSHERESY // VOIDCREW EDIT - wide module artwork
+	icon = 'Horusheresy/icons/hud/48x32/hands_screen_cyborg.dmi'
+#endif
 	name = "module3"
 	icon_state = "inv3"
 
@@ -191,11 +200,11 @@
 				if(I)
 					switch(i)
 						if(BORG_CHOOSE_MODULE_ONE)
-							I.screen_loc = ui_inv1
+							I.screen_loc = ui_inventory_item_position(ui_inv1) // VOIDCREW EDIT - center module item
 						if(BORG_CHOOSE_MODULE_TWO)
-							I.screen_loc = ui_inv2
+							I.screen_loc = ui_inventory_item_position(ui_inv2) // VOIDCREW EDIT - center module item
 						if(BORG_CHOOSE_MODULE_THREE)
-							I.screen_loc = ui_inv3
+							I.screen_loc = ui_inventory_item_position(ui_inv3) // VOIDCREW EDIT - center module item
 						else
 							return
 					screenmob.client.screen += I

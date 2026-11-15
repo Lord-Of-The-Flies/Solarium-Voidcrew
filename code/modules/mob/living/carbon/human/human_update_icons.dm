@@ -694,7 +694,7 @@ There are several things that need to be remembered:
 	update_observer_view(worn_item,TRUE)
 
 /mob/living/carbon/human/proc/update_hud_id(obj/item/worn_item)
-	worn_item.screen_loc = ui_id
+	worn_item.screen_loc = ui_inventory_item_position(ui_id) // VOIDCREW EDIT - center in wide slot
 	if((client && hud_used?.hud_shown))
 		client.screen += worn_item
 	update_observer_view(worn_item)
@@ -724,7 +724,7 @@ There are several things that need to be remembered:
 	update_observer_view(worn_item,TRUE)
 
 /mob/living/carbon/human/proc/update_hud_s_store(obj/item/worn_item)
-	worn_item.screen_loc = ui_sstore1
+	worn_item.screen_loc = ui_inventory_item_position(ui_sstore1) // VOIDCREW EDIT - center in wide slot
 	if(client && hud_used?.hud_shown)
 		client.screen += worn_item
 	update_observer_view(worn_item,TRUE)
@@ -736,7 +736,7 @@ There are several things that need to be remembered:
 	update_observer_view(worn_item,TRUE)
 
 /mob/living/carbon/human/proc/update_hud_belt(obj/item/worn_item)
-	belt.screen_loc = ui_belt
+	belt.screen_loc = ui_inventory_item_position(ui_belt) // VOIDCREW EDIT - center in wide slot
 	if(client && hud_used?.hud_shown)
 		client.screen += worn_item
 	update_observer_view(worn_item,TRUE)
@@ -763,7 +763,7 @@ There are several things that need to be remembered:
 
 //update whether our back item appears on our hud.
 /mob/living/carbon/human/update_hud_back(obj/item/worn_item)
-	worn_item.screen_loc = ui_back
+	worn_item.screen_loc = ui_inventory_item_position(ui_back) // VOIDCREW EDIT - center in wide slot
 	if(client && hud_used?.hud_shown)
 		client.screen += worn_item
 	update_observer_view(worn_item, inventory = TRUE)
