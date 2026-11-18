@@ -1,7 +1,12 @@
 //#define LOWMEMORYMODE //uncomment this to load centcom and runtime station and thats it.
 
-// #include "map_files\generic\CentCom.dmm" // SOL-EDIT - Если выдает ошибку, вернуть обратно старый путь
+// VOIDCREW EDIT START: SOLARIUM - the public build must not require the asset submodule.
+#ifdef HORUSHERESY
 #include "..\Horusheresy\_maps\CentCom.dmm"
+#else
+#include "map_files\generic\CentCom.dmm"
+#endif
+// VOIDCREW EDIT END: SOLARIUM
 
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS

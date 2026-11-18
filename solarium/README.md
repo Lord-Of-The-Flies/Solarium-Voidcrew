@@ -14,3 +14,6 @@ tools/build/build.sh dm -DASTRAMILITARUM -DHORUSHERESY
 ```
 
 Без флагов билд скомпилируется без модулей как обычно
+
+<!-- VOIDCREW EDIT: SOLARIUM - ERP integration documentation. -->
+Подключение ERP и конструктор персонажа описаны в [ERP.md](ERP.md).

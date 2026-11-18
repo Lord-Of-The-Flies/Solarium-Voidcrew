@@ -1,3 +1,5 @@
+// VOIDCREW EDIT: SOLARIUM - optional constructor layout is owned by the asset submodule.
+import { CategoryPreferences } from 'solarium_erp/constructor';
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { type ReactNode, useState } from 'react';
@@ -468,8 +470,11 @@ export function MainPage(props: MainPageProps) {
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
 
+  // VOIDCREW EDIT: SOLARIUM - constructor categories use preference records.
   const contextualPreferences =
-    data.character_preferences.secondary_features || [];
+    data.character_preferences.secondary_features || {};
+
+
 
   const mainFeatures = [
     ...Object.entries(data.character_preferences.clothing ?? {}),
@@ -498,6 +503,8 @@ export function MainPage(props: MainPageProps) {
     // server doesn't know whether the random toggle is on.
     delete nonContextualPreferences.random_name;
   }
+
+
 
   return (
     <>
@@ -601,24 +608,13 @@ export function MainPage(props: MainPageProps) {
 
         <Stack.Item grow basis={0}>
           <Stack vertical fill>
-            <PreferenceList
-              randomizations={getRandomization(
-                contextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={contextualPreferences}
-              maxHeight="auto"
-            />
-
-            <PreferenceList
-              randomizations={getRandomization(
-                nonContextualPreferences,
-                serverData,
-                randomBodyEnabled,
-              )}
-              preferences={nonContextualPreferences}
-              maxHeight="auto"
+            {/* VOIDCREW EDIT: SOLARIUM - fallback retains the public preference layout. */}
+            <CategoryPreferences
+              characterPreferences={data.character_preferences}
+              contextualPreferences={contextualPreferences}
+              nonContextualPreferences={nonContextualPreferences}
+              serverData={serverData}
+              randomBodyEnabled={randomBodyEnabled}
             />
           </Stack>
         </Stack.Item>

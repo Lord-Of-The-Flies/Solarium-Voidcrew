@@ -7,6 +7,8 @@
 
 	/// Reference to the json config file
 	var/json_config
+	/// VOIDCREW EDIT: SOLARIUM - modules may own their JSON resources in a separate tree.
+	var/json_config_directory = "code/datums/greyscale/json_configs/"
 
 	/// Reference to the dmi file for this config
 	var/icon_file
@@ -60,8 +62,9 @@
 	if(!json_config)
 		stack_trace("Greyscale config object [DebugName()] is missing a json configuration, make sure `json_config` has been assigned a value.")
 	string_json_config = "[json_config]"
-	if(findtext(string_json_config, "code/datums/greyscale/json_configs/") != 1)
-		stack_trace("All greyscale json configuration files should be located within 'code/datums/greyscale/json_configs/'")
+	// VOIDCREW EDIT: SOLARIUM - validate against the resource root selected by the module.
+	if(findtext(string_json_config, json_config_directory) != 1)
+		stack_trace("All greyscale json configuration files should be located within '[json_config_directory]'")
 	if(!icon_file)
 		stack_trace("Greyscale config object [DebugName()] is missing an icon file, make sure `icon_file` has been assigned a value.")
 	string_icon_file = "[icon_file]"

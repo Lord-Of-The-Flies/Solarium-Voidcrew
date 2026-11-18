@@ -553,9 +553,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if (preference.savefile_identifier != PREFERENCE_CHARACTER)
 			continue
 
-		preference.apply_to_human(character, read_preference(preference.type))
+		// VOIDCREW EDIT: SOLARIUM - body constructor preferences need their owning preferences datum.
+		preference.apply_to_human(character, read_preference(preference.type), src)
 
 	character.dna.real_name = character.real_name
+	// VOIDCREW EDIT: SOLARIUM - modular parts finalize before icons and the applied signal.
+	finalize_character_preferences(character)
 
 	if(icon_updates)
 		character.icon_render_keys = list()
@@ -614,3 +617,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	unlock_content = !!byond_member
 	if(unlock_content)
 		max_save_slots = 8
+
+/// VOIDCREW EDIT: SOLARIUM - extension point for modules applying visual character parts.
+/datum/preferences/proc/finalize_character_preferences(mob/living/carbon/human/character)
+	return

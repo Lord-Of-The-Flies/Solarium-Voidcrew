@@ -1179,7 +1179,7 @@
 			continue
 		//Some externals have multiple layers for background, foreground and between
 		for(var/external_layer in overlay.all_layers)
-			if(overlay.layers & external_layer)
+			if(overlay.supports_layer(external_layer)) // VOIDCREW EDIT: SOLARIUM - constructor layer maps
 				. += overlay.get_overlay(external_layer, src)
 		for(var/datum/layer in .)
 			overlay.modify_bodypart_appearance(layer)

@@ -4,6 +4,8 @@
 // together.
 // This still helps to prevent the server from needing to send client UI data
 import type { Feature } from './base';
+// VOIDCREW EDIT: SOLARIUM - load private body constructor and ERP preferences when available.
+import { features as erpFeatures } from 'solarium_erp';
 
 // while also preventing downstreams from needing to mutate existing files.
 export const features: Record<string, Feature<unknown>> = {};
@@ -25,3 +27,6 @@ import * as voidcrewFeatures from 'voidcrew_tgui/preferences/features';
 for (const [featureKey, feature] of Object.entries(voidcrewFeatures)) {
   features[featureKey] = feature as Feature<unknown>;
 }
+
+// VOIDCREW EDIT: SOLARIUM - private preferences share the host rendering contract.
+Object.assign(features, erpFeatures);
