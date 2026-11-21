@@ -6700,12 +6700,20 @@
 #include "voidcrew\_DEFINES\loot.dm"
 #include "voidcrew\_DEFINES\maps.dm"
 #include "voidcrew\_DEFINES\maths.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\_DEFINES\missions.dm"
+#else
 #include "voidcrew\_DEFINES\missions.dm"
+#endif
 #include "voidcrew\_DEFINES\mobfactions.dm"
 #include "voidcrew\_DEFINES\nanite_defines.dm"
 #include "voidcrew\_DEFINES\nanite_signals.dm"
 #include "voidcrew\_DEFINES\overmap.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\_DEFINES\overmap_zones.dm"
+#else
 #include "voidcrew\_DEFINES\overmap_zones.dm"
+#endif
 #include "voidcrew\_DEFINES\planet_defines.dm"
 #include "voidcrew\_DEFINES\player_outposts.dm"
 #include "voidcrew\_DEFINES\ship_combat.dm"
@@ -6991,12 +6999,36 @@
 #include "voidcrew\modules\cyberware\ware_street.dm"
 #include "voidcrew\modules\drop_pod\drop_pod.dm"
 #include "voidcrew\modules\drug_smuggling\ingredients.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\lab_ruin.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\lab_ruin.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\lab_session.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\lab_session.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\machines.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\machines.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\mission.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\mission.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\objectives.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\objectives.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\drug_smuggling\product.dm"
+#else
 #include "voidcrew\modules\drug_smuggling\product.dm"
+#endif
 #include "voidcrew\modules\drug_smuggling\recipe.dm"
 #include "voidcrew\modules\dynamic_events\dynamic_events_subsystem.dm"
 #include "voidcrew\modules\dynamic_events\event_base.dm"
@@ -7072,33 +7104,129 @@
 #include "voidcrew\modules\mining\lavaland\edits\machine_redemption.dm"
 #include "voidcrew\modules\mining\lavaland\edits\mining_order.dm"
 #include "voidcrew\modules\mining\lavaland\edits\necropolis_chests.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\_missions.dm"
+#else
 #include "voidcrew\modules\missions\_missions.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\design.dm"
+#else
 #include "voidcrew\modules\missions\design.dm"
+#endif
 #include "voidcrew\modules\missions\gps_link.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\mission_board.dm"
+#else
 #include "voidcrew\modules\missions\mission_board.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\mission_pad.dm"
+#else
 #include "voidcrew\modules\missions\mission_pad.dm"
+#endif
 #include "voidcrew\modules\missions\mission_target.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\player_bounty.dm"
+#else
 #include "voidcrew\modules\missions\player_bounty.dm"
+#endif
 #include "voidcrew\modules\missions\code\controllers\subsystem\missions.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\big_game_hunt.dm"
+#else
 #include "voidcrew\modules\missions\missions\big_game_hunt.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\delivery.dm"
+#else
 #include "voidcrew\modules\missions\missions\delivery.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\exploration.dm"
+#else
 #include "voidcrew\modules\missions\missions\exploration.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\field_expedition.dm"
+#else
 #include "voidcrew\modules\missions\missions\field_expedition.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\gas_harvest.dm"
+#else
 #include "voidcrew\modules\missions\missions\gas_harvest.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\live_capture.dm"
+#else
 #include "voidcrew\modules\missions\missions\live_capture.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\poacher_bust.dm"
+#else
 #include "voidcrew\modules\missions\missions\poacher_bust.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\prospect_stake.dm"
+#else
 #include "voidcrew\modules\missions\missions\prospect_stake.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\recovery.dm"
+#else
 #include "voidcrew\modules\missions\missions\recovery.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\recovery_variants.dm"
+#else
 #include "voidcrew\modules\missions\missions\recovery_variants.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\rescue.dm"
+#else
 #include "voidcrew\modules\missions\missions\rescue.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\research.dm"
+#else
 #include "voidcrew\modules\missions\missions\research.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\suppression.dm"
+#else
 #include "voidcrew\modules\missions\missions\suppression.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\missions\survey.dm"
+#else
 #include "voidcrew\modules\missions\missions\survey.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\objectives\_objective.dm"
+#else
 #include "voidcrew\modules\missions\objectives\_objective.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\objectives\combat.dm"
+#else
 #include "voidcrew\modules\missions\objectives\combat.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\objectives\deliver.dm"
+#else
 #include "voidcrew\modules\missions\objectives\deliver.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\objectives\site_ops.dm"
+#else
 #include "voidcrew\modules\missions\objectives\site_ops.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\missions\objectives\travel.dm"
+#else
 #include "voidcrew\modules\missions\objectives\travel.dm"
+#endif
 #include "voidcrew\modules\mob\living\basic\demon.dm"
 #include "voidcrew\modules\mob\living\basic\hoarfrost\hoarfrost_abilities.dm"
 #include "voidcrew\modules\mob\living\basic\hoarfrost\hoarfrost_ai.dm"
@@ -7177,9 +7305,17 @@
 #include "voidcrew\modules\npc_ships\code\spawner_subsystem.dm"
 #include "voidcrew\modules\npc_ships\code\behaviors\ship_combat_behaviors.dm"
 #include "voidcrew\modules\npc_ships\code\behaviors\ship_movement_behaviors.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\npc_ships\code\bounty\bounty.dm"
+#else
 #include "voidcrew\modules\npc_ships\code\bounty\bounty.dm"
+#endif
 #include "voidcrew\modules\npc_ships\code\bounty\bounty_loot.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\npc_ships\code\bounty\bounty_subsystem.dm"
+#else
 #include "voidcrew\modules\npc_ships\code\bounty\bounty_subsystem.dm"
+#endif
 #include "voidcrew\modules\npc_ships\code\faction_pirates\faction_pirate_bosses.dm"
 #include "voidcrew\modules\npc_ships\code\faction_pirates\faction_pirate_corpses.dm"
 #include "voidcrew\modules\npc_ships\code\faction_pirates\faction_pirate_equipment.dm"
@@ -7368,29 +7504,77 @@
 #include "voidcrew\modules\trade\blueprint_imprinter.dm"
 #include "voidcrew\modules\trade\modsuit_bench.dm"
 #include "voidcrew\modules\trade\outpost.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\outpost_amenities.dm"
+#else
 #include "voidcrew\modules\trade\outpost_amenities.dm"
+#endif
 #include "voidcrew\modules\trade\outpost_elevator.dm"
 #include "voidcrew\modules\trade\outpost_hangar.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\outpost_missions.dm"
+#else
 #include "voidcrew\modules\trade\outpost_missions.dm"
+#endif
 #include "voidcrew\modules\trade\outpost_orbit.dm" // SOL-EDIT
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\outpost_quests.dm"
+#else
 #include "voidcrew\modules\trade\outpost_quests.dm"
+#endif
 #include "voidcrew\modules\trade\outpost_security.dm"
 #include "voidcrew\modules\trade\planetary_goods.dm"
 #include "voidcrew\modules\trade\rumor_charts.dm"
 #include "voidcrew\modules\trade\shop.dm"
 #include "voidcrew\modules\trade\shop_buyback.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_black_market.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_black_market.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_black_market_vendors.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_black_market_vendors.dm"
+#endif
 #include "voidcrew\modules\trade\shop_catalog_charts.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_diner.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_diner.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_general.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_general.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_general_vendors.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_general_vendors.dm"
+#endif
 #include "voidcrew\modules\trade\shop_catalog_job_packs.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_outfitter.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_outfitter.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_outfitter_vendors.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_outfitter_vendors.dm"
+#endif
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\shop_catalog_suit_vendor.dm"
+#else
 #include "voidcrew\modules\trade\shop_catalog_suit_vendor.dm"
+#endif
 #include "voidcrew\modules\trade\trader_favor.dm"
+#ifdef ASTRAMILITARUM
+#include "Astramilitarum\translations\voidcrew\modules\trade\trader_npc.dm"
+#else
 #include "voidcrew\modules\trade\trader_npc.dm"
+#endif
 #include "voidcrew\modules\trade\voucher.dm"
 #include "voidcrew\modules\trade\favor_uniques\outfitter.dm"
 #include "voidcrew\modules\trade\favor_uniques\pike.dm"
