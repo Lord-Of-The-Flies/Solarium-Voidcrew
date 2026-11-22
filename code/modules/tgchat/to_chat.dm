@@ -22,6 +22,11 @@
 	html = "[html]"
 	text = "[text]"
 
+	#ifdef ASTRAMILITARUM
+	html = ru_translate_ui(html)
+	text = ru_translate_ui(text)
+	#endif
+
 	if(!target)
 		return
 	if(!html && !text)
@@ -67,6 +72,11 @@
 	// Useful where the integer 0 is the entire message. Use case is enabling to_chat(target, some_boolean) while preventing to_chat(target, "")
 	html = "[html]"
 	text = "[text]"
+
+	#ifdef ASTRAMILITARUM
+	html = ru_translate_ui(html)
+	text = ru_translate_ui(text)
+	#endif
 
 	if(!target)
 		return

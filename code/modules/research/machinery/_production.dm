@@ -79,18 +79,18 @@
 	if(!in_range(user, src) && !isobserver(user))
 		return
 
-	. += span_notice("Material usage cost at <b>[efficiency_coeff * 100]%</b>")
-	. += span_notice("Build time at <b>[efficiency_coeff * 100]%</b>")
+	. += span_notice("Расход материала: <b>[efficiency_coeff * 100]%</b>")
+	. += span_notice("Время сборки: <b>[efficiency_coeff * 100]%</b>")
 	if(drop_direction)
-		. += span_notice("Currently configured to drop printed objects <b>[dir2text(drop_direction)]</b>.")
-		. += span_notice("[EXAMINE_HINT("Alt-click")] to reset.")
+		. += span_notice("Сейчас напечатанные предметы выпадают <b>[dir2text(drop_direction)]</b>.")
+		. += span_notice("[EXAMINE_HINT("Alt-клик")], чтобы сбросить.")
 	// VOIDCREW EDIT - was an else: show the drag hint even with a direction set, playtesters saw "alt-click to reset" but couldn't find how to aim it
-	. += span_notice("[EXAMINE_HINT("Drag")] towards a direction (while next to it) to change drop direction.")
+	. += span_notice("[EXAMINE_HINT("Перетащите")] в нужную сторону (стоя рядом), чтобы изменить направление выброса.")
 
 /obj/machinery/rnd/production/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(drop_direction)
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Reset Drop"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Сбросить направление"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/rnd/production/connect_techweb(datum/techweb/new_techweb)

@@ -60,27 +60,27 @@
 	if(!in_range(user, src) && !isobserver(user))
 		return
 
-	. += span_notice("Material usage cost at <b>[creation_efficiency * 100]%</b>")
+	. += span_notice("Расход материала: <b>[creation_efficiency * 100]%</b>")
 	if(drop_direction)
-		. += span_notice("Currently configured to drop printed objects <b>[dir2text(drop_direction)]</b>.")
-		. += span_notice("[EXAMINE_HINT("Alt-click")] to reset.")
+		. += span_notice("Сейчас напечатанные предметы выпадают <b>[dir2text(drop_direction)]</b>.")
+		. += span_notice("[EXAMINE_HINT("Alt-клик")], чтобы сбросить.")
 	// VOIDCREW EDIT - was an else: show the drag hint even with a direction set, playtesters saw "alt-click to reset" but couldn't find how to aim it
-	. += span_notice("[EXAMINE_HINT("Drag")] towards a direction (while next to it) to change drop direction.")
+	. += span_notice("[EXAMINE_HINT("Перетащите")] в нужную сторону (стоя рядом), чтобы изменить направление выброса.")
 
-	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
+	. += span_notice("Его панель обслуживания можно [EXAMINE_HINT("открутить")] [panel_open ? "закрыть" : "открыть"].")
 	if(panel_open)
-		. += span_notice("The machine can be [EXAMINE_HINT("pried")] apart.")
+		. += span_notice("Машину можно [EXAMINE_HINT("поддеть")] и разобрать.")
 
 /obj/machinery/autolathe/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	if(drop_direction)
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Reset Drop"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Сбросить направление"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(isnull(held_item))
 		return NONE
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(panel_open && held_item.tool_behaviour == TOOL_CROWBAR)

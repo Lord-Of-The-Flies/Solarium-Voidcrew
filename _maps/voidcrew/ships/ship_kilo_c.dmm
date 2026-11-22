@@ -292,7 +292,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /mob/living/basic/pet/cat{
-	desc = "The real captain of the Dollhouse. Her fur is brushed to a mirror shine and she knows it.";
+	desc = "Настоящий капитан «Кукольного дома». Её шерсть вычищена до зеркального блеска, и она это знает.";
 	name = "Princess"
 	},
 /turf/open/floor/iron/dollhouse,

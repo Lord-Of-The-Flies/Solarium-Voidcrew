@@ -11,22 +11,22 @@
 // Required component that enables the missile to lock onto targets
 
 /obj/item/electronics/ship_missile_tracking
-	name = "missile tracking circuit"
-	desc = "A guidance system circuit for ship missiles. Insert into a wired missile frame before adding the warhead."
+	name = "схема наведения ракеты"
+	desc = "Схема системы наведения для корабельных ракет. Вставляется в ракетный каркас с проводкой перед установкой боеголовки."
 	icon_state = "integrated_circuit"
 	/// Time to insert this circuit into a frame
 	var/insert_time = 2 SECONDS
 
 /obj/item/electronics/ship_missile_tracking/examine(mob/user)
 	. = ..()
-	. += span_notice("This circuit enables target tracking and guidance for ship missiles.")
+	. += span_notice("Эта схема обеспечивает захват цели и наведение корабельных ракет.")
 
 // ========== MISSILE BOMB CORES ==========
 // Warheads that use TG's bomb core system for detonation
 
 /obj/item/bombcore/missile
-	name = "standard missile warhead"
-	desc = "A warhead designed for ship-to-ship missiles. Insert into a missile frame with a tracking circuit installed."
+	name = "стандартная ракетная боеголовка"
+	desc = "Боеголовка для ракет класса «корабль-корабль». Вставляется в ракетный каркас с установленной схемой наведения."
 	icon = 'voidcrew/icons/obj/devices/assemblies.dmi'
 	icon_state = "bombcore"
 	/// Short name for use in missile naming and UI
@@ -47,12 +47,12 @@
 
 /obj/item/bombcore/missile/examine(mob/user)
 	. = ..()
-	. += span_notice("Ship damage output: [ship_damage]")
-	. += span_notice("Explosion radius: [range_light] tiles")
+	. += span_notice("Урон по кораблю: [ship_damage]")
+	. += span_notice("Радиус взрыва: [range_light] кл.")
 
 /obj/item/bombcore/missile/light
-	name = "light missile warhead"
-	desc = "A smaller warhead for missiles. Less damage but cheaper to produce."
+	name = "лёгкая ракетная боеголовка"
+	desc = "Меньшая боеголовка для ракет. Наносит меньше урона, но дешевле в производстве."
 	payload_type = "light"
 	icon_state = "bombcore_light"
 	ship_damage = MISSILE_DAMAGE_LIGHT
@@ -64,9 +64,9 @@
 	range_flame = 1
 
 /obj/item/bombcore/missile/heavy
-	name = "heavy missile warhead"
+	name = "тяжёлая ракетная боеголовка"
 	icon_state = "bombcore_heavy"
-	desc = "A massive warhead for missiles. Devastating damage but expensive."
+	desc = "Массивная боеголовка для ракет. Огромный урон, но дорогая."
 	w_class = WEIGHT_CLASS_BULKY
 	payload_type = "heavy"
 	ship_damage = MISSILE_DAMAGE_HEAVY

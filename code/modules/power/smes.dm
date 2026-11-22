@@ -123,16 +123,16 @@
 /obj/machinery/power/smes/examine(user)
 	. = ..()
 
-	. += span_notice("it's maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "opened"]")
+	. += span_notice("Его панель обслуживания можно [EXAMINE_HINT("открутить")] [panel_open ? "закрыть" : "открыть"]")
 	if(panel_open)
 		if(!terminal)
-			. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
-		. += span_notice("It can [EXAMINE_HINT("wrenched")] to rotate.")
+			. += span_notice("Его можно [EXAMINE_HINT("поддеть")] и разобрать.")
+		. += span_notice("Его можно [EXAMINE_HINT("повернуть")] гаечным ключом.")
 
 	if(!terminal)
-		. += span_warning("A terminal that requires [EXAMINE_HINT("10 cable pieces")] needs to be installed!.")
+		. += span_warning("Нужно установить клемму, для которой требуется [EXAMINE_HINT("10 кусков кабеля")]!.")
 	else if(panel_open)
-		. += span_notice("The terminal can be [EXAMINE_HINT("cut")] apart.")
+		. += span_notice("Клемму можно [EXAMINE_HINT("отрезать")].")
 
 /obj/machinery/power/smes/update_overlays()
 	. = ..()

@@ -26,6 +26,29 @@ import { useBackend, useSharedState } from '../../tgui/backend';
 // Shuttle state constants (must match DM defines)
 const CARGO_SHUTTLE_AWAY = 0;
 
+const CATEGORY_LABELS = {
+  Armory: 'Арсенал',
+  'Canisters & Materials': 'Баллоны и материалы',
+  'Costumes & Toys': 'Костюмы и игрушки',
+  Emergency: 'Аварийное снаряжение',
+  'Engine Construction': 'Строительство двигателей',
+  Engineering: 'Инженерия',
+  'Food & Hydroponics': 'Еда и гидропоника',
+  Goods: 'Товары',
+  Imports: 'Импорт',
+  Livestock: 'Животные',
+  Medical: 'Медицина',
+  'Miscellaneous Supplies': 'Разное снабжение',
+  Outsourced: 'Аутсорсинг',
+  Science: 'Наука',
+  Security: 'Охрана',
+  Service: 'Сервис',
+  'Ship Combat': 'Корабельный бой',
+  'Vending Restocks': 'Пополнение автоматов',
+};
+
+const categoryLabel = (name) => CATEGORY_LABELS[name] || name;
+
 // Inline search function to avoid import issues
 function searchForSupplies(supplies, search) {
   const lowerSearch = search.toLowerCase();
@@ -44,7 +67,7 @@ function SearchBar(props) {
   const {
     expensive,
     onSearch,
-    placeholder = 'Search...',
+    placeholder = 'Поиск...',
     query = '',
   } = props;
 
@@ -192,7 +215,7 @@ function CatalogTabs(props) {
               }}
             >
               <Stack justify="space-between">
-                <span>{supply.name}</span>
+                <span>{categoryLabel(supply.name)}</span>
                 <span> {supply.packs?.length || 0}</span>
               </Stack>
             </Tabs.Tab>
@@ -206,10 +229,10 @@ function CatalogTabs(props) {
             color={self_paid ? 'caution' : 'transparent'}
             icon={self_paid ? 'check-square-o' : 'square-o'}
             onClick={() => act('toggleprivate')}
-            tooltip="Use your own funds to purchase items."
+            tooltip="Покупать товары на собственные средства."
             tooltipPosition="top"
           >
-            Buy Privately
+            Купить за свои средства
           </Button>
         )}
       </Stack.Item>
@@ -286,9 +309,9 @@ function CatalogList(props) {
                 <Stack.Item>
                   <Stack reverse>
                     {!!pack.small_item &&
-                      tooltipIcon('Small Item', 'compress-alt', 'purple')}
+                      tooltipIcon('Малый предмет', 'compress-alt', 'purple')}
                     {!!pack.contraband &&
-                      tooltipIcon('Contraband', 'pastafarianism', 'bad')}
+                      tooltipIcon('Контрабанда', 'pastafarianism', 'bad')}
                   </Stack>
                 </Stack.Item>
               )}
@@ -304,10 +327,10 @@ function CatalogList(props) {
                   paddingRight: '4px',
                 }}
               >
-                {formatMoney(cost)} cr
+                {formatMoney(cost)} кр
                 {!!privateBuy && (
                   <div style={{ fontSize: '0.8em', opacity: 0.7 }}>
-                    ({formatMoney(Math.round(cost * 1.1))} cr private)
+                    ({formatMoney(Math.round(cost * 1.1))} кр. свои)
                   </div>
                 )}
               </Stack.Item>
@@ -339,7 +362,7 @@ function CatalogPackInfo(props) {
               />
             }
           >
-            <BlockQuote>{pack?.desc || 'No description available.'}</BlockQuote>
+            <BlockQuote>{pack?.desc || 'Описание отсутствует.'}</BlockQuote>
           </Section>
         </Stack.Item>
         <Stack.Item m={0} grow>
@@ -371,8 +394,7 @@ function CatalogPackInfo(props) {
                   <Icon name="triangle-exclamation" size={6} color="orange" />
                 </Stack.Item>
                 <Stack.Item mt={2} color="label" textAlign="center">
-                  {`We can't find information about even the approximate contents
-                  of this order.`}
+                  {`Мы не можем найти информацию даже о примерном содержимом этого заказа.`}
                 </Stack.Item>
               </Stack>
             )}

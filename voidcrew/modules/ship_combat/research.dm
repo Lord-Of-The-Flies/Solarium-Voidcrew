@@ -6,8 +6,8 @@
 // Base warfare node - just the combat console
 /datum/techweb_node/ship_combat
 	id = TECHWEB_NODE_SHIP_COMBAT
-	display_name = "Shuttle Warfare Systems"
-	description = "Basic technology for shuttle-to-shuttle warfare. Unlocks the weapons console for coordinating combat systems."
+	display_name = "Системы шаттлового боя"
+	description = "Базовые технологии для боя между шаттлами. Открывает оружейную консоль для управления боевыми системами."
 	prereq_ids = list(TECHWEB_NODE_BASIC_SHUTTLE)
 	design_ids = list(
 		"ship_combat_console",
@@ -17,8 +17,8 @@
 // Missile systems - launcher, frame, tracking, light warhead
 /datum/techweb_node/ship_combat_missiles
 	id = TECHWEB_NODE_SHIP_COMBAT_MISSILES
-	display_name = "Missile Ordnance"
-	description = "Missile launcher systems and light warheads for shuttle warfare. Chemical missiles can be created by inserting grenades into missile frames."
+	display_name = "Ракетное вооружение"
+	description = "Ракетные пусковые установки и лёгкие боеголовки для шаттлового боя. Химические ракеты можно создать, вставив гранаты в ракетные каркасы."
 	prereq_ids = list(TECHWEB_NODE_SHIP_COMBAT)
 	design_ids = list(
 		"ship_missile_launcher",
@@ -64,8 +64,8 @@
 // Shield generator
 /datum/techweb_node/ship_combat_shields
 	id = TECHWEB_NODE_SHIP_COMBAT_SHIELDS
-	display_name = "Shuttle Shield Systems"
-	description = "Deflector shield technology that protects shuttles and outpost claims from attackers. Power requirements scale with shuttle size."
+	display_name = "Системы шаттловых щитов"
+	description = "Технология отражающих щитов, защищающих шаттлы и аутпосты от атакующих. Энергопотребление зависит от размера шаттла."
 	prereq_ids = list(TECHWEB_NODE_SHIP_COMBAT)
 	design_ids = list(
 		"ship_shield_generator",
@@ -76,8 +76,8 @@
 // Laser turret
 /datum/techweb_node/ship_combat_lasers
 	id = TECHWEB_NODE_SHIP_COMBAT_LASERS
-	display_name = "Shuttle Laser Systems"
-	description = "Directed energy weapons that are highly effective against shields. Power level can be adjusted via the weapons system."
+	display_name = "Системы шаттловых лазеров"
+	description = "Оружие направленной энергии, особенно эффективное против щитов. Уровень мощности регулируется через оружейную систему."
 	prereq_ids = list(TECHWEB_NODE_SHIP_COMBAT)
 	design_ids = list(
 		"ship_laser_turret",
@@ -87,8 +87,8 @@
 // Interdictor
 /datum/techweb_node/ship_combat_interdictor
 	id = TECHWEB_NODE_SHIP_COMBAT_INTERDICTOR
-	display_name = "Shuttle Interdiction Systems"
-	description = "Advanced interdiction technology that slows enemy shuttles, enables force docking, and prevents cloaking. Power level determines effectiveness."
+	display_name = "Системы шаттловой интердикции"
+	description = "Продвинутая технология интердикции, замедляющая вражеские шаттлы, позволяющая принудительную стыковку и блокирующая маскировку. Эффективность зависит от уровня мощности."
 	prereq_ids = list(TECHWEB_NODE_SHIP_COMBAT)
 	design_ids = list(
 		"ship_interdictor",

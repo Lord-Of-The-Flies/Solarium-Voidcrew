@@ -8,52 +8,52 @@
 // ========== MISSILE COMPONENT PACKS ==========
 
 /datum/supply_pack/ship_combat/missile_frames
-	name = "Missile Frames Crate"
-	desc = "A crate containing four missile frames. \
-		Requires wiring, tracking circuit, and a warhead to arm."
+	name = "Ящик с ракетными каркасами"
+	desc = "Ящик с четырьмя ракетными каркасами. \
+		Требуется проводка, схема наведения и боеголовка для подготовки."
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/obj/structure/ship_missile = 4)
-	crate_name = "missile frames crate"
+	crate_name = "ящик с ракетными каркасами"
 
 /datum/supply_pack/ship_combat/tracking_circuits
-	name = "Missile Tracking Circuits Crate"
-	desc = "A crate containing six missile tracking circuits. \
-		Required for missile guidance systems."
+	name = "Ящик со схемами наведения ракет"
+	desc = "Ящик с шестью схемами наведения ракет. \
+		Необходимы для систем наведения ракет."
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/item/electronics/ship_missile_tracking = 6)
-	crate_name = "tracking circuits crate"
+	crate_name = "ящик со схемами наведения"
 
 /datum/supply_pack/ship_combat/warhead_standard
-	name = "Standard Warheads Crate"
-	desc = "A crate containing four standard missile warheads. \
-		Moderate damage, good for general combat."
+	name = "Ящик со стандартными боеголовками"
+	desc = "Ящик с четырьмя стандартными ракетными боеголовками. \
+		Умеренный урон, подходят для общего боя."
 	cost = CARGO_CRATE_VALUE * 8
 	contains = list(/obj/item/bombcore/missile = 4)
-	crate_name = "standard warheads crate"
+	crate_name = "ящик со стандартными боеголовками"
 
 /datum/supply_pack/ship_combat/warhead_light
-	name = "Light Warheads Crate"
-	desc = "A crate containing six light missile warheads. \
-		Lower damage but cheaper."
+	name = "Ящик с лёгкими боеголовками"
+	desc = "Ящик с шестью лёгкими ракетными боеголовками. \
+		Меньше урона, но дешевле."
 	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/obj/item/bombcore/missile/light = 6)
-	crate_name = "light warheads crate"
+	crate_name = "ящик с лёгкими боеголовками"
 
 /datum/supply_pack/ship_combat/warhead_heavy
-	name = "Heavy Warheads Crate"
-	desc = "A crate containing two heavy missile warheads. \
-		Devastating damage but expensive."
+	name = "Ящик с тяжёлыми боеголовками"
+	desc = "Ящик с двумя тяжёлыми ракетными боеголовками. \
+		Огромный урон, но дорого."
 	cost = CARGO_CRATE_VALUE * 12
 	contains = list(/obj/item/bombcore/missile/heavy = 2)
-	crate_name = "heavy warheads crate"
+	crate_name = "ящик с тяжёлыми боеголовками"
 
 // Chemical missiles now use standard chemical grenades - no cargo pack needed
 // Players order grenade casings from Science/Medical cargo and build their own
 
 /datum/supply_pack/ship_combat/missiles_kit
-	name = "Missile Assembly Kit"
-	desc = "A starter kit for missile assembly: contains four frames, \
-		four tracking circuits, four standard warheads, and cable coil."
+	name = "Набор для сборки ракет"
+	desc = "Стартовый набор для сборки ракет: четыре каркаса, \
+		четыре схемы наведения, четыре стандартные боеголовки и катушка кабеля."
 	cost = CARGO_CRATE_VALUE * 12
 	contains = list(
 		/obj/structure/ship_missile = 4,
@@ -61,14 +61,14 @@
 		/obj/item/bombcore/missile = 4,
 		/obj/item/stack/cable_coil = 1,
 	)
-	crate_name = "missile assembly kit"
+	crate_name = "набор для сборки ракет"
 
 // ========== EQUIPMENT PACKS ==========
 
 /datum/supply_pack/ship_combat/launcher_kit
-	name = "Missile Launcher Kit"
-	desc = "A starter kit for ship combat: contains a missile launcher \
-		circuit board, two frames, tracking circuits, and two standard warheads."
+	name = "Набор с ракетной пусковой установкой"
+	desc = "Стартовый набор для корабельного боя: плата ракетной пусковой \
+		установки, два каркаса, схемы наведения и две стандартные боеголовки."
 	cost = CARGO_CRATE_VALUE * 8
 	contains = list(
 		/obj/item/circuitboard/machine/ship_combat/missile_launcher = 1,
@@ -77,12 +77,12 @@
 		/obj/item/bombcore/missile = 2,
 		/obj/item/stack/cable_coil = 1,
 	)
-	crate_name = "missile launcher kit"
+	crate_name = "набор с ракетной пусковой установкой"
 
 /datum/supply_pack/ship_combat/combat_starter
-	name = "Ship Combat Starter Pack"
-	desc = "Everything you need to get started with ship combat: \
-		a combat console board, launcher board, frames, tracking circuits, warheads, and wiring."
+	name = "Стартовый набор для корабельного боя"
+	desc = "Всё необходимое для начала корабельного боя: \
+		плата боевой консоли, плата пусковой установки, каркасы, схемы наведения, боеголовки и проводка."
 	cost = CARGO_CRATE_VALUE * 15
 	contains = list(
 		/obj/item/circuitboard/computer/ship_combat_console = 1,
@@ -93,4 +93,4 @@
 		/obj/item/bombcore/missile/light = 2,
 		/obj/item/stack/cable_coil = 1,
 	)
-	crate_name = "ship combat starter pack"
+	crate_name = "стартовый набор для корабельного боя"

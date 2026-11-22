@@ -18,6 +18,10 @@
 /atom/proc/balloon_alert(mob/viewer, text)
 	SHOULD_NOT_SLEEP(TRUE)
 
+	#ifdef ASTRAMILITARUM
+	text = ru_translate_ui(text)
+	#endif
+
 	INVOKE_ASYNC(src, PROC_REF(balloon_alert_perform), viewer, text)
 
 /// Create balloon alerts (text that floats up) to everything within range.

@@ -72,9 +72,9 @@ export const CaptainManagement = () => {
 
   if (ship_destroyed) {
     return (
-      <Window width={500} height={500} title="Ship Management">
+      <Window width={500} height={500} title="Управление кораблём">
         <Window.Content>
-          <NoticeBox danger>Ship no longer exists!</NoticeBox>
+          <NoticeBox danger>Корабль больше не существует!</NoticeBox>
         </Window.Content>
       </Window>
     );
@@ -82,16 +82,16 @@ export const CaptainManagement = () => {
 
   if (!is_captain) {
     return (
-      <Window width={500} height={500} title="Ship Management">
+      <Window width={500} height={500} title="Управление кораблём">
         <Window.Content>
-          <NoticeBox danger>You are no longer the captain!</NoticeBox>
+          <NoticeBox danger>Вы больше не капитан!</NoticeBox>
         </Window.Content>
       </Window>
     );
   }
 
   return (
-    <Window width={500} height={550} title={`Ship Management - ${ship_name}`}>
+    <Window width={500} height={550} title={`Управление кораблём — ${ship_name}`}>
       <Window.Content scrollable>
         <Stack vertical fill>
           <Stack.Item>
@@ -101,29 +101,27 @@ export const CaptainManagement = () => {
                 onClick={() => setCurrentTab('crew')}
                 icon="users"
               >
-                Crew ({data.crew.length})
+                Экипаж ({data.crew.length})
               </Tabs.Tab>
               <Tabs.Tab
                 selected={currentTab === 'invites'}
                 onClick={() => setCurrentTab('invites')}
                 icon="envelope"
               >
-                Invites ({data.pending_invites.length})
+                Приглашения ({data.pending_invites.length})
               </Tabs.Tab>
               <Tabs.Tab
                 selected={currentTab === 'applications'}
                 onClick={() => setCurrentTab('applications')}
                 icon="clipboard-list"
               >
-                Applications ({data.applications.length})
+                Заявки ({data.applications.length})
               </Tabs.Tab>
               <Tabs.Tab
                 selected={currentTab === 'settings'}
                 onClick={() => setCurrentTab('settings')}
                 icon="cog"
-              >
-                Settings
-              </Tabs.Tab>
+              > Настройки </Tabs.Tab>
             </Tabs>
           </Stack.Item>
 
@@ -144,16 +142,16 @@ const CrewTab = () => {
   const { crew, command_offer_pending } = data;
 
   return (
-    <Section title="Crew Roster">
+    <Section title="Список экипажа">
       {crew.length === 0 ? (
-        <NoticeBox info>No crew members found.</NoticeBox>
+        <NoticeBox info>Экипаж не найден.</NoticeBox>
       ) : (
         <Table>
           <Table.Row header>
-            <Table.Cell>Name</Table.Cell>
-            <Table.Cell>Role</Table.Cell>
-            <Table.Cell>Status</Table.Cell>
-            <Table.Cell>Actions</Table.Cell>
+            <Table.Cell>Имя</Table.Cell>
+            <Table.Cell>Роль</Table.Cell>
+            <Table.Cell>Статус</Table.Cell>
+            <Table.Cell>Действия</Table.Cell>
           </Table.Row>
           {crew.map((member) => (
             <Table.Row key={member.ref} className="candystripe">
@@ -168,7 +166,7 @@ const CrewTab = () => {
               <Table.Cell>{member.job}</Table.Cell>
               <Table.Cell color={member.is_online ? 'good' : 'grey'}>
                 <Icon name={member.is_online ? 'circle' : 'circle-xmark'} />
-                {member.is_online ? ' Online' : ' Offline'}
+                {member.is_online ? ' В сети' : ' Не в сети'}
               </Table.Cell>
               <Table.Cell>
                 {!member.is_captain && (
@@ -178,10 +176,8 @@ const CrewTab = () => {
                       color="bad"
                       compact
                       onClick={() => act('kick_crew', { ref: member.ref })}
-                      tooltip="Remove from crew"
-                    >
-                      Kick
-                    </Button>
+                      tooltip="Убрать из экипажа"
+                    > Выгнать </Button>
                     <Button
                       icon="crown"
                       color="caution"
@@ -194,14 +190,12 @@ const CrewTab = () => {
                       }
                       tooltip={
                         command_offer_pending
-                          ? 'An offer of command is already waiting on an answer'
+                          ? 'Предложение командования уже ждёт ответа'
                           : member.can_take_command
-                            ? 'Offer them command of the ship. They get 30 seconds to accept, and you stop being captain if they do.'
-                            : 'They must be alive and online to take command'
+                            ? 'Предложить им командование кораблём. У них есть 30 секунд на ответ; если примут, вы перестанете быть капитаном.'
+                            : 'Они должны быть живы и в сети, чтобы принять командование'
                       }
-                    >
-                      Transfer
-                    </Button>
+                    > Передать командование </Button>
                   </>
                 )}
               </Table.Cell>
@@ -220,14 +214,14 @@ const InvitesTab = () => {
   return (
     <Stack vertical fill>
       <Stack.Item>
-        <Section title="Pending Invitations">
+        <Section title="Ожидающие приглашения">
           {pending_invites.length === 0 ? (
-            <NoticeBox info>No pending invitations.</NoticeBox>
+            <NoticeBox info>Нет ожидающих приглашений.</NoticeBox>
           ) : (
             <Table>
               <Table.Row header>
-                <Table.Cell>Player</Table.Cell>
-                <Table.Cell>Actions</Table.Cell>
+                <Table.Cell>Игрок</Table.Cell>
+                <Table.Cell>Действия</Table.Cell>
               </Table.Row>
               {pending_invites.map((invite) => (
                 <Table.Row key={invite.ckey} className="candystripe">
@@ -240,9 +234,7 @@ const InvitesTab = () => {
                       onClick={() =>
                         act('cancel_invite', { ckey: invite.ckey })
                       }
-                    >
-                      Cancel
-                    </Button>
+                    > Отменить </Button>
                   </Table.Cell>
                 </Table.Row>
               ))}
@@ -251,15 +243,15 @@ const InvitesTab = () => {
         </Section>
       </Stack.Item>
       <Stack.Item grow>
-        <Section title="Available Players" fill scrollable>
+        <Section title="Доступные игроки" fill scrollable>
           {available_players.length === 0 ? (
-            <NoticeBox info>No players available to invite.</NoticeBox>
+            <NoticeBox info>Нет игроков, доступных для приглашения.</NoticeBox>
           ) : (
             <Table>
               <Table.Row header>
-                <Table.Cell>Name</Table.Cell>
-                <Table.Cell>Role</Table.Cell>
-                <Table.Cell>Actions</Table.Cell>
+                <Table.Cell>Имя</Table.Cell>
+                <Table.Cell>Роль</Table.Cell>
+                <Table.Cell>Действия</Table.Cell>
               </Table.Row>
               {available_players.map((player) => (
                 <Table.Row key={player.ckey} className="candystripe">
@@ -276,12 +268,10 @@ const InvitesTab = () => {
                       }
                       tooltip={
                         can_invite
-                          ? 'Send crew invitation'
-                          : 'Please wait before sending another invite'
+                          ? 'Отправить приглашение в экипаж'
+                          : 'Подождите перед отправкой следующего приглашения'
                       }
-                    >
-                      Invite
-                    </Button>
+                    > Пригласить </Button>
                   </Table.Cell>
                 </Table.Row>
               ))}
@@ -298,12 +288,10 @@ const ApplicationsTab = () => {
   const { applications } = data;
 
   return (
-    <Section title="Applications to Join" fill scrollable>
+    <Section title="Заявки на присоединение" fill scrollable>
       {applications.length === 0 ? (
         <NoticeBox info>
-          Nobody has applied. Players see an Apply button on your ship in the
-          lobby whenever it is password-locked; approving one lets that player
-          in without the password. Applications lapse after ten minutes.
+          Никто не подавал заявку. Игроки видят кнопку «Подать заявку» на вашем корабле в лобби, когда на нём стоит пароль; одобрение позволяет игроку войти без пароля. Заявки истекают через десять минут.
         </NoticeBox>
       ) : (
         <Stack vertical>
@@ -314,7 +302,7 @@ const ApplicationsTab = () => {
                   <Stack.Item grow>
                     <Box bold>{application.name}</Box>
                     <Box color="label" fontSize="11px">
-                      ckey: {application.ckey} - waiting {application.waiting}s
+                      ckey: {application.ckey} — ожидание {application.waiting} с
                     </Box>
                   </Stack.Item>
                   <Stack.Item>
@@ -324,21 +312,17 @@ const ApplicationsTab = () => {
                       onClick={() =>
                         act('approve_application', { ref: application.ref })
                       }
-                    >
-                      Approve
-                    </Button>
+                    > Одобрить </Button>
                   </Stack.Item>
                   <Stack.Item>
                     <Button
                       icon="times"
                       color="bad"
-                      tooltip="Asks you for an optional reason to send back"
+                      tooltip="Запросит необязательную причину для ответа"
                       onClick={() =>
                         act('deny_application', { ref: application.ref })
                       }
-                    >
-                      Deny
-                    </Button>
+                    > Отклонить </Button>
                   </Stack.Item>
                 </Stack>
                 <Box mt={1} italic>
@@ -371,7 +355,7 @@ const SettingsTab = () => {
   return (
     <Stack vertical fill>
       <Stack.Item>
-        <Section title="Ship Name">
+        <Section title="Название корабля">
           <Stack>
             <Stack.Item grow>
               <Input
@@ -379,7 +363,7 @@ const SettingsTab = () => {
                 value={newName}
                 maxLength={42}
                 onChange={(value) => setNewName(value ?? '')}
-                placeholder="Enter ship name..."
+                placeholder="Введите название корабля..."
               />
             </Stack.Item>
             <Stack.Item>
@@ -387,26 +371,23 @@ const SettingsTab = () => {
                 icon="save"
                 color="good"
                 disabled={!newName || newName.length < 2 || !can_rename}
-                tooltip={!can_rename ? 'Rename is on cooldown' : ''}
+                tooltip={!can_rename ? 'Переименование на перезарядке' : ''}
                 onClick={() => act('rename_ship', { name: newName })}
-              >
-                Save
-              </Button>
+              > Сохранить </Button>
             </Stack.Item>
           </Stack>
           <Box mt={1} fontSize="11px" color="label">
-            Ship names must be 2-42 characters. Renaming has a 5-minute
-            cooldown.
+            Название корабля должно быть от 2 до 42 символов. Переименование доступно раз в 5 минут.
           </Box>
         </Section>
       </Stack.Item>
 
       <Stack.Item>
-        <Section title="Cryopod Joining">
+        <Section title="Присоединение через криокапсулы">
           <Stack align="center">
             <Stack.Item grow>
               <Box>
-                Allow players to join your ship via cryopods in the lobby menu.
+                Разрешить игрокам присоединяться к вашему кораблю через криокапсулы в меню лобби.
               </Box>
             </Stack.Item>
             <Stack.Item>
@@ -415,7 +396,7 @@ const SettingsTab = () => {
                 color={joining_allowed ? 'good' : 'bad'}
                 onClick={() => act('toggle_joining')}
               >
-                {joining_allowed ? 'Enabled' : 'Disabled'}
+                {joining_allowed ? 'Включено' : 'Выключено'}
               </Button>
             </Stack.Item>
           </Stack>
@@ -423,13 +404,11 @@ const SettingsTab = () => {
       </Stack.Item>
 
       <Stack.Item>
-        <Section title="Join Password">
+        <Section title="Пароль для присоединения">
           {can_set_password ? (
             <>
               <Box mb={1} color="label" fontSize="11px">
-                Players joining from the lobby must enter this password or be
-                approved or invited. Changing it clears all saved join access
-                and approvals. Leave blank and save to remove the lock.
+                Игроки, присоединяющиеся из лобби, должны ввести этот пароль либо быть одобрены или приглашены. Смена пароля сбрасывает весь сохранённый доступ и одобрения. Оставьте поле пустым и сохраните, чтобы снять блокировку.
               </Box>
               <Stack>
                 <Stack.Item grow>
@@ -438,7 +417,7 @@ const SettingsTab = () => {
                     value={newPassword}
                     maxLength={24}
                     onChange={(value) => setNewPassword(value ?? '')}
-                    placeholder="No password - anyone may join"
+                    placeholder="Без пароля — может присоединиться любой"
                   />
                 </Stack.Item>
                 <Stack.Item>
@@ -449,7 +428,7 @@ const SettingsTab = () => {
                       act('set_password', { password: newPassword })
                     }
                   >
-                    {newPassword ? 'Set Password' : 'Clear'}
+                    {newPassword ? 'Установить пароль' : 'Очистить'}
                   </Button>
                 </Stack.Item>
               </Stack>
@@ -459,30 +438,27 @@ const SettingsTab = () => {
                   color="caution"
                   disabled={!join_password}
                   onClick={() => act('reset_join_access')}
-                  tooltip="Clear all saved join access and approvals without changing the password. Players must enter it or be approved or invited again to rejoin. Crew already aboard stay on the roster."
+                  tooltip="Сбросить весь сохранённый доступ и одобрения, не меняя пароль. Чтобы вернуться, игрокам придётся ввести пароль или снова получить одобрение либо приглашение. Экипаж, уже находящийся на борту, остаётся в списке."
                 >
-                  Reset Join Access
+                  Сбросить доступ к присоединению
                 </Button>
               </Box>
             </>
           ) : (
             <Box color="label">
-              Fleet-issued vessels stay open to everyone and cannot be
-              password-locked.
+              Корабли, выданные флотом, открыты для всех, и на них нельзя поставить пароль.
             </Box>
           )}
         </Section>
       </Stack.Item>
 
       <Stack.Item>
-        <Section title="Crew-Only Airlocks">
+        <Section title="Шлюзы только для экипажа">
           {can_set_password ? (
             <Stack align="center">
               <Stack.Item grow>
                 <Box color="label" fontSize="11px">
-                  While this is on, the airlocks and windoors aboard this ship
-                  only open for your crew. Anyone else is refused at the door.
-                  Crowbars, emags and cut wires still work as they always did.
+                  Пока это включено, шлюзы и ветродвери на корабле открываются только для вашего экипажа. Всем остальным будет отказано у двери. Ломы, емаги и перерезанные провода по-прежнему работают как раньше.
                 </Box>
               </Stack.Item>
               <Stack.Item>
@@ -491,24 +467,22 @@ const SettingsTab = () => {
                   color={crew_only_airlocks ? 'good' : 'bad'}
                   onClick={() => act('toggle_crew_lock')}
                 >
-                  {crew_only_airlocks ? 'Crew Only' : 'Open To All'}
+                  {crew_only_airlocks ? 'Только экипаж' : 'Открыто для всех'}
                 </Button>
               </Stack.Item>
             </Stack>
           ) : (
             <Box color="label">
-              Fleet-issued vessels stay open to everyone and cannot key their
-              airlocks to the crew.
+              Корабли, выданные флотом, открыты для всех, и их шлюзы нельзя привязать к экипажу.
             </Box>
           )}
         </Section>
       </Stack.Item>
 
       <Stack.Item grow>
-        <Section title="Ship Memo" fill>
+        <Section title="Заметка о корабле" fill>
           <Box mb={1} color="label" fontSize="11px">
-            This memo is shown to players when they select your ship in the
-            lobby and after they spawn.
+            Эта заметка показывается игрокам при выборе вашего корабля в лобби и после появления.
           </Box>
           <TextArea
             fluid
@@ -516,13 +490,13 @@ const SettingsTab = () => {
             value={newMemo}
             maxLength={500}
             onChange={(value) => setNewMemo(value ?? '')}
-            placeholder="Enter a message for new crew members..."
+            placeholder="Введите сообщение для новых членов экипажа..."
           />
           <Box mt={1}>
             <Stack align="center">
               <Stack.Item grow>
                 <Box color="label" fontSize="11px">
-                  {(newMemo ?? '').length}/500 characters
+                  {(newMemo ?? '').length}/500 символов
                 </Box>
               </Stack.Item>
               <Stack.Item>
@@ -531,7 +505,7 @@ const SettingsTab = () => {
                   color="good"
                   onClick={() => act('set_memo', { memo: newMemo })}
                 >
-                  Save Memo
+                  Сохранить заметку
                 </Button>
               </Stack.Item>
             </Stack>

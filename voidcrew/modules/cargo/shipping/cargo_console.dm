@@ -2,8 +2,8 @@
  * Computer
  */
 /obj/machinery/computer/voidcrew_cargo
-	name = "cargo console"
-	desc = "Used to call and send freight from a ship."
+	name = "грузовая консоль"
+	desc = "Используется для вызова и отправки грузов с корабля."
 	icon_screen = "supply"
 	circuit = /obj/item/circuitboard/computer/voidcrew_cargo
 	light_color = COLOR_BRIGHT_ORANGE
@@ -189,7 +189,7 @@
 	. = ..()
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "VoidcrewCargo", name)
+		ui = new(user, src, "VoidcrewCargo", "Грузовая консоль")
 		ui.open()
 
 /obj/machinery/computer/voidcrew_cargo/ui_static_data(mob/user)
@@ -268,7 +268,7 @@
 	data["has_bank_account"] = !!cargo_account()
 	data["account_name"] = cargo_account()?.account_holder
 	if(!cargo_account())
-		data["shuttle_error"] = "NO BANK ACCOUNT CONNECTED"
+		data["shuttle_error"] = "БАНКОВСКИЙ СЧЁТ НЕ ПОДКЛЮЧЁН"
 		return data
 
 	data["points"] = cargo_account().account_balance
@@ -364,7 +364,7 @@
 		return "Not on a registered ship"
 	// Check location first - more meaningful error when in hyperspace
 	if(!istype(ship.docked, /obj/structure/overmap/planet/empty))
-		return "Must be docked in space"
+		return "Нужно пристыковаться в открытом космосе"
 	if(ship.state != OVERMAP_SHIP_IDLE)
 		return "Ship cannot be moving"
 	// Everything past here gates CALLING the shuttle only. Once it has arrived it is
@@ -399,7 +399,7 @@
 		say("Treasury spending permission required.")
 		return TRUE
 	if(!cargo_account())
-		balloon_alert(usr, "no bank account connected.")
+		balloon_alert(usr, "банковский счёт не подключён.")
 		usr.playsound_local(src, 'sound/machines/buzz/buzz-sigh.ogg', 50, TRUE, -1)
 		return
 
@@ -490,7 +490,7 @@
 			var/obj/structure/overmap/ship/ship = get_ship_from_atom(src)
 
 			if(!can_call_cargo_shuttle())
-				say("Error: [get_shuttle_error_message()]")
+				say("Ошибка: [get_shuttle_error_message()]")
 				usr.playsound_local(src, 'sound/machines/buzz/buzz-sigh.ogg', 50, TRUE, -1)
 				return TRUE
 

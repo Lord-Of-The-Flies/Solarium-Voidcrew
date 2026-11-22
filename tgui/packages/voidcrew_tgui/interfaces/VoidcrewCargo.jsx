@@ -22,6 +22,13 @@ const CARGO_SHUTTLE_ARRIVING = 1;
 const CARGO_SHUTTLE_DOCKED = 2;
 const CARGO_SHUTTLE_DEPARTING = 3;
 
+const SHUTTLE_STATUS_LABELS = {
+  Away: 'Вне станции',
+  Arriving: 'Прибывает',
+  Docked: 'Пристыкован',
+  Departing: 'Отправляется',
+};
+
 export const VoidcrewCargo = () => {
   return (
     <Window width={800} height={750}>
@@ -48,23 +55,21 @@ export const VoidcrewCargoContent = () => {
             icon="list"
             selected={tab === 'catalog'}
             onClick={() => setTab('catalog')}
-          >
-            Catalog
-          </Tabs.Tab>
+          > Каталог </Tabs.Tab>
           <Tabs.Tab
             icon="shopping-cart"
             textColor={tab !== 'cart' && cart_length > 0 && 'yellow'}
             selected={tab === 'cart'}
             onClick={() => setTab('cart')}
           >
-            Checkout ({cart_length})
+            Корзина ({cart_length})
           </Tabs.Tab>
           <Tabs.Tab
             icon="history"
             selected={tab === 'history'}
             onClick={() => setTab('history')}
           >
-            History ({history.length})
+            История ({history.length})
           </Tabs.Tab>
         </Tabs>
       </Section>
@@ -76,7 +81,7 @@ export const VoidcrewCargoContent = () => {
         ) : (
           <Section>
             <Box color="bad">
-              No supplies available. Make sure the cargo system is initialized.
+              Нет доступных товаров. Убедитесь, что грузовая система инициализирована.
             </Box>
           </Section>
         ))}
@@ -90,7 +95,7 @@ const VoidcrewCargoStatus = () => {
   const { act, data } = useBackend();
   const {
     shuttle_state = CARGO_SHUTTLE_AWAY,
-    shuttle_status = 'Away',
+    shuttle_status = 'Вне станции',
     shuttle_timer = 0,
     can_call_shuttle,
     shuttle_error,
@@ -102,15 +107,15 @@ const VoidcrewCargoStatus = () => {
   const getButtonText = () => {
     switch (shuttle_state) {
       case CARGO_SHUTTLE_AWAY:
-        return 'Call shuttle';
+        return 'Вызвать шаттл';
       case CARGO_SHUTTLE_ARRIVING:
-        return `Arriving...`;
+        return `Прибывает...`;
       case CARGO_SHUTTLE_DOCKED:
-        return 'Depart';
+        return 'Отправить';
       case CARGO_SHUTTLE_DEPARTING:
-        return `Departing...`;
+        return `Отправляется...`;
       default:
-        return 'Cargo Shuttle';
+        return 'Грузовой шаттл';
     }
   };
 
@@ -149,30 +154,32 @@ const VoidcrewCargoStatus = () => {
               value={points}
               format={(value) => formatMoney(value)}
             />
-            {' credits'}
+            {' кредитов'}
           </>
-        )) || <AnimatedNumber value="No credits" />}
+        )) || <AnimatedNumber value="Нет кредитов" />}
       </Box>
       <LabeledList>
-        <LabeledList.Item label="Paying account">
-          {data.account_name || 'Linked bank account'}
+        <LabeledList.Item label="Плательщик">
+          {data.account_name || 'Привязанный банковский счёт'}
         </LabeledList.Item>
-        <LabeledList.Item label="Cargo Shuttle">
+        <LabeledList.Item label="Грузовой шаттл">
           <Button
             color={getButtonColor()}
             disabled={isButtonDisabled()}
             tooltip={
               isButtonDisabled() && shuttle_state === CARGO_SHUTTLE_AWAY
-                ? shuttle_error || 'Cannot call shuttle'
+                ? shuttle_error || 'Невозможно вызвать шаттл'
                 : null
             }
             content={getButtonText()}
             onClick={() => act('send')}
           />
         </LabeledList.Item>
-        <LabeledList.Item label="Status">{shuttle_status}</LabeledList.Item>
+        <LabeledList.Item label="Статус">
+          {SHUTTLE_STATUS_LABELS[shuttle_status] || shuttle_status}
+        </LabeledList.Item>
         {shuttle_state === CARGO_SHUTTLE_ARRIVING && (
-          <LabeledList.Item label="Timer">
+          <LabeledList.Item label="Таймер">
             <ProgressBar
               value={shuttle_timer}
               maxValue={30}
@@ -182,12 +189,12 @@ const VoidcrewCargoStatus = () => {
                 bad: [0, 10],
               }}
             >
-              {shuttle_timer}s remaining
+              {shuttle_timer} с осталось
             </ProgressBar>
           </LabeledList.Item>
         )}
         {shuttle_state === CARGO_SHUTTLE_DEPARTING && (
-          <LabeledList.Item label="Timer">
+          <LabeledList.Item label="Таймер">
             <ProgressBar
               value={shuttle_timer}
               maxValue={5}
@@ -197,12 +204,12 @@ const VoidcrewCargoStatus = () => {
                 bad: [0, 2],
               }}
             >
-              {shuttle_timer}s remaining
+              {shuttle_timer} с осталось
             </ProgressBar>
           </LabeledList.Item>
         )}
         {!!shuttle_error && shuttle_state === CARGO_SHUTTLE_AWAY && (
-          <LabeledList.Item label="Note" color="bad">
+          <LabeledList.Item label="Примечание" color="bad">
             {shuttle_error}
           </LabeledList.Item>
         )}
@@ -219,19 +226,19 @@ const VoidcrewCargoStatus = () => {
         >
           <Box bold color={loan.accepted ? 'good' : 'yellow'} mb={1}>
             {loan.accepted
-              ? `Loan Accepted from ${loan.sender}`
-              : `Shuttle Loan Offer from ${loan.sender}`}
+              ? `Заём принят от ${loan.sender}`
+              : `Предложение займа на шаттл от ${loan.sender}`}
           </Box>
           <Box mb={1}>{loan.announcement}</Box>
           {loan.bonus_credits > 0 && (
             <Box color="good" mb={1}>
-              Bonus: {formatMoney(loan.bonus_credits)} credits
-              {loan.accepted && ' (credited)'}
+              Бонус: {formatMoney(loan.bonus_credits)} кредитов
+              {loan.accepted && ' (зачислено)'}
             </Box>
           )}
           {loan.accepted ? (
             <Box color="good" italic>
-              Call the cargo shuttle to receive your loan items.
+              Вызовите грузовой шаттл, чтобы получить товары по займу.
             </Box>
           ) : (
             <Stack>
@@ -239,7 +246,7 @@ const VoidcrewCargoStatus = () => {
                 <Button
                   color="green"
                   icon="check"
-                  content="Accept Loan"
+                  content="Принять заём"
                   onClick={() => act('accept_loan')}
                 />
               </Stack.Item>
@@ -247,7 +254,7 @@ const VoidcrewCargoStatus = () => {
                 <Button
                   color="red"
                   icon="times"
-                  content="Decline"
+                  content="Отклонить"
                   onClick={() => act('decline_loan')}
                 />
               </Stack.Item>
@@ -268,16 +275,16 @@ const VoidcrewCargoCartButtons = () => {
   return (
     <>
       <Box inline mx={1}>
-        {cart.length === 0 && 'Cart is empty'}
-        {cart.length === 1 && '1 item'}
-        {cart.length >= 2 && cart.length + ' items'}{' '}
+        {cart.length === 0 && 'Корзина пуста'}
+        {cart.length === 1 && '1 товар'}
+        {cart.length >= 2 && cart.length + ' товаров'}{' '}
         {total > 0 && `(${formatMoney(total)} cr)`}
       </Box>
       {!cartLocked && (
         <Button
           icon="times"
           color="transparent"
-          content="Clear"
+          content="Очистить"
           onClick={() => act('clear')}
         />
       )}
@@ -294,16 +301,16 @@ const VoidcrewCargoCart = () => {
     <Section fill>
       <Section>
         <Stack>
-          <Stack.Item mt="4px">Current Cart</Stack.Item>
+          <Stack.Item mt="4px">Текущая корзина</Stack.Item>
           <Stack.Item ml="200px" mt="3px">
-            Quantity
+            Количество
           </Stack.Item>
           <Stack.Item ml="72px">
             <VoidcrewCargoCartButtons />
           </Stack.Item>
         </Stack>
       </Section>
-      {cart.length === 0 && <Box color="label">Nothing in cart</Box>}
+      {cart.length === 0 && <Box color="label">В корзине ничего нет</Box>}
       {cart.length > 0 && (
         <Table>
           {cart.map((entry) => (
@@ -346,7 +353,7 @@ const VoidcrewCargoCart = () => {
                 )}
               </Table.Cell>
               <Table.Cell collapsing textAlign="right" inline ml="50px">
-                {formatMoney(entry.cost)} {entry.cost_type}
+                {formatMoney(entry.cost)} {entry.cost_type === 'cr' ? 'кр' : entry.cost_type}
               </Table.Cell>
               <Table.Cell inline mt="20px" />
             </Table.Row>
@@ -356,22 +363,21 @@ const VoidcrewCargoCart = () => {
       {cart.length > 0 && shuttle_state === CARGO_SHUTTLE_AWAY && (
         <Box mt={2}>
           <Box opacity={0.5}>
-            Add items to cart, then call the cargo shuttle to order.
+            Добавьте товары в корзину, затем вызовите грузовой шаттл для заказа.
           </Box>
         </Box>
       )}
       {cart.length > 0 && shuttle_state === CARGO_SHUTTLE_ARRIVING && (
         <Box mt={2}>
           <Box color="yellow">
-            Order dispatched - the cart is locked until the shuttle arrives.
+            Заказ отправлен — корзина заблокирована до прибытия шаттла.
           </Box>
         </Box>
       )}
       {!!shuttleDocked && (
         <Box mt={2}>
           <Box color="good">
-            Cargo shuttle is docked! Board the shuttle to retrieve your items,
-            then send it away to sell exports.
+            Грузовой шаттл пристыкован! Поднимитесь на борт, чтобы забрать товары, затем отправьте его обратно, чтобы продать экспорт.
           </Box>
         </Box>
       )}
@@ -384,31 +390,31 @@ const VoidcrewCargoHistory = () => {
   const { history = [] } = data;
 
   return (
-    <Section fill title="Transaction History">
+    <Section fill title="История транзакций">
       {history.length === 0 && (
-        <Box color="label">No transactions recorded yet.</Box>
+        <Box color="label">Транзакций пока нет.</Box>
       )}
       {history.length > 0 && (
         <Table>
           <Table.Row header>
-            <Table.Cell>Time</Table.Cell>
-            <Table.Cell>Type</Table.Cell>
-            <Table.Cell>Item</Table.Cell>
-            <Table.Cell>Qty</Table.Cell>
-            <Table.Cell textAlign="right">Value</Table.Cell>
+            <Table.Cell>Время</Table.Cell>
+            <Table.Cell>Тип</Table.Cell>
+            <Table.Cell>Товар</Table.Cell>
+            <Table.Cell>Кол-во</Table.Cell>
+            <Table.Cell textAlign="right">Стоимость</Table.Cell>
           </Table.Row>
           {history.map((entry, index) => (
             <Table.Row key={index} className="candystripe">
               <Table.Cell color="label">{entry.time}</Table.Cell>
               <Table.Cell color={entry.type === 'buy' ? 'bad' : 'good'}>
-                {entry.type === 'buy' ? 'Purchase' : 'Sale'}
+                {entry.type === 'buy' ? 'Покупка' : 'Продажа'}
               </Table.Cell>
               <Table.Cell>{entry.name}</Table.Cell>
               <Table.Cell>{entry.amount}</Table.Cell>
               <Table.Cell textAlign="right">
                 <Box color={entry.type === 'buy' ? 'bad' : 'good'}>
                   {entry.type === 'buy' ? '-' : '+'}
-                  {formatMoney(entry.value)} cr
+                  {formatMoney(entry.value)} кр
                 </Box>
               </Table.Cell>
             </Table.Row>
