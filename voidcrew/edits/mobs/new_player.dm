@@ -123,16 +123,16 @@
  * Callback when player confirms their hull, theme and upgrade selections.
  * The selector has already handled the hull unlock and part deduction.
  */
-/mob/dead/new_player/proc/on_upgrades_confirmed(datum/map_template/shuttle/voidcrew/template, list/upgrade_selections, datum/ship_theme/selected_theme)
+/mob/dead/new_player/proc/on_upgrades_confirmed(datum/map_template/shuttle/voidcrew/template, list/upgrade_selections, datum/ship_theme/selected_theme, subfaction = null)
 	if(!template)
 		return select_ship() // Cancelled, return to menu
 
-	spawn_ship_with_upgrades(template, upgrade_selections, selected_theme)
+	spawn_ship_with_upgrades(template, upgrade_selections, selected_theme, subfaction)
 
 /**
  * Actually spawn the ship with the given upgrade selections and theme
  */
-/mob/dead/new_player/proc/spawn_ship_with_upgrades(datum/map_template/shuttle/voidcrew/template, list/upgrade_selections, datum/ship_theme/selected_theme)
+/mob/dead/new_player/proc/spawn_ship_with_upgrades(datum/map_template/shuttle/voidcrew/template, list/upgrade_selections, datum/ship_theme/selected_theme, subfaction)
 	if(!template)
 		return select_ship()
 
@@ -143,7 +143,8 @@
 	spawning_ship = TRUE
 
 	to_chat(src, span_notice("Your [template.name] is being prepared. Please be patient!"))
-	var/obj/structure/overmap/ship/target = SSshuttle.create_ship(template, upgrade_selections, selected_theme)
+	// Loading a theme changes suffix/geometry: never mutate the shared catalog template.
+	var/obj/structure/overmap/ship/target = SSshuttle.create_ship(template.type, upgrade_selections, selected_theme, subfaction)
 	if(!istype(target))
 		spawning_ship = FALSE
 		// A refusal at the map-volume ceiling is transient - transit space frees up in

@@ -239,6 +239,12 @@
 		return
 
 	var/image/item_overlay = image(holding)
+	// VOIDCREW EDIT START - align the hover preview with wide equipment slots.
+#ifdef HORUSHERESY
+	if(icon != hud.ui_style && icon == ui_inventory_icon(hud.ui_style))
+		item_overlay.pixel_x += 8
+#endif
+	// VOIDCREW EDIT END
 	item_overlay.alpha = 92
 
 	if(!holding.mob_can_equip(user, slot_id, disable_warning = TRUE, bypass_equip_delay_self = TRUE))

@@ -52,7 +52,7 @@ def included_sources(root):
 
     def visit(path):
         path = path.resolve()
-        if path in seen:
+        if path in seen or not path.exists():
             return
         seen.add(path)
         text = strip_comments(path.read_text(encoding="utf-8"))

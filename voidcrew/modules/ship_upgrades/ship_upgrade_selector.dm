@@ -41,7 +41,7 @@
 	/// Every hull on the shelf, cached: /datum/map_template/shuttle/voidcrew instances
 	var/list/purchasable_hulls = list()
 
-/datum/ship_upgrade_selector/New(mob/viewing_user, datum/map_template/shuttle/voidcrew/ship_template, datum/callback/completion_callback)
+/datum/ship_upgrade_selector/New(mob/viewing_user, datum/map_template/shuttle/voidcrew/ship_template, datum/callback/completion_callback, auto_select = TRUE)
 	. = ..()
 	user = viewing_user
 	on_complete = completion_callback
@@ -51,7 +51,8 @@
 	purchasable_hulls = get_purchasable_ship_templates()
 
 	// No hull handed to us (opened straight from the join menu): start on the first one
-	set_template(ship_template || (length(purchasable_hulls) ? purchasable_hulls[1] : null))
+	if(auto_select)
+		set_template(ship_template || (length(purchasable_hulls) ? purchasable_hulls[1] : null))
 
 /datum/ship_upgrade_selector/Destroy()
 	user = null
@@ -155,9 +156,11 @@
 	var/list/slot_ids = get_current_slot_ids()
 
 	for(var/slot_key in slot_ids)
-		var/datum/ship_upgrade_module/default_module = get_default_module_for_ship_slot(template.type, slot_key)
-		if(default_module && is_module_available_for_theme(default_module, selected_theme?.id))
-			selected_upgrades[slot_key] = default_module
+		for(var/module_id in available_modules)
+			var/datum/ship_upgrade_module/module = available_modules[module_id]
+			if(module.slot == slot_key && module.is_default && is_module_available_for_theme(module, selected_theme?.id))
+				selected_upgrades[slot_key] = module
+				break
 
 /**
  * Get the upgrade slot IDs for the current theme (or template default)
@@ -165,7 +168,7 @@
 /datum/ship_upgrade_selector/proc/get_current_slot_ids()
 	if(selected_theme?.upgrade_slot_ids && length(selected_theme.upgrade_slot_ids))
 		return selected_theme.upgrade_slot_ids
-	return template.upgrade_slot_ids
+	return template?.upgrade_slot_ids || list()
 
 /**
  * Check if a module is unlocked (or is default/free)
@@ -223,6 +226,10 @@
 	var/datum/callback/completion = on_complete
 	on_complete = null
 	completion.Invoke(chosen, upgrades, theme)
+
+/// The legacy selector has no affiliation; the purchase wizard supplies one.
+/datum/ship_upgrade_selector/proc/get_launch_subfaction()
+	return null
 
 /**
  * Static data - hull shelf, current hull info and its themes.
@@ -459,6 +466,8 @@
 /datum/ship_upgrade_selector/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	if(..())
 		return TRUE
+	if(ui.user != user || !on_complete)
+		return FALSE
 
 	. = TRUE
 
@@ -586,7 +595,7 @@
 			var/slot_key = params["slot"]
 			var/module_id = params["module_id"]
 
-			if(!slot_key)
+			if(!template || !(slot_key in get_current_slot_ids()))
 				return FALSE
 
 			if(!module_id)
@@ -629,7 +638,7 @@
 			// Validate all selections are unlocked
 			for(var/slot_key in selected_upgrades)
 				var/datum/ship_upgrade_module/module = selected_upgrades[slot_key]
-				if(module && !is_module_unlocked(module))
+				if(!module || !(slot_key in get_current_slot_ids()) || available_modules[module.id] != module || module.slot != slot_key || !is_module_available_for_theme(module, selected_theme?.id) || !is_module_unlocked(module))
 					to_chat(user, span_warning("You have selected upgrades you don't own!"))
 					return FALSE
 
@@ -637,11 +646,12 @@
 			var/datum/map_template/shuttle/voidcrew/launching = template
 			var/list/launching_upgrades = selected_upgrades.Copy()
 			var/datum/ship_theme/launching_theme = selected_theme
+			var/launching_subfaction = get_launch_subfaction()
 			var/datum/callback/completion = on_complete
 			on_complete = null
 
 			ui.close()
-			completion?.Invoke(launching, launching_upgrades, launching_theme)
+			completion?.Invoke(launching, launching_upgrades, launching_theme, launching_subfaction)
 
 		if("cancel")
 			// ui_close reports the cancellation for us
