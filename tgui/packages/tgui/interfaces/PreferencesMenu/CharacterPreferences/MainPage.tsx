@@ -302,7 +302,7 @@ function MainFeature(props: MainFeatureProps) {
         <Box
           className={classes([
             'preferences32x32',
-            catalog.icons![currentValue],
+            catalog.icons?.[currentValue],
             'centered-image',
           ])}
           style={{
