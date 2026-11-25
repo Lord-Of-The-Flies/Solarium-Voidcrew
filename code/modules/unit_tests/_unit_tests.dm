@@ -464,6 +464,9 @@
 	return update_designs()
 // VOIDCREW EDIT ADDITION END
 
+#ifdef ASTRAMILITARUM
+#include "../../../Astramilitarum/code/modules/unit_tests/voidcrew_ship_factions.dm" // SOLARIUM EDIT ADDITION
+#endif
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
 #endif

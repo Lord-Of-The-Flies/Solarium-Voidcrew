@@ -125,9 +125,9 @@
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
 	inv_box.name = "id"
-	inv_box.icon = ui_style
+	inv_box.icon = ui_inventory_icon(ui_style) // VOIDCREW EDIT - wide slot artwork
 	inv_box.icon_state = "id"
-	inv_box.icon_full = "template_small"
+	inv_box.icon_full = inv_box.icon != ui_style ? "id" : "template_small" // VOIDCREW EDIT - supplied wide background
 	inv_box.screen_loc = ui_id
 	inv_box.slot_id = ITEM_SLOT_ID
 	static_inventory += inv_box
@@ -152,9 +152,9 @@
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
 	inv_box.name = "back"
-	inv_box.icon = ui_style
+	inv_box.icon = ui_inventory_icon(ui_style) // VOIDCREW EDIT - wide slot artwork
 	inv_box.icon_state = "back"
-	inv_box.icon_full = "template_small"
+	inv_box.icon_full = inv_box.icon != ui_style ? "back" : "template_small" // VOIDCREW EDIT - supplied wide background
 	inv_box.screen_loc = ui_back
 	inv_box.slot_id = ITEM_SLOT_BACK
 	static_inventory += inv_box
@@ -179,9 +179,9 @@
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
 	inv_box.name = "suit storage"
-	inv_box.icon = ui_style
+	inv_box.icon = ui_inventory_icon(ui_style) // VOIDCREW EDIT - wide slot artwork
 	inv_box.icon_state = "suit_storage"
-	inv_box.icon_full = "template"
+	inv_box.icon_full = inv_box.icon != ui_style ? "suit_storage" : "template" // VOIDCREW EDIT - supplied wide background
 	inv_box.screen_loc = ui_sstore1
 	inv_box.slot_id = ITEM_SLOT_SUITSTORE
 	static_inventory += inv_box
@@ -243,9 +243,9 @@
 
 	inv_box = new /atom/movable/screen/inventory(null, src)
 	inv_box.name = "belt"
-	inv_box.icon = ui_style
+	inv_box.icon = ui_inventory_icon(ui_style) // VOIDCREW EDIT - wide slot artwork
 	inv_box.icon_state = "belt"
-	inv_box.icon_full = "template_small"
+	inv_box.icon_full = inv_box.icon != ui_style ? "belt" : "template_small" // VOIDCREW EDIT - supplied wide background
 	inv_box.screen_loc = ui_belt
 	inv_box.slot_id = ITEM_SLOT_BELT
 	static_inventory += inv_box
@@ -402,16 +402,16 @@
 	if(screenmob.hud_used)
 		if(screenmob.hud_used.hud_shown)
 			if(H.s_store)
-				H.s_store.screen_loc = ui_sstore1
+				H.s_store.screen_loc = ui_inventory_item_position(ui_sstore1) // VOIDCREW EDIT - center item
 				screenmob.client.screen += H.s_store
 			if(H.wear_id)
-				H.wear_id.screen_loc = ui_id
+				H.wear_id.screen_loc = ui_inventory_item_position(ui_id) // VOIDCREW EDIT - center item
 				screenmob.client.screen += H.wear_id
 			if(H.belt)
-				H.belt.screen_loc = ui_belt
+				H.belt.screen_loc = ui_inventory_item_position(ui_belt) // VOIDCREW EDIT - center item
 				screenmob.client.screen += H.belt
 			if(H.back)
-				H.back.screen_loc = ui_back
+				H.back.screen_loc = ui_inventory_item_position(ui_back) // VOIDCREW EDIT - center item
 				screenmob.client.screen += H.back
 			if(H.l_store)
 				H.l_store.screen_loc = ui_storage1

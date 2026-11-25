@@ -185,8 +185,11 @@ export const DmTarget = new Juke.Target({
     NamedVersionFile,
   ],
   outputs: ({ get }) => {
-    if (get(DmVersionParameter)) {
-      return []; // Always rebuild when dm version is provided
+    // Defines change what is compiled, but Juke's cache does not track them.
+    // Rebuild whenever any -D flag is supplied so a plain build never masks
+    // a module build (Astramilitarum/Horusheresy) that uses the same output.
+    if (get(DmVersionParameter) || get(DefineParameter).length > 0) {
+      return []; // Always rebuild when defines are provided
     }
     return [`${DME_NAME}.dmb`, `${DME_NAME}.rsc`];
   },
@@ -337,6 +340,7 @@ export const TguiTarget = new Juke.Target({
     'tgui/rspack.config.ts',
     'tgui/**/package.json',
     'tgui/packages/**/*.+(js|cjs|ts|tsx|jsx|scss)',
+    'Horusheresy/tgui/**',
   ],
   outputs: [
     'tgui/public/tgui.bundle.css',

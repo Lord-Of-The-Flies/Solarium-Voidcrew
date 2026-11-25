@@ -36,3 +36,32 @@
 /proc/ui_perk_position(perk_count)
 	var/y_off = perk_count < 1 ? 0 : perk_count/2
 	return "WEST+0.5:12,NORTH-2-[y_off]:20"
+
+// VOIDCREW EDIT START - Horusheresy wide inventory artwork.
+/proc/ui_inventory_icon(style)
+#ifdef HORUSHERESY
+	switch(style)
+		if('Horusheresy/icons/hud/screen_midnight.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_midnight.dmi'
+		if('Horusheresy/icons/hud/screen_plasmafire.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_plasmafire.dmi'
+		if('Horusheresy/icons/hud/screen_slimecore.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_slimecore.dmi'
+		if('Horusheresy/icons/hud/screen_operative.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_operative.dmi'
+		if('Horusheresy/icons/hud/screen_glass.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_glass.dmi'
+		if('Horusheresy/icons/hud/screen_detective.dmi')
+			return 'Horusheresy/icons/hud/48x32/hands_screen_detective.dmi'
+#endif
+	return style
+
+/proc/ui_inventory_item_position(position)
+#ifdef HORUSHERESY
+	var/list/coordinates = splittext(position, ",")
+	var/list/horizontal = splittext(coordinates[1], ":")
+	return "[horizontal[1]]:[text2num(horizontal[2]) + 8],[coordinates[2]]"
+#else
+	return position
+#endif
+// VOIDCREW EDIT END

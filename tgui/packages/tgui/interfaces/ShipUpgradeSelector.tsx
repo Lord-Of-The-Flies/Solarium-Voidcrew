@@ -43,7 +43,7 @@ type ShipTheme = {
   jobs: JobPreview[];
 };
 
-type HullEntry = {
+export type HullEntry = {
   id: string;
   name: string;
   short_name: string;
@@ -107,7 +107,7 @@ type HoverModule = {
   moduleId: string;
 };
 
-type ShipUpgradeSelectorData = {
+export type ShipUpgradeSelectorData = {
   ship_name: string;
   ship_short_name: string;
   ship_template: string;
@@ -145,7 +145,9 @@ const SPLIT_DEFAULT = 0.6;
 const SPLIT_MIN = 0.15;
 const SPLIT_MAX = 0.85;
 
-export const ShipUpgradeSelector = () => {
+export const ShipUpgradeSelector = (
+  props: { onBack?: () => void; wizardHeading?: ReactNode } = {},
+) => {
   const { act, data } = useBackend<ShipUpgradeSelectorData>();
   const {
     ship_name,
@@ -210,8 +212,9 @@ export const ShipUpgradeSelector = () => {
   }, [dragging]);
 
   // Effective tab - if no themes, the theme tab collapses into upgrades
-  const effectiveTab =
-    activeTab === 'hull'
+  const effectiveTab = props.onBack
+    ? 'upgrades'
+    : activeTab === 'hull'
       ? 'hull'
       : activeTab === 'theme' && has_themes && themes?.length > 0
         ? 'theme'
@@ -289,8 +292,12 @@ export const ShipUpgradeSelector = () => {
       <Stack.Item>
         <Stack justify="flex-end">
           <Stack.Item>
-            <Button icon="times" color="bad" onClick={() => act('cancel')}>
-              Cancel
+            <Button
+              icon={props.onBack ? 'arrow-left' : 'times'}
+              color="bad"
+              onClick={props.onBack ?? (() => act('cancel'))}
+            >
+              {props.onBack ? 'Back' : 'Cancel'}
             </Button>
           </Stack.Item>
           <Stack.Item ml={1}>
@@ -330,8 +337,8 @@ export const ShipUpgradeSelector = () => {
   return (
     <Window
       title={ship_name ? `Shipyard: ${ship_name}` : 'Shipyard'}
-      width={hasPreview ? 1200 : 650}
-      height={hasPreview ? 900 : 650}
+      width={hasPreview || props.onBack ? 1200 : 650}
+      height={hasPreview || props.onBack ? 900 : 650}
     >
       <Window.Content>
         {/* Purchase Confirmation Modal */}
@@ -407,6 +414,7 @@ export const ShipUpgradeSelector = () => {
             userSelect: dragging ? 'none' : undefined,
           }}
         >
+          {props.wizardHeading}
           {/* Top row: the big ship preview, spanning the whole window */}
           {hasPreview && !!preview && (
             <div
@@ -460,7 +468,9 @@ export const ShipUpgradeSelector = () => {
                             {previewLabel}
                           </Box>
                         )}
-                        Hover a theme or module to preview it on the map.
+                        {props.onBack
+                          ? 'Hover a module to preview it on the map.'
+                          : 'Hover a theme or module to preview it on the map.'}
                       </Box>
                     </Stack.Item>
                   </Stack>
@@ -498,32 +508,34 @@ export const ShipUpgradeSelector = () => {
                   )}
 
                   {/* Tabs */}
-                  <Stack.Item>
-                    <Tabs>
-                      <Tabs.Tab
-                        selected={effectiveTab === 'hull'}
-                        onClick={() => setActiveTab('hull')}
-                      >
-                        Hull
-                      </Tabs.Tab>
-                      {/* !! matters: DM sends has_themes as 0/1, and a bare 0
-                          renders as the text "0" in the tab strip */}
-                      {!!has_themes && !!themes?.length && (
+                  {!props.onBack && (
+                    <Stack.Item>
+                      <Tabs>
                         <Tabs.Tab
-                          selected={effectiveTab === 'theme'}
-                          onClick={() => setActiveTab('theme')}
+                          selected={effectiveTab === 'hull'}
+                          onClick={() => setActiveTab('hull')}
                         >
-                          Theme
+                          Hull
                         </Tabs.Tab>
-                      )}
-                      <Tabs.Tab
-                        selected={effectiveTab === 'upgrades'}
-                        onClick={() => setActiveTab('upgrades')}
-                      >
-                        Upgrades
-                      </Tabs.Tab>
-                    </Tabs>
-                  </Stack.Item>
+                        {/* !! matters: DM sends has_themes as 0/1, and a bare 0
+                          renders as the text "0" in the tab strip */}
+                        {!!has_themes && !!themes?.length && (
+                          <Tabs.Tab
+                            selected={effectiveTab === 'theme'}
+                            onClick={() => setActiveTab('theme')}
+                          >
+                            Theme
+                          </Tabs.Tab>
+                        )}
+                        <Tabs.Tab
+                          selected={effectiveTab === 'upgrades'}
+                          onClick={() => setActiveTab('upgrades')}
+                        >
+                          Upgrades
+                        </Tabs.Tab>
+                      </Tabs>
+                    </Stack.Item>
+                  )}
 
                   {/* Hull Selection */}
                   {effectiveTab === 'hull' && (
@@ -953,7 +965,7 @@ function describeHull(hull: HullEntry): string {
 }
 
 /** Part cost, each class red when the player is short of it. */
-const PartCostStrip = (props: {
+export const PartCostStrip = (props: {
   cost: Partial<PartsInventory> | undefined;
   parts: PartsInventory;
 }) => {
@@ -1089,7 +1101,7 @@ const HullRow = (props: {
 };
 
 /** Compact one-line readout of the player's spendable parts. */
-const PartsStrip = (props: { parts: PartsInventory }) => (
+export const PartsStrip = (props: { parts: PartsInventory }) => (
   <Stack>
     {Object.entries(props.parts || {}).map(([partClass, count]) => (
       <Stack.Item key={partClass} ml={2}>

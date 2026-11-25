@@ -522,6 +522,11 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 		if (item.icon == ui_style)
 			item.icon = new_ui_style
 
+	// VOIDCREW EDIT START - update equipment using a separate wide DMI too.
+	for(var/atom/movable/screen/inventory/item in static_inventory)
+		if(item.icon == ui_inventory_icon(ui_style))
+			item.icon = ui_inventory_icon(new_ui_style)
+	// VOIDCREW EDIT END
 	ui_style = new_ui_style
 	build_hand_slots()
 
@@ -566,7 +571,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	for(var/i in 1 to mymob.held_items.len)
 		hand_box = new /atom/movable/screen/inventory/hand(null, src)
 		hand_box.name = mymob.get_held_index_name(i)
-		hand_box.icon = ui_style
+		hand_box.icon = ui_inventory_icon(ui_style) // VOIDCREW EDIT - wide hand artwork
 		hand_box.icon_state = "hand_[mymob.held_index_to_dir(i)]"
 		hand_box.screen_loc = ui_hand_position(i)
 		hand_box.held_index = i

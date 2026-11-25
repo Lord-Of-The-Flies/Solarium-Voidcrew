@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import path from 'node:path';
 
 import { defineConfig } from '@rspack/cli';
@@ -21,6 +22,18 @@ export function createStats(verbose: boolean): StatsOptions {
 }
 
 const dirname = path.resolve();
+
+// Solarium: private Horusheresy TGUI interfaces live in a submodule. When it is
+// not checked out, resolve the same import to a local no-op loader so the core
+// build works without the submodule.
+const solariumTguiPath = path.resolve(
+  dirname,
+  '../Horusheresy/tgui/packages/solarium_tgui',
+);
+const solariumTguiFallbackPath = path.resolve(
+  dirname,
+  './packages/solarium_tgui_fallback',
+);
 
 export default defineConfig({
   context: dirname,
@@ -79,19 +92,11 @@ export default defineConfig({
       },
 
       {
+        // Inline SVGs: the game serves TGUI from an asset-cache URL, so a
+        // site-root URL like /bg-nanotrasen.svg is a 404 in-game. Data URIs
+        // keep emblems working in every transport, including browse_rsc.
         test: /\.svg$/,
-        oneOf: [
-          {
-            issuer: /\.(s)?css$/,
-            type: 'asset/inline',
-          },
-          {
-            type: 'asset/resource',
-          },
-        ],
-        generator: {
-          filename: '[name][ext]',
-        },
+        type: 'asset/inline',
       },
     ],
   },
@@ -120,11 +125,17 @@ export default defineConfig({
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    // Private interfaces live outside tgui/ (Horusheresy submodule), so make
+    // the workspace node_modules resolvable from any issuer path.
+    modules: [path.resolve(dirname, './node_modules'), 'node_modules'],
     alias: {
       tgui: path.resolve(dirname, './packages/tgui'),
       'tgui-panel': path.resolve(dirname, './packages/tgui-panel'),
       'tgui-say': path.resolve(dirname, './packages/tgui-say'),
       'tgui-dev-server': path.resolve(dirname, './packages/tgui-dev-server'),
+      solarium_tgui: fs.existsSync(solariumTguiPath)
+        ? solariumTguiPath
+        : solariumTguiFallbackPath,
     },
   },
   stats: createStats(true),

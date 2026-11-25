@@ -4,13 +4,15 @@
  * @license MIT
  */
 
+// Solarium: private Horusheresy interfaces take precedence when available.
+import { loadInterface as loadSolariumInterface } from 'solarium_tgui';
+// voidcrew edit - modular tgui
+import { loadInterface } from '../voidcrew_tgui';
 import { useBackend } from './backend';
 import { useDebug } from './debug';
 import { LoadingScreen } from './interfaces/common/LoadingScreen';
 import { Window } from './layouts';
 
-// voidcrew edit - modular tgui
-import { loadInterface } from '../voidcrew_tgui';
 // const requireInterface = require.context('./interfaces');
 
 const routingError =
@@ -86,7 +88,8 @@ export function getRoutedComponent() {
     const interfacePath = interfacePathBuilder(name);
     try {
       // voidcrew edit - modular TGUI
-      esModule = loadInterface(interfacePath);
+      esModule =
+        loadSolariumInterface(interfacePath) || loadInterface(interfacePath);
     } catch (err) {
       if (err.code !== 'MODULE_NOT_FOUND') {
         throw err;

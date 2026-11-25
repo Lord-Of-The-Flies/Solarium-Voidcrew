@@ -3001,7 +3001,11 @@
 /obj/structure/overmap/ship/proc/set_ship_name(new_name, mob/user, ignore_cooldown = FALSE)
 	if(!new_name)
 		return FALSE
+#ifdef ASTRAMILITARUM
+	new_name = reject_bad_text(ship_name_with_prefix(new_name, ship_prefix), MAX_NAME_LEN)
+#else
 	new_name = reject_bad_text(trim(new_name), MAX_NAME_LEN)
+#endif
 	if(!new_name)
 		if(user)
 			to_chat(user, span_warning("Invalid ship name."))
@@ -3014,21 +3018,7 @@
 		return FALSE
 
 	var/old_name = name
-	var/old_team_name = ship_team?.name
-	name = new_name
-	display_name = new_name
-	if(shuttle)
-		shuttle.name = new_name
-	if(ship_team)
-		ship_team.name = new_name
-		// Keep crew paychecks pointed at the renamed ship budget
-		for(var/datum/mind/crewmate as anything in ship_team.members)
-			if(crewmate.assigned_role?.paycheck_department == old_team_name)
-				crewmate.assigned_role.paycheck_department = new_name
-	if(ship_account)
-		SSeconomy.department_accounts -= list("[ship_account.account_holder]" = "[ship_account.account_holder] Budget")
-		ship_account.account_holder = new_name
-		SSeconomy.department_accounts += list("[new_name]" = "[new_name] Budget")
+	synchronize_ship_name(new_name)
 
 	if(!ignore_cooldown)
 		COOLDOWN_START(src, rename_cooldown, SHIP_RENAME_COOLDOWN)
@@ -3044,6 +3034,22 @@
 		message_admins("[key_name_admin(user)] renamed vessel '[old_name]' to '[new_name]'")
 		log_shuttle("[key_name(user)] renamed ship [old_name] to [new_name]")
 	return TRUE
+
+/obj/structure/overmap/ship/proc/synchronize_ship_name(new_name)
+	var/old_team_name = ship_team?.name
+	name = new_name
+	display_name = new_name
+	if(shuttle)
+		shuttle.name = new_name
+	if(ship_team)
+		ship_team.name = new_name
+		for(var/datum/mind/crewmate as anything in ship_team.members)
+			if(crewmate.assigned_role?.paycheck_department == old_team_name)
+				crewmate.assigned_role.paycheck_department = new_name
+	if(ship_account)
+		SSeconomy.department_accounts -= list("[ship_account.account_holder]" = "[ship_account.account_holder] Budget")
+		ship_account.account_holder = new_name
+		SSeconomy.department_accounts += list("[new_name]" = "[new_name] Budget")
 
 /obj/structure/overmap/ship/proc/adjust_speed(n_x, n_y)
 	var/offset = 1

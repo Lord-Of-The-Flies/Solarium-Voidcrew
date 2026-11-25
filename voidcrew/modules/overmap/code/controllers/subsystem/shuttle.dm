@@ -58,11 +58,11 @@
 	// wait two minutes then clear a different ship's active load as the old path did.
 	port.load_roundstart()
 
-/datum/controller/subsystem/shuttle/proc/create_ship(ship_template_to_spawn, list/upgrade_selections, datum/ship_theme/selected_theme)
+/datum/controller/subsystem/shuttle/proc/create_ship(ship_template_to_spawn, list/upgrade_selections, datum/ship_theme/selected_theme, subfaction = null)
 	RETURN_TYPE(/obj/structure/overmap/ship)
-	return run_template_load(CALLBACK(src, PROC_REF(create_ship_impl), ship_template_to_spawn, upgrade_selections, selected_theme))
+	return run_template_load(CALLBACK(src, PROC_REF(create_ship_impl), ship_template_to_spawn, upgrade_selections, selected_theme, subfaction))
 
-/datum/controller/subsystem/shuttle/proc/create_ship_impl(ship_template_to_spawn, list/upgrade_selections, datum/ship_theme/selected_theme, datum/shuttle_template_load/load_owner)
+/datum/controller/subsystem/shuttle/proc/create_ship_impl(ship_template_to_spawn, list/upgrade_selections, datum/ship_theme/selected_theme, subfaction = null, datum/shuttle_template_load/load_owner)
 
 	// Handle both type paths and already-instantiated templates
 	var/datum/map_template/shuttle/voidcrew/template_instance
@@ -154,6 +154,10 @@
 	loaded.current_ship = ship_to_spawn
 	ship_to_spawn.name = loaded.name
 	ship_to_spawn.shuttle = loaded
+#ifdef ASTRAMILITARUM
+	if(subfaction)
+		ship_to_spawn.set_ship_affiliation(subfaction)
+#endif
 
 	// Fresh ships spawn parked in deep space with zero speed - still the starfield
 	// the template load asserted on our areas
@@ -285,4 +289,3 @@
 	if(!check_rights(R_ADMIN))
 		return
 	src.holder.check_teams()
-

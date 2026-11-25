@@ -206,11 +206,14 @@
 			DIRECT_OUTPUT(user, link(wiki_url))
 
 		if("purchase_ship")
-			// Close this menu and open the ship shop - hull, theme and modules all
-			// live in the one UI that shows you what you're buying
+			// Affiliation -> hull -> upgrades, with one owner for the whole flow.
 			ui.close()
 			var/datum/callback/cb = CALLBACK(user, TYPE_PROC_REF(/mob/dead/new_player, on_upgrades_confirmed))
+#if defined(ASTRAMILITARUM) && defined(HORUSHERESY)
+			var/datum/ship_upgrade_selector/purchase_wizard/selector = new(user, null, cb)
+#else
 			var/datum/ship_upgrade_selector/selector = new(user, null, cb)
+#endif
 			selector.ui_interact(user)
 
 		if("requisition_hull")
