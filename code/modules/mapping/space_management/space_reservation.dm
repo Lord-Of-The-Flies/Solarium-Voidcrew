@@ -393,6 +393,12 @@
 	LAZYADD(SSmapping.turf_reservations, src)
 
 /datum/turf_reservation/Destroy()
-	Release()
+	release_on_destroy()
 	LAZYREMOVE(SSmapping.turf_reservations, src)
 	return ..()
+
+/// VOIDCREW EDIT - large releases intentionally yield inside qdel (see Release()),
+/// so keep that blocking path out of Destroy's sleep lint.
+/datum/turf_reservation/proc/release_on_destroy()
+	ALLOWED_TO_SLEEP(TRUE)
+	Release()

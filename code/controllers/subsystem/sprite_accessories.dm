@@ -63,6 +63,8 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	setup_lists()
 	init_hair_gradients()
 	init_hair_masks()
+	// ERP port: builds sprite_accessories[feature_key][name] used by mutant bodypart overlays and customization prefs
+	make_sprite_accessory_references()
 
 /// Sets up all of the lists for later utilization in the round and building sprites.
 /// In an ideal world we could tack everything that just needed `DEFAULT_SPRITE_LIST` into static variables on the top, but due to the initialization order

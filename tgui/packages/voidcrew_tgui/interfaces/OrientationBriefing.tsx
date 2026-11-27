@@ -35,16 +35,16 @@ type Data = {
 type TabName = 'welcome' | 'zones' | 'combat';
 
 const TABS: { id: TabName; label: string; icon: string }[] = [
-  { id: 'welcome', label: 'Welcome', icon: 'hand-spock' },
-  { id: 'zones', label: 'Zones', icon: 'circle-half-stroke' },
-  { id: 'combat', label: 'Ship Combat', icon: 'crosshairs' },
+  { id: 'welcome', label: 'Добро пожаловать', icon: 'hand-spock' },
+  { id: 'zones', label: 'Зоны', icon: 'circle-half-stroke' },
+  { id: 'combat', label: 'Корабельный бой', icon: 'crosshairs' },
 ];
 
 export const OrientationBriefing = () => {
   const [tab, setTab] = useState<TabName>('welcome');
 
   return (
-    <Window title="Welcome to Voidcrew" width={600} height={560}>
+    <Window title="Добро пожаловать в Voidcrew" width={600} height={560}>
       <Window.Content scrollable>
         <Stack vertical fill>
           <Stack.Item>
@@ -77,33 +77,27 @@ const WelcomeTab = () => {
   const { act } = useBackend<Data>();
 
   return (
-    <Section title="This server is in early testing">
+    <Section title="Сервер в раннем тестировании">
       <NoticeBox>
-        Things will break. Expect bugs, half-finished features and rounds that
-        end badly through no fault of your own.
+        Всё будет ломаться. Ожидайте баги, недоделанные функции и раунды, которые плохо заканчиваются не по вашей вине.
       </NoticeBox>
       <Box mb={1}>
-        Report anything broken to <b>jackrip</b> on the Discord, what you were
-        doing and roughly when is usually enough to find it in the logs. The
-        wiki covers ships, the overmap, missions and everything else Voidcrew
-        adds, in far more detail than this window.
+        Обо всех поломках сообщайте <b>jackrip</b> в Discord: что вы делали и примерно когда — обычно этого достаточно, чтобы найти проблему в логах. Вики подробно описывает корабли, овермап, задания и всё остальное, что добавляет Voidcrew, — гораздо подробнее, чем это окно.
       </Box>
       <Stack mb={2}>
         <Stack.Item>
           <Button icon="comments" onClick={() => act('open_discord')}>
-            Open the Discord
+            Открыть Discord
           </Button>
         </Stack.Item>
         <Stack.Item>
           <Button icon="book" onClick={() => act('open_wiki')}>
-            Open the Wiki
+            Открыть вики
           </Button>
         </Stack.Item>
       </Stack>
       <Box color="label">
-        You crew a ship on an overmap. Take contracts, mine, trade and explore;
-        fly further out for better pay and worse odds. The other two tabs cover
-        where you are allowed to go and how to arm the ship.
+        Вы управляете кораблём на овермапе. Берите контракты, добывайте ресурсы, торгуйте и исследуйте; чем дальше вы летите, тем выше оплата и тем хуже шансы. Две другие вкладки рассказывают, куда можно летать и как вооружить корабль.
       </Box>
     </Section>
   );
@@ -115,10 +109,9 @@ const ZonesTab = () => {
   const { zones } = data;
 
   return (
-    <Section title="The three rings">
+    <Section title="Три кольца">
       <Box mb={2} color="label">
-        Your helm console always shows which ring you are in. Crossing a border
-        takes ten seconds and can be cancelled until it completes.
+        Ваша консоль управления всегда показывает, в каком кольце вы находитесь. Пересечение границы занимает десять секунд, и его можно отменить до завершения.
       </Box>
       {zones.map((zone) => (
         <Box key={zone.name} mb={2}>
@@ -137,8 +130,7 @@ const ZonesTab = () => {
         </Box>
       ))}
       <NoticeBox mt={2}>
-        Farther out, be ready for meteors, radiation storms on planets, hostile
-        crews and worse.
+        Чем дальше, тем выше риск: метеоры, радиационные бури на планетах, враждебные экипажи и кое-что похуже.
       </NoticeBox>
     </Section>
   );
@@ -150,11 +142,9 @@ const CombatTab = () => {
   const { research_path, combat_researched, ship_name } = data;
 
   return (
-    <Section title="Ship combat gear">
+    <Section title="Корабельное боевое снаряжение">
       <Box mb={2}>
-        Shields, turrets, missiles and interdictors are researched on your own
-        ship, not bought. Use an R&amp;D console wired to your ship&apos;s
-        research server; each node unlocks a board you print and build in.
+        Щиты, турели, ракеты и интердикторы исследуются на вашем корабле, а не покупаются. Используйте консоль НИОКР, подключённую к исследовательскому серверу корабля; каждый узел открывает плату, которую вы печатаете и устанавливаете.
       </Box>
       {research_path.map((node) => (
         <Box key={node.name} mb={1}>
@@ -164,15 +154,11 @@ const CombatTab = () => {
       ))}
       {combat_researched ? (
         <NoticeBox success mt={2}>
-          {ship_name ?? 'Your ship'} has Shuttle Warfare Systems researched. You
-          can build shields and weapons whenever you are ready.
+          {ship_name ?? 'Ваш корабль'} — системы шаттлового боя исследованы. Вы можете строить щиты и оружие, когда будете готовы.
         </NoticeBox>
       ) : (
         <NoticeBox danger mt={2}>
-          {ship_name ?? 'Your ship'} has no Shuttle Warfare Systems research yet:
-          no shields, nothing to shoot back with. Take contracts in the middle
-          ring, earn research points, and stay out of the outer ring until you
-          are equipped.
+          {ship_name ?? 'Ваш корабль'} ещё не исследовал системы шаттлового боя: нет щитов и нечем отвечать. Берите контракты в среднем кольце, зарабатывайте исследовательские очки и не суйтесь во внешнее кольцо, пока не экипируетесь.
         </NoticeBox>
       )}
     </Section>

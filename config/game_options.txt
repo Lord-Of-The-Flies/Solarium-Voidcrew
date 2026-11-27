@@ -606,3 +606,28 @@ SPY_HARD_REWARD_TC_THRESHOLD 15
 ## Repeat for each English word that translated output must not contain.
 ## Keep the real list in private server configuration, outside version control.
 #TRANSLATE_OUTPUT_BLOCKED_WORD exampletoken
+
+## ERP port: additional roundstart species
+ROUNDSTART_RACES teshari
+ROUNDSTART_RACES vulpkanin
+ROUNDSTART_RACES tajaran
+ROUNDSTART_RACES unathi
+ROUNDSTART_RACES skrell
+ROUNDSTART_RACES akula
+ROUNDSTART_RACES aquatic
+ROUNDSTART_RACES dwarf
+ROUNDSTART_RACES insect
+ROUNDSTART_RACES mammal
+ROUNDSTART_RACES serpentid
+ROUNDSTART_RACES vox
+ROUNDSTART_RACES vox_primalis
+ROUNDSTART_RACES xeno
+ROUNDSTART_RACES synth
+ROUNDSTART_RACES lycan
+ROUNDSTART_RACES protean
+ROUNDSTART_RACES ghoul
+ROUNDSTART_RACES shadekin
+ROUNDSTART_RACES arachnid
+ROUNDSTART_RACES humanoid
+ROUNDSTART_RACES mutant
+ROUNDSTART_RACES mush

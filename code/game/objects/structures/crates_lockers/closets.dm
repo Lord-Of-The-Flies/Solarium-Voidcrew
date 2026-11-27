@@ -345,31 +345,31 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 /obj/structure/closet/examine(mob/user)
 	. = ..()
 	if(id_card)
-		. += span_notice("It can be [EXAMINE_HINT("marked")] with a pen.")
+		. += span_notice("Его можно [EXAMINE_HINT("пометить")] ручкой.")
 	if(can_weld_shut && !welded)
-		. += span_notice("It can be [EXAMINE_HINT("welded")] shut.")
+		. += span_notice("Его можно [EXAMINE_HINT("заварить")].")
 	if(welded)
-		. += span_notice("It's [EXAMINE_HINT("welded")] shut.")
+		. += span_notice("Он [EXAMINE_HINT("заварен")].")
 	if(anchorable && !anchored)
-		. += span_notice("It can be [EXAMINE_HINT("bolted")] to the ground.")
+		. += span_notice("Его можно [EXAMINE_HINT("прикрутить")] к полу.")
 	if(anchored)
-		. += span_notice("It's [anchorable ? EXAMINE_HINT("bolted") : "attached firmly"] to the ground.")
+		. += span_notice("Он [anchorable ? EXAMINE_HINT("прикручен") : "намертво прикреплён"] к полу.")
 	if(length(paint_jobs))
-		. += span_notice("It can be [EXAMINE_HINT("painted")] with another texture.")
+		. += span_notice("Его можно [EXAMINE_HINT("покрасить")], выбрав другую текстуру.")
 	if(HAS_TRAIT(user, TRAIT_SKITTISH) && divable)
-		. += span_notice("If you bump into [p_them()] while running, you will jump inside.")
+		. += span_notice("Если врезаться в него на бегу, вы запрыгнете внутрь.")
 
 	if(can_install_electronics)
 		if(!secure)
-			. += span_notice("You can install airlock electronics for access control.")
+			. += span_notice("Можно установить шлюзовую электронику для контроля доступа.")
 		else
-			. += span_notice("Its airlock electronics are [EXAMINE_HINT("screwed")] in place.")
+			. += span_notice("Его шлюзовая электроника [EXAMINE_HINT("прикручена")] на месте.")
 		if(!card_reader_installed && length(access_choices))
-			. += span_notice("You can install a card reader for further access control.")
+			. += span_notice("Можно установить считыватель карт для дополнительного контроля доступа.")
 		else if(card_reader_installed)
-			. += span_notice("The card reader could be [EXAMINE_HINT("pried")] out.")
-			. += span_notice("Swipe your PDA with an ID card/Just ID to change access levels.")
-			. += span_notice("Use multitool to [access_locked ? "unlock" : "lock"] the access panel.")
+			. += span_notice("Считыватель карт можно [EXAMINE_HINT("поддеть")].")
+			. += span_notice("Проведите ID-картой по КПК (или просто ID), чтобы изменить уровень доступа.")
+			. += span_notice("Используйте мультитул, чтобы [access_locked ? "разблокировать" : "заблокировать"] панель доступа.")
 
 /obj/structure/closet/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
@@ -377,53 +377,53 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 
 	if(isnull(held_item))
 		if(secure && !broken)
-			context[SCREENTIP_CONTEXT_RMB] = opened ? "Lock" : "Unlock"
+			context[SCREENTIP_CONTEXT_RMB] = opened ? "Заблокировать" : "Разблокировать"
 		if(!welded)
-			context[SCREENTIP_CONTEXT_LMB] = opened ? "Close" : "Open"
+			context[SCREENTIP_CONTEXT_LMB] = opened ? "Закрыть" : "Открыть"
 		screentip_change = TRUE
 
 	if(istype(held_item, cutting_tool))
 		if(opened)
-			context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+			context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 			screentip_change = TRUE
 		else
 			if(!welded && can_weld_shut)
-				context[SCREENTIP_CONTEXT_LMB] = "Weld"
+				context[SCREENTIP_CONTEXT_LMB] = "Заварить"
 				screentip_change = TRUE
 			else if(welded)
-				context[SCREENTIP_CONTEXT_LMB] = "Unweld"
+				context[SCREENTIP_CONTEXT_LMB] = "Разварить"
 				screentip_change = TRUE
 
 	if(istype(held_item) && held_item.tool_behaviour == TOOL_WRENCH && anchorable)
-		context[SCREENTIP_CONTEXT_RMB] = anchored ? "Unanchor" : "Anchor"
+		context[SCREENTIP_CONTEXT_RMB] = anchored ? "Открутить" : "Прикрутить"
 		screentip_change = TRUE
 
 	if(!locked && !opened && (welded || !can_weld_shut))
 		if(!secure)
 			if(!broken && can_install_electronics && istype(held_item, /obj/item/electronics/airlock))
-				context[SCREENTIP_CONTEXT_LMB] = "Install Electronics"
+				context[SCREENTIP_CONTEXT_LMB] = "Установить электронику"
 				screentip_change = TRUE
 		else
 			if(istype(held_item) && held_item.tool_behaviour == TOOL_SCREWDRIVER)
-				context[SCREENTIP_CONTEXT_LMB] = "Remove Electronics"
+				context[SCREENTIP_CONTEXT_LMB] = "Снять электронику"
 				screentip_change = TRUE
 			if(!card_reader_installed && length(access_choices) && !broken && can_install_electronics && istype(held_item, /obj/item/stock_parts/card_reader))
-				context[SCREENTIP_CONTEXT_LMB] = "Install Reader"
+				context[SCREENTIP_CONTEXT_LMB] = "Установить считыватель"
 				screentip_change = TRUE
 		if(card_reader_installed && istype(held_item) && held_item.tool_behaviour == TOOL_CROWBAR)
-			context[SCREENTIP_CONTEXT_LMB] = "Remove Reader"
+			context[SCREENTIP_CONTEXT_LMB] = "Снять считыватель"
 			screentip_change = TRUE
 
 	if(!locked && !opened)
 		if(id_card && IS_WRITING_UTENSIL(held_item))
-			context[SCREENTIP_CONTEXT_LMB] = "Rename"
+			context[SCREENTIP_CONTEXT_LMB] = "Переименовать"
 			screentip_change = TRUE
 		if(secure && card_reader_installed && !broken)
 			if(!access_locked && istype(held_item) && !isnull(held_item.GetID()))
-				context[SCREENTIP_CONTEXT_LMB] = "Change Access"
+				context[SCREENTIP_CONTEXT_LMB] = "Изменить доступ"
 				screentip_change = TRUE
 			if(istype(held_item) && istype(held_item) && held_item.tool_behaviour == TOOL_MULTITOOL)
-				context[SCREENTIP_CONTEXT_LMB] = "[access_locked ? "Unlock" : "Lock"] Access Panel"
+				context[SCREENTIP_CONTEXT_LMB] = "[access_locked ? "Разблокировать" : "Заблокировать"] панель доступа"
 				screentip_change = TRUE
 
 	return screentip_change ? CONTEXTUAL_SCREENTIP_SET : NONE
@@ -443,7 +443,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 			return FALSE
 	if(strong_grab)
 		if(user)
-			to_chat(user, span_danger("[pulledby] has an incredibly strong grip on [src], preventing it from opening."))
+			to_chat(user, span_danger("[pulledby] невероятно крепко держит [src], не давая открыть."))
 		return FALSE
 	var/turf/T = get_turf(src)
 	for(var/mob/living/L in T)

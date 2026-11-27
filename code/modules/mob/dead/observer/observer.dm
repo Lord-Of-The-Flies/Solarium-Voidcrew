@@ -315,19 +315,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(!HAS_TRAIT(src, TRAIT_CORPSELOCKED)) //corpse-locked have to confirm with the alert below
 			ghostize(TRUE)
 			return TRUE
-	var/response = tgui_alert(usr, "Are you sure you want to ghost? You won't be able to re-enter your body! [get_respawn_notice()]", "Confirm Ghost Observe", list("Ghost", "Stay in Body"))
-	if(response != "Ghost")
+	var/response = tgui_alert(usr, "Вы уверены, что хотите стать призраком? Вы больше не сможете вернуться в своё тело! [get_respawn_notice()]", "Подтверждение наблюдения", list("Стать призраком", "Остаться в теле"))
+	if(response != "Стать призраком")
 		return FALSE//didn't want to ghost after-all
 	ghostize(FALSE) // FALSE parameter is so we can never re-enter our body. U ded.
 	return TRUE
 
 /mob/eye/verb/ghost()
 	set category = "OOC"
-	set name = "Ghost"
-	set desc = "Relinquish your life and enter the land of the dead."
+	set name = "Стать призраком"
+	set desc = "Покинуть жизнь и отправиться в мир мёртвых."
 
-	var/response = tgui_alert(usr, "Are you sure you want to ghost? If you ghost whilst still alive you cannot re-enter your body!", "Confirm Ghost Observe", list("Ghost", "Stay in Body"))
-	if(response != "Ghost")
+	var/response = tgui_alert(usr, "Вы уверены, что хотите стать призраком? Если сделать это при жизни, вернуться в тело будет нельзя!", "Подтверждение наблюдения", list("Стать призраком", "Остаться в теле"))
+	if(response != "Стать призраком")
 		return
 	ghostize(FALSE)
 

@@ -90,7 +90,7 @@
 		log_aggro_change(previous_target, target)
 
 /mob/living/simple_animal/hostile/megafauna/handle_target_del(datum/source)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	// The parent clears target before calling LoseTarget(), so capture it now.
 	if(target == source)
 		log_aggro_change(target, null)

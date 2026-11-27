@@ -557,6 +557,10 @@ SUBSYSTEM_DEF(air)
 		if(!length(result))
 			continue
 		for(var/obj/machinery/atmospherics/considered_device in result)
+			// VOIDCREW EDIT: same guard as build_pipeline_blocking() - a deleted or never
+			// initialized neighbour has no ports to attach a pipeline to.
+			if(QDELETED(considered_device) || isnull(considered_device.nodes))
+				continue
 			if(!istype(considered_device, /obj/machinery/atmospherics/pipe))
 				considered_device.set_pipenet(net, borderline)
 				net.add_machinery_member(considered_device)

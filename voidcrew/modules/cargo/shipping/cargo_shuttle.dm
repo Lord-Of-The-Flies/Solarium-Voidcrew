@@ -356,7 +356,7 @@
 		return "Cargo shuttle is not available"
 
 	if(!istype(ship?.docked, /obj/structure/overmap/planet/empty))
-		return "Must be docked in space"
+		return "Нужно пристыковаться в открытом космосе"
 
 	target_ship = ship
 	docked_at = ship.docked

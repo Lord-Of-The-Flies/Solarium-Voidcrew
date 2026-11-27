@@ -17,7 +17,9 @@
 		moth_head.blend_icon(uni_icon('icons/mob/human/human_face.dmi', "motheyes_l"), ICON_OVERLAY)
 		moth_head.blend_icon(uni_icon('icons/mob/human/human_face.dmi', "motheyes_r"), ICON_OVERLAY)
 
-	var/datum/sprite_accessory/antennae = SSaccessories.moth_antennae_list[value]
+	var/datum/sprite_accessory/antennae = SSaccessories.moth_antennae_list?[value]
+	if(!antennae)
+		return moth_head.copy()
 
 	var/datum/universal_icon/icon_with_antennae = moth_head.copy()
 	icon_with_antennae.blend_icon(uni_icon(antennae.icon, "m_moth_antennae_[antennae.icon_state]_FRONT"), ICON_OVERLAY)

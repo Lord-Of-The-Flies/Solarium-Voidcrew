@@ -277,12 +277,14 @@ GLOBAL_LIST_INIT(ship_rcd_hull_designs, list(
 		for(var/wall_name in list("Plastitanium Wall", "Titanium Wall", "Iron Wall"))
 			var/list/wall_info = wall_types[wall_name]
 			if(istype(target, wall_info["path"]))
-				return wall_info["materials"].Copy()
+				var/list/materials = wall_info["materials"]
+				return materials.Copy()
 	if(isfloorturf(target))
 		for(var/floor_name in list("Plastitanium Floor", "Titanium Floor"))
 			var/list/floor_info = floor_types[floor_name]
 			if(istype(target, floor_info["path"]))
-				return floor_info["materials"].Copy()
+				var/list/materials = floor_info["materials"]
+				return materials.Copy()
 		// Plating can also be built with one RCD unit over a lattice.
 		if(istype(target, /turf/open/floor/plating))
 			return list(/datum/material/iron = SHIP_RCD_SILO_USE_AMOUNT)
@@ -458,6 +460,7 @@ GLOBAL_LIST_INIT(ship_rcd_hull_designs, list(
 
 /// Get the materials list for the currently selected floor type
 /obj/item/construction/rcd/internal/ship/proc/get_selected_floor_materials()
+	RETURN_TYPE(/list)
 	var/list/floor_info = floor_types[selected_floor_type]
 	if(!floor_info)
 		return list(/datum/material/iron = 100)
@@ -1395,7 +1398,7 @@ GLOBAL_LIST_INIT(ship_rcd_hull_designs, list(
 	balloon_alert(user, "console saved")
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/computer/camera_advanced/base_construction/ship/LateInitialize()
+/obj/machinery/computer/camera_advanced/base_construction/ship/post_machine_initialize()
 	. = ..()
 	attempt_ship_connection()
 
@@ -2072,6 +2075,8 @@ GLOBAL_LIST_INIT(ship_rcd_hull_designs, list(
 // ============================================
 
 /obj/machinery/computer/camera_advanced/base_construction/ship/ui_interact(mob/user, datum/tgui/ui)
+	// VOIDCREW EDIT - this console owns its TGUI state instead of using the stock computer one.
+	SHOULD_CALL_PARENT(FALSE)
 	if(!current_ship && !attempt_ship_connection())
 		to_chat(user, span_warning("No ship connection."))
 		return FALSE

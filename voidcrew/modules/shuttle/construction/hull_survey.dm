@@ -1117,6 +1117,8 @@
 	)
 
 /datum/map_template/shuttle/voidcrew/commissioned/New()
+	// VOIDCREW EDIT - deliberate full replacement: this template has no map on disk.
+	SHOULD_CALL_PARENT(FALSE)
 	// Deliberately does NOT call ..(). The parent chain measures [prefix][port_id]_[suffix].dmm
 	// via preload_size(), and this template has no map on disk. Everything the parent New()
 	// actually does for us is the part_requirements fill below.

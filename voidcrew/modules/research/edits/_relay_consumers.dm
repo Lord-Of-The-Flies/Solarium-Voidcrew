@@ -53,7 +53,7 @@
 /obj/machinery/computer/rdservercontrol/ui_data(mob/user)
 	validate_research_site(stored_research)
 	. = ..()
-	var/list/data = .
+	var/list/list/data = .
 	for(var/list/server_data as anything in data["servers"]?.Copy())
 		var/obj/machinery/rnd/server/server = locate(server_data["server_ref"])
 		if(!same_research_service_site(src, server))

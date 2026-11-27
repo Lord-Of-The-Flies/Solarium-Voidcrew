@@ -111,7 +111,8 @@
 /datum/unit_test/voidcrew_ruin_cleanup_load/Destroy()
 	if(!QDELETED(site))
 		site.remove_docks()
-		site.remove_mapzone()
+		// VOIDCREW EDIT - the real sweep can block on worldgen_yield, and Destroy must not sleep.
+		INVOKE_ASYNC(site, TYPE_PROC_REF(/obj/structure/overmap/space_ruin, remove_mapzone))
 	return ..()
 
 /datum/unit_test/voidcrew_ruin_cleanup_load/Run()

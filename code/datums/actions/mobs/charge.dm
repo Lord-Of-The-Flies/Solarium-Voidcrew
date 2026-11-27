@@ -255,7 +255,8 @@
 			target.take_damage(charge_damage)
 
 	INVOKE_ASYNC(src, PROC_REF(DestroySurroundings), source)
-	try_hit_target(source, target)
+	// VOIDCREW EDIT - hit_target may grab/pull the target, which blocks (do_after/stoplag) and must never run inside a signal handler.
+	INVOKE_ASYNC(src, PROC_REF(try_hit_target), source, target)
 
 /// Attempt to hit someone with our charge
 /datum/action/cooldown/mob_cooldown/charge/proc/try_hit_target(atom/movable/source, atom/target)

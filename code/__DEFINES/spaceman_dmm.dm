@@ -39,6 +39,12 @@
 	 */
 	#define SHOULD_NOT_SLEEP(X) set SpacemanDMM_should_not_sleep = X
 	/**
+	 * If set, exempts the proc (and its subtree) from SpacemanDMM_should_not_sleep
+	 * propagation. Use for procs that intentionally run interactive or otherwise
+	 * blocking channels, such as martial-arts moves and touch spell effects.
+	 */
+	#define ALLOWED_TO_SLEEP(X) set SpacemanDMM_allowed_to_sleep = X
+	/**
 	 * If set, ensure a proc is 'pure', such that it does not make any changes
 	 * outside itself or output. This also checks to make sure anything using
 	 * this proc doesn't invoke it without making use of the return value.
@@ -63,6 +69,7 @@
 	#define SHOULD_CALL_PARENT(X)
 	#define SHOULD_NOT_OVERRIDE(X)
 	#define SHOULD_NOT_SLEEP(X)
+	#define ALLOWED_TO_SLEEP(X)
 	#define SHOULD_BE_PURE(X)
 	#define PRIVATE_PROC(X)
 	#define PROTECTED_PROC(X)

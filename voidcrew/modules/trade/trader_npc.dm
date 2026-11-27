@@ -208,6 +208,8 @@
  * fire automatically through the mob's say() (see modules/voice_barks).
  */
 /mob/living/basic/outpost_trader/proc/speak_line(category)
+	// VOIDCREW EDIT - say() can reach blocking speech-input code.
+	ALLOWED_TO_SLEEP(TRUE)
 	if(!shop)
 		return
 	if(category != TRADER_LINE_AGGRESSION && !COOLDOWN_FINISHED(src, speak_cooldown))

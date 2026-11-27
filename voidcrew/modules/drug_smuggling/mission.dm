@@ -62,7 +62,7 @@
 		drop_site_waypoint(site)
 		drop_site_gps_signal(site)
 	QDEL_LIST(sites)
-	release_lab()
+	release_lab_on_destroy()
 	// Contract's over either way: the patrol has no quarrel left
 	patrol?.stand_down()
 	patrol = null
@@ -254,6 +254,10 @@
  * replacement). A lab nobody ever visited has no reservation for
  * check_and_respawn() to clean, so it gets deleted outright.
  */
+/datum/mission/drug_run/proc/release_lab_on_destroy()
+	ALLOWED_TO_SLEEP(TRUE)
+	release_lab()
+
 /datum/mission/drug_run/proc/release_lab()
 	if(!lab_ruin)
 		return

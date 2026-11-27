@@ -70,13 +70,13 @@ GLOBAL_LIST_EMPTY(first_time_notice_pending)
 		GLOB.first_time_notice_pending -= ckey
 		return
 
-	var/message = {"Looks like this is your first time on this server.
+	var/message = {"Похоже, вы впервые на этом сервере.
 
-Quick version: this is a /tg/station fork where small crews fly ships around a galaxy map. Every ship starts in the inner ring around the star, which is completely safe - nothing there can attack your ship or your crew, including other players. The farther out you fly, the more dangerous it gets.
+Коротко: это форк /tg/station, где небольшие экипажи летают на кораблях по галактической карте. Каждый корабль начинает во внутреннем кольце вокруг звезды — там полностью безопасно, ничто не может атаковать ваш корабль или экипаж, включая других игроков. Чем дальше вы летите, тем опаснее.
 
-One setting worth picking before you play: melee controls. The default is tg-style Combat Mode - press F (or 4) in game to raise or drop your guard. If you prefer the classic Help/Disarm/Grab/Harm intents from other SS13 servers, pick Classic Intents below and use the 1-4 keys to switch intent. You can change this any time under Game Preferences (the "Use Intent System" toggle)."}
+Одна настройка, которую стоит выбрать до начала игры: управление ближним боем. По умолчанию включён режим боя в стиле tg — нажмите F (или 4) в игре, чтобы поднять или опустить блок. Если вам привычнее классические интенты Help/Disarm/Grab/Harm с других серверов SS13, выберите «Классические интенты» ниже и используйте клавиши 1–4 для переключения. Это можно изменить в любой момент в настройках игры (переключатель «Use Intent System»)."}
 
-	var/choice = tgui_alert(player, message, "Welcome!", list("Combat Mode", "Classic Intents", "Not Now"), timeout = 5 MINUTES)
+	var/choice = tgui_alert(player, message, "Добро пожаловать!", list("Режим боя", "Классические интенты", "Не сейчас"), timeout = 5 MINUTES)
 	GLOB.first_time_notice_pending -= ckey
 
 	// Re-resolve: the client can disconnect while the prompt is open, and the
@@ -91,14 +91,14 @@ One setting worth picking before you play: melee controls. The default is tg-sty
 	// that aren't visible on the player's currently open prefs page, which from
 	// the lobby is none of them.
 	switch(choice)
-		if("Classic Intents")
+		if("Классические интенты")
 			player.prefs.write_preference(GLOB.preference_entries[/datum/preference/toggle/use_intents], TRUE)
-			to_chat(player, span_notice("Classic intents enabled. Use the 1-4 keys in game to switch intent. You can change this any time under Game Preferences."))
-		if("Combat Mode")
+			to_chat(player, span_notice("Классические интенты включены. Используйте клавиши 1–4 в игре для переключения интента. Это можно изменить в любой момент в настройках игры."))
+		if("Режим боя")
 			player.prefs.write_preference(GLOB.preference_entries[/datum/preference/toggle/use_intents], FALSE)
-			to_chat(player, span_notice("Combat mode it is - press F (or 4) in game to toggle it. You can switch to classic intents any time under Game Preferences."))
-		if("Not Now")
-			to_chat(player, span_notice("No problem. If you ever want classic Help/Disarm/Grab/Harm intents, the \"Use Intent System\" toggle is under Game Preferences."))
+			to_chat(player, span_notice("Выбран режим боя — нажмите F (или 4) в игре, чтобы переключить его. Вернуться к классическим интентам можно в любой момент в настройках игры."))
+		if("Не сейчас")
+			to_chat(player, span_notice("Без проблем. Если когда-нибудь захотите классические интенты Help/Disarm/Grab/Harm, переключатель «Use Intent System» находится в настройках игры."))
 
 	player.prefs.savefile.set_entry(FIRST_TIME_NOTICE_SAVEFILE_KEY, TRUE)
 	player.prefs.savefile.save()

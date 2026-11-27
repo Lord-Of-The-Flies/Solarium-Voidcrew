@@ -183,6 +183,8 @@
 	return prompt_behavior == "cancel" ? null : "HONK"
 
 /datum/action/cooldown/spell/voice_of_the_word/unit_test_prompt/cast(atom/cast_on)
+	// VOIDCREW EDIT - test stub deliberately does not run the real cast chain.
+	SHOULD_CALL_PARENT(FALSE)
 	// The regression concerns entering the cast chain, not honking at unrelated fixtures.
 	cast_calls++
 	last_cast_on = cast_on
@@ -277,6 +279,8 @@
 	return "Overload the Room"
 
 /datum/action/cooldown/spell/mass_hack/unit_test_prompt/cast(atom/cast_on)
+	// VOIDCREW EDIT - test stub deliberately does not run the real cast chain.
+	SHOULD_CALL_PARENT(FALSE)
 	// Count the real cast dispatch without scheduling explosions across the test room.
 	cast_calls++
 

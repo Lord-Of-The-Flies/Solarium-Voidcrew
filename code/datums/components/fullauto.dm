@@ -298,7 +298,8 @@
 	if(fire_cd || shooter.incapacitated)
 		return NONE
 	if(!can_shoot())
-		shoot_with_empty_chamber(shooter)
+		// VOIDCREW EDIT - some guns (rebar crossbow) block in shoot_with_empty_chamber via do_after, which a signal handler must not do.
+		INVOKE_ASYNC(src, PROC_REF(shoot_with_empty_chamber), shooter)
 		return NONE
 	INVOKE_ASYNC(src, PROC_REF(do_autofire_shot), source, target, shooter, allow_akimbo, params)
 	return COMPONENT_AUTOFIRE_SHOT_SUCCESS //All is well, we can continue shooting.

@@ -78,6 +78,8 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
  * them retain their existing behavior.
  */
 /datum/outpost_pvp_enforcement/proc/register_pvp_aggression(mob/living/victim, mob/living/offender)
+	// VOIDCREW EDIT - outpost aggression responses can announce through blocking say().
+	ALLOWED_TO_SLEEP(TRUE)
 	if(!victim.mind || !offender?.mind || victim == offender)
 		return
 	var/obj/structure/overmap/trader_outpost/guarding_outpost = get_trader_outpost_for_turf(get_turf(victim))
@@ -450,6 +452,8 @@ GLOBAL_DATUM_INIT(outpost_pvp_enforcement, /datum/outpost_pvp_enforcement, new)
 
 /// Shoves, bare hands and stamina hits aren't vandalism; only a real damaging hit is
 /datum/element/outpost_property/proc/register_hit(obj/source, atom/attacker)
+	// VOIDCREW EDIT - outpost aggression responses can announce through blocking say().
+	ALLOWED_TO_SLEEP(TRUE)
 	if(!isliving(attacker))
 		return
 	var/obj/structure/overmap/trader_outpost/outpost = get_trader_outpost_for_turf(get_turf(source))

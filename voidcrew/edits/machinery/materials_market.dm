@@ -46,6 +46,7 @@
  * console re-points linked_console at itself, so a single-console hull always agrees.
  */
 /obj/machinery/materials_market/proc/find_ship_cargo_console()
+	RETURN_TYPE(/obj/machinery/computer/voidcrew_cargo)
 	var/obj/machinery/computer/voidcrew_cargo/cached = cached_cargo_console?.resolve()
 	if(cached && same_service_site(src, cached) && (world.time - cached_console_time) < MARKET_CONSOLE_CACHE_TIME)
 		return cached

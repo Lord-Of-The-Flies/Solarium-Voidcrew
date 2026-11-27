@@ -188,6 +188,11 @@
 	setup_weather_areas()
 	setup_weather_turfs()
 
+/// VOIDCREW EDIT - end() can reach blocking radio signalling, so keep it out of Destroy's sleep lint.
+/datum/weather/proc/finish_live_storm()
+	ALLOWED_TO_SLEEP(TRUE)
+	end()
+
 /datum/weather/Destroy()
 	// VOIDCREW EDIT ADDITION START - a finished storm must not outlive its own end().
 	//
@@ -204,7 +209,7 @@
 		// COMSIG_WEATHER_END / COMSIG_WEATHER_ENDED_IN_AREA listeners (weather planes,
 		// storm-hating mobs) and the subtype cleanup (the GLOB.*_storm_sounds lists) still
 		// fire. The deletion end() schedules lands after we are already destroyed and no-ops.
-		end()
+		finish_live_storm()
 	SSweather.processing -= src
 	stage = END_STAGE
 	// stage is END_STAGE, so generate_overlay_cache() hands back an empty list and this pulls

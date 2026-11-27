@@ -394,6 +394,11 @@
 
 /mob/living/basic/vestige_oracle/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
+	perform_oracle_life(seconds_per_tick)
+
+/// VOIDCREW EDIT - the muttering say() can reach blocking say/input code, so keep it out of Life.
+/mob/living/basic/vestige_oracle/proc/perform_oracle_life(seconds_per_tick)
+	ALLOWED_TO_SLEEP(TRUE)
 	if(stat == DEAD)
 		return
 	handle_disengagement(seconds_per_tick)

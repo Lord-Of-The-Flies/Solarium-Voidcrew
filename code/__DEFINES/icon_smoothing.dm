@@ -229,21 +229,31 @@ DEFINE_BITFIELD(smoothing_junction, list(
 		PARSE_CAN_SMOOTH_WITH(canSmoothWith, canSmoothWith, smoothing_flags); \
 	}
 
+// VOIDCREW EDIT: both parsers are guarded with istext() so that running them on an
+// already-parsed value is a no-op instead of a json_decode error. SET_SMOOTHING_GROUPS
+// replaces the string with an associative list (see bitflag_lists.dm), so a second
+// SETUP_SMOOTHING() on the same atom - a re-Initialize, which the atoms subsystem can
+// legitimately reach for atoms picked up by a nested template load - used to feed that
+// list into json_decode() and runtime with "Expected value at /list0] (character 2)".
 #define PARSE_SMOOTHING_GROUPS(parse_from, set_into) \
-	if (PERFORM_ALL_TESTS(focus_only/sorted_smoothing_groups)) { \
-		ASSERT_SORTED_SMOOTHING_GROUPS(smoothing_groups); \
-	} \
-	SET_SMOOTHING_GROUPS(parse_from, set_into);
+	if (istext(parse_from)) { \
+		if (PERFORM_ALL_TESTS(focus_only/sorted_smoothing_groups)) { \
+			ASSERT_SORTED_SMOOTHING_GROUPS(parse_from); \
+		} \
+		SET_SMOOTHING_GROUPS(parse_from, set_into); \
+	}
 
 #define PARSE_CAN_SMOOTH_WITH(parse_from, set_into, set_flags_into) \
-	if (PERFORM_ALL_TESTS(focus_only/sorted_smoothing_groups)) { \
-		ASSERT_SORTED_SMOOTHING_GROUPS(canSmoothWith); \
-	} \
-	/* S_OBJ is always negative, and we are guaranteed to be sorted. */ \
-	if (canSmoothWith[1] == "-") { \
-		set_flags_into |= SMOOTH_OBJ; \
-	} \
-	SET_SMOOTHING_GROUPS(parse_from, set_into);
+	if (istext(parse_from)) { \
+		if (PERFORM_ALL_TESTS(focus_only/sorted_smoothing_groups)) { \
+			ASSERT_SORTED_SMOOTHING_GROUPS(parse_from); \
+		} \
+		/* S_OBJ is always negative, and we are guaranteed to be sorted. */ \
+		if (parse_from[1] == "-") { \
+			set_flags_into |= SMOOTH_OBJ; \
+		} \
+		SET_SMOOTHING_GROUPS(parse_from, set_into); \
+	}
 
 /// Given a smoothing groups variable, will set out to the actual numbers inside it
 #define UNWRAP_SMOOTHING_GROUPS(smoothing_groups, out) \

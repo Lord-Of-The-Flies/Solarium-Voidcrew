@@ -13,6 +13,7 @@ GLOBAL_LIST_INIT(armor_by_type, generate_armor_type_cache())
  * Gets an armor type datum using the given type by formatting it into the expected datum tag
  */
 /proc/get_armor_by_type(armor_type)
+	RETURN_TYPE(/datum/armor)
 	var/armor = locate(replacetext("[armor_type]", "/", "-"))
 	if(armor)
 		return armor

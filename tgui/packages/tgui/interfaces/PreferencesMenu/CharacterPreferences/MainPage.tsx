@@ -607,7 +607,7 @@ export function MainPage(props: MainPageProps) {
           </Stack>
         </Stack.Item>
 
-        <Stack.Item grow basis={0}>
+        <Stack.Item grow basis={0} ml="4px">
           <Stack vertical fill>
             {/* VOIDCREW EDIT: SOLARIUM - fallback retains the public preference layout. */}
             <CategoryPreferences

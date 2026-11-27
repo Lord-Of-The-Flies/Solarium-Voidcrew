@@ -384,13 +384,13 @@
 	sleeper.apply_status_effect(/datum/status_effect/hospice_tuck)
 
 /obj/item/bedsheet/medical/hospice/smooth_sheets(mob/living/sleeper)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	var/mob/living/tucked_in = sleeper
 	..()
 	tucked_in?.remove_status_effect(/datum/status_effect/hospice_tuck)
 
 /obj/item/bedsheet/medical/hospice/on_pickup(datum/source, mob/grabber)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	var/mob/living/tucked_in = signal_sleeper?.resolve()
 	..()
 	tucked_in?.remove_status_effect(/datum/status_effect/hospice_tuck)

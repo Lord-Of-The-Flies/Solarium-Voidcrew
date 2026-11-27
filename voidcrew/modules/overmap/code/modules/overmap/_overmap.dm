@@ -116,6 +116,7 @@ GLOBAL_LIST_EMPTY(overmap_objects)
  * unloaded sites both answer null.
  */
 /obj/structure/overmap/proc/get_interior_footprint()
+	RETURN_TYPE(/datum/map_footprint)
 	return null
 
 /// Whether a visitor is inside this site or one of its elevator-connected hangars.

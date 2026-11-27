@@ -280,6 +280,11 @@
  * * visible_message_flags (optional) is the type of message being sent.
  */
 /atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, visible_message_flags = NONE)
+	#ifdef ASTRAMILITARUM
+	message = ru_translate_ui(message)
+	self_message = ru_translate_ui(self_message)
+	blind_message = ru_translate_ui(blind_message)
+	#endif
 	var/turf/T = get_turf(src)
 	if(!T)
 		return

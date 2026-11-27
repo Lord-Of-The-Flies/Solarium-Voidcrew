@@ -25,6 +25,8 @@
 
 /atom/movable/screen/screentip/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
+	if(hud?.mymob)
+		UnregisterSignal(hud.mymob, list(COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT))
 	hovered_atom_ref = null
 	return ..()
 

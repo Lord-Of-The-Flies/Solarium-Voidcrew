@@ -991,7 +991,7 @@
 	for(var/obj/machinery/computer/helm/console as anything in helm_consoles)
 		SStgui.update_uis(console)
 
-/obj/structure/overmap/ship/newtonian_move(direction, instant, start_delay)
+/obj/structure/overmap/ship/newtonian_move(direction, instant, start_delay, drift_force = 1 NEWTONS, controlled_cap = null, force_loop = TRUE)
 	return // we don't want ships to endlessly drift in space
 
 /**
@@ -1157,6 +1157,7 @@
  * Returns the first job with officer = TRUE, or the first job as fallback.
  */
 /obj/structure/overmap/ship/proc/get_captain_job()
+	RETURN_TYPE(/datum/job)
 	for(var/datum/job/job in job_slots)
 		if(job.officer)
 			return job

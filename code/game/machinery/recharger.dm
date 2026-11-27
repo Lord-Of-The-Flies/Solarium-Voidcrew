@@ -142,6 +142,14 @@
 	charging.forceMove(drop_location())
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
+/// Hook for module-specific charging logic. Return TRUE if handled.
+/obj/machinery/recharger/proc/handle_special_charging(seconds_per_tick)
+	return FALSE
+
+/// Number of magazine charge units added per process tick.
+/obj/machinery/recharger/proc/get_magazine_recharge_steps(obj/item/ammo_box/magazine/recharge/power_pack)
+	return recharge_coeff
+
 /obj/machinery/recharger/process(seconds_per_tick)
 	if(machine_stat & (NOPOWER|BROKEN) || !anchored)
 		return PROCESS_KILL
@@ -149,6 +157,10 @@
 	using_power = FALSE
 	if(isnull(charging))
 		return PROCESS_KILL
+
+	if(handle_special_charging(seconds_per_tick))
+		return
+
 	var/obj/item/stock_parts/power_store/charging_cell = charging.get_cell()
 	if(charging_cell)
 		if(charging_cell.charge < charging_cell.maxcharge)
@@ -158,7 +170,8 @@
 
 	if(istype(charging, /obj/item/ammo_box/magazine/recharge)) //if you add any more snowflake ones, make sure to update the examine messages too.
 		var/obj/item/ammo_box/magazine/recharge/power_pack = charging
-		for(var/charge_iterations in 1 to recharge_coeff)
+		var/charge_steps = get_magazine_recharge_steps(power_pack)
+		for(var/charge_iterations in 1 to charge_steps)
 			if(power_pack.stored_ammo.len >= power_pack.max_ammo)
 				break
 			power_pack.stored_ammo += new power_pack.ammo_type(power_pack)

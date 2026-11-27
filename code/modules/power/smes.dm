@@ -123,16 +123,16 @@
 /obj/machinery/power/smes/examine(user)
 	. = ..()
 
-	. += span_notice("it's maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "opened"]")
+	. += span_notice("Его панель обслуживания можно [EXAMINE_HINT("открутить")] [panel_open ? "закрыть" : "открыть"]")
 	if(panel_open)
 		if(!terminal)
-			. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
-		. += span_notice("It can [EXAMINE_HINT("wrenched")] to rotate.")
+			. += span_notice("Его можно [EXAMINE_HINT("поддеть")] и разобрать.")
+		. += span_notice("Его можно [EXAMINE_HINT("повернуть")] гаечным ключом.")
 
 	if(!terminal)
-		. += span_warning("A terminal that requires [EXAMINE_HINT("10 cable pieces")] needs to be installed!.")
+		. += span_warning("Нужно установить клемму, для которой требуется [EXAMINE_HINT("10 кусков кабеля")]!.")
 	else if(panel_open)
-		. += span_notice("The terminal can be [EXAMINE_HINT("cut")] apart.")
+		. += span_notice("Клемму можно [EXAMINE_HINT("отрезать")].")
 
 /obj/machinery/power/smes/update_overlays()
 	. = ..()
@@ -162,6 +162,18 @@
 
 	for(var/obj/item/stock_parts/power_store/power_cell in component_parts)
 		. += power_cell.charge()
+
+/// Returns the total charge of this smes. VOIDCREW EDIT - public getter for total_charge.
+/obj/machinery/power/smes/proc/get_total_charge()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	SHOULD_BE_PURE(TRUE)
+	return total_charge()
+
+/// Returns the total capacity of this smes. VOIDCREW EDIT - public getter for total_capacity.
+/obj/machinery/power/smes/proc/get_total_capacity()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	SHOULD_BE_PURE(TRUE)
+	return total_capacity
 
 /**
  * Adjusts the total charge of this smes

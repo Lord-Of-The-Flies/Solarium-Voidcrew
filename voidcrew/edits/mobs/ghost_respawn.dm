@@ -10,15 +10,17 @@
 /proc/get_respawn_notice()
 	var/respawn_setting = CONFIG_GET(flag/allow_respawn)
 	if(respawn_setting == RESPAWN_FLAG_DISABLED)
-		return "You will not be able to play this round!"
+		return "Вы не сможете играть в этом раунде!"
 
-	var/notice = "You can rejoin later: use the Respawn button in the top-left action bar, then pick a ship from the join menu."
+	var/notice = "Вы сможете вернуться позже: нажмите кнопку «Возродиться» на панели действий слева вверху, затем выберите корабль в меню присоединения."
 	if(respawn_setting == RESPAWN_FLAG_NEW_CHARACTER)
-		notice += " You will have to come back as a different character."
+		notice += " Вернуться придётся другим персонажем."
 
 	var/respawn_delay = CONFIG_GET(number/respawn_delay)
 	if(respawn_delay)
-		notice += " You must wait [DisplayTimeText(respawn_delay)] after death first, unless you died in the [ZONE_NAME_GREEN]."
+		var/delay_text = replacetext(DisplayTimeText(respawn_delay), " minutes", " мин.")
+		delay_text = replacetext(delay_text, " minute", " мин.")
+		notice += " Сначала нужно подождать [delay_text] после смерти, если только вы не погибли в [ZONE_NAME_GREEN]."
 
 	return notice
 
@@ -31,8 +33,8 @@
  * the respawn delay is still running - and counts the remaining delay down on the button itself.
  */
 /datum/action/cooldown/respawn
-	name = "Respawn"
-	desc = "Abandon this character and return to the lobby, so you can join again as someone new."
+	name = "Возродиться"
+	desc = "Покинуть этого персонажа и вернуться в лобби, чтобы присоединиться заново как кто-то новый."
 	button_icon = 'icons/hud/actions.dmi'
 	button_icon_state = "ghost"
 	check_flags = NONE
@@ -79,12 +81,14 @@
 		//Ghosts read chat rather than their own sprite, and it is where abandon_mob() reports
 		//its own refusals, so the reason goes there rather than into a balloon alert.
 		if(feedback && owner && next_use_time > world.time)
-			to_chat(owner, span_warning("You must wait [DisplayTimeText(next_use_time - world.time, 1)] to respawn!"))
+			var/wait_text = replacetext(DisplayTimeText(next_use_time - world.time, 1), " minutes", " мин.")
+			wait_text = replacetext(wait_text, " minute", " мин.")
+			to_chat(owner, span_warning("Нужно подождать [wait_text] до возрождения!"))
 		return FALSE
 	//Admins are allowed to talk their way past a disabled config, so leave their button lit.
 	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_DISABLED && !check_rights_for(owner.client, R_ADMIN))
 		if(feedback)
-			to_chat(owner, span_boldnotice("Respawning is not enabled!"))
+			to_chat(owner, span_boldnotice("Возрождение отключено!"))
 		return FALSE
 	return TRUE
 

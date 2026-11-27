@@ -189,7 +189,7 @@
 	return TRUE
 
 /datum/component/experiment_handler/ignored_handheld_experiment_attempt(datum/source, atom/target, mob/user, list/modifiers)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 
 	if(isnull(linked_web) && !(config_flags & EXPERIMENT_CONFIG_SILENT_FAIL))
 		playsound(user, 'sound/machines/buzz/buzz-sigh.ogg', 25)

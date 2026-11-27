@@ -447,6 +447,23 @@
 #include "../../../voidcrew/modules/unit_tests/armor_partial_modifiers.dm" // VOIDCREW EDIT ADDITION
 #include "../../../voidcrew/modules/unit_tests/overmap_spawn_density.dm" // VOIDCREW EDIT ADDITION
 // END_INCLUDE
+
+// VOIDCREW EDIT ADDITION START - public wrappers so unit tests can exercise protected interaction procs
+// without tripping the protected_proc diagnostic. They must live on the same type that declares the
+// protected proc, and they dispatch dynamically so subtype overrides still run.
+/atom/proc/unit_test_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	return base_item_interaction(user, tool, modifiers)
+
+/atom/proc/unit_test_ranged_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	return base_ranged_item_interaction(user, tool, modifiers)
+
+/atom/proc/unit_test_mouse_drop_receive(atom/dropped, mob/user, params)
+	return mouse_drop_receive(dropped, user, params)
+
+/obj/machinery/rnd/production/proc/unit_test_update_designs()
+	return update_designs()
+// VOIDCREW EDIT ADDITION END
+
 #ifdef ASTRAMILITARUM
 #include "../../../Astramilitarum/code/modules/unit_tests/voidcrew_ship_factions.dm" // SOLARIUM EDIT ADDITION
 #endif

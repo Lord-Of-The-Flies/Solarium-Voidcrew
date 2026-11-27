@@ -327,7 +327,7 @@
  * Full override of kill_named's proof drop - same signal, hunt flavor.
  */
 /datum/mission_objective/field/kill_named/big_game/on_target_death(mob/living/source, gibbed)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	if(target_killed || !mission || mission.failed || mission.completed)
 		return
 	target_killed = TRUE

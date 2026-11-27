@@ -332,6 +332,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
  * destroyed mid-flight.
  */
 /datum/preferences/proc/get_character_preview_view(mob/user)
+	RETURN_TYPE(/atom/movable/screen/map_view/char_preview)
 	if(isnull(character_preview_view))
 		create_character_preview_view(user)
 	return character_preview_view

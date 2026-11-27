@@ -12,7 +12,7 @@
  * of calling get_area(src).
  */
 /obj/machinery/on_exit_area(datum/source, area/area_to_unregister)
-	SIGNAL_HANDLER
+	// VOIDCREW EDIT - SIGNAL_HANDLER is inherited from the initial definition.
 	if(always_area_sensitive && use_power == NO_POWER_USE)
 		return
 	// FIX: Remove power from the PASSED area (old area), not get_area(src) (new area)

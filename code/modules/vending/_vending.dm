@@ -358,13 +358,13 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		return // you can add the comment here instead
 	if(total_max_stock())
 		if(total_loaded_stock() < total_max_stock())
-			. += span_notice("\The [src] can be restocked with [span_boldnotice("\a [initial(refill_canister.machine_name)] [initial(refill_canister.name)]")] with the panel open.")
+			. += span_notice("[src] можно пополнить с помощью [span_boldnotice("[initial(refill_canister.machine_name)] [initial(refill_canister.name)]")] при открытой панели.")
 		else
-			. += span_notice("\The [src] is fully stocked.")
+			. += span_notice("[src] полностью укомплектован.")
 	if(credits_contained < CREDITS_DUMP_THRESHOLD && credits_contained > 0)
-		. += span_notice("It should have a handfull of credits stored based on the missing items.")
+		. += span_notice("Судя по недостающим товарам, внутри должно быть немного кредитов.")
 	else if (credits_contained > PAYCHECK_CREW)
-		. += span_notice("It should have at least a full paycheck worth of credits inside!")
+		. += span_notice("Внутри должно быть как минимум на полную зарплату кредитов!")
 		/**
 		 * Intentionally leaving out a case for zero credits as it should be covered by the vending machine's stock being full,
 		 * or covered by first case if items were returned.

@@ -219,7 +219,8 @@
  * * i - is the current iteration of the node, based on the device_type (from 1 to 4)
  */
 /obj/machinery/atmospherics/proc/nullify_node(i)
-	if(!nodes[i])
+	// VOIDCREW EDIT: length(null) is 0, so this also covers an atom that never initialized.
+	if(!length(nodes) || !nodes[i])
 		return
 	var/obj/machinery/atmospherics/node_machine = nodes[i]
 	node_machine.disconnect(src)

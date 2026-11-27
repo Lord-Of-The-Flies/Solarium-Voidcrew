@@ -107,6 +107,13 @@ SUBSYSTEM_DEF(atoms)
 					stoplag()
 					if(mapload_source)
 						set_tracked_initalized(INITIALIZATION_INNEW_MAPLOAD, mapload_source)
+					// VOIDCREW EDIT: stoplag() yields the world, and a nested template load
+					// running off that yield can Initialize this very atom (list templates
+					// overlap on turfs the parent and its modules both own). Re-check the
+					// flag so we don't Initialize it a second time - that double run is what
+					// produced "the floor initialized multiple times!".
+					if(A.flags_1 & INITIALIZED_1)
+						continue
 				PROFILE_INIT_ATOM_BEGIN()
 				InitAtom(A, TRUE, mapload_arg)
 				PROFILE_INIT_ATOM_END(A)

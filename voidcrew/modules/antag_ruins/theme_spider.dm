@@ -571,6 +571,8 @@
 	var/hold_ends = 0
 
 /obj/structure/spider/stickyweb/vestige_capture/CanAllowThrough(atom/movable/mover, border_dir)
+	// VOIDCREW EDIT - fully replaces the stock pass check with capture logic.
+	SHOULD_CALL_PARENT(FALSE)
 	if(!isliving(mover) || captive)
 		return TRUE
 	return !try_capture(mover)

@@ -5,6 +5,8 @@
 /// Crystal mobs
 #define FACTION_CRYSTAL "crystal"
 /// NPC pirate ships and crew
+#ifndef FACTION_PIRATE
 #define FACTION_PIRATE "pirate"
+#endif
 /// Space IRS agents
 #define FACTION_IRS "irs"

@@ -86,6 +86,13 @@
 	if(!can_use(source))
 		return NONE
 
+	return perform_unarmed_strike(source, attack_target, modifiers)
+
+/// VOIDCREW EDIT - split out of the signal handler so style moves may run blocking
+/// interactive channels (do_after, alerts) without tripping the signal-handler sleep lint.
+/datum/martial_art/proc/perform_unarmed_strike(mob/living/source, mob/living/attack_target, modifiers)
+	ALLOWED_TO_SLEEP(TRUE)
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		return disarm_act(source, attack_target)
 
@@ -110,6 +117,12 @@
 	if(!can_use(source))
 		return NONE
 
+	return perform_grab_act(source, grabbing)
+
+/// VOIDCREW EDIT - split out of the signal handler so style grabs may run blocking
+/// interactive channels without tripping the signal-handler sleep lint.
+/datum/martial_art/proc/perform_grab_act(mob/living/source, mob/living/grabbing)
+	ALLOWED_TO_SLEEP(TRUE)
 	return grab_act(source, grabbing)
 
 /**

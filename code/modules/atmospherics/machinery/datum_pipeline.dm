@@ -142,6 +142,13 @@
 				possible_expansions -= borderline
 				continue
 			for(var/obj/machinery/atmospherics/considered_device in result)
+				// VOIDCREW EDIT: a pipe can list a neighbour that was deleted, or a component
+				// a nested module load picked up before it ever ran Initialize() (its
+				// nodes/parents/airs are all null). set_pipenet() then ran nodes.Find() /
+				// parents[0] on nothing, and add_machinery_member() on parents.len. Neither
+				// can be part of a live network - it connects itself once it really inits.
+				if(QDELETED(considered_device) || isnull(considered_device.nodes))
+					continue
 				if(!istype(considered_device, /obj/machinery/atmospherics/pipe))
 					considered_device.set_pipenet(src, borderline)
 					add_machinery_member(considered_device)
@@ -192,6 +199,10 @@
 	other_airs |= returned_airs
 
 /datum/pipeline/proc/add_member(obj/machinery/atmospherics/reference_device, obj/machinery/atmospherics/device_to_add)
+	// VOIDCREW EDIT: a pipe's pipeline_expansion() can hand back a neighbour that was
+	// deleted or never initialized (no nodes/parents) - it cannot own a pipeline.
+	if(QDELETED(reference_device) || isnull(reference_device.nodes))
+		return
 	if(!istype(reference_device, /obj/machinery/atmospherics/pipe))
 		reference_device.set_pipenet(src, device_to_add)
 		add_machinery_member(reference_device)

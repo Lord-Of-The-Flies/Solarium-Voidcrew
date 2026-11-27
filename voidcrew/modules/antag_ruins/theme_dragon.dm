@@ -322,6 +322,7 @@
 
 /// The bound soul's broodwatch, if it still runs, resolved fresh every time, never stored (renounce-safe)
 /obj/structure/vestige_dragon_egg/proc/get_bound_trial()
+	RETURN_TYPE(/datum/vestige_trial/broodwatch)
 	var/datum/vestige_trial/broodwatch/trial = bound_mind?.active_vestige_trial
 	if(istype(trial))
 		return trial

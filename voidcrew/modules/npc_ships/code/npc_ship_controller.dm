@@ -65,6 +65,8 @@
 /// Override to avoid ai_movement access (we set ai_movement = null for ships)
 /// Replicates parent logic without the ai_movement.moving_controllers check
 /datum/ai_controller/npc_ship/UnpossessPawn(destroy)
+	// VOIDCREW EDIT - the parent dereferences ai_movement, which ships intentionally leave null.
+	SHOULD_CALL_PARENT(FALSE)
 	if(isnull(pawn))
 		return
 
@@ -127,6 +129,8 @@
  * Override to avoid mob-specific signal registrations.
  */
 /datum/ai_controller/npc_ship/PossessPawn(atom/new_pawn)
+	// VOIDCREW EDIT - the parent registers mob-only signals; ships reimplement below.
+	SHOULD_CALL_PARENT(FALSE)
 	if(pawn)
 		UnpossessPawn(FALSE)
 
@@ -608,6 +612,7 @@
  * be parked a tile or two outside the band.
  */
 /datum/ai_controller/npc_ship/proc/get_raid_zone(obj/structure/overmap/ship/target)
+	RETURN_TYPE(/datum/overmap_zone)
 	if(QDELETED(target))
 		target = get_target()
 	if(QDELETED(target))

@@ -22,7 +22,7 @@
  */
 
 /// Where bug reports go during the testing phase.
-#define VOIDCREW_DISCORD_URL "https://discord.gg/6z9wQTYJmK"
+#define VOIDCREW_DISCORD_URL "https://discord.gg/xP87eJQej"
 
 /// The player wiki. Kept in step with WIKIURL in config/voidcrew/voidcrew_config.txt,
 /// which is what the standard tg wiki verb reads.
@@ -68,33 +68,33 @@ GLOBAL_DATUM_INIT(orientation_briefing, /datum/orientation_briefing, new)
 		list(
 			"name" = ZONE_NAME_GREEN,
 			"color" = ZONE_COLOR_GREEN,
-			"summary" = "The inner ring, where every ship starts. Weapons will not fire and nobody can board you.",
+			"summary" = "Внутреннее кольцо, где начинает каждый корабль. Оружие не стреляет, и никто не может взять вас на абордаж.",
 			"rules" = list(
-				"No ship weapons, no boarding, no interdiction",
-				"Nothing out here damages your ship or attacks your crew",
-				"Lowest ore yields and contract pay",
+				"Никакого корабельного оружия, абордажа и интердикции",
+				"Здесь ничто не повреждает ваш корабль и не атакует экипаж",
+				"Самые низкие доходы с руды и контрактов",
 			),
 		),
 		list(
 			"name" = ZONE_NAME_YELLOW,
 			"color" = ZONE_COLOR_YELLOW,
-			"summary" = "The middle ring. Weapons still will not fire, but a crew can raid you.",
+			"summary" = "Среднее кольцо. Оружие всё ещё не стреляет, но экипаж может устроить рейд.",
 			"rules" = list(
-				"No ship weapons",
-				"Boarding and interdiction are allowed",
-				"Player vs player requires escalation. Robbery is accepted, and combat is acceptable if they resist",
-				"About 50% more ore, about 70% more contract pay",
+				"Корабельное оружие запрещено",
+				"Абордаж и интердикция разрешены",
+				"PvP требует эскалации. Грабеж допустим, а бой — если жертва сопротивляется",
+				"Примерно на 50% больше руды и на 70% больше оплаты по контрактам",
 			),
 		),
 		list(
 			"name" = ZONE_NAME_RED,
 			"color" = ZONE_COLOR_RED,
-			"summary" = "The outer ring. Nothing is off limits. Your hull can be shot at, and the ships out here are equipped for it.",
+			"summary" = "Внешнее кольцо. Здесь нет ограничений. По вашему корпусу могут стрелять, и корабли здесь к этому готовы.",
 			"rules" = list(
-				"Ship weapons are live: you can be shot",
-				"PLAYERS CAN KILL YOU FOR NOTHING",
-				"Boarding and interdiction are allowed",
-				"Double ore, about 160% more pay plus a trade voucher",
+				"Корабельное оружие активно: по вам могут стрелять",
+				"ИГРОКИ МОГУТ УБИТЬ ВАС ПРОСТО ТАК",
+				"Абордаж и интердикция разрешены",
+				"Двойная руда, примерно на 160% больше оплаты и торговый ваучер",
 			),
 		),
 	)
@@ -149,9 +149,9 @@ GLOBAL_DATUM_INIT(orientation_briefing, /datum/orientation_briefing, new)
 	GLOB.orientation_briefing.ui_interact(user)
 
 /client/verb/orientation_briefing()
-	set name = "Orientation Briefing"
+	set name = "Вводный брифинг"
 	set category = "OOC"
-	set desc = "Re-open the new player briefing: testing phase, zones, and ship combat gear."
+	set desc = "Снова открыть брифинг для новичков: тестирование, зоны и корабельное боевое снаряжение."
 	if(!mob)
 		return
 	GLOB.orientation_briefing.ui_interact(mob)

@@ -182,8 +182,8 @@
 		message += span_warning("Diagnostic: broken and non-functional.")
 	else if(!target.is_operational)
 		message += span_warning("Diagnostic: not operational.")
-	else if(target.atom_integrity < target.max_integrity)
-		message += span_warning("Diagnostic: structural stress, [round(target.atom_integrity / target.max_integrity * 100)]% integrity, underperforming.")
+	else if(target.get_integrity() < target.max_integrity)
+		message += span_warning("Diagnostic: structural stress, [round(target.get_integrity_percentage() * 100)]% integrity, underperforming.")
 	else
 		message += span_notice("Diagnostic: nominal.")
 	to_chat(user, boxed_message(jointext(message, "\n")), type = MESSAGE_TYPE_INFO)
@@ -192,7 +192,7 @@
 /// Reads a turf's structural integrity and reveals what's hidden inside it, no unwrenching required.
 /obj/item/analyzer/honest_gauge/proc/read_turf(turf/target, mob/living/user)
 	if(target.uses_integrity && target.max_integrity)
-		to_chat(user, span_notice("[src] reads [target]: [round(target.atom_integrity / target.max_integrity * 100)]% integrity."))
+		to_chat(user, span_notice("[src] reads [target]: [round(target.get_integrity_percentage() * 100)]% integrity."))
 	else
 		to_chat(user, span_notice("[src] finds nothing structural to grade in [target]."))
 	t_ray_scan(user, 8, 3)
@@ -329,7 +329,7 @@
 /obj/item/weldingtool/slagmaw/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	// Walls don't use atom integrity in this codebase (nothing to "repair" on them),
 	// so the one-pass restore covers structures, windows, and damaged machinery instead
-	if(isOn() && interacting_with.uses_integrity && (isturf(interacting_with) || istype(interacting_with, /obj/structure) || istype(interacting_with, /obj/machinery)) && interacting_with.atom_integrity < interacting_with.max_integrity)
+	if(isOn() && interacting_with.uses_integrity && (isturf(interacting_with) || istype(interacting_with, /obj/structure) || istype(interacting_with, /obj/machinery)) && interacting_with.get_integrity() < interacting_with.max_integrity)
 		if(!use_tool(interacting_with, user, 3 SECONDS, amount = 5, volume = 50))
 			return ITEM_INTERACT_BLOCKING
 		if(QDELETED(interacting_with))
