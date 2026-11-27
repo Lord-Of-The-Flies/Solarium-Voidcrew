@@ -21,7 +21,7 @@
 	update_fallback()
 	START_PROCESSING(SSprocessing, src)
 	if(hud?.mymob)
-		RegisterSignal(hud.mymob, list(COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT), PROC_REF(on_connection_changed))
+		RegisterSignals(hud.mymob, list(COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT), PROC_REF(on_connection_changed))
 
 /atom/movable/screen/screentip/Destroy()
 	STOP_PROCESSING(SSprocessing, src)

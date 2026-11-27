@@ -49,6 +49,7 @@
 			preferences.character_preview_view.setDir(turn(preferences.character_preview_view.dir, -90))
 		if("right")
 			preferences.character_preview_view.setDir(turn(preferences.character_preview_view.dir, 90))
+	return TRUE
 
 /datum/preference_middleware/loadout/proc/action_pass_to_loadout_item(list/params, mob/user)
 	PRIVATE_PROC(TRUE)

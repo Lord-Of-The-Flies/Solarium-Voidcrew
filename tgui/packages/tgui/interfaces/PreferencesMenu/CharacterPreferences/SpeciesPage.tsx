@@ -11,7 +11,7 @@ import {
 } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
-import { CharacterPreview } from '../../common/CharacterPreview';
+import { PreferencePreview } from './PreferencePreview';
 import { LoadingScreen } from '../../common/LoadingScreen';
 import {
   createSetPreference,
@@ -340,9 +340,10 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
                   </Stack.Item>
 
                   <Stack.Item width="30%">
-                    <CharacterPreview
-                      id={data.character_preview_view}
+                    <PreferencePreview
+                      image={data.character_preview_image}
                       height="100%"
+                      size={128}
                     />
                   </Stack.Item>
                 </Stack>

@@ -131,7 +131,7 @@ export enum PrefsWindow {
 }
 
 export type PreferencesMenuData = {
-  character_preview_view: string;
+  character_preview_image: string;
   character_profiles: (string | null)[];
 
   character_preferences: {

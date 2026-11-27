@@ -16,7 +16,7 @@ import {
 import { classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
 
-import { CharacterPreview } from '../../common/CharacterPreview';
+import { PreferencePreview } from './PreferencePreview';
 import { RandomizationButton } from '../components/RandomizationButton';
 import { features } from '../preferences/features';
 import {
@@ -556,9 +556,10 @@ export function MainPage(props: MainPageProps) {
             </Stack.Item>
 
             <Stack.Item grow>
-              <CharacterPreview
+              <PreferencePreview
                 height="100%"
-                id={data.character_preview_view}
+                image={data.character_preview_image}
+                size={160}
               />
             </Stack.Item>
 
