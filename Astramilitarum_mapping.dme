@@ -1,0 +1,5 @@
+// Точка входа для маппинга в Voidworks: подключает основной проект вместе с
+// приватным модулем Astramilitarum, чтобы редактор видел его типы и мобов.
+// Для сборки игры используется обычный tgstation.dme с флагами -DASTRAMILITARUM -DHORUSHERESY.
+#define ASTRAMILITARUM
+#include "tgstation.dme"

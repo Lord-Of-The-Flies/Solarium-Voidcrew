@@ -207,6 +207,9 @@ Temporary Items
 /_maps/**/backup/
 /_maps/templates.dm
 
+# Local hardlink mirror of Horusheresy/_maps so Voidworks lists those maps
+/voidcrew/_maps/horusheresy/
+
 #dmm palette file. You really should be using StrongDMM instead.
 *.dmm-pal
 
