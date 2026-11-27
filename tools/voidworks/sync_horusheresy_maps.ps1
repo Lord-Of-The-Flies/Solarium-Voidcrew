@@ -45,3 +45,28 @@ Get-ChildItem -LiteralPath $src -Recurse -File -Filter '*.dmm' | ForEach-Object 
 }
 
 Write-Host "Done: linked $count map(s) into $dst"
+
+# Horusheresy maps take precedence over same-named maps in voidcrew/_maps.
+# Warn if a duplicate is still there: Voidworks would list both, and the
+# voidcrew copy is the obsolete one.
+$horusNames = @{}
+Get-ChildItem -LiteralPath $src -Recurse -File -Filter '*.dmm' | ForEach-Object {
+    $horusNames[$_.Name.ToLowerInvariant()] = $true
+}
+
+$duplicates = @()
+$voidcrewMaps = Join-Path $root 'voidcrew\_maps'
+Get-ChildItem -LiteralPath $voidcrewMaps -Recurse -File -Filter '*.dmm' | ForEach-Object {
+    $isMirror = $_.FullName -like "*$([IO.Path]::DirectorySeparatorChar)horusheresy$([IO.Path]::DirectorySeparatorChar)*"
+    if (-not $isMirror -and $horusNames.ContainsKey($_.Name.ToLowerInvariant())) {
+        $duplicates += $_.FullName
+    }
+}
+
+if ($duplicates.Count -gt 0) {
+    Write-Warning "Found $($duplicates.Count) duplicate map(s) in voidcrew/_maps. Horusheresy versions take precedence; remove these so Voidworks does not list both:"
+    $duplicates | ForEach-Object { Write-Warning "  $_" }
+}
+else {
+    Write-Host "No duplicate maps found in voidcrew/_maps."
+}

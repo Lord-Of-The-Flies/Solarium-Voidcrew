@@ -27,3 +27,5 @@ powershell -ExecutionPolicy Bypass -File tools/voidworks/sync_horusheresy_maps.p
 ```
 
 The script mirrors `Horusheresy/_maps` into `voidcrew/_maps/horusheresy` using NTFS hardlinks. Both paths point at the same file, so saving a map through Voidworks updates the original file in `Horusheresy/_maps`. The mirror is ignored by git. Re-run the script after adding new maps to `Horusheresy/_maps`, and reopen the project in Voidworks so the cached map list refreshes.
+
+Horusheresy maps take precedence over same-named maps in `voidcrew/_maps`. The obsolete outpost duplicates were removed from `voidcrew/_maps/map_files/outposts`; the maintained copies are in `Horusheresy/_maps/tradeposts`. Maps that exist only in `voidcrew/_maps` are still listed normally. The script prints a warning if a duplicate is reintroduced, because Voidworks would otherwise show both copies.
