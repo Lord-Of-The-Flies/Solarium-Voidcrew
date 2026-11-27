@@ -19,6 +19,8 @@
 	/// Art component subtype added to this statue
 	var/art_type = /datum/element/art
 	/// Abstract root type
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /obj/structure/statue
 
 /obj/structure/statue/Initialize(mapload)
 	. = ..()

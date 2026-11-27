@@ -151,9 +151,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		ui = new(user, src, "PreferencesMenu")
 		ui.set_autoupdate(FALSE)
 		ui.open()
-		// open() sends the preference spritesheets, which sleeps too, so the same race
-		// can still land here.
-		character_preview_view?.display_to(user, ui.window)
 
 /datum/preferences/ui_state(mob/user)
 	return GLOB.always_state
@@ -173,6 +170,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	data["character_preferences"] = compile_character_preferences(user)
 
 	data["active_slot"] = default_slot
+	data["character_preview_image"] = get_character_preview_view(user)?.get_preview_image()
 
 	for (var/datum/preference_middleware/preference_middleware as anything in middleware)
 		data += preference_middleware.get_ui_data(user)
@@ -184,10 +182,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	data["character_profiles"] = create_character_profiles()
 
-	// Rebuild rather than deref: a runtime here silently drops the entire static half of
-	// the payload, and data["window"] two lines down is what PreferencesMenu routes on -
-	// without it the interface throws and the player is left with a blank dark window.
-	data["character_preview_view"] = get_character_preview_view(user)?.assigned_map
 	data["overflow_role"] = SSjob.get_job_type(SSjob.overflow_role).title
 	data["window"] = current_window
 
@@ -303,7 +297,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 /datum/preferences/proc/create_character_preview_view(mob/user)
 	var/atom/movable/screen/map_view/char_preview/preview = new(null, src)
 	character_preview_view = preview
-	preview.generate_view("character_preview_[REF(preview)]")
 	preview.update_body()
 
 	// update_body() sleeps. Anything that runs ui_close() while it does - closing an
@@ -390,6 +383,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/datum/preferences/preferences
 	/// Whether we show current job clothes or nude/loadout only
 	var/show_job_clothes = TRUE
+	var/preview_image
+	var/preview_image_dir
 
 /atom/movable/screen/map_view/char_preview/Initialize(mapload, datum/preferences/preferences)
 	. = ..()
@@ -397,18 +392,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /atom/movable/screen/map_view/char_preview/Destroy()
 	QDEL_NULL(body)
-	preferences?.character_preview_view = null
+	if(preferences?.character_preview_view == src)
+		preferences.character_preview_view = null
 	preferences = null
 	return ..()
 
 /// Updates the currently displayed body
 /atom/movable/screen/map_view/char_preview/proc/update_body()
-	if (isnull(body))
+	// Species changes can remove limbs that wiping the dummy does not restore.
+	if (isnull(body) || body.dna.species.type != preferences.read_preference(/datum/preference/choiced/species))
 		create_body()
 	else
 		body.wipe_state()
 
 	appearance = preferences.render_new_preview_appearance(body, show_job_clothes)
+	preview_image = null
+
+/atom/movable/screen/map_view/char_preview/proc/get_preview_image()
+	if(isnull(preview_image) || preview_image_dir != dir)
+		preview_image = icon2base64(getFlatIcon(src, no_anim = TRUE))
+		preview_image_dir = dir
+	return preview_image
 
 /atom/movable/screen/map_view/char_preview/proc/create_body()
 	QDEL_NULL(body)
@@ -554,9 +558,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if (preference.savefile_identifier != PREFERENCE_CHARACTER)
 			continue
 
+		// VOIDCREW EDIT: SOLARIUM - body constructor preferences need their owning preferences datum.
 		preference.apply_to_human(character, read_preference(preference.type), src)
 
 	character.dna.real_name = character.real_name
+	// VOIDCREW EDIT: SOLARIUM - modular parts finalize before icons and the applied signal.
+	finalize_character_preferences(character)
 
 	if(icon_updates)
 		character.icon_render_keys = list()
@@ -615,3 +622,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	unlock_content = !!byond_member
 	if(unlock_content)
 		max_save_slots = 8
+
+/// VOIDCREW EDIT: SOLARIUM - extension point for modules applying visual character parts.
+/datum/preferences/proc/finalize_character_preferences(mob/living/carbon/human/character)
+	return

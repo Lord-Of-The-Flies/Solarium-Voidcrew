@@ -14,6 +14,8 @@
 	/// The /datum/config_entry type that supersedes this one
 	var/protection = NONE
 	/// Do not instantiate if type matches this
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /datum/config_entry
 	/// Force validate and set on VV. VAS proccall guard will run regardless.
 	var/vv_VAS = TRUE
 	/// Controls if error is thrown when duplicate configuration values for this entry type are encountered

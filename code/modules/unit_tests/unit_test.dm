@@ -48,6 +48,8 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	var/list/fail_reasons
 
 	/// Do not instantiate if type matches this
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /datum/unit_test
 
 	/// List of atoms that we don't want to ever initialize in an agnostic context, like for Create and Destroy. Stored on the base datum for usability in other relevant tests that need this data.
 	var/static/list/uncreatables = null

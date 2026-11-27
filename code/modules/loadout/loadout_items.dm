@@ -50,6 +50,8 @@ GLOBAL_LIST_INIT(all_loadout_categories, init_loadout_categories())
 	/// Only works if the item has a "unique reskin" list set.
 	var/can_be_reskinned = FALSE
 	/// The abstract parent of this loadout item, to determine which items to not instantiate
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /datum/loadout_item
 	/// The actual item path of the loadout item.
 	var/obj/item/item_path
 	/// Icon file (DMI) for the UI to use for preview icons.

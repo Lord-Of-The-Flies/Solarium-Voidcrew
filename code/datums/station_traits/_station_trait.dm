@@ -34,6 +34,8 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 	/// The ID that we look for in dynamic.json. Not synced with 'name' because I can already see this go wrong
 	var/dynamic_threat_id
 	/// Trait should not be instantiated in a round if its type matches this type
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /datum/station_trait
 
 /datum/station_trait/New()
 	. = ..()

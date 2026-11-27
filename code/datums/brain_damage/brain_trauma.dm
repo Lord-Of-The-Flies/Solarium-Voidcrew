@@ -16,6 +16,8 @@
 	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?
 
 	/// Tracks abstract types of brain traumas, useful for determining traumas that should not exist
+	// VOIDCREW EDIT: SOLARIUM - inherit the shared datum marker.
+	abstract_type = /datum/brain_trauma
 
 /datum/brain_trauma/Destroy()
 	// Handles our references with our brain

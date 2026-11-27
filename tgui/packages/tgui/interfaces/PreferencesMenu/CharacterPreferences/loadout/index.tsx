@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { useBackend } from 'tgui/backend';
-import { CharacterPreview } from 'tgui/interfaces/common/CharacterPreview';
+import { PreferencePreview } from '../PreferencePreview';
 import {
   Box,
   Button,
@@ -299,7 +299,11 @@ function LoadoutPreviewSection() {
     >
       <Stack vertical fill>
         <Stack.Item grow align="center">
-          <CharacterPreview height="100%" id={data.character_preview_view} />
+          <PreferencePreview
+            height="100%"
+            image={data.character_preview_image}
+            size={160}
+          />
         </Stack.Item>
         <Stack.Divider />
         <Stack.Item align="center">

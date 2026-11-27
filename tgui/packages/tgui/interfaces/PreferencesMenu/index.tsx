@@ -17,10 +17,13 @@ import {
 } from './types';
 import { RandomToggleState } from './useRandomToggleState';
 import { ServerPrefs } from './useServerPrefs';
+// VOIDCREW EDIT: SOLARIUM - private layout settings have public defaults.
+import { preferencesWindowSize } from 'solarium_erp';
 
 export function PreferencesMenu(props) {
   return (
-    <Window width={1100} height={790}>
+    // VOIDCREW EDIT: SOLARIUM - optional module controls the constructor window size.
+    <Window {...preferencesWindowSize}>
       <Window.Content>
         <Suspense fallback={<LoadingScreen />}>
           <PrefsWindowInner />

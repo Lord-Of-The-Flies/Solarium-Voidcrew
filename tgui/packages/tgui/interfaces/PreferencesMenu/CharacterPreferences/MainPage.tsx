@@ -1,3 +1,5 @@
+// VOIDCREW EDIT: SOLARIUM - optional constructor layout is owned by the asset submodule.
+import { CategoryPreferences } from 'solarium_erp/constructor';
 import { sortBy } from 'es-toolkit';
 import { filter, map } from 'es-toolkit/compat';
 import { type ReactNode, useState } from 'react';
@@ -8,15 +10,13 @@ import {
   Floating,
   Input,
   LabeledList,
-  NoticeBox,
   Section,
   Stack,
 } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 import { createSearch } from 'tgui-core/string';
 
-import { CharacterPreview } from '../../common/CharacterPreview';
-import { PageButton } from '../components/PageButton';
+import { PreferencePreview } from './PreferencePreview';
 import { RandomizationButton } from '../components/RandomizationButton';
 import { features } from '../preferences/features';
 import {
@@ -302,7 +302,7 @@ function MainFeature(props: MainFeatureProps) {
         <Box
           className={classes([
             'preferences32x32',
-            catalog.icons![currentValue],
+            catalog.icons?.[currentValue],
             'centered-image',
           ])}
           style={{
@@ -470,8 +470,11 @@ export function MainPage(props: MainPageProps) {
   const currentSpeciesData =
     serverData?.species[data.character_preferences.misc.species];
 
+  // VOIDCREW EDIT: SOLARIUM - constructor categories use preference records.
   const contextualPreferences =
-    data.character_preferences.secondary_features || [];
+    data.character_preferences.secondary_features || {};
+
+
 
   const mainFeatures = [
     ...Object.entries(data.character_preferences.clothing ?? {}),
@@ -501,98 +504,7 @@ export function MainPage(props: MainPageProps) {
     delete nonContextualPreferences.random_name;
   }
 
-  // Character setup sub-tabs (ported from the skyrat/bubber preferences menu).
-  // Without these, every preference in the `character_basics` / `ooc_preferences` /
-  // `silicon_preferences` categories is sent by the server but never rendered.
-  enum PrefPage {
-    CharBasics,
-    Visual,
-    Lore,
-    OOCPref,
-    Silicon,
-  }
 
-  const [currentPrefPage, setCurrentPrefPage] = useState(PrefPage.CharBasics);
-
-  const characterBasicsPreferences =
-    data.character_preferences.character_basics || [];
-  const oocPrefPreferences = data.character_preferences.ooc_preferences || [];
-  const siliconPreferences = data.character_preferences.silicon_preferences || [];
-
-  let prefPageContents;
-  switch (currentPrefPage) {
-    case PrefPage.CharBasics:
-      prefPageContents = (
-        <PreferenceList
-          randomizations={getRandomization(
-            characterBasicsPreferences,
-            serverData,
-            randomBodyEnabled,
-          )}
-          preferences={characterBasicsPreferences}
-          maxHeight="auto"
-        />
-      );
-      break;
-    case PrefPage.Visual:
-      prefPageContents = (
-        <PreferenceList
-          randomizations={getRandomization(
-            contextualPreferences,
-            serverData,
-            randomBodyEnabled,
-          )}
-          preferences={contextualPreferences}
-          maxHeight="auto"
-        />
-      );
-      break;
-    case PrefPage.Lore:
-      prefPageContents = (
-        <PreferenceList
-          randomizations={getRandomization(
-            nonContextualPreferences,
-            serverData,
-            randomBodyEnabled,
-          )}
-          preferences={nonContextualPreferences}
-          maxHeight="auto"
-        />
-      );
-      break;
-    case PrefPage.OOCPref:
-      prefPageContents = (
-        <PreferenceList
-          randomizations={getRandomization(
-            oocPrefPreferences,
-            serverData,
-            randomBodyEnabled,
-          )}
-          preferences={oocPrefPreferences}
-          maxHeight="auto"
-        />
-      );
-      break;
-    case PrefPage.Silicon:
-      prefPageContents = (
-        <>
-          <NoticeBox info>
-            This tab is for preferences that only apply when playing the AI or
-            Cyborg jobs!
-          </NoticeBox>
-          <PreferenceList
-            randomizations={getRandomization(
-              siliconPreferences,
-              serverData,
-              randomBodyEnabled,
-            )}
-            preferences={siliconPreferences}
-            maxHeight="auto"
-          />
-        </>
-      );
-      break;
-  }
 
   return (
     <>
@@ -644,9 +556,10 @@ export function MainPage(props: MainPageProps) {
             </Stack.Item>
 
             <Stack.Item grow>
-              <CharacterPreview
+              <PreferencePreview
                 height="100%"
-                id={data.character_preview_view}
+                image={data.character_preview_image}
+                size={160}
               />
             </Stack.Item>
 
@@ -696,54 +609,14 @@ export function MainPage(props: MainPageProps) {
 
         <Stack.Item grow basis={0} ml="4px">
           <Stack vertical fill>
-            <Stack>
-              <Stack.Item grow={2}>
-                <PageButton
-                  currentPage={currentPrefPage}
-                  page={PrefPage.CharBasics}
-                  setPage={setCurrentPrefPage}
-                >
-                  Character Basics
-                </PageButton>
-              </Stack.Item>
-              <Stack.Item grow={2}>
-                <PageButton
-                  currentPage={currentPrefPage}
-                  page={PrefPage.Visual}
-                  setPage={setCurrentPrefPage}
-                >
-                  Character Visuals
-                </PageButton>
-              </Stack.Item>
-              <Stack.Item grow={2}>
-                <PageButton
-                  currentPage={currentPrefPage}
-                  page={PrefPage.Lore}
-                  setPage={setCurrentPrefPage}
-                >
-                  Character Lore
-                </PageButton>
-              </Stack.Item>
-              <Stack.Item grow={2}>
-                <PageButton
-                  currentPage={currentPrefPage}
-                  page={PrefPage.OOCPref}
-                  setPage={setCurrentPrefPage}
-                >
-                  OOC Preferences
-                </PageButton>
-              </Stack.Item>
-              <Stack.Item grow={2}>
-                <PageButton
-                  currentPage={currentPrefPage}
-                  page={PrefPage.Silicon}
-                  setPage={setCurrentPrefPage}
-                >
-                  Silicon Preferences
-                </PageButton>
-              </Stack.Item>
-            </Stack>
-            {prefPageContents}
+            {/* VOIDCREW EDIT: SOLARIUM - fallback retains the public preference layout. */}
+            <CategoryPreferences
+              characterPreferences={data.character_preferences}
+              contextualPreferences={contextualPreferences}
+              nonContextualPreferences={nonContextualPreferences}
+              serverData={serverData}
+              randomBodyEnabled={randomBodyEnabled}
+            />
           </Stack>
         </Stack.Item>
       </Stack>

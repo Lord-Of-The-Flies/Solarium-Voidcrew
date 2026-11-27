@@ -359,31 +359,36 @@ SILICON_MAX_LAW_AMOUNT 12
 ## See code/__DEFINES/DNA.dm for more options than the ones below.
 
 ## You probably want humans on your space station, but technically speaking you can turn them off without any ill effect
+## VOIDCREW EDIT START: SOLARIUM - enable the available base species.
 ROUNDSTART_RACES human
 
 ## Races that are strictly worse than humans that could probably be turned on without balance concerns
 ROUNDSTART_RACES felinid
 ROUNDSTART_RACES lizard
-#ROUNDSTART_RACES fly
+ROUNDSTART_RACES fly
 ROUNDSTART_RACES moth
 ROUNDSTART_RACES plasmaman
-#ROUNDSTART_RACES shadow
+ROUNDSTART_RACES shadow
 
 ## Races that are better than humans in some ways, but worse in others
 ROUNDSTART_RACES ethereal
-#ROUNDSTART_RACES jelly
-#ROUNDSTART_RACES abductor
-#ROUNDSTART_RACES snail
+ROUNDSTART_RACES jelly
+ROUNDSTART_RACES abductor
+ROUNDSTART_RACES snail
 
 ## Races that are straight upgrades. If these are on expect powergamers to always pick them
-#ROUNDSTART_RACES skeleton
-#ROUNDSTART_RACES zombie
-#ROUNDSTART_RACES pod
-#ROUNDSTART_RACES ghost
+ROUNDSTART_RACES skeleton
+ROUNDSTART_RACES zombie
+ROUNDSTART_RACES pod
+ROUNDSTART_RACES spirit
 
 ## Races that are radical departures to what a species is, so while they technically can be roundstart - it's probably not wise
-#ROUNDSTART_RACES android
-#ROUNDSTART_RACES golem
+ROUNDSTART_RACES android
+ROUNDSTART_RACES golem
+
+## Additional base species. ERP species defaults live in Astramilitarum/code/ERP.
+ROUNDSTART_RACES mush
+## VOIDCREW EDIT END: SOLARIUM
 
 ##-------------------------------------------------------------------------------------------
 

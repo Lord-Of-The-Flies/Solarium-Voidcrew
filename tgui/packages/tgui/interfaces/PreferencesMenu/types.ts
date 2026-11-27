@@ -84,7 +84,8 @@ export type Job = {
 
 export type Quirk = {
   description: string;
-  icon: string;
+  // VOIDCREW EDIT: SOLARIUM - the server may send a quirk without an icon.
+  icon: string | null;
   name: string;
   value: number;
   customizable: boolean;
@@ -130,7 +131,7 @@ export enum PrefsWindow {
 }
 
 export type PreferencesMenuData = {
-  character_preview_view: string;
+  character_preview_image: string;
   character_profiles: (string | null)[];
 
   character_preferences: {

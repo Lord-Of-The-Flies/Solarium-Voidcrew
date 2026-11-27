@@ -314,6 +314,11 @@
  * * obj/machinery/atmospherics/target - the machine we are connecting to
  */
 /obj/machinery/atmospherics/proc/can_be_node(obj/machinery/atmospherics/target)
+	// VOIDCREW EDIT: SOLARIUM - nested ship modules can border the parent map's atoms before
+	// their Initialize() creates nodes/parents/airs. The parent load reconnects
+	// them after initialization; do not build a pipeline through them early.
+	if (!(target.flags_1 & INITIALIZED_1) || QDELETED(target))
+		return FALSE
 	return connection_check(target, piping_layer)
 
 /**

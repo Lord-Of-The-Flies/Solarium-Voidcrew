@@ -1,6 +1,12 @@
 import { ByondUi } from 'tgui-core/components';
 
-export const CharacterPreview = (props: { height: string; id: string }) => {
+type Props = {
+  height: string;
+  id: string;
+  zoom?: number;
+};
+
+export const CharacterPreview = (props: Props) => {
   return (
     <ByondUi
       width="220px"
@@ -8,6 +14,7 @@ export const CharacterPreview = (props: { height: string; id: string }) => {
       params={{
         id: props.id,
         type: 'map',
+        zoom: props.zoom ?? 0,
       }}
     />
   );
