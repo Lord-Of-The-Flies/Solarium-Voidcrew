@@ -64,7 +64,11 @@ Unlike normal organs, we're actually inside a persons limbs at all times
 	if(isnull(feature_key))
 		return TRUE
 
-	if(target.dna.features[feature_key] != SPRITE_ACCESSORY_NONE)
+	// VOIDCREW EDIT: SOLARIUM - constructor data stores the selected name inside a feature list.
+	var/feature_value = target.dna.features[feature_key]
+	if (islist(feature_value))
+		feature_value = feature_value["name"]
+	if(feature_value != SPRITE_ACCESSORY_NONE)
 		return TRUE
 	return FALSE
 
@@ -97,7 +101,7 @@ Unlike normal organs, we're actually inside a persons limbs at all times
 
 	//Build the mob sprite and use it as our overlay
 	for(var/external_layer in bodypart_overlay.all_layers)
-		if(bodypart_overlay.layers & external_layer)
+		if(bodypart_overlay.supports_layer(external_layer)) // VOIDCREW EDIT: SOLARIUM - constructor layer maps
 			. += bodypart_overlay.get_overlay(external_layer, bodypart_owner)
 
 ///The horns of a lizard!

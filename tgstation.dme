@@ -7449,4 +7449,6 @@
 #include "solarium\_astramilitarum.dm"
 // Solarium: активен только при -DHORUSHERESY
 #include "solarium\_horusheresy.dm"
+// VOIDCREW EDIT: SOLARIUM - optional ERP integration (requires both private submodules).
+#include "solarium\_erp.dm"
 // END_INCLUDE

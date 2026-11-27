@@ -84,7 +84,8 @@ export type Job = {
 
 export type Quirk = {
   description: string;
-  icon: string;
+  // VOIDCREW EDIT: SOLARIUM - the server may send a quirk without an icon.
+  icon: string | null;
   name: string;
   value: number;
   customizable: boolean;

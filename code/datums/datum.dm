@@ -9,6 +9,8 @@
  * use of variables at this level
  */
 /datum
+	/// VOIDCREW EDIT: SOLARIUM - shared abstract type marker used by modular content.
+	var/abstract_type
 	/**
 	  * Tick count time when this object was destroyed.
 	  *

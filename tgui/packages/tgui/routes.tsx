@@ -6,6 +6,8 @@
 
 // Solarium: private Horusheresy interfaces take precedence when available.
 import { loadInterface as loadSolariumInterface } from 'solarium_tgui';
+// VOIDCREW EDIT: SOLARIUM - resolve ported ERP windows before public interfaces.
+import { loadInterface as loadErpInterface } from 'solarium_erp';
 // voidcrew edit - modular tgui
 import { loadInterface } from '../voidcrew_tgui';
 import { useBackend } from './backend';
@@ -89,7 +91,10 @@ export function getRoutedComponent() {
     try {
       // voidcrew edit - modular TGUI
       esModule =
-        loadSolariumInterface(interfacePath) || loadInterface(interfacePath);
+        // VOIDCREW EDIT: SOLARIUM - ERP windows follow the existing private interface layer.
+        loadSolariumInterface(interfacePath) ||
+        loadErpInterface(interfacePath) ||
+        loadInterface(interfacePath);
     } catch (err) {
       if (err.code !== 'MODULE_NOT_FOUND') {
         throw err;

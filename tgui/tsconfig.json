@@ -12,6 +12,9 @@
 		"moduleResolution": "Bundler",
 		"noEmit": true,
 		"paths": {
+			// VOIDCREW EDIT: SOLARIUM - type resolution for the optional ERP package.
+			"solarium_erp": ["./packages/solarium_erp_fallback"],
+			"solarium_erp/*": ["./packages/solarium_erp_fallback/*"],
 			"solarium_tgui": ["./packages/solarium_tgui_fallback"]
 		},
 		"resolveJsonModule": true,

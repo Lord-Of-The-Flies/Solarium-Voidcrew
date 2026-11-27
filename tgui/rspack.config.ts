@@ -133,6 +133,12 @@ export default defineConfig({
       'tgui-panel': path.resolve(dirname, './packages/tgui-panel'),
       'tgui-say': path.resolve(dirname, './packages/tgui-say'),
       'tgui-dev-server': path.resolve(dirname, './packages/tgui-dev-server'),
+      // VOIDCREW EDIT: SOLARIUM - ERP assets are a separate optional private package.
+      solarium_erp: fs.existsSync(
+        path.resolve(dirname, '../Horusheresy/ERP/tgui/index.js'),
+      )
+        ? path.resolve(dirname, '../Horusheresy/ERP/tgui')
+        : path.resolve(dirname, './packages/solarium_erp_fallback'),
       solarium_tgui: fs.existsSync(solariumTguiPath)
         ? solariumTguiPath
         : solariumTguiFallbackPath,

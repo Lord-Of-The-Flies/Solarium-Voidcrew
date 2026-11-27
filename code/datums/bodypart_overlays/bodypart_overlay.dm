@@ -26,6 +26,12 @@
 	)
 	return all_images
 
+/// VOIDCREW EDIT: SOLARIUM - both native layer bitfields and constructor layer maps are supported.
+/datum/bodypart_overlay/proc/supports_layer(external_layer)
+	if (islist(layers))
+		return !isnull(layers[external_layer])
+	return layers & external_layer
+
 ///Generate the image. Needs to be overridden
 /datum/bodypart_overlay/proc/get_image(layer, obj/item/bodypart/limb)
 	CRASH("Get image needs to be overridden")

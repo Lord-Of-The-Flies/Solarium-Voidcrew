@@ -120,7 +120,8 @@ function QuirkDisplay(props: QuirkDisplayProps) {
             textAlign: 'center',
           }}
         >
-          <Icon color="#333" fontSize={3} name={icon} />
+          {/* VOIDCREW EDIT: SOLARIUM - quirks without icons must not crash the page. */}
+          <Icon color="#333" fontSize={3} name={icon || 'question'} />
         </Stack.Item>
 
         <Stack.Item
